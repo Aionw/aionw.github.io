@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+        Version: 1.3.3
+    -->
+    <script>
+window.lsVersion = "1.3.3",
+window.oldVersion = [
+    
+        
+            "0.2.0","0.0.1","0.1.0","1.0.0","1.0.1","1.1.0","1.1.1","1.2.0","1.3.0","1.3.2"
+        
+    
+]
+</script>
+
+    <!-- ### DNS Prefetch ### -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+
+    <!-- ### Preload ### -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<!-- Title -->
+<title>socks5 | Aione&#39;s blog</title>
+
+<!-- favicon -->
+<!-- Favicons -->
+
+    <link rel="icon" type="image/ico" href="/img/favicon.ico">
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+
+
+<!-- Android Chrome Color -->
+
+
+
+<meta name="format-detection" content="telephone=no">
+
+<!-- Description -->
+<meta name="description" content="socks5在[rfc1928]有详细的说明。
+这里...">
+
+<!-- Keywords -->
+<meta name="keywords" content=", network, protocol">
+
+<!-- Disable Fucking Bloody Baidu Tranformation -->
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+    <!-- ### Import File ### -->
+    
+        <!-- spectre.css -->
+
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css">
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style>
+
+<!-- style.css -->
+
+    <link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    
+        <link rel="stylesheet" href="/css/highlight/github.min.css">
+    
+
+
+
+    
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <!-- ### RSS ### -->
+    
+
+    <!-- ### WebApp ### -->
+    <meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Aione&#39;s blog">
+<meta name="msapplication-starturl" content="https://aione.me">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aione&#39;s blog">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- Manifest Import -->
+
+<!-- Open Search -->
+
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="socks5 | Aione&#39;s blog">
+<meta property="og:site_name" content="Aione&#39;s blog">
+
+<meta property="og:locale" content="zh-Hans">
+
+<meta property="og:url" content="https://aione.me/2019/05/21/socks5/">
+<meta property="og:image" content="https://www.cyberpunk.rs/wp-content/uploads/2018/12/dante_setup_bg.jpg">
+
+<meta property="og:description" content="socks5在[rfc1928]有详细的说明。
+这里...">
+
+<meta name="twitter:card" content="summary_large_image">
+
+
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-05-21T14:07:48.000Z">
+    <meta property="article:modified_time" content="2019-05-21T14:07:48.000Z">
+    <meta property="article:author" content="Aione">
+    <meta property="og:article:tag" content=", network, protocol"> 
+
+
+
+
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://aione.me/2019/05/21/socks5/">
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://aione.me/2019/05/21/socks5/",
+    "@type": "BlogPosting",
+    "logo": "https://aione.me/img/apple-touch-icon.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aione.me/2019/05/21/socks5/"
+    },
+    "headline": "socks5 | Aione&#39;s blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.cyberpunk.rs/wp-content/uploads/2018/12/dante_setup_bg.jpg"
+    },
+    
+    "datePublished": "2019-05-21T14:07:48.000Z",
+    "dateModified": "2019-11-01T13:13:37.577Z",
+    "author": {
+        "@type": "Person",
+        "name": "Aione",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://aione.me/img/android-chrome-384x384.png"
+        },
+        "description": "一起快乐摸鱼吧🐳"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aione&#39;s blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://aione.me/img/apple-touch-icon.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://aione.me/search/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": ", network, protocol",
+    "description": "socks5在[rfc1928]有详细的说明。
+这里..."
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+
+
+</head>
+
+    <body>
+        
+
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Aione&#39;s blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                一起快乐摸鱼吧🐳
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search/" class="navbar-link">搜索</a>
+    
+    
+        <a href="/about/" class="navbar-link">About</a>
+    
+        <a href="/links/" class="navbar-link">Friends</a>
+    
+        <a href="/tags/" class="navbar-link">Tags</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    
+    
+
+
+<div class="post-container">
+    <div id="post-card" class="card">
+        
+            <!-- # Post Thumbnail # -->
+            <div class="card-image" style="background-image: url('https://www.cyberpunk.rs/wp-content/uploads/2018/12/dante_setup_bg.jpg');"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">socks5</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/android-chrome-384x384.png" src="/img/suka-lazyload.gif" alt="Aione's Avatar">
+        <span>2019-05-21</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/笔记本/">笔记本</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=socks5&url=https://aione.me/2019/05/21/socks5/&pic=https://www.cyberpunk.rs/wp-content/uploads/2018/12/dante_setup_bg.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=socks5&url=https://aione.me/2019/05/21/socks5/&via=Aione" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aione.me/2019/05/21/socks5/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://aione.me/2019/05/21/socks5/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aione.me/2019/05/21/socks5/&title=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Aione's blog&title=Aione's blog&summary=&pics=https://www.cyberpunk.rs/wp-content/uploads/2018/12/dante_setup_bg.jpg&url=https://aione.me/2019/05/21/socks5/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://aione.me/2019/05/21/socks5/&text=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAAAAAB0L9x7AAABh0lEQVR42u3a0Q7CIAyF4b3/S+uViVlKe4oKB/PvxoiInwkpbbfrYXBdIECAOAJxJdf982j+a+x9PWVdEN6IcNPcxqN52ZiyLghvxGizjcbuC4/Q6SYGcSRC/SElaIH4H0QEiL4zgoE4E9E5iLIA9pNTFMRyRJXozr5+NdsGsQwhFa5B8TPaoD+rykEsQ3SSmGi8CmrZPBD+iE7yoiS61R8D4YmofjBrmmWNFCWogfBElBOF4kYthqUDDMR2hJLEqIWwGvhA+COU4NRBTB1gIGwQUZDJDitlfrXpQZyBqIKSWvB0UCA8EWqTtGq0KsFKOkVBWCGUIKMUONl7EP6I6kZ9tlg1NyueQPgiRoFEaYpmm7RaE4Qv4hKvbFMq64RNfBCWiO5NuKowqornqVMUxFLEzIPCWSBSHhYE4Y/oHlpVU125EQPCH9HZgFViowYzEOcisoDUKZbaD3GAsEQoD3pVjfePgxWILQj1AFOTYKURD8IX0Ul0u83VdvcOxHbEzgsECBDWiCeCDsh4l6NsCQAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                            <div id="post-toc">
+                                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-使用场景"><span class="post-toc-number">1.</span> <span class="post-toc-text">1 使用场景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#socks5流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">socks5流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TCP部分"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">TCP部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#协商"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">协商</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#认证"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">认证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">请求</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#返回"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">返回</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UDP部分"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">UDP部分</span></a></li></ol></li></ol>
+                            </div>
+                        
+                    
+                    <article id="post-content">
+                        <p>socks5在<a href="https://tools.ietf.org/html/rfc1928" target="_blank" rel="noopener">[rfc1928]</a>有详细的说明。</p>
+<p>这里只对socks5协议做简单解释，只是抽取了部分rfc中的内容进行翻译。</p>
+<h2 id="1-使用场景"><a href="#1-使用场景" class="headerlink" title="1 使用场景"></a>1 使用场景</h2><p>socks5协议的设计初衷是在一个有防火墙的网络中，希望能通过某种方法来提高部分人的网络权限，让这部分人能够安全透明的访问外网。<br>大概是这样的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">client&lt;-----&gt;proxy&lt;-----&gt;remote_server</span><br></pre></td></tr></table></figure></p>
+<p>不过国内大多数都是反着用的（笑</p>
+<h2 id="socks5流程"><a href="#socks5流程" class="headerlink" title="socks5流程"></a>socks5流程</h2><h3 id="TCP部分"><a href="#TCP部分" class="headerlink" title="TCP部分"></a><strong>TCP部分</strong></h3><h3 id="协商"><a href="#协商" class="headerlink" title="协商"></a>协商</h3><p>客户端发送一条请求与socks服务器协商认证方法，请求结构如下。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>VER</th>
+<th>NMETHODS</th>
+<th>METHODS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1 to 255</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>字段解释：</p>
+<ul>
+<li>VER:socks的版本号，socks为X’05’，长度1字节</li>
+<li>NMETHODS:认证方法数目，长度1字节</li>
+<li>METHODS:认证方法，1到255字节</li>
+</ul>
+<p>服务端从客户端提供的方法中选择一个并返回，返回结构如下。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>VER</th>
+<th>METHOD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>可选认证方法如下：</p>
+<ul>
+<li>X’00’: NO AUTHENTICATION REQUIRED</li>
+<li>X’01’: GSSAPI</li>
+<li>X’02’: username/password</li>
+<li>X’03’-X’7F’: IANA assigned</li>
+<li>X’80’-X’FE’: RESERVED FOR PRIVATE METHODS</li>
+<li>X’FF’: NO ACCEPTABLE METHODS</li>
+</ul>
+<h3 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h3><p>认证部分的说明在<a href="https://tools.ietf.org/html/rfc1929" target="_blank" rel="noopener">[rfc1929]</a></p>
+<p>如果客户端选择了username/password认证，那么客户端的请求是长这个样子的</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>VER</th>
+<th>ULEN</th>
+<th>UNAME</th>
+<th>PLEN</th>
+<th>PASSWD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1to255</td>
+<td>1</td>
+<td>1to255</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>字段解释：x</p>
+<ul>
+<li>VER:子协议版本，这里为X’01’</li>
+<li>ULEN: UNAME字段长度</li>
+<li>UNAME: 用户名字节数据</li>
+<li>PLEN: PASSWD字段长度</li>
+<li>PASSWD: 密码字节数据</li>
+</ul>
+<p>比较蠢的是，这东西都是明文传输的，这在rfc1929里也有提到</p>
+<p>服务端返回</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>VER</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>字段解释：</p>
+<ul>
+<li>VER: 同上</li>
+<li>STAUTS: X’00’代表认证成功，其他都表示失败<h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3>针对所依赖方法的子协商一旦完成，客户端就发送请求细节。如果协商过的方法包含了针对完整性检查或保密性目的的封装，这些请求必须被包装到所依赖的方法的封装中。SOCKS请求按下述格式进行组织</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>VER</th>
+<th>CMD</th>
+<th>RSV</th>
+<th>ATYP</th>
+<th>DST.ADDR</th>
+<th>DST.PORT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>X’00’</td>
+<td>1</td>
+<td>Variable</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>字段解释：</p>
+<ul>
+<li>VER: 协议版本号，这里为X’05’</li>
+<li>CMD: <ul>
+<li>CONNECT: X’01’</li>
+<li>BIND: X’02’</li>
+<li>UDP ASSOCIATE: X’03’</li>
+</ul>
+</li>
+<li>RSV: X’00’</li>
+<li>ATYP: 地址类别(ipv4/ipv6/domainname/<del>ipv9</del>)<ul>
+<li>IPV4: X’01’</li>
+<li>DOMAINNAME: X’03’</li>
+<li>IPV6: X’04’</li>
+</ul>
+</li>
+<li>DST.ADDR: 目的地址</li>
+<li>DST.PORT: 目的端口号</li>
+</ul>
+<p>请求类型有下面几种：</p>
+<ul>
+<li>CONNECT : 0X01， 建立代理连接。比较常见的请求，客服端请求服务器发起链接到目标主机，目标端口的代理。SOCKS 服务器将使用目标主机，目标端口, 客户端的源地址和端口号来评估 CONNECT 请求是否通过。成功之后后续流量都会被转发到目标主机的目标端口。</li>
+<li>BIND : 0X02，BIND请求被用于要求客户端接受来自服务器连接的协议中。FTP是一个众所周知的例子，它针对命令和状态报告使用主要的“客户端到服务器”的连接，但是用来响应命令（如LS、GET、PUT命令）的数据传输可以使用一条“服务器到客户端”的连接。只有在完成了connnect操作之后才能进行bind操作，bind操作之后，代理服务器会有两次响应, 第一次响应是在创建socket监听完成之后，第二次是在目标机器连接到代理服务器上之后。.建立流程如下：<ul>
+<li>Client随BIND请求，发送其要绑定的地址和端口。</li>
+<li>Server返回其创建的监听端口的地址和端口。</li>
+<li>Server创建的监听端口有连接后，返回该连接的源地址和端口。</li>
+<li>Server端将上述连接中的流量，发送给client的监听端口。</li>
+</ul>
+</li>
+<li>UDP ASSOCIATE : 0x03，用于在UDP中继处理中建立一条关联以处理UDP数据报。<h3 id="返回"><a href="#返回" class="headerlink" title="返回"></a>返回</h3>服务器返回格式如下：</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>VER</th>
+<th>REP</th>
+<th>RSV</th>
+<th>ATYP</th>
+<th>BND.ADDR</th>
+<th>BND.PORT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>X’00’</td>
+<td>1</td>
+<td>Variable</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>字段解释（与请求相同的部分不再赘述）：</p>
+<ul>
+<li>REP:<ul>
+<li>X’00’: succeeded</li>
+<li>X’01’: general SOCKS server failure</li>
+<li>X’02’: connection not allowed by ruleset</li>
+<li>X’03’: Network unreachable</li>
+<li>X’04’: Host unreachable</li>
+<li>X’05’: Connection refused</li>
+<li>X’06’: TTL expired</li>
+<li>X’07’: Command not supported</li>
+<li>X’08’: Address type not supported</li>
+<li>X’09’-X’FF’: 未被分配</li>
+</ul>
+</li>
+</ul>
+<h3 id="UDP部分"><a href="#UDP部分" class="headerlink" title="UDP部分"></a><strong>UDP部分</strong></h3><p>每个UDP数据包必须有如下请求头：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>RSV</th>
+<th>FRAG</th>
+<th>ATYP</th>
+<th>DST.ADDR</th>
+<th>DST.PORT</th>
+<th>DATA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>Variable</td>
+<td>2</td>
+<td>Variable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>字段解释:</p>
+<ul>
+<li>RSV: Reserved X’0000’</li>
+<li>FRAG: Current fragment number</li>
+<li>ATYP-DST.PORT: 同上</li>
+<li>DATA: user data</li>
+</ul>
+<p><br><br><br></p>
+<p>参考[1]:<a href="https://hatboy.github.io/2018/04/28/Python%E7%BC%96%E5%86%99socks5%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="noopener">Python编写socks5服务器</a><br>参考[2]:<a href="https://tools.ietf.org/html/rfc1929" target="_blank" rel="noopener">[rfc1929]</a><br>参考[3]:<a href="https://tools.ietf.org/html/rfc1928" target="_blank" rel="noopener">[rfc1928]</a></p>
+
+                    </article>
+                    
+    <blockquote class="post-license">
+        <p>
+            <strong>本文作者&nbsp;:&nbsp;Aione</strong>
+            <br>
+            <strong>
+            
+                本文使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a> 协议
+            </strong>
+            <br>
+            <strong>本文链接&nbsp;:&nbsp;</strong><a href="https://aione.me/2019/05/21/socks5/">https://aione.me/2019/05/21/socks5/</a>
+        </p>
+    </blockquote>
+
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+        var dateUpdate = Date.parse("2019-11-01");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2019-05-21T14:07:48.000Z" itemprop="datePublished">2019-05-21</time>
+
+    , 最后修改于&nbsp;<time datetime="2019-11-01T13:13:37.577Z" itemprop="dateModified">2019-11-01</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+
+<a class="post-categories-list-item" href="/categories/笔记本/">笔记本</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+
+<a class="post-tags-list-item" href="/tags/network/" rel="tag">#&nbsp;network</a>
+
+<a class="post-tags-list-item" href="/tags/protocol/" rel="tag">#&nbsp;protocol</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                
+<div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2019/09/29/简单rop/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">简单rop</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/05/21/ss_0x00/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">ss partI</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span data-year></span>
+        <a class="footer-copyright-a" href="https://aione.me">Aione&#39;s blog</a>
+    </p>
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+            
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+        
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+        
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+
+
+    /* Copyright */
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.querySelector('span[data-year]')
+    
+        copyrightSince = 2018;
+        if (copyrightSince === copyrightNow) {
+            copyrightContent.textContent = copyrightNow
+        } else {
+            copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow
+        }
+    
+
+
+
+/* Cnosole Log */
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+</script>
+
+<!-- vanilla-lazyload -->
+
+    <script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+    <!-- Busuanzi -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+
+
+
+<!-- gallery.js -->
+
+
+<!-- Comment -->
+
+
+<!-- ### Custom Footer ### -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>

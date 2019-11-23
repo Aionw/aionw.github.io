@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+        Version: 1.3.3
+    -->
+    <script>
+window.lsVersion = "1.3.3",
+window.oldVersion = [
+    
+        
+            "0.2.0","0.0.1","0.1.0","1.0.0","1.0.1","1.1.0","1.1.1","1.2.0","1.3.0","1.3.2"
+        
+    
+]
+</script>
+
+    <!-- ### DNS Prefetch ### -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+
+    <!-- ### Preload ### -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<!-- Title -->
+<title>CSAPP-shell-lab | Aione&#39;s blog</title>
+
+<!-- favicon -->
+<!-- Favicons -->
+
+    <link rel="icon" type="image/ico" href="/img/favicon.ico">
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+
+
+<!-- Android Chrome Color -->
+
+
+
+<meta name="format-detection" content="telephone=no">
+
+<!-- Description -->
+<meta name="description" content="记录一下 shell lab 流程
+main">
+
+<!-- Keywords -->
+<meta name="keywords" content=", OS, CSAPP">
+
+<!-- Disable Fucking Bloody Baidu Tranformation -->
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+    <!-- ### Import File ### -->
+    
+        <!-- spectre.css -->
+
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css">
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style>
+
+<!-- style.css -->
+
+    <link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    
+        <link rel="stylesheet" href="/css/highlight/github.min.css">
+    
+
+
+
+    
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <!-- ### RSS ### -->
+    
+
+    <!-- ### WebApp ### -->
+    <meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Aione&#39;s blog">
+<meta name="msapplication-starturl" content="https://aione.me">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aione&#39;s blog">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- Manifest Import -->
+
+<!-- Open Search -->
+
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="CSAPP-shell-lab | Aione&#39;s blog">
+<meta property="og:site_name" content="Aione&#39;s blog">
+
+<meta property="og:locale" content="zh-Hans">
+
+<meta property="og:url" content="https://aione.me/2019/10/28/CSAPP-shell-lab/">
+<meta property="og:image" content="https://i.imgur.com/wNlctKZ.jpg">
+
+<meta property="og:description" content="记录一下 shell lab 流程
+main">
+
+<meta name="twitter:card" content="summary_large_image">
+
+
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-10-28T12:30:02.000Z">
+    <meta property="article:modified_time" content="2019-10-28T12:30:02.000Z">
+    <meta property="article:author" content="Aione">
+    <meta property="og:article:tag" content=", OS, CSAPP"> 
+
+
+
+
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://aione.me/2019/10/28/CSAPP-shell-lab/">
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://aione.me/2019/10/28/CSAPP-shell-lab/",
+    "@type": "BlogPosting",
+    "logo": "https://aione.me/img/apple-touch-icon.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aione.me/2019/10/28/CSAPP-shell-lab/"
+    },
+    "headline": "CSAPP-shell-lab | Aione&#39;s blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://i.imgur.com/wNlctKZ.jpg"
+    },
+    
+    "datePublished": "2019-10-28T12:30:02.000Z",
+    "dateModified": "2019-11-01T13:13:39.849Z",
+    "author": {
+        "@type": "Person",
+        "name": "Aione",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://aione.me/img/android-chrome-384x384.png"
+        },
+        "description": "一起快乐摸鱼吧🐳"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aione&#39;s blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://aione.me/img/apple-touch-icon.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://aione.me/search/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": ", OS, CSAPP",
+    "description": "记录一下 shell lab 流程
+main"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+
+
+</head>
+
+    <body>
+        
+
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Aione&#39;s blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                一起快乐摸鱼吧🐳
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search/" class="navbar-link">搜索</a>
+    
+    
+        <a href="/about/" class="navbar-link">About</a>
+    
+        <a href="/links/" class="navbar-link">Friends</a>
+    
+        <a href="/tags/" class="navbar-link">Tags</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    
+    
+
+
+<div class="post-container">
+    <div id="post-card" class="card">
+        
+            <!-- # Post Thumbnail # -->
+            <div class="card-image" style="background-image: url('https://i.imgur.com/wNlctKZ.jpg');"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">CSAPP-shell-lab</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/android-chrome-384x384.png" src="/img/suka-lazyload.gif" alt="Aione's Avatar">
+        <span>2019-10-28</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/笔记本/">笔记本</a>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=CSAPP-shell-lab&url=https://aione.me/2019/10/28/CSAPP-shell-lab/&pic=https://i.imgur.com/wNlctKZ.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=CSAPP-shell-lab&url=https://aione.me/2019/10/28/CSAPP-shell-lab/&via=Aione" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aione.me/2019/10/28/CSAPP-shell-lab/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://aione.me/2019/10/28/CSAPP-shell-lab/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aione.me/2019/10/28/CSAPP-shell-lab/&title=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Aione's blog&title=Aione's blog&summary=&pics=https://i.imgur.com/wNlctKZ.jpg&url=https://aione.me/2019/10/28/CSAPP-shell-lab/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://aione.me/2019/10/28/CSAPP-shell-lab/&text=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB2ElEQVR42u3b226DMBREUf7/p5vXKvKZGSMUwbB5adMSe1Ui9rm4x98NrwMUKFCgFqhDXMs3mmt1bzoPqB7UNPn392qC6d6teUBVob4nUIMnP5smn+YB9S7UcoDhIXd/HChQq4Vxeq97wEG9C5UMpgK3n0YJoG6PUgH9lV8vy2ZA3Rpliw4XLJiXV11A3RqVJJjpIuo2XldAAdWFOpNsus14lVTIZARUBco9qG4hde9LCyegulBTEjAVLezgaoFMFk9Qj0alD6sL2qb7XaENVCcqbQypIG6riD+hQVWgVMCWFD6SIE4lEdGKDupxqCSwS3DJQYo4SgD1WJTafFXisNN8TJoBoHpQKpCLBwuaRKdXdFCPQ7mJVKLgElL3QQDVjTpzKMI1j5JEBFQfSjV3XONHJRC7AR6oHpR70JODE8kG7ZqaoLpRbsM9U0xLDlOA6kO5Q8qyKR00sW2jHFQVSm2obvDdDXosroCqQNnDe2ZSt9juHDQE1YFKDhqnxVg1cXTAB1QNygVicYEiuE/+DlQVKmn4nH3o4w8RqNegVNPIFWdVoykqcICqRaXNSpeQqEUbVBcqWRh3D+DsNLVBdaF2mjzqtS1gHOYfOUBVoO50gQIFCtS/6wPRSrAPUwYXgQAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                            <div id="post-toc">
+                                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#main"><span class="post-toc-number">1.</span> <span class="post-toc-text">main</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#eval"><span class="post-toc-number">2.</span> <span class="post-toc-text">eval</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#waitfg"><span class="post-toc-number">3.</span> <span class="post-toc-text">waitfg</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sigchld-handler"><span class="post-toc-number">4.</span> <span class="post-toc-text">sigchld_handler</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#do-bgfg"><span class="post-toc-number">5.</span> <span class="post-toc-text">do_bgfg</span></a></li></ol>
+                            </div>
+                        
+                    
+                    <article id="post-content">
+                        <p>记录一下 shell lab 流程</p>
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Execute the shell's read/eval loop */</span></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Evaluate the command line */</span></span><br><span class="line">		eval(cmdline);</span><br><span class="line">		fflush(<span class="built_in">stdout</span>);</span><br><span class="line">		fflush(<span class="built_in">stdout</span>);</span><br><span class="line">	&#125; </span><br><span class="line"></span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">/* control never reaches here */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>main</code> 函数里跑了个死循环，不断读取内容并送到 <code>eval()</code> 处理。</p>
+<h3 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h3><p>eval() 函数是 shell 主要的处理函数，处理流程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">built-in func[jobs, quit, fg ,bg] ? func: fork--&gt; bg ? return : wait child process terminate</span><br></pre></td></tr></table></figure></p>
+<p>代码如下，有两个点需要注意一下。</p>
+<ul>
+<li>在创建新的线程处理 <code>cmdline</code> 之前，阻塞 <code>chld</code> 防止新线程结束之后，父进程将已经结束的子进程的 <code>pid</code> 加入 <code>job list</code></li>
+<li>防止由于 <code>&lt;C-z&gt;</code> <code>&lt;C-c&gt;</code> 而导致子进程未添加到 job list 而成为孤儿进程<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">eval</span><span class="params">(<span class="keyword">char</span> *cmdline)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">pid_t</span> pid;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> *argv[MAXARGS];</span><br><span class="line">	<span class="keyword">int</span> bg = parseline(cmdline, argv);</span><br><span class="line">	<span class="keyword">if</span>(argv[<span class="number">0</span>]==<span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!builtin_cmd(argv))&#123;</span><br><span class="line">		<span class="keyword">sigset_t</span> mask_all, mask_chld, prev;</span><br><span class="line">		Sigfillset(&amp;mask_all);</span><br><span class="line">		Sigemptyset(&amp;mask_chld);</span><br><span class="line">		Sigaddset(&amp;mask_chld, SIGCHLD);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//ensure addjob() before deletejob().</span></span><br><span class="line">		Sigprocmask(SIG_BLOCK, &amp;mask_chld, &amp;prev);</span><br><span class="line">		<span class="keyword">if</span>((pid = Fork())== <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="comment">//in child process</span></span><br><span class="line">			Sigprocmask(SIG_SETMASK, &amp;prev, <span class="literal">NULL</span>);</span><br><span class="line">			<span class="keyword">if</span>(execve(argv[<span class="number">0</span>], argv, environ) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%s: Command not found.\n"</span>,argv[<span class="number">0</span>]);</span><br><span class="line">				<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//in parent process</span></span><br><span class="line">		<span class="keyword">int</span> state = bg ? BG:FG;</span><br><span class="line">		<span class="comment">//if parent process meet &lt;c-z&gt; or &lt;c-c&gt; ensure the child process add to job list.</span></span><br><span class="line">		Sigprocmask(SIG_BLOCK, &amp;mask_all, <span class="literal">NULL</span>);</span><br><span class="line">		addjob(jobs, pid, state, cmdline);</span><br><span class="line">		Sigprocmask(SIG_SETMASK, &amp;prev, <span class="literal">NULL</span>);	</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(!bg)&#123;</span><br><span class="line">			waitfg(pid);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"[%d] (%d) %s"</span>,pid2jid(pid),pid,cmdline);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="waitfg"><a href="#waitfg" class="headerlink" title="waitfg"></a>waitfg</h3><p>这个函数要等待前台函数返回<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">waitfg</span><span class="params">(<span class="keyword">pid_t</span> pid)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">sigset_t</span> empt_set, prev;</span><br><span class="line">	sigemptyset(&amp;empt_set);</span><br><span class="line">	<span class="keyword">while</span>(pid==fgpid(jobs))&#123;</span><br><span class="line">		sigprocmask(SIG_BLOCK,&amp;empt_set,&amp;prev);</span><br><span class="line">		sigsuspend(&amp;empt_set);</span><br><span class="line">	&#125;</span><br><span class="line">	sigprocmask(SIG_SETMASK, &amp;prev, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们用 <code>sigsuspend(sigset_t *)</code> 函数直接挂起父进程，等待子进程结束，然后控制交由父进程。</p>
+<blockquote>
+<p><code>sigsuspend(sigset_t *)</code><br>可以理解为，挂起当前进程直到出现了 <code>mask</code> 内没有屏蔽的信号。    </p>
+</blockquote>
+<h3 id="sigchld-handler"><a href="#sigchld-handler" class="headerlink" title="sigchld_handler"></a>sigchld_handler</h3><p>这个函数用于处理 <code>sig_chld</code> 信号，也即是说子进程结束时的处理。</p>
+<p>主要注意子进程退出的三种情况</p>
+<ul>
+<li>程序正常和由于信号退出，这时候字节把子进程从 <code>job_list</code> 中移除即可</li>
+<li>程序停止，更新一下状态即可。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sigchld_handler</span><span class="params">(<span class="keyword">int</span> sig)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> status;</span><br><span class="line">	<span class="keyword">int</span> old_errno = errno;</span><br><span class="line">	<span class="keyword">pid_t</span> pid;</span><br><span class="line">	<span class="keyword">sigset_t</span> mask_all, prev;</span><br><span class="line">	sigfillset(&amp;mask_all);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>((pid = waitpid(<span class="number">-1</span>, &amp;status, WNOHANG|WUNTRACED)) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(WIFEXITED(status))&#123;</span><br><span class="line">			<span class="comment">//normal exit</span></span><br><span class="line">			sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);</span><br><span class="line">			deletejob(jobs, pid);</span><br><span class="line">			sigprocmask(SIG_SETMASK, &amp;prev, <span class="literal">NULL</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(WIFSIGNALED(status)) &#123;</span><br><span class="line">			struct <span class="keyword">job_t</span>* job_ptr = getjobpid(jobs,pid);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"Job [%d] (%d) terminated by signal %d\n"</span>,job_ptr-&gt;jid,job_ptr-&gt;pid,WTERMSIG(status));</span><br><span class="line">			sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);</span><br><span class="line">			deletejob(jobs, pid);</span><br><span class="line">			sigprocmask(SIG_SETMASK, &amp;prev, <span class="literal">NULL</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			struct <span class="keyword">job_t</span>* job_ptr = getjobpid(jobs,pid);</span><br><span class="line">			sigprocmask(SIG_BLOCK,&amp;mask_all,&amp;prev);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"Job [%d] (%d) stopped by signal %d\n"</span>,job_ptr-&gt;jid,job_ptr-&gt;pid,WSTOPSIG(status));</span><br><span class="line">			job_ptr-&gt;state = ST;</span><br><span class="line">			sigprocmask(SIG_SETMASK, &amp;prev, <span class="literal">NULL</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	errno = old_errno;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="do-bgfg"><a href="#do-bgfg" class="headerlink" title="do_bgfg"></a>do_bgfg</h3><p>这是程序处理前后台进程的主要函数，这个函数的处理逻辑也很简单，我们只需要找到进程的 <code>pid</code>，让他继续运行即可，<code>bg/fg</code> 区别只在父进程等待。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_bgfg</span><span class="params">(<span class="keyword">char</span> **argv)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">pid_t</span> pid;</span><br><span class="line">	<span class="keyword">int</span> jid;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">job_t</span>* <span class="title">job_ptr</span>;</span></span><br><span class="line">	<span class="keyword">if</span>(argv[<span class="number">1</span>] == <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s command requires PID or %%jobid argument\n"</span>,argv[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">sscanf</span>(argv[<span class="number">1</span>],<span class="string">"%d"</span>, &amp;pid) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		job_ptr = getjobpid(jobs,pid);</span><br><span class="line">		<span class="keyword">if</span>(job_ptr == <span class="literal">NULL</span>)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"(%d): No such process\n"</span>, pid);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">sscanf</span>(argv[<span class="number">1</span>],<span class="string">"%%%d"</span>, &amp;jid) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		job_ptr = getjobjid(jobs,jid);</span><br><span class="line">		<span class="keyword">if</span>(job_ptr == <span class="literal">NULL</span>)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%%%d: No such job\n"</span>,jid);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s: argument must be a PID or %%jobid\n"</span>,argv[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">return</span>;	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">strcmp</span>(argv[<span class="number">0</span>],<span class="string">"bg"</span>))&#123;</span><br><span class="line">		<span class="comment">//bg</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"[%d] (%d) %s"</span>,job_ptr-&gt;jid,job_ptr-&gt;pid,job_ptr-&gt;cmdline);</span><br><span class="line">		job_ptr-&gt;state = BG;</span><br><span class="line">		kill(-job_ptr-&gt;pid, SIGCONT);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">//fg</span></span><br><span class="line">		job_ptr-&gt;state = FG;</span><br><span class="line">		kill(-job_ptr-&gt;pid, SIGCONT);</span><br><span class="line">		waitfg(job_ptr-&gt;pid);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+                    </article>
+                    
+    <blockquote class="post-license">
+        <p>
+            <strong>本文作者&nbsp;:&nbsp;Aione</strong>
+            <br>
+            <strong>
+            
+                本文使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a> 协议
+            </strong>
+            <br>
+            <strong>本文链接&nbsp;:&nbsp;</strong><a href="https://aione.me/2019/10/28/CSAPP-shell-lab/">https://aione.me/2019/10/28/CSAPP-shell-lab/</a>
+        </p>
+    </blockquote>
+
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+        var dateUpdate = Date.parse("2019-11-01");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2019-10-28T12:30:02.000Z" itemprop="datePublished">2019-10-28</time>
+
+    , 最后修改于&nbsp;<time datetime="2019-11-01T13:13:39.849Z" itemprop="dateModified">2019-11-01</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+
+<a class="post-categories-list-item" href="/categories/笔记本/">笔记本</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+
+<a class="post-tags-list-item" href="/tags/OS/" rel="tag">#&nbsp;OS</a>
+
+<a class="post-tags-list-item" href="/tags/CSAPP/" rel="tag">#&nbsp;CSAPP</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                
+<div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2019/11/07/ucore-lab1/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">ucore_lab1</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/10/22/CSAPP-cache-lab/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">CSAPP cache lab</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span data-year></span>
+        <a class="footer-copyright-a" href="https://aione.me">Aione&#39;s blog</a>
+    </p>
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+            
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+        
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+        
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+
+
+    /* Copyright */
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.querySelector('span[data-year]')
+    
+        copyrightSince = 2018;
+        if (copyrightSince === copyrightNow) {
+            copyrightContent.textContent = copyrightNow
+        } else {
+            copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow
+        }
+    
+
+
+
+/* Cnosole Log */
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+</script>
+
+<!-- vanilla-lazyload -->
+
+    <script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+    <!-- Busuanzi -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+
+
+
+<!-- gallery.js -->
+
+
+<!-- Comment -->
+
+
+<!-- ### Custom Footer ### -->
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>
