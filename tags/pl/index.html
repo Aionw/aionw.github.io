@@ -61,7 +61,7 @@ window.oldVersion = [
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <!-- Title -->
-<title>Tag: pl | Aione&#39;s blog</title>
+<title>标签: pl | Aione&#39;s blog</title>
 
 <!-- favicon -->
 <!-- Favicons -->
@@ -207,7 +207,7 @@ window.oldVersion = [
 
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="Tag: pl | Aione&#39;s blog">
+    <meta property="og:title" content="标签: pl | Aione&#39;s blog">
 <meta property="og:site_name" content="Aione&#39;s blog">
 
 <meta property="og:locale" content="zh-Hans">
@@ -271,13 +271,13 @@ window.oldVersion = [
 
     <nav class="navbar-section text-center">
     
-        <a href="/" class="navbar-link">Home</a>
+        <a href="/" class="navbar-link">首页</a>
     
     
-        <a href="/archives/" class="navbar-link">Archives</a>
+        <a href="/archives/" class="navbar-link">归档</a>
     
     
-        <a href="/search/" class="navbar-link">Search</a>
+        <a href="/search/" class="navbar-link">搜索</a>
     
     
         <a href="/about/" class="navbar-link">About</a>
@@ -295,7 +295,7 @@ window.oldVersion = [
     <div class="main-container">
         <main>
             <!-- # Title # -->
-            <h2 class="page-title">Tag : pl</h2>
+            <h2 class="page-title">标签 : pl</h2>
             <!-- # Post List # -->
             <div class="post-stream-container">
                 
@@ -319,7 +319,7 @@ window.oldVersion = [
     
         嘛，sicp 上有些题挺有意思的，记一下。
 
-    <a href="/2019/11/26/sicp/">Read more</a>
+    <a href="/2019/11/26/sicp/">阅读全文</a>
 </p>
 
 
@@ -441,6 +441,21 @@ console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c 
 <!-- ### Custom Footer ### -->
 
 
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
 
 </html>
