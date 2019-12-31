@@ -86,8 +86,7 @@ window.oldVersion = [
 <meta name="format-detection" content="telephone=no">
 
 <!-- Description -->
-<meta name="description" content="软工基础太痛苦了。
-Practice 1">
+<meta name="description" content="Practice 1加载应用程序并执行（需要编码）...">
 
 <!-- Keywords -->
 <meta name="keywords" content=", OS, ucore">
@@ -220,8 +219,7 @@ Practice 1">
 <meta property="og:url" content="https://aione.me/2019/12/24/ucore-lab5/">
 <meta property="og:image" content="https://automationforum.co/wp-content/uploads/2018/12/operating-sys.png">
 
-<meta property="og:description" content="软工基础太痛苦了。
-Practice 1">
+<meta property="og:description" content="Practice 1加载应用程序并执行（需要编码）...">
 
 <meta name="twitter:card" content="summary_large_image">
 
@@ -272,7 +270,7 @@ Practice 1">
     },
     
     "datePublished": "2019-12-24T15:20:54.000Z",
-    "dateModified": "2019-12-25T15:27:54.463Z",
+    "dateModified": "2019-12-31T14:12:30.516Z",
     "author": {
         "@type": "Person",
         "name": "Aione",
@@ -298,8 +296,7 @@ Practice 1">
     },
     
     "keywords": ", OS, ucore",
-    "description": "软工基础太痛苦了。
-Practice 1"
+    "description": "Practice 1加载应用程序并执行（需要编码）..."
 }
 </script>
 
@@ -463,26 +460,40 @@ Practice 1"
                     
                         
                             <div id="post-toc">
-                                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Practice-1"><span class="post-toc-number">1.</span> <span class="post-toc-text">Practice 1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Q1"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Q1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Q2"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Q2</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Practice-2"><span class="post-toc-number">2.</span> <span class="post-toc-text">Practice 2</span></a></li></ol>
+                                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Practice-1"><span class="post-toc-number">1.</span> <span class="post-toc-text">Practice 1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Q1"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Q1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Q2"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Q2</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Practice-2"><span class="post-toc-number">2.</span> <span class="post-toc-text">Practice 2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Practice-3"><span class="post-toc-number">3.</span> <span class="post-toc-text">Practice 3</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Ex-Challenge"><span class="post-toc-number">4.</span> <span class="post-toc-text">Ex Challenge</span></a></li></ol>
                             </div>
                         
                     
                     <article id="post-content">
-                        <p>软工基础太痛苦了。</p>
-<h2 id="Practice-1"><a href="#Practice-1" class="headerlink" title="Practice 1"></a>Practice 1</h2><p>加载应用程序并执行（需要编码）<br>do_execv函数调用load_icode（位于kern/process/proc.c中）来加载并解析一个处于内存中的ELF执行文件格式的应用程序，建立相应的用户内存空间来放置应用程序的代码段、数据段等，且要设置好proc_struct结构中的成员变量trapframe中的内容，确保在执行此进程后，能够从应用程序设定的起始执行地址开始执行。需设置正确的trapframe内容。</p>
+                        <h2 id="Practice-1"><a href="#Practice-1" class="headerlink" title="Practice 1"></a>Practice 1</h2><p>加载应用程序并执行（需要编码）<br>do_execv函数调用load_icode（位于kern/process/proc.c中）来加载并解析一个处于内存中的ELF执行文件格式的应用程序，建立相应的用户内存空间来放置应用程序的代码段、数据段等，且要设置好proc_struct结构中的成员变量trapframe中的内容，确保在执行此进程后，能够从应用程序设定的起始执行地址开始执行。需设置正确的trapframe内容。</p>
 <blockquote>
 <p>请在实验报告中简要说明你的设计实现过程。</p>
 <p>请在实验报告中描述当创建一个用户态进程并加载了应用程序后，CPU是如何让这个应用程序最终在用户态执行起来的。即这个用户态进程被ucore选择占用CPU执行（RUNNING态）到具体执行应用程序第一条指令的整个经过。</p>
 </blockquote>
 <h3 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h3><p>首先我们得知道 <code>load_icode</code> 是在什么时候被调用得，很容易就可以得到它得调用路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_main -&gt; KERNEL_EXECVE(exit) -&gt; __KERNEL_EXECVE() -&gt; kernel_execve -&gt; sys_call -&gt; sys_exec -&gt; do_execve -&gt; load_icode</span><br></pre></td></tr></table></figure></p>
-<p>本质就是一个用中断起程序调流程， <code>trap_frame</code> 注意这个时候程序在用户态</p>
+<p>本质就是一个用中断起程序调流程，设置 <code>trap_frame</code> 注意把 <code>cs</code> <code>ds</code> <code>ss</code> <code>es</code> 寄存器指到用户态去。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">load_icore</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">  tf-&gt;tf_cs = USER_CS;</span><br><span class="line">  tf-&gt;tf_ds = tf-&gt;tf_ss = tf-&gt;tf_es = USER_DS;</span><br><span class="line">  tf-&gt;tf_esp = USTACKTOP;</span><br><span class="line">  tf-&gt;tf_eip = elf-&gt;e_entry;</span><br><span class="line">  tf-&gt;tf_eflags = FL_IF;</span><br><span class="line"></span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
-<h3 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h3><p>被 ucore 选择占用 CPU 执行肯定设计到调度，从调度入手，调度方式先不分析，当起用户态进程当时候，调用了 <code>proc_run</code>，这个函数在 lab4 的时候提过，就不再赘述了。大致流程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proc_run -&gt; switch_to -&gt; forkret -&gt; forkrets -&gt; __forkret -&gt; ($eip = tf-&gt;tf_eip = elf-&gt;e_entry)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h3><p>被 ucore 选择占用 CPU 执行肯定设计到调度，从调度入手，当起用户态进程当时候，调用了 <code>proc_run</code>，这个函数在 lab4 的时候提过，就不再赘述了。大致流程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proc_run -&gt; switch_to -&gt; forkret -&gt; forkrets -&gt; __forkret -&gt; ($eip = tf-&gt;tf_eip = elf-&gt;e_entry)</span><br></pre></td></tr></table></figure></p>
 <h2 id="Practice-2"><a href="#Practice-2" class="headerlink" title="Practice 2"></a>Practice 2</h2><p>父进程复制自己的内存空间给子进程（需要编码）</p>
 <blockquote>
 <p>请在实验报告中简要说明如何设计实现”Copy on Write 机制“，给出概要设计，鼓励给出详细设计。</p>
 </blockquote>
 <p>基本要求就不说了，allo_page，改 pte 完事了。</p>
+<p>从父进程复制内存的时候将新进程的页表条目指向父进程，然后将内存区域改为只读，这样当程序要写某个内存区域时就会触发缺页异常，在处理缺页异常当时候就可以新建一个页，把父进程对应对页复制过来，修改页表条目，这样就完成了 cow 机制。</p>
+<p>具体来说，在 <code>copy_range</code> 函数里，对于原来是可读的页，也就是 <code>*ptep &amp; PTE_W</code> ，更新权限。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(*ptep &amp; PTE_W) &#123;</span><br><span class="line">  perm &amp;= (~PTE_W);</span><br><span class="line">  page_insert(from, page, start, perm);</span><br><span class="line">&#125;</span><br><span class="line">page_insert(to, page, start, perm);</span><br></pre></td></tr></table></figure></p>
+<p>修改 <code>do_pgfault</code> 函数，要识别当前是因为读权限错误引发的缺页异常。也就是说 <code>*ptep &amp; PTE_P &amp;&amp; vma-&gt;vm_flags &amp; VM_WRITE</code> ，同时我们要注意当，<code>page_ref</code> 为 1 的时候只用改权限就行。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint32_t</span> perm = PTE_U;</span><br><span class="line">perm |= PTE_W;</span><br><span class="line"><span class="keyword">if</span> (*ptep &amp; PTE_P) &#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">Page</span>* <span class="title">page</span> = <span class="title">pte2page</span>(*<span class="title">ptep</span>);</span></span><br><span class="line">  <span class="keyword">if</span> (page_ref(page) &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Page</span>* <span class="title">npage</span> = <span class="title">alloc_page</span>();</span></span><br><span class="line">    <span class="built_in">memcpy</span>(page2kva(npage),page2kva(page));</span><br><span class="line">    page_insert(mm-&gt;pgdir, npage, addr, perm);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    page_inesrt(mm-&gt;pgdir, page, addr, perm);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要代码如上，省去了部分错误处理代码。</p>
+<h2 id="Practice-3"><a href="#Practice-3" class="headerlink" title="Practice 3"></a>Practice 3</h2><p>阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现（不需要编码）</p>
+<blockquote>
+<p>请分析fork/exec/wait/exit在实现中是如何影响进程的执行状态的？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fork 新建 PCB，然后设置状态为 UNINIT</span><br><span class="line">exec 覆写原来的 mm，加载新的程序并执行，进程状态不变</span><br><span class="line">wait 等待子进程返回，状态变为 SLEEPING</span><br><span class="line">exit 基本上清空 PCB，把子线程交给 init_process 管理，把当前状态变为 PROC_ZOMBIE</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>请给出ucore中一个用户态进程的执行状态生命周期图（包执行状态，执行状态之间的变换关系，以及产生变换的事件或函数调用）。（字符方式画即可）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">                                             RUNNING----------------+</span><br><span class="line">                                               A |                  |</span><br><span class="line">                                               | |                  |</span><br><span class="line">                                            proc_run()            exit()  </span><br><span class="line">                                               | |                  |</span><br><span class="line">                                               | V                  V</span><br><span class="line">--alloc_page()--&gt; UNINIT --wakeup_proc()--&gt; RUNNABLE --exit()--&gt; ZOMBIE</span><br><span class="line">                                               A                    A</span><br><span class="line">                                               |                    |</span><br><span class="line">                                           子进程exit()            exit()</span><br><span class="line">                                               |                    |</span><br><span class="line">                                               |                    |</span><br><span class="line">                                            SLEEPING----------------+</span><br></pre></td></tr></table></figure>
+<h2 id="Ex-Challenge"><a href="#Ex-Challenge" class="headerlink" title="Ex Challenge"></a>Ex Challenge</h2><p>Dirty COW 有时间再来做了，cow 机制的实现👆有。</p>
 
                     </article>
                     
@@ -503,7 +514,7 @@ Practice 1"
 
     <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
     <script>
-        var dateUpdate = Date.parse("2019-12-25");
+        var dateUpdate = Date.parse("2019-12-31");
         var nowDate = new Date();
         var a = nowDate.getTime();
         var b = a - dateUpdate;
@@ -518,7 +529,7 @@ Practice 1"
 
 <p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-12-24T15:20:54.000Z" itemprop="datePublished">2019-12-24</time>
 
-    , Updated at&nbsp;<time datetime="2019-12-25T15:27:54.463Z" itemprop="dateModified">2019-12-25</time>
+    , Updated at&nbsp;<time datetime="2019-12-31T14:12:30.516Z" itemprop="dateModified">2019-12-31</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
