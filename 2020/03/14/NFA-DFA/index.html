@@ -272,7 +272,7 @@ NFANFA 可被 $(...">
     },
     
     "datePublished": "2020-03-14T11:28:53.000Z",
-    "dateModified": "2020-03-14T14:32:35.437Z",
+    "dateModified": "2020-03-14T14:39:04.627Z",
     "author": {
         "@type": "Person",
         "name": "Aione",
@@ -471,12 +471,12 @@ NFANFA 可被 $(..."
 <li>$Q$ 为状态的有限集合</li>
 <li>$\Sigma$ 为输入字符集</li>
 <li>$T$ 为转移函数， 可以表示为 $Q\times \Sigma \to P(Q)$ ，因为每个状态有输入和输出，输入为$\Sigma$，输出就是下一个状态，在 NFA 中，下一个状态不唯一，所以下个状态表示为 $P(Q)$ ，也就是说 $Q$ 的幂集合</li>
-<li>$q_0$ 为起始状态<br>在带有 $\varepsilon$移动 的状态下，NFA 可被扩展为 $NFA-\varepsilon$ 或者 $NFA-\lambda$ ，那么此时的 $T$ 可以表示为 $Q\times (\Sigma \cup \{\varepsilon\}) \to P(Q)$<blockquote>
+<li>$q_0$ 为起始状态<br>在带有 $\varepsilon$移动 的状态下，NFA 可被扩展为 $NFA-\varepsilon$ 或者说 $NFA-\lambda$ ，那么此时的 $T$ 可以表示为 $Q\times (\Sigma \cup \{\varepsilon\}) \to P(Q)$<blockquote>
 <p>$\varepsilon$ 移动， 即使说一个状态在没有输入的状况下转化为其他状态，也就是说，当前状态不确定，<del>薛定谔的状态</del></p>
-<h2 id="DFA"><a href="#DFA" class="headerlink" title="DFA"></a>DFA</h2><p>DFA 和 NFA 可以互相转化，与 NFA 不同，DFA 在一个输入下只有唯一的一种后继状态，DFA 可以表示为 $Q\times\Sigma\to Q$ 由于 DFA 的性质，还可以写成 $Q\times\Sigma^{*}\to Q$ </p>
 </blockquote>
 </li>
 </ul>
+<h2 id="DFA"><a href="#DFA" class="headerlink" title="DFA"></a>DFA</h2><p>DFA 和 NFA 可以互相转化，与 NFA 不同，DFA 在一个输入下只有唯一的一种后继状态，DFA 可以表示为 $Q\times\Sigma\to Q$ 由于 DFA 的性质，还可以写成 $Q\times\Sigma^{*}\to Q$ </p>
 <h2 id="NFA-to-DFA"><a href="#NFA-to-DFA" class="headerlink" title="NFA to DFA"></a>NFA to DFA</h2><p>即由 $Q\times\Sigma\to P(Q)\Rightarrow Q\times\Sigma\to Q$，很显然的一个想法是令$Q\in P(Q)$，也就是说，把 NFA 中由一个输入产生的多个后继状态在不改变 NFA 的情况下组合成一个。</p>
 <p>这种转换的方法叫幂集构造，由上述公式的变化，易知：</p>
 <p>如果我们有一个$n$个状态的 NFA，当把它变为 DFA 的时候，我们最多会有 $2^n$ 个状态。</p>
