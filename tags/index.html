@@ -296,7 +296,7 @@ window.oldVersion = [
     <div class="container">
     <main>
         <div class="tagscloud">
-        <a href="/tags/CSAPP/" style="font-size: 1.27rem; color: #798090">CSAPP</a> <a href="/tags/OS/" style="font-size: 1.8rem; color: #454d5d">OS</a> <a href="/tags/network/" style="font-size: 1.27rem; color: #798090">network</a> <a href="/tags/protocol/" style="font-size: 0.75rem; color: #acb3c2">protocol</a> <a href="/tags/pwn/" style="font-size: 0.75rem; color: #acb3c2">pwn</a>
+        <a href="/tags/CSAPP/" style="font-size: 1.27rem; color: #798090">CSAPP</a> <a href="/tags/DFA/" style="font-size: 0.75rem; color: #acb3c2">DFA</a> <a href="/tags/NFA/" style="font-size: 0.75rem; color: #acb3c2">NFA</a> <a href="/tags/OS/" style="font-size: 1.8rem; color: #454d5d">OS</a> <a href="/tags/compiler/" style="font-size: 0.75rem; color: #acb3c2">compiler</a> <a href="/tags/network/" style="font-size: 1.27rem; color: #798090">network</a> <a href="/tags/protocol/" style="font-size: 0.75rem; color: #acb3c2">protocol</a> <a href="/tags/pwn/" style="font-size: 0.75rem; color: #acb3c2">pwn</a>
         </div>
     </main>
 </div>
@@ -394,6 +394,21 @@ console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c 
 <!-- ### Custom Footer ### -->
 
 
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
 
 </html>
