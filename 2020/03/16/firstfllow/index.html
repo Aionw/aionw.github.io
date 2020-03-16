@@ -61,7 +61,7 @@ window.oldVersion = [
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <!-- Title -->
-<title>NFA &amp; DFA | Aione&#39;s blog</title>
+<title>为什么我们要计算 First Set/ Follow Set | Aione&#39;s blog</title>
 
 <!-- favicon -->
 <!-- Favicons -->
@@ -86,11 +86,11 @@ window.oldVersion = [
 <meta name="format-detection" content="telephone=no">
 
 <!-- Description -->
-<meta name="description" content="看 DFA, NFA 有点头大，记一下，理一下流程。
-NFANFA 可被 $(...">
+<meta name="description" content="在递归下降 parse 当中，在某些情况下，我们会计算 First Set/ Follow Set。为什么要计算它们呢？
+假设我们有如下语法">
 
 <!-- Keywords -->
-<meta name="keywords" content=", compiler, NFA, DFA">
+<meta name="keywords" content=", compiler, recursive descent">
 
 <!-- Disable Fucking Bloody Baidu Tranformation -->
 <meta http-equiv="Cache-Control" content="no-transform">
@@ -212,25 +212,25 @@ NFANFA 可被 $(...">
 
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="NFA &amp; DFA | Aione&#39;s blog">
+    <meta property="og:title" content="为什么我们要计算 First Set/ Follow Set | Aione&#39;s blog">
 <meta property="og:site_name" content="Aione&#39;s blog">
 
 <meta property="og:locale" content="zh-Hans">
 
-<meta property="og:url" content="https://aione.me/2020/03/14/NFA-DFA/">
+<meta property="og:url" content="https://aione.me/2020/03/16/firstfllow/">
 <meta property="og:image" content="https://aione.me/img/apple-touch-icon.png">
 
-<meta property="og:description" content="看 DFA, NFA 有点头大，记一下，理一下流程。
-NFANFA 可被 $(...">
+<meta property="og:description" content="在递归下降 parse 当中，在某些情况下，我们会计算 First Set/ Follow Set。为什么要计算它们呢？
+假设我们有如下语法">
 
 <meta name="twitter:card" content="summary">
 
 
     <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2020-03-14T11:28:53.000Z">
-    <meta property="article:modified_time" content="2020-03-14T11:28:53.000Z">
+    <meta property="article:published_time" content="2020-03-16T05:33:34.000Z">
+    <meta property="article:modified_time" content="2020-03-16T05:33:34.000Z">
     <meta property="article:author" content="Aione">
-    <meta property="og:article:tag" content=", compiler, NFA, DFA"> 
+    <meta property="og:article:tag" content=", compiler, recursive descent"> 
 
 
 
@@ -247,7 +247,7 @@ NFANFA 可被 $(...">
 
 
     <!-- ### Canonical link ### -->
-    <link rel="canonical" href="https://aione.me/2020/03/14/NFA-DFA/">
+    <link rel="canonical" href="https://aione.me/2020/03/16/firstfllow/">
 
     <!-- ### Structured Data ### -->
     
@@ -257,22 +257,22 @@ NFANFA 可被 $(...">
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
-    "url": "https://aione.me/2020/03/14/NFA-DFA/",
+    "url": "https://aione.me/2020/03/16/firstfllow/",
     "@type": "BlogPosting",
     "logo": "https://aione.me/img/apple-touch-icon.png",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://aione.me/2020/03/14/NFA-DFA/"
+        "@id": "https://aione.me/2020/03/16/firstfllow/"
     },
-    "headline": "NFA &amp; DFA | Aione&#39;s blog",
+    "headline": "为什么我们要计算 First Set/ Follow Set | Aione&#39;s blog",
     
     "image": {
         "@type": "ImageObject",
         "url": "https://aione.me/img/apple-touch-icon.png"
     },
     
-    "datePublished": "2020-03-14T11:28:53.000Z",
-    "dateModified": "2020-03-14T14:39:04.627Z",
+    "datePublished": "2020-03-16T05:33:34.000Z",
+    "dateModified": "2020-03-16T06:28:45.797Z",
     "author": {
         "@type": "Person",
         "name": "Aione",
@@ -297,9 +297,9 @@ NFANFA 可被 $(...">
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": ", compiler, NFA, DFA",
-    "description": "看 DFA, NFA 有点头大，记一下，理一下流程。
-NFANFA 可被 $(..."
+    "keywords": ", compiler, recursive descent",
+    "description": "在递归下降 parse 当中，在某些情况下，我们会计算 First Set/ Follow Set。为什么要计算它们呢？
+假设我们有如下语法"
 }
 </script>
 
@@ -365,7 +365,7 @@ NFANFA 可被 $(..."
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">NFA & DFA</h1>
+    <h1 class="card-title h3 mb-2">为什么我们要计算 First Set/ Follow Set</h1>
 
 
 
@@ -373,7 +373,7 @@ NFANFA 可被 $(..."
 <div class="post-header-info">
     <p class="post-header-info-left text-gray">
         <img class="author-thumb lazyload" data-src="/img/android-chrome-384x384.png" src="/img/suka-lazyload.gif" alt="Aione's Avatar">
-        <span>2020-03-14</span>
+        <span>2020-03-16</span>
         
             <span class="suka-devide-dot"></span>
             <a class="category-link" href="/categories/笔记本/">笔记本</a>
@@ -397,56 +397,56 @@ NFANFA 可被 $(..."
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=NFA &amp; DFA&url=https://aione.me/2020/03/14/NFA-DFA/&pic=https://aione.me/img/apple-touch-icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=为什么我们要计算 First Set/ Follow Set&url=https://aione.me/2020/03/16/firstfllow/&pic=https://aione.me/img/apple-touch-icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=NFA &amp; DFA&url=https://aione.me/2020/03/14/NFA-DFA/&via=Aione" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=为什么我们要计算 First Set/ Follow Set&url=https://aione.me/2020/03/16/firstfllow/&via=Aione" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
     </li>
     
 
     <!-- Share Facebook -->
     
     <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aione.me/2020/03/14/NFA-DFA/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aione.me/2020/03/16/firstfllow/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
     </li>
     
 
     <!-- Share Google+ -->
     
     <li class="menu-item">
-        <a href="https://plus.google.com/share?url=https://aione.me/2020/03/14/NFA-DFA/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        <a href="https://plus.google.com/share?url=https://aione.me/2020/03/16/firstfllow/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
     </li>
     
 
     <!-- Share LinkedIn -->
     
     <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aione.me/2020/03/14/NFA-DFA/&title=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aione.me/2020/03/16/firstfllow/&title=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
     </li>
     
 
     <!-- Share QQ -->
     
     <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Aione's blog&title=Aione's blog&summary=&pics=https://aione.me/img/apple-touch-icon.png&url=https://aione.me/2020/03/14/NFA-DFA/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Aione's blog&title=Aione's blog&summary=&pics=https://aione.me/img/apple-touch-icon.png&url=https://aione.me/2020/03/16/firstfllow/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
     </li>
     
 
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=https://aione.me/2020/03/14/NFA-DFA/&text=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        <a href="https://t.me/share/url?url=https://aione.me/2020/03/16/firstfllow/&text=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
     </li>
     
 
     <!-- QRCode -->
     
     <li class="menu-item">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAAAAAB0L9x7AAABk0lEQVR42u3b0Y7CMAxE0f7/T+++oij2jLtsmaDbFyoQ7alkEscO10/AcYEAAeIIxNUc6+ev33l9Xd93rgsiG7ENmuVGK2y9WfX97n0Q2YhdQO4usAtQB799ABBHIpzAUwMaiO9CVEFYTXL/+usA8SjCnYA6oBrIQJyDUInu3de3ZtsgHkPIRWtzkWrgevuqHMSjiGpxo5KUbiKrBi65IAYRgeiSWQepCittIQVELGIykTkLYXUOIhuhgrJKWtT5KDBBRCHcm00mrm7xXP46QMQgVIGsu3CXCFcQO7MCEYG4UyTpGnQyeQYRj1AFUxVo6rM2qQERg1CDkUpsnQVT+SAg4hHOpgxVZHcwILIRajPOZKNO92BWogsiAjFpsrnnqrgKIh+hNv3dLaLKZg2IWITTiJs069xGHohMxKRh7yx+3c2kILIRagHjJCsqMP+0uwjERxBO483dKOwUV0Gci5AbtgYD2O3ABBGHcBZFbvMWxDkIp7Ey2Sw6KqaCiENMN245fy5wCq4gMhGfPECAABGN+AW3SikYMpP3mAAAAABJRU5ErkJggg==" alt="QRCode">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAAAAAB0L9x7AAABh0lEQVR42u3auxLCMAxE0fz/T0NDAUykXSUQ1sxNwzPOKTSWLHu7BVwbCBAglkBszfVyw+Pz+2/dezUuiFzEbtDsINoBn5DuuCCyEe8D731fBZ57P4j/QVTBWYFA/D+ieq8SGIi1EVWi6YKw+s/HsyiIyxFdwXLm9WPVNohLEXLRaiamr67KQVyK6AKpm8Aq6Gg8EJEIp4CtHqQSmkpsIDIRbnHbPeDohAUiE6GSkVMId822dpIDEYmYBJ7TdK8mKJlFQcQgnICabroczqIgohBqkaOKV1X8jgpdEBGISSKTgxtBCSIX4W62OhvyVRE0yqIgYhCT5ocbsHKTBkQsoks6TgHrTFhW9w5EHMI9wKWCuGvWg1gH4R7emzZSu4IJRCbC3YhzBlcTGog1EJMAVMnJOQBoVdsgfo5wG+jqHlUInzpdBOJyhNtUdzd0DxW6IJZCuAcF1ULoVGCCiEE4B0SdAtla/ICIQUySVLch5xQ/IPIR7uLGPbxhF0cgIhG/vECAABGNuAMyVrl5xXbetwAAAABJRU5ErkJggg==" alt="QRCode">
     </li>
     
 
@@ -460,46 +460,21 @@ NFANFA 可被 $(..."
                     
                         
                             <div id="post-toc">
-                                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NFA"><span class="post-toc-number">1.</span> <span class="post-toc-text">NFA</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DFA"><span class="post-toc-number">2.</span> <span class="post-toc-text">DFA</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NFA-to-DFA"><span class="post-toc-number">3.</span> <span class="post-toc-text">NFA to DFA</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何应用-DFA-来识别-token"><span class="post-toc-number">4.</span> <span class="post-toc-text">如何应用 DFA 来识别 token ?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子"><span class="post-toc-number">5.</span> <span class="post-toc-text">例子</span></a></li></ol>
+                                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#First-Set"><span class="post-toc-number">1.</span> <span class="post-toc-text">First Set</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Follow-Set"><span class="post-toc-number">2.</span> <span class="post-toc-text">Follow Set</span></a></li></ol>
                             </div>
                         
                     
                     <article id="post-content">
-                        <p>看 DFA, NFA 有点头大，记一下，理一下流程。</p>
-<h2 id="NFA"><a href="#NFA" class="headerlink" title="NFA"></a>NFA</h2><p>NFA 可被 $(Q,\Sigma, T, q0, F)$ 定义，其中</p>
-<ul>
-<li>$Q$ 为状态的有限集合</li>
-<li>$\Sigma$ 为输入字符集</li>
-<li>$T$ 为转移函数， 可以表示为 $Q\times \Sigma \to P(Q)$ ，因为每个状态有输入和输出，输入为$\Sigma$，输出就是下一个状态，在 NFA 中，下一个状态不唯一，所以下个状态表示为 $P(Q)$ ，也就是说 $Q$ 的幂集合</li>
-<li>$q_0$ 为起始状态<br>在带有 $\varepsilon$移动 的状态下，NFA 可被扩展为 $NFA-\varepsilon$ 或者说 $NFA-\lambda$ ，那么此时的 $T$ 可以表示为 $Q\times (\Sigma \cup \{\varepsilon\}) \to P(Q)$<blockquote>
-<p>$\varepsilon$ 移动， 即使说一个状态在没有输入的状况下转化为其他状态，也就是说，当前状态不确定，<del>薛定谔的状态</del></p>
-</blockquote>
-</li>
-</ul>
-<h2 id="DFA"><a href="#DFA" class="headerlink" title="DFA"></a>DFA</h2><p>DFA 和 NFA 可以互相转化，与 NFA 不同，DFA 在一个输入下只有唯一的一种后继状态，DFA 可以表示为 $Q\times\Sigma\to Q$ 由于 DFA 的性质，还可以写成 $Q\times\Sigma^{*}\to Q$ </p>
-<h2 id="NFA-to-DFA"><a href="#NFA-to-DFA" class="headerlink" title="NFA to DFA"></a>NFA to DFA</h2><p>即由 $Q\times\Sigma\to P(Q)\Rightarrow Q\times\Sigma\to Q$，很显然的一个想法是令$Q\in P(Q)$，也就是说，把 NFA 中由一个输入产生的多个后继状态在不改变 NFA 的情况下组合成一个。</p>
-<p>这种转换的方法叫幂集构造，由上述公式的变化，易知：</p>
-<p>如果我们有一个$n$个状态的 NFA，当把它变为 DFA 的时候，我们最多会有 $2^n$ 个状态。</p>
-<h2 id="如何应用-DFA-来识别-token"><a href="#如何应用-DFA-来识别-token" class="headerlink" title="如何应用 DFA 来识别 token ?"></a>如何应用 DFA 来识别 token ?</h2><p>首先我们要把语言划分成不同到成分，即不同到 <code>class</code>，然后如何识别呢？对于每个 <code>class</code> 我们可以定义相应到 DFA ，这可以用语言自带的库实现，比如字符串对比，正则表达式。然后我们只要把不同部分的 DFA 组合到一起形成一个大的 DFA 就可以了。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>在对 sql 进行词法分析对过程中，有个例子就是，当输入为<code>[a-zA-Z]</code>的时候，下一个状态是不确定的，有可能为 <code>Identifier</code> 也可能为 <code>Keyword</code>，即如下 NFA</p>
-<p><img src="https://i.loli.net/2020/03/14/cDYvRaoW5JIwsru.png" alt="NFA.gv.png"></p>
-<p>通过魔法，可以转化为如下 DFA</p>
-<p><img src="https://i.loli.net/2020/03/14/4kJlp9gUxLfvBjo.png" alt="DFA.gv.png"></p>
-<p>实际上，在转换为 DFA 之后，switch 写一下 lexer 就写完了。</p>
-<p>最近正好在写 sql 的 lexer，看到了几个例子，这里记一下。在 SQL 里，如何快速识别出关键字<code>(KEYWORD)</code>是分析速度最大的影响因素。我看到有两种实现。</p>
-<ol>
-<li>用 hash 表实现，$O(1)$</li>
-<li>用 字典🌲 实现， $O(1)$</li>
-<li>顺序查找，$O(N)$</li>
-</ol>
-<p>字典树是跑的最快的，因为 hash 表在最差的情况下可能到 $O(N)$ ，当然这也要看 hash 表到实现，但是字典树到最差情况就是 $O(max(len(keyword)))$ ，只要$max(len(keyword))&lt;num_keywords$ 那么字典树就绝对更快。 ping-cap 的 sql parser 就是这么写的。</p>
-<hr>
-<p>ref:</p>
-<ol>
-<li><a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton" target="_blank" rel="noopener">DFA wiki</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton" target="_blank" rel="noopener">NFA wiki</a></li>
-<li><a href="https://github.com/pingcap/parser" target="_blank" rel="noopener">pingcap sqlparser</a></li>
-</ol>
+                        <p>在递归下降 parse 当中，在某些情况下，我们会计算 First Set/ Follow Set。为什么要计算它们呢？</p>
+<p>假设我们有如下语法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">S -&gt; AB</span><br><span class="line">A -&gt; Ca | ε</span><br><span class="line">B -&gt; BaAC | c</span><br><span class="line">C -&gt; b | ε</span><br></pre></td></tr></table></figure></p>
+<p>首先，注意到 B production 是一个左递归，递归下降不能处理左递归的情况。得把 B 变为右递归，我们做如下变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B -&gt; cB&apos;</span><br><span class="line">B&apos; -&gt; aACB&apos; | ε</span><br></pre></td></tr></table></figure></p>
+<h2 id="First-Set"><a href="#First-Set" class="headerlink" title="First Set"></a>First Set</h2><p>当我们获得第一个 token 的时候，首先要和 S 进行匹配，但此时 AB 都是非终结符，我们需要一种可以和现有 token 匹配但方法，这就是 First set（first集），我们把 tkn 和 First(A) 进行匹配，完成我们递归下降的过程。理解到了 First 集合的含义，那如何计算 First 集也是信手拈来。</p>
+<p>First(A) 就是，按照 A 的推到走下去，可能遇到的第一个终结符。匹配 A 会有哪些终结符。我们的两个集合都是为了匹配 token 服务的。</p>
+<p>那么很容易得到计算 First(A) 的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">First(A) = First(Ca|ε) = &#123;First(C), a, ε&#125; = &#123;b, a, ε&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意这里，当 C 为 ε 的时候，下一个要匹配的就变成了 a。</p>
+<h2 id="Follow-Set"><a href="#Follow-Set" class="headerlink" title="Follow Set"></a>Follow Set</h2><p>Follow Set 是为了解决我们推到过程中遇到一个非终结符，这个非终结符可能为 ε 诞生的，它同样是计算接下来要可能的终结符。</p>
+<p>举个例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Follow(A) = &#123;First(C), First(B), First(B&apos;)&#125; = &#123;a, b, c, ε&#125;</span><br></pre></td></tr></table></figure></p>
+<p>假设 A 为空，A 后可能为 C, B。</p>
 
                     </article>
                     
@@ -512,7 +487,7 @@ NFANFA 可被 $(..."
                 本文使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a> 协议
             </strong>
             <br>
-            <strong>Link to this article&nbsp;:&nbsp;</strong><a href="https://aione.me/2020/03/14/NFA-DFA/">https://aione.me/2020/03/14/NFA-DFA/</a>
+            <strong>Link to this article&nbsp;:&nbsp;</strong><a href="https://aione.me/2020/03/16/firstfllow/">https://aione.me/2020/03/16/firstfllow/</a>
         </p>
     </blockquote>
 
@@ -520,7 +495,7 @@ NFANFA 可被 $(..."
 
     <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
     <script>
-        var dateUpdate = Date.parse("2020-03-14");
+        var dateUpdate = Date.parse("2020-03-16");
         var nowDate = new Date();
         var a = nowDate.getTime();
         var b = a - dateUpdate;
@@ -533,7 +508,7 @@ NFANFA 可被 $(..."
     </script>
 
 
-<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2020-03-14T11:28:53.000Z" itemprop="datePublished">2020-03-14</time>
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2020-03-16T05:33:34.000Z" itemprop="datePublished">2020-03-16</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
@@ -552,9 +527,7 @@ NFANFA 可被 $(..."
 
 <a class="post-tags-list-item" href="/tags/compiler/" rel="tag">#&nbsp;compiler</a>
 
-<a class="post-tags-list-item" href="/tags/NFA/" rel="tag">#&nbsp;NFA</a>
-
-<a class="post-tags-list-item" href="/tags/DFA/" rel="tag">#&nbsp;DFA</a>
+<a class="post-tags-list-item" href="/tags/recursive-descent/" rel="tag">#&nbsp;recursive descent</a>
 
 </span>
 
@@ -567,20 +540,13 @@ NFANFA 可被 $(..."
 <ul class="pagination">
     <!-- Prev Nav -->
     
-        <li class="page-item page-prev">
-            <a href="/2020/03/16/firstfllow/" rel="prev">
-                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">为什么我们要计算 First Set/ Follow Set</div>
-            </a>
-        </li>
-    
 
     <!-- Next Nav -->
     
         <li class="page-item page-next">
-            <a href="/2019/10/28/CSAPP-shell-lab/" rel="next">
+            <a href="/2020/03/14/NFA-DFA/" rel="next">
                 <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">CSAPP-shell-lab</div>
+                <div class="page-item-subtitle">NFA &amp; DFA</div>
             </a>
         </li>
     
