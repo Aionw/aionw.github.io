@@ -61,7 +61,7 @@ window.oldVersion = [
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <!-- Title -->
-<title>我 | Aione&#39;s blog</title>
+<title>一致性 hash | Aione&#39;s blog</title>
 
 <!-- favicon -->
 <!-- Favicons -->
@@ -88,14 +88,10 @@ window.oldVersion = [
 <meta name="format-detection" content="telephone=no">
 
 <!-- Description -->
-<meta name="description" content="我是谁
-西南某专科学生。
-冻鳗爱好者。
-
-">
+<meta name="description" content="在 MapReduce 里，我们要把 map worker 得到的 kv 对平均分配到 wroker 到磁盘，如果分配不均匀，就会降低总体性能。如果使用普通的 hash 算法，那么分配的均匀性依赖与算法的均匀性，并且一旦 wor...">
 
 <!-- Keywords -->
-<meta name="keywords" content>
+<meta name="keywords" content=", hash">
 
 <!-- Disable Fucking Bloody Baidu Tranformation -->
 <meta http-equiv="Cache-Control" content="no-transform">
@@ -187,6 +183,10 @@ window.oldVersion = [
 
     <!-- Prettify Theme -->
     
+    
+        <link rel="stylesheet" href="/css/highlight/github.min.css">
+    
+
 
 
     
@@ -213,24 +213,24 @@ window.oldVersion = [
 
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="我 | Aione&#39;s blog">
+    <meta property="og:title" content="一致性 hash | Aione&#39;s blog">
 <meta property="og:site_name" content="Aione&#39;s blog">
 
 <meta property="og:locale" content="zh-Hans">
 
-<meta property="og:url" content="https://aione.space/about/">
+<meta property="og:url" content="https://aione.space/2020/09/10/consistent-hashing/">
 <meta property="og:image" content="https://aione.space/img/new/android-icon-192x192.png">
 
-<meta property="og:description" content="我是谁
-西南某专科学生。
-冻鳗爱好者。
-
-">
+<meta property="og:description" content="在 MapReduce 里，我们要把 map worker 得到的 kv 对平均分配到 wroker 到磁盘，如果分配不均匀，就会降低总体性能。如果使用普通的 hash 算法，那么分配的均匀性依赖与算法的均匀性，并且一旦 wor...">
 
 <meta name="twitter:card" content="summary">
 
 
-    <meta property="og:type" content="blog">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2020-09-10T01:13:37.000Z">
+    <meta property="article:modified_time" content="2020-09-10T01:13:37.000Z">
+    <meta property="article:author" content="Aione">
+    <meta property="og:article:tag" content=", hash"> 
 
 
 
@@ -247,11 +247,60 @@ window.oldVersion = [
 
 
     <!-- ### Canonical link ### -->
-    <link rel="canonical" href="https://aione.space/about/">
+    <link rel="canonical" href="https://aione.space/2020/09/10/consistent-hashing/">
 
     <!-- ### Structured Data ### -->
     
 
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://aione.space/2020/09/10/consistent-hashing/",
+    "@type": "BlogPosting",
+    "logo": "https://aione.space/img/new/android-icon-192x192.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aione.space/2020/09/10/consistent-hashing/"
+    },
+    "headline": "一致性 hash | Aione&#39;s blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://aione.space/img/new/android-icon-192x192.png"
+    },
+    
+    "datePublished": "2020-09-10T01:13:37.000Z",
+    "dateModified": "2020-09-11T12:00:15.089Z",
+    "author": {
+        "@type": "Person",
+        "name": "Aione",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://aione.space/img/new/android-icon-192x192.png"
+        },
+        "description": "一起快乐摸鱼吧🐳"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aione&#39;s blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://aione.space/img/new/android-icon-192x192.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://aione.space/search/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": ", hash",
+    "description": "在 MapReduce 里，我们要把 map worker 得到的 kv 对平均分配到 wroker 到磁盘，如果分配不均匀，就会降低总体性能。如果使用普通的 hash 算法，那么分配的均匀性依赖与算法的均匀性，并且一旦 wor..."
+}
+</script>
 
 
 
@@ -315,7 +364,7 @@ window.oldVersion = [
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">我</h1>
+    <h1 class="card-title h3 mb-2">一致性 hash</h1>
 
 
 
@@ -323,7 +372,10 @@ window.oldVersion = [
 <div class="post-header-info">
     <p class="post-header-info-left text-gray">
         <img class="author-thumb lazyload" data-src="/img/new/android-icon-192x192.png" src="/img/suka-lazyload.gif" alt="Aione's Avatar">
-        <span>2019-04-18</span>
+        <span>2020-09-10</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/笔记本/">笔记本</a>
         
         
             <!-- Busuanzi Post Views -->
@@ -344,56 +396,56 @@ window.oldVersion = [
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=我&url=https://aione.space/about/&pic=https://aione.space/img/new/android-icon-192x192.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=一致性 hash&url=https://aione.space/2020/09/10/consistent-hashing/&pic=https://aione.space/img/new/android-icon-192x192.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=我&url=https://aione.space/about/&via=Aione" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=一致性 hash&url=https://aione.space/2020/09/10/consistent-hashing/&via=Aione" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
     </li>
     
 
     <!-- Share Facebook -->
     
     <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aione.space/about/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aione.space/2020/09/10/consistent-hashing/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
     </li>
     
 
     <!-- Share Google+ -->
     
     <li class="menu-item">
-        <a href="https://plus.google.com/share?url=https://aione.space/about/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        <a href="https://plus.google.com/share?url=https://aione.space/2020/09/10/consistent-hashing/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
     </li>
     
 
     <!-- Share LinkedIn -->
     
     <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aione.space/about/&title=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aione.space/2020/09/10/consistent-hashing/&title=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
     </li>
     
 
     <!-- Share QQ -->
     
     <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Aione's blog&title=Aione's blog&summary=&pics=https://aione.space/img/new/android-icon-192x192.png&url=https://aione.space/about/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Aione's blog&title=Aione's blog&summary=&pics=https://aione.space/img/new/android-icon-192x192.png&url=https://aione.space/2020/09/10/consistent-hashing/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
     </li>
     
 
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=https://aione.space/about/&text=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        <a href="https://t.me/share/url?url=https://aione.space/2020/09/10/consistent-hashing/&text=Aione's blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
     </li>
     
 
     <!-- QRCode -->
     
     <li class="menu-item">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAAAAABx8Un7AAABM0lEQVR42u3ZyxKDIAyFYd//pdttL7mcBIksfjadKvg5I4QA1+uBcoGCgrbQKyif978aB9e854DOouZH/0AtyLofPQd0HrU60F8jo673cmZ70CPQ306kdCjQs1Fv8Ef1QM9Aw0DtTNrbZhnQZTRLzNTfW7NB0DYqL36MIL991QbaXp9mncqD1OQNdBbNkjDlhaI6bu8FHUG9pDqawK02XiABnUOjQd9KqjuTOOhtaLbYrdSJJgXQWdT98Mm1aGFlBhXQcbQy+DsvBTqHKgO8stlR2rwC3YYqybQX9OWDQdARtLLBUfkP+hxaOYivbFQubzKDLqHKQbwXILKOlW5Igm5DOwd86iQBei66POGDHoGWg3plAQW6FVUSsuyQL91wBh1D1YM9JQBEbUBn0MkCCgpaKm9PETGRMVHVNQAAAABJRU5ErkJggg==" alt="QRCode">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB4klEQVR42u3a0W7DIBBEUf//T7evrgUzs8SVYHN5SVQn8amEgR24fjZsFyhQoEANUJdo9+t/vvz42/2zz9fn+9l9QPVCDTtdcKMUktwHVD/UqIOPHobRj85uqNDD+4D6CtQIp6Czjg0K1GyAVNcrgyuo/ig5UZpFnxpk/2WVAGp7lCsc3np9tZoBtS3Khg7hgOnev5q6gNoa5cIIVYi6SV0NxsPJG1QbVBJeJJ3WLfbsYhFUK9SnE60LN5KQF1QvlCsmZ4vCtOhUoQmoXqiVAN8tBmf4uKODOhqlCtDq9WSSVpsCoPqh5BdMUOE2kdSmAaheqKRDq0k6Xci5fxpUH5Tr0C6wTReA5acP1NGopCBNmuv8NlAB1QJVKSaT4DV9AOQiD9TxqJWQNf38bHAeXgPVDpUs6pIOXj3YBaoXKumIUTAfHnKWoSyoFqhKiFHdoExCWFA9UbJADDaGKuHY8o4DqGNQ1YA1DTyShyU+1AXqKFRSALhwtnKQQg62oFqgkgPN6eDpAjK7OQ6qDSoJKFQRUS0YopP7oI5HqQMRKsRIJ+pSEAuqNcodxqlMvPbQIKivRVUPa7kiFFRPVLJBNAu9PilGl1YJoLZHrRQObiGYBCOvVzOgtkDt1ECBAgXq1n4BozBQb0Ni918AAAAASUVORK5CYII=" alt="QRCode">
     </li>
     
 
@@ -407,15 +459,19 @@ window.oldVersion = [
                     
                         
                             <div id="post-toc">
-                                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#我是谁"><span class="post-toc-number">1.</span> <span class="post-toc-text">我是谁</span></a></li></ol>
+                                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一致性-hash"><span class="post-toc-number">1.</span> <span class="post-toc-text">一致性 hash</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">原理</span></a></li></ol>
                             </div>
                         
                     
                     <article id="post-content">
-                        <h3 id="我是谁"><a href="#我是谁" class="headerlink" title="我是谁"></a>我是谁</h3><ul>
-<li>西南某专科学生。</li>
-<li>冻鳗爱好者。</li>
-</ul>
+                        <p>在 MapReduce 里，我们要把 map worker 得到的 kv 对平均分配到 wroker 到磁盘，如果分配不均匀，就会降低总体性能。如果使用普通的 hash 算法，那么分配的均匀性依赖与算法的均匀性，并且一旦 worker 数量发生改变，我们要进行大规划的 rehash，会造成大批量的数据移动。这时我们就需要一致性 hash。</p>
+<h2 id="一致性-hash"><a href="#一致性-hash" class="headerlink" title="一致性 hash"></a>一致性 hash</h2><p>一致性 hash 的目标就是，当 hash slot 数目发生改变时，需要 rehash 的数目尽可能小并且尽量保证数据分配的平均。</p>
+<blockquote>
+<p>wiki\<br>一致哈希是一种特殊的哈希算法。在使用一致哈希算法后，哈希表槽位数（大小）的改变平均只需要对 K/n个关键字重新映射，其中K是关键字的数量， n是槽位数量。然而在传统的哈希表中，添加或删除一个槽位的几乎需要对所有关键字进行重新映射。</p>
+</blockquote>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>一致性 hash 将 hash 的值域看作一个环，根据 key 的 hash 值选择环上的节点，这样，当有新的节点添加到环上时，只需要对相邻节点的 key 进行 rehash 就可以解决问题。<br><img src="https://i.loli.net/2020/09/10/XOzRMWx95e7msnP.png" alt="image.png"></p>
+<p>这样会引入一个新的问题，如果节点在环上分配不均匀，会导致 hash 偏移，会使某个节点的负载过重，这种情况下，我们引入虚节点。</p>
+<p><img src="https://i.loli.net/2020/09/10/2qHrOLdgQMakV8N.png" alt="image.png"><br>当我们创建hash环的时候，首先在环上平均分配虚拟节点，当有服务器加入的时候，分配给该服务器虚拟节点，通过将hash分配和具体的服务器解耦合达到均衡负载的目的。在这种情况下，如果有节点离开或者加入，我们只需要将该虚拟节点重新分配出去或者给新服务器分配虚拟节点即可。</p>
 
                     </article>
                     
@@ -428,7 +484,7 @@ window.oldVersion = [
                 本文使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a> 协议
             </strong>
             <br>
-            <strong>Link to this article&nbsp;:&nbsp;</strong><a href="https://aione.space/about/index.html">https://aione.space/about/index.html</a>
+            <strong>Link to this article&nbsp;:&nbsp;</strong><a href="https://aione.space/2020/09/10/consistent-hashing/">https://aione.space/2020/09/10/consistent-hashing/</a>
         </p>
     </blockquote>
 
@@ -436,7 +492,7 @@ window.oldVersion = [
 
     <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
     <script>
-        var dateUpdate = Date.parse("2019-11-24");
+        var dateUpdate = Date.parse("2020-09-11");
         var nowDate = new Date();
         var a = nowDate.getTime();
         var b = a - dateUpdate;
@@ -449,14 +505,28 @@ window.oldVersion = [
     </script>
 
 
-<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-04-18T14:28:46.000Z" itemprop="datePublished">2019-04-18</time>
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2020-09-10T01:13:37.000Z" itemprop="datePublished">2020-09-10</time>
 
-    , Updated at&nbsp;<time datetime="2019-11-24T03:45:37.981Z" itemprop="dateModified">2019-11-24</time>
+    , Updated at&nbsp;<time datetime="2020-09-11T12:00:15.089Z" itemprop="dateModified">2020-09-11</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
 
+<span class="post-categories-list mt-2">
 
+
+<a class="post-categories-list-item" href="/categories/笔记本/">笔记本</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+
+<a class="post-tags-list-item" href="/tags/hash/" rel="tag">#&nbsp;hash</a>
+
+</span>
 
 
 </p>
@@ -467,8 +537,22 @@ window.oldVersion = [
 <ul class="pagination">
     <!-- Prev Nav -->
     
+        <li class="page-item page-prev">
+            <a href="/2020/09/11/gfs/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">gfs</div>
+            </a>
+        </li>
+    
 
     <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2020/06/01/mapreduce/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Google 三轮车之 MapReduce</div>
+            </a>
+        </li>
     
 </ul>
 </div>
