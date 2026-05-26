@@ -1,0 +1,853 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ascend Transport &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/transfer-engine/ascend_transport';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Heterogeneous Ascend Transport" href="heterogeneous_ascend.html" />
+    <link rel="prev" title="Ascend Direct Transport" href="ascend_direct_transport.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Transfer Engine</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="efa_transport.html">AWS EFA Transport for Mooncake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ascend_direct_transport.html">Ascend Direct Transport</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ascend Transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heterogeneous_ascend.html">Heterogeneous Ascend Transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sunrise_link_transport.html">Sunrise Link Transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transfer-engine-bench-tuning.html">Transfer Engine Benchmarking &amp; Tuning Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/transfer-engine/ascend_transport.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/design/transfer-engine/ascend_transport.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ascend Transport</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-dependencies">New Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-compilation-script">One-Step Compilation Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes-mandatory">Important Notes (Mandatory)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-installation-script-without-compiling-mooncake">One-Step Installation Script (Without Compiling Mooncake)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-instructions">Build Instructions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoint-management">Endpoint Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ranktable-management">Ranktable Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-service">Metadata Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-handling">Fault Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-cases">Test Cases</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-commands-for-scenario-testing">Example Commands for Scenario Testing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-commands-for-performance-testing">Example Commands for Performance Testing</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-description">Print Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timeout-configuration">Timeout Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-code">Error Code</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ascend-transport">
+<h1>Ascend Transport<a class="headerlink" href="#ascend-transport" title="Link to this heading">#</a></h1>
+<p>The source code path for Ascend Transport is <code class="docutils literal notranslate"><span class="pre">Mooncake/mooncake-transfer-engine/src/transport/ascend_transport</span></code>, which also includes automated build scripts and the README file.</p>
+<p>**ASCEND TRANSPORT is scheduled for deprecation, please use <a class="reference internal" href="ascend_direct_transport.html"><span class="std std-doc">ASCEND DIRECT TRANSPORT</span></a> on ASCEND platform. **</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Ascend Transport is a high-performance zero-copy NPU data transfer library with one-sided semantics, directly compatible with Mooncake Transfer Engine. To compile and use the Ascend Transport library, please set the <code class="docutils literal notranslate"><span class="pre">USE_ASCEND</span></code> flag to <code class="docutils literal notranslate"><span class="pre">&quot;ON&quot;</span></code> in the <code class="docutils literal notranslate"><span class="pre">mooncake-common/common.cmake</span></code> file.</p>
+<p>Ascend Transport supports inter-NPU data transfer using one-sided semantics (currently supports Device to Device; other modes are under development). Users only need to specify the node and memory information at both ends through the Mooncake Transfer Engine interface to achieve high-performance point-to-point data transfer. Ascend Transport abstracts away internal complexities and automatically handles operations such as establishing connections, registering and exchanging memory, and checking transfer status.</p>
+<p>Ascend Transport supports the batch transfer interface batch_transfer_sync provided by Mooncake in transfer_engine_py.cpp, which enables batch transmission of multiple non-contiguous memory blocks targeting the same destination card. Test results demonstrate that when transferring small non-contiguous memory blocks (e.g., 128KB), using the batch transfer interface achieves over 100% bandwidth improvement compared to using the transferSync interface.</p>
+<section id="new-dependencies">
+<h3>New Dependencies<a class="headerlink" href="#new-dependencies" title="Link to this heading">#</a></h3>
+<p>In addition to the dependencies already required by Mooncake, Ascend Transport needs some HCCL-related dependencies:</p>
+<p><strong>MPI</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mpich<span class="w"> </span>mpich-devel
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mpich<span class="w"> </span>libmpich-dev
+</pre></div>
+</div>
+<p><strong>Ascend Compute Architecture for Neural Networks</strong>
+Updated to Ascend Compute Architecture for Neural Networks 8.2.RC1. pkg packages are no longer required.</p>
+</section>
+</section>
+<section id="one-step-compilation-script">
+<h2>One-Step Compilation Script<a class="headerlink" href="#one-step-compilation-script" title="Link to this heading">#</a></h2>
+<p>Ascend Transport provides a one-step compilation script to simplify the setup process. The script is located at <code class="docutils literal notranslate"><span class="pre">scripts/ascend/dependencies_ascend.sh</span></code>. To execute the script, follow these steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sh<span class="w"> </span>scripts/ascend/dependencies_ascend.sh
+</pre></div>
+</div>
+<p>The one-step compilation script also accommodates scenarios where users are unable to directly perform <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> operations in their environment. Users can place the source code of the dependencies that would normally be cloned via <code class="docutils literal notranslate"><span class="pre">git</span></code> and the Mooncake source code in the same directory. The script will automatically compile the dependencies and Mooncake.</p>
+<p>The output artifacts of Mooncake include the <code class="docutils literal notranslate"><span class="pre">libascend_transport_mem.so</span></code> and <code class="docutils literal notranslate"><span class="pre">mooncake-wheel/dist/mooncake_transfer_engine*.whl</span></code>.</p>
+<p><strong>Environment Setup</strong>
+Before using <code class="docutils literal notranslate"><span class="pre">ascend_transport</span></code>, ensure that the environment variables are set. You can use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:<span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>Alternatively, you can copy the <code class="docutils literal notranslate"><span class="pre">.so</span></code> file to another path referenced by <code class="docutils literal notranslate"><span class="pre">$LD_LIBRARY_PATH</span></code>.</p>
+</section>
+<section id="important-notes-mandatory">
+<h2>Important Notes (Mandatory)<a class="headerlink" href="#important-notes-mandatory" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Initialization Parameter Change</strong>:
+When calling <code class="docutils literal notranslate"><span class="pre">TransferEngine::initialize</span></code>, the <code class="docutils literal notranslate"><span class="pre">local_server_name</span></code> parameter must include the physical ID of the NPU on which it is running. The format of <code class="docutils literal notranslate"><span class="pre">local_server_name</span></code> has changed from <code class="docutils literal notranslate"><span class="pre">ip:port</span></code> to <code class="docutils literal notranslate"><span class="pre">ip:port:npu_x</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">&quot;0.0.0.0:12345:npu_2&quot;</span></code>. Ascend Transport will internally parse and obtain the physical ID of the NPU. The format for <code class="docutils literal notranslate"><span class="pre">segment_name</span></code> stored in metadata and <code class="docutils literal notranslate"><span class="pre">target_hostname</span></code> used during transfer remains unchanged, still in the format of <code class="docutils literal notranslate"><span class="pre">ip:port</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">&quot;0.0.0.0:12345&quot;</span></code>.</p></li>
+<li><p><strong>TCP Connection and Port Usage</strong>:
+Ascend Transport will establish a TCP connection on the host side, occupying a port number that is <code class="docutils literal notranslate"><span class="pre">10000</span></code> plus the physical ID of the NPU. If this port is already in use, it will automatically search for an available port.</p></li>
+<li><p><strong>Memory Alignment Requirement</strong>:
+Due to internal interface limitations, Ascend Transport currently requires that the registered memory be NPU memory and must be aligned to 2M.</p></li>
+<li><p><strong>hccn.conf File Requirement</strong>:
+Ensure that the file <code class="docutils literal notranslate"><span class="pre">hccn.conf</span></code> exists in the <code class="docutils literal notranslate"><span class="pre">/etc</span></code> directory. This is especially important when running inside a container. You should either mount <code class="docutils literal notranslate"><span class="pre">/etc/hccn.conf</span></code> or copy the file from the host machine to the container’s <code class="docutils literal notranslate"><span class="pre">/etc</span></code> directory.</p></li>
+<li><p><strong>potential MPI Conflicts</strong>:
+Concurrently installing MPI (typically MPICH) and OpenMPI may cause conflicts. If you encounter MPI-related issues, try running the following commands:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">   </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mpich<span class="w"> </span>libmpich-dev
+<span class="w">   </span>sudo<span class="w"> </span>apt<span class="w"> </span>purge<span class="w"> </span>openmpi-bin<span class="w"> </span>libopenmpi-dev
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p><strong>IPV6 is not support</strong>:
+IPv6 is not supported in this release; an IPv6-compatibility patch will be delivered shortly.</p></li>
+</ol>
+</section>
+<section id="one-step-installation-script-without-compiling-mooncake">
+<h2>One-Step Installation Script (Without Compiling Mooncake)<a class="headerlink" href="#one-step-installation-script-without-compiling-mooncake" title="Link to this heading">#</a></h2>
+<p>If you have already compiled Mooncake on one machine, you can skip the compilation step on other machines with the same system and only install the dependencies. You can directly use the output artifacts of Mooncake, <code class="docutils literal notranslate"><span class="pre">libascend_transport_mem.so</span></code> and <code class="docutils literal notranslate"><span class="pre">mooncake-wheel/dist/mooncake_transfer_engine*.whl</span></code>.</p>
+<p>To do this, place <code class="docutils literal notranslate"><span class="pre">mooncake-wheel/dist/mooncake_transfer_engine*.whl</span></code>, <code class="docutils literal notranslate"><span class="pre">libascend_transport_mem.so</span></code>, and the script <code class="docutils literal notranslate"><span class="pre">scripts/ascend/dependencies_ascend_installation.sh</span></code> in the same directory. Then, execute the script as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./dependencies_ascend_installation.sh
+</pre></div>
+</div>
+<p><strong>Environment Setup</strong>
+Before using <code class="docutils literal notranslate"><span class="pre">ascend_transport</span></code>, ensure that the environment variables are set. You can use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:<span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>Alternatively, you can copy the <code class="docutils literal notranslate"><span class="pre">.so</span></code> file to another path referenced by <code class="docutils literal notranslate"><span class="pre">$LD_LIBRARY_PATH</span></code>.</p>
+<section id="build-instructions">
+<h3>Build Instructions<a class="headerlink" href="#build-instructions" title="Link to this heading">#</a></h3>
+<p>Once all dependencies are installed successfully, you can proceed with building Mooncake normally. If errors occur, try setting the following environment variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CPLUS_INCLUDE_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$CPLUS_INCLUDE_PATH</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;/usr/local/Ascend&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>paste<span class="w"> </span>-sd:<span class="w"> </span>-<span class="k">)</span>
+</pre></div>
+</div>
+</section>
+<section id="endpoint-management">
+<h3>Endpoint Management<a class="headerlink" href="#endpoint-management" title="Link to this heading">#</a></h3>
+<p>Each Huawei NPU card has a dedicated parameter-plane NIC and should be managed by a single <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> instance responsible for all its data transfers.</p>
+</section>
+<section id="ranktable-management">
+<h3>Ranktable Management<a class="headerlink" href="#ranktable-management" title="Link to this heading">#</a></h3>
+<p>Ascend Transport does not rely on global Ranktable information. It only needs to obtain the local Ranktable information of the current NPU card. During the initialization of Ascend Transport, it will automatically parse the /etc/hccn.conf file to acquire this information.</p>
+</section>
+<section id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h3>
+<p>When using Ascend Transport, the <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> must still call the <code class="docutils literal notranslate"><span class="pre">init</span></code> function after construction:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TransferEngine</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">TransferEngine</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">metadata_conn_string</span><span class="p">,</span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_server_name</span><span class="p">,</span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ip_or_host_name</span><span class="p">,</span>
+<span class="w">                         </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">rpc_port</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The only difference is that the <code class="docutils literal notranslate"><span class="pre">local_server_name</span></code> parameter must now include the physical NPU card ID. The format changes from <code class="docutils literal notranslate"><span class="pre">ip:port</span></code> to <code class="docutils literal notranslate"><span class="pre">ip:port:npu_x</span></code>, e.g., <code class="docutils literal notranslate"><span class="pre">&quot;0.0.0.0:12345:npu_2&quot;</span></code>.</p>
+</section>
+<section id="metadata-service">
+<h3>Metadata Service<a class="headerlink" href="#metadata-service" title="Link to this heading">#</a></h3>
+<p>Ascend Transport is compatible with all metadata services currently supported by Mooncake, including <code class="docutils literal notranslate"><span class="pre">etcd</span></code>, <code class="docutils literal notranslate"><span class="pre">redis</span></code>, <code class="docutils literal notranslate"><span class="pre">http</span></code>, and <code class="docutils literal notranslate"><span class="pre">p2phandshake</span></code>. Upon initialization, Ascend Transport registers key NPU card information such as <code class="docutils literal notranslate"><span class="pre">device_id</span></code>, <code class="docutils literal notranslate"><span class="pre">device_ip</span></code>, <code class="docutils literal notranslate"><span class="pre">rank_id</span></code>, and <code class="docutils literal notranslate"><span class="pre">server_ip</span></code>.</p>
+</section>
+<section id="data-transfer">
+<h3>Data Transfer<a class="headerlink" href="#data-transfer" title="Link to this heading">#</a></h3>
+<p>Ascend Transport supports write/read semantics and automatically determines whether cross-HCCS communication is needed, selecting either HCCS or ROCE as the underlying transport protocol. Users can use the standard Mooncake <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> API to monitor the progress of each transfer request.</p>
+</section>
+<section id="fault-handling">
+<h3>Fault Handling<a class="headerlink" href="#fault-handling" title="Link to this heading">#</a></h3>
+<p>Building upon HCCL’s built-in fault handling mechanisms, Ascend Transport implements comprehensive error recovery strategies across multiple stages, including initialization, connection setup, and data transfer. It incorporates retry logic and returns precise error codes based on HCCL collective communication standards when retries fail. For detailed logs, refer to <code class="docutils literal notranslate"><span class="pre">/root/Ascend/log/debug/plog</span></code>.</p>
+</section>
+<section id="test-cases">
+<h3>Test Cases<a class="headerlink" href="#test-cases" title="Link to this heading">#</a></h3>
+<p>Ascend Transport provides multi-scenario test files: <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/example/transfer_engine_ascend_one_sided.cpp</span></code>, which supports one-to-one, one-to-two, and two-to-one transfer tests, as well as a performance benchmark file <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/example/transfer_engine_ascend_perf.cpp</span></code>. After successfully compiling the Transfer Engine, the corresponding test programs can be found in the <code class="docutils literal notranslate"><span class="pre">build/mooncake-transfer-engine/example</span></code> directory.The test programs accept configuration parameters via command-line arguments. For the full list of configurable options, refer to the DEFINE_string definitions at the beginning of each test file.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> is set to <code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code>, Mooncake randomly selects a port in the new RPC port-mapping to avoid conflicts.<br />
+Therefore, in testing:</p>
+<ol class="arabic">
+<li><p><strong>Start the target node first</strong>.<br />
+Watch the log produced by <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/src/transfer_engine.cpp</span></code>; you should see a line similar to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Transfer</span> <span class="n">Engine</span> <span class="n">RPC</span> <span class="n">using</span> <span class="o">&lt;</span><span class="n">protocol</span><span class="o">&gt;</span> <span class="n">listening</span> <span class="n">on</span> <span class="o">&lt;</span><span class="n">IP</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">actual</span><span class="o">-</span><span class="n">port</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note the <strong>actual port</strong> the target node is listening on.</p>
+</li>
+<li><p><strong>Edit the initiator’s launch command</strong>:<br />
+Change the value of <code class="docutils literal notranslate"><span class="pre">--segment_id</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;IP&gt;:&lt;actual-port&gt;</span></code> (i.e., the target node’s IP plus the port you just captured).</p></li>
+<li><p><strong>Launch the initiator node</strong> to complete the test.</p></li>
+</ol>
+<p>Refer to the command format shown below:</p>
+<section id="example-commands-for-scenario-testing">
+<h4>Example Commands for Scenario Testing<a class="headerlink" href="#example-commands-for-scenario-testing" title="Link to this heading">#</a></h4>
+<p><strong>Start Initiator Node:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_ascend_one_sided<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local_server_name<span class="o">=</span><span class="m">10</span>.0.0.0:12345<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span>hccl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--operation<span class="o">=</span>write<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--segment_id<span class="o">=</span><span class="m">10</span>.0.0.0:12346<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_id<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mode<span class="o">=</span>initiator<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--block_size<span class="o">=</span><span class="m">8388608</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--batch_size<span class="o">=</span><span class="m">32</span><span class="w"> </span>
+</pre></div>
+</div>
+<p><strong>Start Target Node:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_ascend_one_sided<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local_server_name<span class="o">=</span><span class="m">10</span>.0.0.0:12346<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span>hccl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--operation<span class="o">=</span>write<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_id<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mode<span class="o">=</span>target<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--block_size<span class="o">=</span><span class="m">8388608</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--batch_size<span class="o">=</span><span class="m">32</span><span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="example-commands-for-performance-testing">
+<h4>Example Commands for Performance Testing<a class="headerlink" href="#example-commands-for-performance-testing" title="Link to this heading">#</a></h4>
+<p><strong>Start Initiator Node:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_ascend_perf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local_server_name<span class="o">=</span><span class="m">10</span>.0.0.0:12345<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span>hccl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--operation<span class="o">=</span>write<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--segment_id<span class="o">=</span><span class="m">10</span>.0.0.0:12346<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_id<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mode<span class="o">=</span>initiator<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--block_size<span class="o">=</span><span class="m">16384</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--batch_size<span class="o">=</span><span class="m">32</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--block_iteration<span class="o">=</span><span class="m">10</span>
+</pre></div>
+</div>
+<p><strong>Start Target Node:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_ascend_perf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local_server_name<span class="o">=</span><span class="m">10</span>.0.0.0:12346<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span>hccl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--operation<span class="o">=</span>write<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_id<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mode<span class="o">=</span>target<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--batch_size<span class="o">=</span><span class="m">32</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--block_iteration<span class="o">=</span><span class="m">10</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">device_id</span></code> parameter mentioned above represents both the NPU logical ID and physical ID. If not all devices are mounted in your container, please specify the logical ID and physical ID separately when using the demo above. Replace <code class="docutils literal notranslate"><span class="pre">--device_id</span></code> with <code class="docutils literal notranslate"><span class="pre">--device_logicid</span></code> and <code class="docutils literal notranslate"><span class="pre">--device_phyid</span></code>.</p>
+<p>For example, if only device 5 and device 7 are mounted in the container, with device 5 as the initiator and device 7 as the receiver, the commands for multi-scenario use cases should be modified as follows:</p>
+<p><strong>Start the initiator node:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_ascend_one_sided<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local_server_name<span class="o">=</span><span class="m">10</span>.0.0.0:12345<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span>hccl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--operation<span class="o">=</span>write<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--segment_id<span class="o">=</span><span class="m">10</span>.0.0.0:12346<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_logicid<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_phyid<span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mode<span class="o">=</span>initiator<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--block_size<span class="o">=</span><span class="m">8388608</span>
+</pre></div>
+</div>
+<p><strong>Start the target node:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_ascend_one_sided<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local_server_name<span class="o">=</span><span class="m">10</span>.0.0.0:12346<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span>hccl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--operation<span class="o">=</span>write<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_logicid<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_phyid<span class="o">=</span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mode<span class="o">=</span>target<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--block_size<span class="o">=</span><span class="m">8388608</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="print-description">
+<h3>Print Description<a class="headerlink" href="#print-description" title="Link to this heading">#</a></h3>
+<p>If you need to obtain information about whether each transport request is cross-hccs and its corresponding execution time, you can enable the related logs by setting the environment variable. Use the following command to turn on the logging:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ASCEND_TRANSPORT_PRINT</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<section id="timeout-configuration">
+<h3>Timeout Configuration<a class="headerlink" href="#timeout-configuration" title="Link to this heading">#</a></h3>
+<p>Ascend Transport based on TCP for out-of-band communication, has a connection timeout configured via the environment variable <code class="docutils literal notranslate"><span class="pre">Ascend_TCP_TIMEOUT</span></code>, with a default value of 30 seconds. On the host side, the <code class="docutils literal notranslate"><span class="pre">recv</span></code> timeout is set to 30 seconds, meaning that if no message is received from the peer within 30 seconds, an error will be reported.</p>
+<p>The connection timeout for <code class="docutils literal notranslate"><span class="pre">hccl_socket</span></code> is configured through the environment variable <code class="docutils literal notranslate"><span class="pre">Ascend_HCCL_SOCKET_TIMEOUT</span></code>, with a default value of 30 seconds. If this timeout is exceeded, the current transmission will report an error and return.</p>
+<p><code class="docutils literal notranslate"><span class="pre">hccl_socket</span></code> has a keep-alive requirement, and the execution timeout is configured via the environment variable <code class="docutils literal notranslate"><span class="pre">HCCL_EXEC_TIMEOUT</span></code>. If no communication occurs within the <code class="docutils literal notranslate"><span class="pre">HCCL_EXEC_TIMEOUT</span></code> period, the <code class="docutils literal notranslate"><span class="pre">hccl_socket</span></code> connection will be disconnected.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">transport_mem</span></code>, the point-to-point communication between endpoints involves a connection handshake process, and its timeout is configured via <code class="docutils literal notranslate"><span class="pre">Ascend_TRANSPORT_MEM_TIMEOUT</span></code>, with a default value of 120 seconds.</p>
+</section>
+<section id="error-code">
+<h3>Error Code<a class="headerlink" href="#error-code" title="Link to this heading">#</a></h3>
+<p>Ascend transport error codes reuse the HCCL collective communication transport error codes.
+typedef enum {
+HCCL_SUCCESS = 0,       /* success <em>/
+HCCL_E_PARA = 1,        /</em> parameter error <em>/
+HCCL_E_PTR = 2,         /</em> empty pointer, checking if operations like notifypool-&gt;reset are performed multiple times leading to pointer clearing <em>/
+HCCL_E_MEMORY = 3,      /</em> memory error <em>/
+HCCL_E_INTERNAL = 4,    /</em> Internal error. Common causes include:
+* - Memory not registered
+* - Memory registration error
+* - The starting address of the registered memory is not 2M aligned
+* - Memory not successfully swapped
+* Check whether the memory to be transferred is within the range of registered memory.
+* In multi-machine scenarios, check whether the startup script is mixed used.
+<em>/
+HCCL_E_NOT_SUPPORT = 5, /</em> feature not supported <em>/
+HCCL_E_NOT_FOUND = 6,   /</em> specific resource not found <em>/
+HCCL_E_UNAVAIL = 7,     /</em> resource unavailable <em>/
+HCCL_E_SYSCALL = 8,     /</em> error calling system interface, prioritize checking if initialization parameters are correctly passed <em>/
+HCCL_E_TIMEOUT = 9,     /</em> timeout <em>/
+HCCL_E_OPEN_FILE_FAILURE = 10, /</em> open file fail <em>/
+HCCL_E_TCP_CONNECT = 11, /</em> tcp connect fail, connection failure, limited to checking ports on both ends and connectivity <em>/
+HCCL_E_ROCE_CONNECT = 12, /</em> roce connect fail, connection failure, limited to checking ports on both ends and connectivity <em>/
+HCCL_E_TCP_TRANSFER = 13, /</em> tcp transfer fail, check if the port is correct and if SOCKET is mixed <em>/
+HCCL_E_ROCE_TRANSFER = 14, /</em> roce transfer fail <em>/
+HCCL_E_RUNTIME = 15,      /</em> call runtime api fail, check the transportmem-related parameters filled in for transmission <em>/
+HCCL_E_DRV = 16,          /</em> call driver api fail <em>/
+HCCL_E_PROFILING = 17,    /</em> call profiling api fail <em>/
+HCCL_E_CCE = 18,          /</em> call cce api fail <em>/
+HCCL_E_NETWORK = 19,      /</em> call network api fail <em>/
+HCCL_E_AGAIN = 20,        /</em> operation repeated, in some cases it is not an error. For example, registering the same memory multiple times will directly return the handle from the first registration. If it does not affect the functionality, it is considered successful <em>/
+HCCL_E_REMOTE = 21,       /</em> error cqe <em>/
+HCCL_E_SUSPENDING = 22,   /</em> error communicator suspending <em>/
+HCCL_E_RESERVED           /</em> reserved */
+} HcclResult;</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ascend_direct_transport.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ascend Direct Transport</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="heterogeneous_ascend.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Heterogeneous Ascend Transport</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-dependencies">New Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-compilation-script">One-Step Compilation Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes-mandatory">Important Notes (Mandatory)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-installation-script-without-compiling-mooncake">One-Step Installation Script (Without Compiling Mooncake)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-instructions">Build Instructions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoint-management">Endpoint Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ranktable-management">Ranktable Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-service">Metadata Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-handling">Fault Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-cases">Test Cases</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-commands-for-scenario-testing">Example Commands for Scenario Testing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-commands-for-performance-testing">Example Commands for Performance Testing</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-description">Print Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timeout-configuration">Timeout Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-code">Error Code</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

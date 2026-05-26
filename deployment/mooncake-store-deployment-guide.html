@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mooncake Store &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deployment/mooncake-store-deployment-guide';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SSD Offload" href="ssd-offload.html" />
+    <link rel="prev" title="Build Guide" href="../getting_started/build.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Mooncake Store</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ssd-offload.html">SSD Offload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html">Mooncake HF3FS Plugin (Experimental)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/deployment/mooncake-store-deployment-guide.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/deployment/mooncake-store-deployment-guide.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mooncake Store</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-examples">Deployment Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observability">Observability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-log-level-for-yalantinglibs-coro-rpc-and-coro-http">Set the Log Level for yalantinglibs coro_rpc and coro_http</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-engine-tuning-env-vars-with-defaults">Client/Engine Tuning (Env Vars, with defaults)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-tips">Quick Tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#master-startup-flags-with-defaults">Master Startup Flags (with defaults)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mooncake-store">
+<h1>Mooncake Store<a class="headerlink" href="#mooncake-store" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Mooncake Store is a high-performance <strong>distributed key-value (KV) cache storage engine</strong> designed for LLM inference scenarios. Unlike general-purpose caches (e.g., Redis, Memcached), it is purpose-built for immutable KV cache objects — keys are derived from values via hashing, and values remain immutable after insertion until evicted.</p>
+<p>It provides object-level <code class="docutils literal notranslate"><span class="pre">Put</span></code>/<code class="docutils literal notranslate"><span class="pre">Get</span></code>/<code class="docutils literal notranslate"><span class="pre">Remove</span></code> APIs with strong consistency, multi-replica support for hotspot mitigation, zero-copy RDMA transfers via the Transfer Engine, and multi-layer storage (RAM → SSD). Typical use cases include distributed KVCache sharing in vLLM/SGLang disaggregated serving deployments.</p>
+<p>Mooncake Store consists of two core components:</p>
+<ul class="simple">
+<li><p><strong>Master Service</strong> (<code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code>): Orchestrates the cluster-wide storage pool, manages node membership, handles object space allocation, and runs eviction policies. It exposes an RPC service and optionally an HTTP metadata server for the Transfer Engine.</p></li>
+<li><p><strong>Client</strong>: Embedded into the inference process (or run as a standalone service), each Client contributes a segment of memory to the distributed cache and performs actual data transfers peer-to-peer, bypassing the Master.</p></li>
+</ul>
+<p>This page summarizes useful flags, environment variables, and HTTP endpoints to help advanced users tune Mooncake Master and observe metrics. For architecture and design details, see <a class="reference internal" href="../design/mooncake-store.html"><span class="std std-doc">Mooncake Store Design</span></a>.</p>
+</section>
+<section id="deployment-examples">
+<h2>Deployment Examples<a class="headerlink" href="#deployment-examples" title="Link to this heading">#</a></h2>
+<p>Example (enable embedded HTTP metadata and metrics):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--http_metadata_server_host<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rpc_thread_num<span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--metrics_port<span class="o">=</span><span class="m">9003</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_metric_reporting<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>Example (resolve the master RPC address from a stable interface name in a container):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rpc_interface<span class="o">=</span>eth0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--http_metadata_server_host<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
+</pre></div>
+</div>
+<p>This resolves the current IPv4 address of <code class="docutils literal notranslate"><span class="pre">eth0</span></code> at startup and uses it as the final <code class="docutils literal notranslate"><span class="pre">rpc_address</span></code>.</p>
+<p>Example (use free-ratio-first allocation strategy for better load balancing):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--allocation_strategy<span class="o">=</span>free_ratio_first<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
+</pre></div>
+</div>
+<p><strong>Tips:</strong></p>
+<p>In addition to command-line flags, the Master also supports configuration via JSON and YAML files. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--config_path<span class="o">=</span>mooncake-store/conf/master.yaml
+</pre></div>
+</div>
+<p>For config files, the equivalent setting is:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">rpc_interface</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eth0&quot;</span>
+<span class="nt">rpc_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50051</span>
+</pre></div>
+</div>
+<p>For detailed command line option we offered, please refer to <a class="reference internal" href="#master-startup-flags-with-defaults">Master Startup Flags</a></p>
+</section>
+<section id="observability">
+<h2>Observability<a class="headerlink" href="#observability" title="Link to this heading">#</a></h2>
+<section id="metrics-endpoints">
+<h3>Metrics Endpoints<a class="headerlink" href="#metrics-endpoints" title="Link to this heading">#</a></h3>
+<p>The master exposes Prometheus-style metrics over HTTP on <code class="docutils literal notranslate"><span class="pre">--metrics_port</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metrics</span></code> — Prometheus format (<code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metrics/summary</span></code> — Human-readable summary.</p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;:9003/metrics
+curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;:9003/metrics/summary
+</pre></div>
+</div>
+<p>For detailed metrics we offer, please refer to <a class="reference internal" href="../getting_started/observability.html"><span class="std std-doc">Observability</span></a>.</p>
+</section>
+<section id="set-the-log-level-for-yalantinglibs-coro-rpc-and-coro-http">
+<h3>Set the Log Level for yalantinglibs coro_rpc and coro_http<a class="headerlink" href="#set-the-log-level-for-yalantinglibs-coro-rpc-and-coro-http" title="Link to this heading">#</a></h3>
+<p>By default, the log level is set to warning. You can customize it using the following environment variable:</p>
+<p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">MC_YLT_LOG_LEVEL=info</span></code></p>
+<p>This sets the log level for yalantinglibs (including coro_rpc and coro_http) to info.</p>
+<p>Available log levels: trace, debug, info, warn (or warning), error, and critical.</p>
+</section>
+</section>
+<section id="client-engine-tuning-env-vars-with-defaults">
+<h2>Client/Engine Tuning (Env Vars, with defaults)<a class="headerlink" href="#client-engine-tuning-env-vars-with-defaults" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Topology discovery (Store Client → Transfer Engine)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MS_AUTO_DISC</span></code> (default <code class="docutils literal notranslate"><span class="pre">1</span></code>): Auto-discover NIC/GPU topology. Set <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable and provide <code class="docutils literal notranslate"><span class="pre">rdma_devices</span></code> manually.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MS_FILTERS</span></code> (default empty): Optional comma-separated NIC whitelist when auto-discovery is enabled (e.g., <code class="docutils literal notranslate"><span class="pre">mlx5_0,mlx5_2</span></code>).</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">MC_MS_AUTO_DISC=0</span></code>, pass <code class="docutils literal notranslate"><span class="pre">rdma_devices</span></code> (comma-separated) to the Python <code class="docutils literal notranslate"><span class="pre">setup(...)</span></code> call.</p></li>
+</ul>
+</li>
+<li><p>Transfer Engine metrics (disabled by default)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC</span></code> (default <code class="docutils literal notranslate"><span class="pre">0</span></code>/unset): Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> to enable periodic engine metrics logging. <strong>Note:</strong> Not supported when using Transfer Engine TENT.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC_INTERVAL_SECONDS</span></code> (default <code class="docutils literal notranslate"><span class="pre">5</span></code>): Positive integer seconds between reports (effective only if metrics enabled).</p></li>
+</ul>
+</li>
+<li><p>Client metrics (enabled by default)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_METRIC</span></code> (default <code class="docutils literal notranslate"><span class="pre">1</span></code>): Client-side metrics on by default; set <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable entirely.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_METRIC_INTERVAL</span></code> (default <code class="docutils literal notranslate"><span class="pre">0</span></code>): Reporting interval in seconds; <code class="docutils literal notranslate"><span class="pre">0</span></code> collects but does not periodically report.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_MIN_PORT</span></code> (default <code class="docutils literal notranslate"><span class="pre">12300</span></code>): Minimum local port for client connections. Must be in range 1024–32767 or 61000–65535 (well-known and ephemeral ports are excluded). Falls back to default on invalid input.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_MAX_PORT</span></code> (default <code class="docutils literal notranslate"><span class="pre">14300</span></code>): Maximum local port for client connections. Same range constraints as <code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_MIN_PORT</span></code>; must be ≥ <code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_MIN_PORT</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Local memcpy optimization (Store transfer path)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_MEMCPY</span></code> (default <code class="docutils literal notranslate"><span class="pre">0</span></code>/false): Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> to prefer local memcpy when source/destination are on the same client.</p></li>
+</ul>
+</li>
+<li><p>Memory allocator (mmap buffer path)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_USE_HUGEPAGE</span></code> (default unset): Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> to request HugeTLB-backed <code class="docutils literal notranslate"><span class="pre">mmap()</span></code> allocations for the direct allocation path. This requires hugepages to be reserved on the host first.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_HUGEPAGE_SIZE</span></code> (default <code class="docutils literal notranslate"><span class="pre">2MB</span></code>): Hugepage size to request when hugepages are enabled. Supported values are <code class="docutils literal notranslate"><span class="pre">2MB</span></code> and <code class="docutils literal notranslate"><span class="pre">1GB</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MMAP_ARENA_POOL_SIZE</span></code> (default unset): Size of the pre-allocated arena pool for mmap buffer allocations. Accepts human-readable sizes (e.g., <code class="docutils literal notranslate"><span class="pre">8gb</span></code>, <code class="docutils literal notranslate"><span class="pre">20gb</span></code>). Setting this variable explicitly enables the arena; if the arena is enabled via gflag instead, the default pool size is <code class="docutils literal notranslate"><span class="pre">8gb</span></code>. The arena is allocated once at first use and serves subsequent allocations via lock-free atomic bump pointer. Set this to match available hugepage capacity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_DISABLE_MMAP_ARENA</span></code> (default unset): Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> to disable the arena and fall back to per-call <code class="docutils literal notranslate"><span class="pre">mmap()</span></code>, even if the arena was explicitly requested. Also accepts <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">yes</span></code>, or <code class="docutils literal notranslate"><span class="pre">on</span></code>. This must be set before the first Mooncake mmap-buffer allocation in the process. Useful for debugging or when hugepage capacity is limited. Lazy arena initialization is one-shot per process, so after a failed first attempt you need to restart the process to retry arena bring-up.</p></li>
+</ul>
+</li>
+</ul>
+<p>For HiCache-style deployments or other large buffer allocations, pre-flight the host with the sizing helper before reserving hugepages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>scripts/check_hicache_hugepage_requirements.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tp-size<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--hicache-size<span class="w"> </span>64gb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--global-segment-size<span class="w"> </span>8gb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--arena-pool-size<span class="w"> </span>56gb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--available-hugetlb<span class="w"> </span>512gb
+
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.nr_hugepages<span class="o">=</span><span class="m">262144</span>
+grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;HugePages_Total|HugePages_Free|Hugepagesize&#39;</span><span class="w"> </span>/proc/meminfo
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">64gb</span></code> / <code class="docutils literal notranslate"><span class="pre">56gb</span></code> inputs above are tuned examples for large HiCache deployments, not defaults. The arena remains disabled unless you explicitly enable it. If you enable it via gflag without an env override, the default pool size is <code class="docutils literal notranslate"><span class="pre">8gb</span></code>. On smaller hosts, start with <code class="docutils literal notranslate"><span class="pre">8gb</span></code> or <code class="docutils literal notranslate"><span class="pre">16gb</span></code> and size upward with the helper.</p>
+<section id="quick-tips">
+<h3>Quick Tips<a class="headerlink" href="#quick-tips" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Scale <code class="docutils literal notranslate"><span class="pre">--rpc_thread_num</span></code> with available CPU cores and workload.</p></li>
+<li><p>Start with default eviction settings; adjust <code class="docutils literal notranslate"><span class="pre">--eviction_high_watermark_ratio</span></code> and <code class="docutils literal notranslate"><span class="pre">--eviction_ratio</span></code> based on memory pressure and object churn.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">/metrics/summary</span></code> during bring-up; integrate <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> with Prometheus/Grafana for production.</p></li>
+</ul>
+</section>
+</section>
+<section id="master-startup-flags-with-defaults">
+<h2>Master Startup Flags (with defaults)<a class="headerlink" href="#master-startup-flags-with-defaults" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Configuration File</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--config_path</span></code> (str, default empty): Path to JSON or YAML config file. When set, other flags can be specified in the config file using equivalent keys (e.g., <code class="docutils literal notranslate"><span class="pre">rpc_port:</span> <span class="pre">50051</span></code>).</p></li>
+</ul>
+</li>
+<li><p>RPC Related</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--rpc_port</span></code> (int, default 50051): RPC listen port.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rpc_thread_num</span></code> (int, default min(4, CPU cores)): RPC worker threads. If not set, uses <code class="docutils literal notranslate"><span class="pre">--max_threads</span></code> (default 4) capped by CPU cores.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rpc_address</span></code> (str, default <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>): RPC bind address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rpc_interface</span></code> (str, default empty): Network interface used to resolve the final RPC address. When set, Mooncake Master resolves the interface’s current IPv4 address at startup and uses it as the final <code class="docutils literal notranslate"><span class="pre">rpc_address</span></code>. This overrides <code class="docutils literal notranslate"><span class="pre">--rpc_address</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rpc_conn_timeout_seconds</span></code> (int, default <code class="docutils literal notranslate"><span class="pre">0</span></code>): RPC idle connection timeout; <code class="docutils literal notranslate"><span class="pre">0</span></code> disables.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rpc_enable_tcp_no_delay</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">true</span></code>): Enable TCP_NODELAY.</p></li>
+</ul>
+</li>
+<li><p>Metrics</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_metric_reporting</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">true</span></code>): Periodically log master metrics to INFO.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--metrics_port</span></code> (int, default <code class="docutils literal notranslate"><span class="pre">9003</span></code>): HTTP port for <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> endpoints.</p></li>
+</ul>
+</li>
+<li><p>HTTP Metadata Server For Mooncake Transfer Engine</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_http_metadata_server</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Enable embedded HTTP metadata server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--http_metadata_server_host</span></code> (str, default <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>): Metadata bind host.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--http_metadata_server_port</span></code> (int, default <code class="docutils literal notranslate"><span class="pre">8080</span></code>): Metadata TCP port.</p></li>
+</ul>
+</li>
+<li><p>Allocation Strategy</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--allocation_strategy</span></code> (str, default <code class="docutils literal notranslate"><span class="pre">random</span></code>): Memory allocation strategy for replica placement. Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">random</span></code>: Pure random selection across segments (baseline, fastest).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">free_ratio_first</span></code>: Free-ratio-first strategy. Samples multiple candidates and selects those with highest free space ratio for better load balancing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cxl</span></code>: CXL-aware allocation strategy.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--memory_allocator</span></code> (str, default <code class="docutils literal notranslate"><span class="pre">offset</span></code>): Memory allocator for global segments. Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code>: Offset-based allocator (default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cachelib</span></code>: Use cachelib memory allocator.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Eviction and TTLs</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--default_kv_lease_ttl</span></code> (duration, default <code class="docutils literal notranslate"><span class="pre">5000</span></code> ms): Default lease TTL for KV objects. The default unit is milliseconds, so <code class="docutils literal notranslate"><span class="pre">5000</span></code> means <code class="docutils literal notranslate"><span class="pre">5000ms</span></code>. Duration strings such as <code class="docutils literal notranslate"><span class="pre">5000ms</span></code>, <code class="docutils literal notranslate"><span class="pre">5s</span></code>, <code class="docutils literal notranslate"><span class="pre">30m</span></code>, or <code class="docutils literal notranslate"><span class="pre">1h</span></code> are also supported.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--default_kv_soft_pin_ttl</span></code> (duration, default <code class="docutils literal notranslate"><span class="pre">1800000</span></code> ms): Soft pin TTL (30 minutes). The default unit is milliseconds, so <code class="docutils literal notranslate"><span class="pre">1800000</span></code> means <code class="docutils literal notranslate"><span class="pre">1800000ms</span></code>. Duration strings such as <code class="docutils literal notranslate"><span class="pre">1800000ms</span></code>, <code class="docutils literal notranslate"><span class="pre">30m</span></code>, or <code class="docutils literal notranslate"><span class="pre">1h</span></code> are also supported.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--allow_evict_soft_pinned_objects</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">true</span></code>): Allow evicting soft-pinned objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--eviction_ratio</span></code> (double, default <code class="docutils literal notranslate"><span class="pre">0.05</span></code>): Fraction evicted when hitting high watermark.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--eviction_high_watermark_ratio</span></code> (double, default <code class="docutils literal notranslate"><span class="pre">0.95</span></code>): Usage ratio to trigger eviction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--client_ttl</span></code> (int64, default <code class="docutils literal notranslate"><span class="pre">10</span></code> s): Seconds a client stays considered alive after the last heartbeat. If this TTL elapses without a refresh, the master treats the client as disconnected and may unmount its segments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_disk_eviction</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">true</span></code>): Enable disk eviction for storage backend.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--quota_bytes</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">0</span></code>): Storage backend quota in bytes. <code class="docutils literal notranslate"><span class="pre">0</span></code> uses 90% of capacity as default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--put_start_discard_timeout_sec</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">120</span></code>): Timeout in seconds for discarding uncompleted PutStart operations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--put_start_release_timeout_sec</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">60</span></code>): Timeout in seconds for releasing space allocated in uncompleted PutStart operations.</p></li>
+</ul>
+</li>
+<li><p>NoF SSD Eviction (requires <code class="docutils literal notranslate"><span class="pre">USE_NOF=ON</span></code> at build time)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--nof_eviction_ratio</span></code> (double, default <code class="docutils literal notranslate"><span class="pre">0.05</span></code>): Fraction of objects to evict when NoF SSD space is full.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nof_eviction_high_watermark_ratio</span></code> (double, default <code class="docutils literal notranslate"><span class="pre">0.95</span></code>): Usage ratio to trigger NoF SSD eviction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nof_heartbeat_interval_sec</span></code> (int64, default <code class="docutils literal notranslate"><span class="pre">5</span></code>): How often master probes each mounted NoF segment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nof_heartbeat_probe_timeout_ms</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">1000</span></code>): Timeout in milliseconds for a single NoF heartbeat probe.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nof_heartbeat_failures_threshold</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">5</span></code>): Consecutive NoF heartbeat failures required before unmounting a NoF segment.</p></li>
+</ul>
+</li>
+<li><p>Offload &amp; Promotion</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_offload</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Enable offload to local disk.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--offload_on_evict</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Defer LOCAL_DISK offload to eviction time instead of PutEnd.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--offload_force_evict</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Force-evict objects exceeding offload capacity without disk offload.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--promotion_on_hit</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Promote LOCAL_DISK-only keys to MEMORY on read access.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--promotion_admission_threshold</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">2</span></code>): Min access count (CountMinSketch) before promotion fires. Set <code class="docutils literal notranslate"><span class="pre">1</span></code> to disable second-touch gating.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--promotion_queue_limit</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">50000</span></code>): Max in-flight promotion tasks across all shards.</p></li>
+</ul>
+</li>
+<li><p>High Availability (optional)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_ha</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Enable HA (requires etcd).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--ha_backend_type</span></code> (str, default <code class="docutils literal notranslate"><span class="pre">etcd</span></code>): HA backend type. Available options: <code class="docutils literal notranslate"><span class="pre">etcd</span></code>, <code class="docutils literal notranslate"><span class="pre">redis</span></code>, <code class="docutils literal notranslate"><span class="pre">k8s</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--ha_backend_connstring</span></code> (str, default empty): HA backend connection string (e.g., <code class="docutils literal notranslate"><span class="pre">127.0.0.1:2379</span></code>). If unset and backend is <code class="docutils literal notranslate"><span class="pre">etcd</span></code>, falls back to <code class="docutils literal notranslate"><span class="pre">--etcd_endpoints</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--etcd_endpoints</span></code> (str, default empty unless HA config): etcd endpoints, semicolon separated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cluster_id</span></code> (str, default <code class="docutils literal notranslate"><span class="pre">mooncake_cluster</span></code>): Cluster ID for persistence in HA mode.</p></li>
+</ul>
+</li>
+<li><p>Task Manager (optional)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--max_total_finished_tasks</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">10000</span></code>): Maximum number of finished tasks to keep in memory. When this limit is reached, the oldest finished tasks will be pruned from memory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--max_total_pending_tasks</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">10000</span></code>): Maximum number of pending tasks that can be queued in memory. When this limit is reached, new task submissions will fail with <code class="docutils literal notranslate"><span class="pre">TASK_PENDING_LIMIT_EXCEEDED</span></code> error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--max_total_processing_tasks</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">10000</span></code>): Maximum number of tasks that can be processing simultaneously. When this limit is reached, no new tasks will be popped from the pending queue until some processing tasks complete.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--max_retry_attempts</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">10</span></code>): Maximum number of retry attempts for failed tasks. Tasks that fail with <code class="docutils literal notranslate"><span class="pre">NO_AVAILABLE_HANDLE</span></code> error will be retried up to this many times before being marked as failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--pending_task_timeout_sec</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">300</span></code>): Timeout in seconds for pending tasks. <code class="docutils literal notranslate"><span class="pre">0</span></code> means no timeout.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--processing_task_timeout_sec</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">300</span></code>): Timeout in seconds for processing tasks. <code class="docutils literal notranslate"><span class="pre">0</span></code> means no timeout.</p></li>
+</ul>
+</li>
+<li><p>CXL Memory (optional)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_cxl</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Enable CXL memory support for segments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cxl_path</span></code> (str, default <code class="docutils literal notranslate"><span class="pre">/dev/dax0.0</span></code>): DAX device path for CXL memory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cxl_size</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">0</span></code>): CXL memory size in bytes.</p></li>
+</ul>
+</li>
+<li><p>DFS Storage (optional)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--root_fs_dir</span></code> (str, default empty): DFS mount directory for storage backend, used in Multi-layer Storage Support.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--global_file_segment_size</span></code> (int64, default <code class="docutils literal notranslate"><span class="pre">int64_max</span></code>): Maximum available space for DFS segments.</p></li>
+</ul>
+</li>
+<li><p>MMAP Arena Allocator</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--use_mmap_arena_allocator</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Enable pre-allocated mmap arena pool allocator on the master side. The arena is allocated once at first use and serves subsequent allocations via lock-free atomic bump pointer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--mmap_arena_pool_size</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">8589934592</span></code> (8GB)): Size of the pre-allocated arena pool in bytes. Only effective when <code class="docutils literal notranslate"><span class="pre">--use_mmap_arena_allocator=true</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Snapshot / Restore (optional)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Enable periodic snapshot of master metadata data (effective when using the <code class="docutils literal notranslate"><span class="pre">offset</span></code> memory allocator).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--snapshot_interval_seconds</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">600</span></code>): Interval in seconds between periodic snapshots of master data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--snapshot_child_timeout_seconds</span></code> (uint64, default <code class="docutils literal notranslate"><span class="pre">300</span></code>): Timeout in seconds for each snapshot child process.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code> (uint32, default <code class="docutils literal notranslate"><span class="pre">2</span></code>): Number of recent snapshots to keep. Older snapshots beyond this limit will be automatically deleted.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type</span></code> (str, required when snapshot enabled): Snapshot object store type: <code class="docutils literal notranslate"><span class="pre">local</span></code> for local filesystem, <code class="docutils literal notranslate"><span class="pre">s3</span></code> for S3 storage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--snapshot_backup_dir</span></code> (str, default empty): Optional local directory for snapshot backup. If empty (default), local backup is disabled. When set, it serves two purposes: (1) during snapshot persistence, data will be saved locally as a fallback if uploading to the backend fails; (2) during restore, downloaded metadata will also be saved to this directory as a local backup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot_restore</span></code> (bool, default <code class="docutils literal notranslate"><span class="pre">false</span></code>): Enable restore from the latest snapshot at master startup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_type</span></code> (str, default empty): Snapshot catalog store type. Available options: <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (embedded), <code class="docutils literal notranslate"><span class="pre">redis</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_connstring</span></code> (str, default empty): Optional connection string for snapshot catalog store (e.g., Redis connection string).</p></li>
+<li><p><strong>Environment variable</strong> <code class="docutils literal notranslate"><span class="pre">MOONCAKE_SNAPSHOT_LOCAL_PATH</span></code> (<strong>required</strong> when <code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type=local</span></code>): Persistent directory path for local snapshot storage. This variable <strong>must</strong> be set before starting the master; there is no default value. Example: <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">MOONCAKE_SNAPSHOT_LOCAL_PATH=/data/mooncake_snapshots</span></code>.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Warning: Managed Directory</strong></p>
+<p>The snapshot storage path (<code class="docutils literal notranslate"><span class="pre">MOONCAKE_SNAPSHOT_LOCAL_PATH</span></code> for local backend, or S3 bucket for S3 backend) is a <strong>managed directory</strong> exclusively controlled by the Mooncake snapshot system. <strong>DO NOT store other files or data in this directory.</strong> Old snapshots exceeding <code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code> will be automatically and permanently deleted during cleanup. Use a dedicated, isolated directory for snapshot storage to avoid accidental data loss.</p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ssd-offload.html">SSD Offload</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html">Mooncake HF3FS Plugin (Experimental)</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../getting_started/build.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Build Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ssd-offload.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SSD Offload</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-examples">Deployment Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observability">Observability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-log-level-for-yalantinglibs-coro-rpc-and-coro-http">Set the Log Level for yalantinglibs coro_rpc and coro_http</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-engine-tuning-env-vars-with-defaults">Client/Engine Tuning (Env Vars, with defaults)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-tips">Quick Tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#master-startup-flags-with-defaults">Master Startup Flags (with defaults)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

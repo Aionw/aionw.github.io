@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>疑难解答 &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh_archive/troubleshooting';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/zh_archive/troubleshooting.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh_archive/troubleshooting.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>疑难解答</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">元数据及带外通信</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">建议排查方向</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdma">RDMA 资源初始化</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">建议排查方向</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">RDMA 传输期间</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">建议排查方向</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>疑难解答<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>本文档列举了使用 Mooncake Store 期间容易出现的错误及排查应对措施。</p>
+<blockquote>
+<div><p><strong>容易出错的地方</strong></p>
+<ul class="simple">
+<li><p>[ ] <code class="docutils literal notranslate"><span class="pre">connectable_name</span></code> 填写的不是本机的 LAN/WAN 地址：错误示例如填写 Loopback 地址（127.0.0.1/localhost）、填写主机名、填写其他机器的 LAN/WAN 地址等</p></li>
+<li><p>[ ] MTU 和 GID 配置：使用 MC_MTU 和 MC_GID_INDEX 环境变量</p></li>
+<li><p>[ ] RDMA 模式下的设备名称、设备连接状态</p></li>
+<li><p>[ ] etcd 是否正常启动，是否对外开放端口</p></li>
+</ul>
+</div></blockquote>
+<section id="id2">
+<h2>元数据及带外通信<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>启动时需要按照传入的 <code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> 参数构造 <code class="docutils literal notranslate"><span class="pre">TransferMetadata</span></code> 对象，在程序执行期间，会使用该对象与 etcd 服务器通信，维护连接建立及维持所需的各种内部数据。</p></li>
+<li><p>启动时需要按照传入的 <code class="docutils literal notranslate"><span class="pre">connectable_name</span></code> 参数和 <code class="docutils literal notranslate"><span class="pre">rpc_port</span></code> 参数向集群注册当前节点，并开启本机 <code class="docutils literal notranslate"><span class="pre">rpc_port</span></code> 参数指定的 TCP 端口供交换元数据使用。其他节点第一次向当前节点发出读写请求前，会使用上述信息，经 DNS 解析后通过 TCP 协议的 <code class="docutils literal notranslate"><span class="pre">connect()</span></code> 方法向其发起连接，连接成功后才传递元数据。</p></li>
+</ol>
+<p>这一部分的报错信息通常显示错误产生于 <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/src/transfer_metadata.cpp</span></code> 文件内。</p>
+<section id="id3">
+<h3>建议排查方向<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>传入的 <code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> 参数不是一个（或一组）有效的可通达的 etcd 服务端地址。这种情况下会显示 <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">from</span> <span class="pre">etcd</span> <span class="pre">client</span></code> 错误。建议从以下几个方面排查：</p>
+<ul>
+<li><p>刚刚安装 etcd 服务后的默认监听 IP 为 127.0.0.1，这种情况下其他节点不能使用该服务。因此实际监听 IP 需结合网络环境确定。在实验环境中，可使用 0.0.0.0。例如，可使用下列命令行启动合要求的服务：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is 10.0.0.1</span>
+etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0.0.0.0:2379<span class="w"> </span>--advertise-client-urls<span class="w"> </span>http://10.0.0.1:2379
+</pre></div>
+</div>
+<p>可在其他节点上使用 <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">&lt;metadata_server&gt;</span></code> 进行验证。</p>
+</li>
+<li><p>启动程序前需关闭 HTTP 代理。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">unset</span><span class="w"> </span>http_proxy
+<span class="nb">unset</span><span class="w"> </span>https_proxy
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>其他节点不能通过传入的 <code class="docutils literal notranslate"><span class="pre">connectable_name</span></code> 参数和 <code class="docutils literal notranslate"><span class="pre">rpc_port</span></code> 参数和当前节点发出 Socket 带外通信，从而实施连接建立操作。这种情况下的错误类型可能有：</p>
+<ul class="simple">
+<li><p>启动进程时显示 <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">address</span> <span class="pre">already</span> <span class="pre">in</span> <span class="pre">use</span></code> 错误，通常是因为 <code class="docutils literal notranslate"><span class="pre">rpc_port</span></code> 参数对应的端口号被占用，请尝试使用其他端口号；</p></li>
+<li><p>另一个节点向当前节点发起 Batch Transfer 期间显示 <code class="docutils literal notranslate"><span class="pre">connection</span> <span class="pre">refused</span></code> 等类型错误，则需重点检查当前节点创建时这两个参数的正确性。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">connectable_name</span></code> 必须是当前节点的非 Loopback IP 地址，或者有效的 Hostname（DNS 或 <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> 上有记录），集群内其它节点可使用 <code class="docutils literal notranslate"><span class="pre">connectable_name</span></code> 和 <code class="docutils literal notranslate"><span class="pre">rpc_port</span></code> 等参数连接当前节点。</p></li>
+<li><p>某些网络中有防火墙机制，需要提前加入白名单。</p></li>
+</ul>
+</li>
+<li><p>如果 <code class="docutils literal notranslate"><span class="pre">local_server_name</span></code> 和  <code class="docutils literal notranslate"><span class="pre">connectable_name</span></code>/<code class="docutils literal notranslate"><span class="pre">rpc_port</span></code> 参数的对应关系发生改变并发生各类错误，可尝试清空 etcd 数据库后重启集群。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="rdma">
+<h2>RDMA 资源初始化<a class="headerlink" href="#rdma" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>启动时需要按照传入的 <code class="docutils literal notranslate"><span class="pre">nic_priority_matrix</span></code> 参数，初始化列表中所有 RDMA 网卡对应的设备上下文和其它内部对象；</p></li>
+<li><p>其他节点第一次向当前节点发出读写请求前，会借助带外通信机制交换 GID、LID、QP Num 等信息，并完成 RDMA 可靠连接通路的建立</p></li>
+</ol>
+<p>这一部分的报错信息通常显示错误产生于 <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/src/transport/rdma_transport/rdma_*.cpp</span></code> 文件内。</p>
+<section id="id4">
+<h3>建议排查方向<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>显示 <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">matched</span> <span class="pre">device</span> <span class="pre">found</span></code> 错误，检查 <code class="docutils literal notranslate"><span class="pre">nic_priority_matrix</span></code> 参数内是否有本机不存在的网卡名称。可使用 <code class="docutils literal notranslate"><span class="pre">ibv_devinfo</span></code> 命令查看本机已安装的网卡列表。</p></li>
+<li><p>显示 <code class="docutils literal notranslate"><span class="pre">Device</span> <span class="pre">XXX</span> <span class="pre">port</span> <span class="pre">not</span> <span class="pre">active</span></code> 错误，表明对应设备的默认 RDMA Port（RDMA 设备端口，需要和 <code class="docutils literal notranslate"><span class="pre">rpc_port</span></code> TCP 端口区分开）没有处于 ACTIVE 状态，这通常是因为 RDMA 网线没有安装好，或者驱动程序没有配置好所致。可使用 <code class="docutils literal notranslate"><span class="pre">MC_IB_PORT</span></code> 环境变量变更默认使用的 RDMA Port。</p></li>
+<li><p>显示 <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">exchange</span> <span class="pre">handshake</span> <span class="pre">description</span></code> 错误，表明通信双方无法建立 RDMA 可靠连接通路。在大多数情况下，通常是因为某一方配置有误，或者双方本身无法通达所致。首先使用 <code class="docutils literal notranslate"><span class="pre">ib_send_bw</span></code> 等工具确认两个节点的可通达性，并留意输出的 GID、LID、MTU 等参数信息，之后对照报错信息分析可能的出错点：</p>
+<ol class="arabic simple">
+<li><p>在启动后输出日志通常包含数行形如 <code class="docutils literal notranslate"><span class="pre">RDMA</span> <span class="pre">device:</span> <span class="pre">XXX,</span> <span class="pre">LID:</span> <span class="pre">XXX,</span> <span class="pre">GID:</span> <span class="pre">(X)</span> <span class="pre">XX:XX:XX:...</span></code> 的日志信息。如果显示的 GID 地址全部为 0（括号内表示 GID Index），则需要结合网络环境选择正确的 GID Index，启动时使用使用 <code class="docutils literal notranslate"><span class="pre">MC_GID_INDEX</span></code> 环境变量加以指定。</p></li>
+<li><p>显示 <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">modify</span> <span class="pre">QP</span> <span class="pre">to</span> <span class="pre">RTR,</span> <span class="pre">check</span> <span class="pre">mtu,</span> <span class="pre">gid,</span> <span class="pre">peer</span> <span class="pre">lid,</span> <span class="pre">peer</span> <span class="pre">qp</span> <span class="pre">num</span></code> 错误，首先需要确定发生错误的是哪一方，没有显示 <code class="docutils literal notranslate"><span class="pre">Handshake</span> <span class="pre">request</span> <span class="pre">rejected</span> <span class="pre">by</span> <span class="pre">peer</span> <span class="pre">endpoint:</span> </code> 前缀的就表明问题来自显示错误的一方。按照错误提示指引，需要检查 MTU 长度配置（使用 <code class="docutils literal notranslate"><span class="pre">MC_MTU</span></code> 环境变量调节）、自己及对方的 GID 地址是否有效等。同时，如果两个节点无法实现物理连接，也可能会在这一步中断，敬请留意。</p></li>
+<li><p>如果显示 <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">QP:</span> <span class="pre">Cannot</span> <span class="pre">allocate</span> <span class="pre">memory</span></code> 错误，通常是由于创建的 QP 数量过多，达到了驱动限制。可以使用 <code class="docutils literal notranslate"><span class="pre">rdma</span> <span class="pre">resource</span></code> 命令追踪已创建的 QP 数量。解决此问题的一种可能方法：</p>
+<ul class="simple">
+<li><p>将 Mooncake 更新到 v0.3.5 或更高版本</p></li>
+<li><p>在启动应用程序前设置环境变量 <code class="docutils literal notranslate"><span class="pre">MC_ENABLE_DEST_DEVICE_AFFINITY=1</span></code></p></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+<section id="id5">
+<h2>RDMA 传输期间<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3>建议排查方向<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>若网络状态不稳定，部分请求会无法发送到位，显示 <code class="docutils literal notranslate"><span class="pre">Worker:</span> <span class="pre">Process</span> <span class="pre">failed</span> <span class="pre">for</span> <span class="pre">slice</span></code> 等错误。Transfer Engine 能通过重选路径等方式规避掉问题。在某些复杂情况下，如果连续输出大量此类错误，建议比照最后一个字段的字符串提示，搜索造成问题的原因。</p>
+<p>注意：大多数情况下输出的错误除第一次出现之外，都是 <code class="docutils literal notranslate"><span class="pre">work</span> <span class="pre">request</span> <span class="pre">flushed</span> <span class="pre">error</span></code>。这是因为第一次产生错误时，RDMA 驱动会将连接设置为不可用状态，因此处于提交队列的任务都被阻止执行，并报告后续错误。因此建议定位到第一次发生错误的地方并进行检查。</p>
+<p>此外，若出现 <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">get</span> <span class="pre">description</span> <span class="pre">of</span> <span class="pre">XXX</span></code> 错误，表明用户调用 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 接口时输入的 Segment 名称无法在 etcd 数据库中找到。对于内存读写场景，Segment 名称需要严格匹配对方节点初始化时填写的 <code class="docutils literal notranslate"><span class="pre">local_hostname</span></code> 字段。</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">元数据及带外通信</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">建议排查方向</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdma">RDMA 资源初始化</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">建议排查方向</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">RDMA 传输期间</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">建议排查方向</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

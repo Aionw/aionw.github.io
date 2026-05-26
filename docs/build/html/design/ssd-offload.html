@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SSD Offload Design &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/ssd-offload';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TENT: Transfer Engine NEXT" href="tent/overview.html" />
+    <link rel="prev" title="Mooncake Store" href="mooncake-store.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="mooncake-store.html">Mooncake Store</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">SSD Offload Design</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/ssd-offload.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/design/ssd-offload.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SSD Offload Design</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-flow">Data Flow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offload-memory-ssd">Offload (memory → SSD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ssd-memory">Load (SSD → memory)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-backends">Storage Backends</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucketstoragebackend-default">BucketStorageBackend (default)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storagebackendadaptor-fileperkey">StorageBackendAdaptor (FilePerKey)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offsetallocatorstoragebackend">OffsetAllocatorStorageBackend</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-bucketstoragebackend">Eviction (BucketStorageBackend)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policies">Policies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-phase-eviction-protocol">Two-phase eviction protocol</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#io-uring-file-i-o">io_uring File I/O</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thread-local-rings-shareduringring">Thread-local rings (<code class="docutils literal notranslate"><span class="pre">SharedUringRing</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-buffer-registration">Fixed-buffer registration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-direct-and-alignment">O_DIRECT and alignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-o-operations">I/O operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-storage-backends">Integration with storage backends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-recovery-on-restart">Metadata Recovery on Restart</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ssd-offload-design">
+<h1>SSD Offload Design<a class="headerlink" href="#ssd-offload-design" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Mooncake Store supports offloading KV cache objects from distributed memory to local SSD. This extends the effective cache capacity beyond DRAM limits at lower cost, while preserving the performance characteristics of the hot path through zero-copy RDMA-based memory transfers.</p>
+<p>SSD offload is implemented as a background subsystem within the <strong>real client</strong> process. It is transparent to the application: a <code class="docutils literal notranslate"><span class="pre">Put</span></code> that would otherwise be evicted from memory is persisted to disk, and a <code class="docutils literal notranslate"><span class="pre">Get</span></code> that finds no memory replica automatically falls back to reading from SSD.</p>
+</section>
+<hr class="docutils" />
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌─────────────────────────────────────────────────────────┐
+│                  Application (vLLM, etc.)               │
+└──────────────────────────┬──────────────────────────────┘
+                           │ MooncakeDistributedStore API
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│                      Real Client                        │
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │                  FileStorage                     │   │
+│  │  ┌────────────┐  ┌──────────────────────────┐    │   │
+│  │  │  Heartbeat │  │   ClientBuffer (staging) │    │   │
+│  │  │   Thread   │  └──────────────────────────┘    │   │
+│  │  └─────┬──────┘                                  │   │
+│  │        │ offload / load                          │   │
+│  │        ▼                                         │   │
+│  │  ┌─────────────────────────────────────────┐     │   │
+│  │  │        StorageBackendInterface          │     │   │
+│  │  │  ┌───────────┐ ┌──────────┐ ┌────────┐  │     │   │
+│  │  │  │  Bucket   │ │FilePerKey│ │Offset  │  │     │   │
+│  │  │  │  Backend  │ │ Backend  │ │Alloc.  │  │     │   │
+│  │  │  └───────────┘ └──────────┘ └────────┘  │     │   │
+│  │  └─────────────────────────────────────────┘     │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │         In-memory distributed KV cache           │   │
+│  │              (Transfer Engine / RDMA)            │   │
+│  └──────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+                           │
+                    Local SSD / NVMe
+</pre></div>
+</div>
+<p>The key components are:</p>
+<ul class="simple">
+<li><p><strong>FileStorage</strong>: The top-level coordinator. It owns the storage backend, a staging buffer (<code class="docutils literal notranslate"><span class="pre">ClientBuffer</span></code>), and background threads for heartbeating and buffer garbage collection.</p></li>
+<li><p><strong>StorageBackendInterface</strong>: An abstract interface implemented by three backends (see below). Responsible for the actual on-disk layout and I/O.</p></li>
+<li><p><strong>Heartbeat thread</strong>: Periodically contacts the master. The master returns a list of objects to offload; the heartbeat thread writes them to SSD and notifies the master of completion.</p></li>
+<li><p><strong>ClientBuffer</strong>: A pre-registered, O_DIRECT-aligned staging area used for zero-copy reads from SSD back into application memory.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="data-flow">
+<h2>Data Flow<a class="headerlink" href="#data-flow" title="Link to this heading">#</a></h2>
+<section id="offload-memory-ssd">
+<h3>Offload (memory → SSD)<a class="headerlink" href="#offload-memory-ssd" title="Link to this heading">#</a></h3>
+<p>The offload path is driven entirely by the heartbeat thread inside <code class="docutils literal notranslate"><span class="pre">FileStorage</span></code>. No write path from the application is involved.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Heartbeat Thread          Master                  Local Memory Segment
+      │                     │                             │
+      │─OffloadObjectHB ───▶│                             │
+      │◀─ {key→size} map ───│  (objects to evict from     │
+      │                     │   memory to SSD)            │
+      │                     │                             │
+      │─ BatchQuery(keys) ───────────────────────────────▶│
+      │◀─ {key→Slice} ────────────────────────────────────│
+      │                     │                             │
+      │  [PrepareEviction: remove old buckets, notify master via BatchEvictDiskReplica]
+      │─ BatchEvictDiskReplica(evicted_keys) ────────────▶│ (master removes stale replicas)
+      │  [FinalizeEviction: delete evicted files]
+      │                     │                             │
+      │  BatchOffload(slices) → StorageBackend → SSD      │
+      │                     │                             │
+      │─ NotifyOffloadSuccess(keys, metadata) ───────────▶│
+      │                     │  (master adds LOCAL_DISK    │
+      │                     │   replica to object entry)  │
+</pre></div>
+</div>
+<p>Step by step:</p>
+<ol class="arabic simple">
+<li><p><strong>Heartbeat</strong>: The heartbeat thread wakes up every <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_HEARTBEAT_INTERVAL_SECONDS</span></code> seconds and calls <code class="docutils literal notranslate"><span class="pre">client_-&gt;OffloadObjectHeartbeat(enable_offloading_,</span> <span class="pre">offloading_objects)</span></code>. The master replies with a map of <code class="docutils literal notranslate"><span class="pre">{key</span> <span class="pre">→</span> <span class="pre">size}</span></code> for objects it has selected to evict from memory.</p></li>
+<li><p><strong>Read slices from memory</strong>: <code class="docutils literal notranslate"><span class="pre">FileStorage::OffloadObjects</span></code> groups the keys into buckets (for <code class="docutils literal notranslate"><span class="pre">BucketStorageBackend</span></code>) and calls <code class="docutils literal notranslate"><span class="pre">BatchQuerySegmentSlices</span></code> to obtain <code class="docutils literal notranslate"><span class="pre">{key</span> <span class="pre">→</span> <span class="pre">Slice}</span></code> from the local memory segment via <code class="docutils literal notranslate"><span class="pre">client_-&gt;BatchQuery</span></code>.</p></li>
+<li><p><strong>Eviction</strong> (if capacity limit is set): Before writing, <code class="docutils literal notranslate"><span class="pre">PrepareEviction</span></code> removes old buckets from metadata under the exclusive lock and collects their keys. The <code class="docutils literal notranslate"><span class="pre">eviction_handler</span></code> callback calls <code class="docutils literal notranslate"><span class="pre">client_-&gt;BatchEvictDiskReplica</span></code> to notify the master in a single RPC. <code class="docutils literal notranslate"><span class="pre">FinalizeEviction</span></code> then deletes the corresponding files.</p></li>
+<li><p><strong>Write to SSD</strong>: <code class="docutils literal notranslate"><span class="pre">StorageBackend::BatchOffload</span></code> serializes and writes the key-value data to disk.</p></li>
+<li><p><strong>Notify master</strong>: On success, the <code class="docutils literal notranslate"><span class="pre">complete_handler</span></code> calls <code class="docutils literal notranslate"><span class="pre">client_-&gt;NotifyOffloadSuccess(keys,</span> <span class="pre">metadatas)</span></code>. The master adds a <code class="docutils literal notranslate"><span class="pre">LOCAL_DISK</span></code> replica entry (carrying the real client’s RPC address as <code class="docutils literal notranslate"><span class="pre">transport_endpoint</span></code>) to the object’s replica list.</p></li>
+</ol>
+</section>
+<section id="load-ssd-memory">
+<h3>Load (SSD → memory)<a class="headerlink" href="#load-ssd-memory" title="Link to this heading">#</a></h3>
+<p>The load path involves three parties: the <strong>requesting client</strong>, the <strong>target client</strong> that holds the SSD data, and the <strong>Transfer Engine</strong> for zero-copy data movement.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Requesting Client                 Target Client                    Master
+       │                                    │                         │
+       │─ BatchGet(keys) ──────────────────────────────────────────▶│
+       │◀─ QueryResult {replicas: [LOCAL_DISK(rpc_addr)]} ──────────│
+       │                                    │                         │
+       │  (no memory replica available)     │                         │
+       │─ batch_get_offload_object(keys, sizes) ───────────────────▶│
+       │                                    │                         │
+       │                    FileStorage::BatchGet                     │
+       │                    → StorageBackend::BatchLoad               │
+       │                    → read from SSD into ClientBuffer         │
+       │                                    │                         │
+       │◀─ BatchGetOffloadObjectResponse ───│                         │
+       │   {batch_id, pointers[], transfer_engine_addr, gc_ttl_ms}   │
+       │                                    │                         │
+       │─ Transfer Engine: BatchGetOffloadObject ──────────────────▶│
+       │  (RDMA/TCP: pull data from ClientBuffer into app memory)     │
+       │◀─ done ────────────────────────────│                         │
+       │                                    │                         │
+       │─ release_offload_buffer(batch_id) ────────────────────────▶│
+       │                                    │ (free ClientBuffer slot)│
+</pre></div>
+</div>
+<p>Step by step:</p>
+<ol class="arabic simple">
+<li><p><strong>Query master</strong>: The requesting client calls <code class="docutils literal notranslate"><span class="pre">client_-&gt;BatchGet(keys,</span> <span class="pre">...)</span></code> to query the master for replica locations. If the object has been offloaded, the master returns a <code class="docutils literal notranslate"><span class="pre">LOCAL_DISK</span></code> replica descriptor containing the target client’s RPC address (<code class="docutils literal notranslate"><span class="pre">transport_endpoint</span></code>).</p></li>
+<li><p><strong>RPC to target client</strong>: The requesting client calls <code class="docutils literal notranslate"><span class="pre">batch_get_offload_object(keys,</span> <span class="pre">sizes)</span></code> on the target client identified by <code class="docutils literal notranslate"><span class="pre">transport_endpoint</span></code>. The target client calls <code class="docutils literal notranslate"><span class="pre">FileStorage::BatchGet</span></code>, which allocates slots in <code class="docutils literal notranslate"><span class="pre">ClientBuffer</span></code> and reads the requested objects from SSD via <code class="docutils literal notranslate"><span class="pre">StorageBackend::BatchLoad</span></code>.</p></li>
+<li><p><strong>Response with buffer pointers</strong>: The target client returns a <code class="docutils literal notranslate"><span class="pre">BatchGetOffloadObjectResponse</span></code> containing <code class="docutils literal notranslate"><span class="pre">batch_id</span></code>, a list of buffer <code class="docutils literal notranslate"><span class="pre">pointers</span></code> (addresses within <code class="docutils literal notranslate"><span class="pre">ClientBuffer</span></code>), the Transfer Engine address, and <code class="docutils literal notranslate"><span class="pre">gc_ttl_ms</span></code> (the buffer lease TTL).</p></li>
+<li><p><strong>Zero-copy transfer</strong>: The requesting client invokes <code class="docutils literal notranslate"><span class="pre">client_-&gt;BatchGetOffloadObject(transfer_engine_addr,</span> <span class="pre">keys,</span> <span class="pre">pointers,</span> <span class="pre">slices)</span></code>, which uses the Transfer Engine (RDMA or TCP) to pull the data directly from the target client’s <code class="docutils literal notranslate"><span class="pre">ClientBuffer</span></code> into the application’s target memory (DRAM or VRAM). No intermediate copy is made on the requesting client side.</p></li>
+<li><p><strong>Release buffer</strong>: After the transfer completes, the requesting client immediately calls <code class="docutils literal notranslate"><span class="pre">release_offload_buffer(batch_id)</span></code> on the target client to free the <code class="docutils literal notranslate"><span class="pre">ClientBuffer</span></code> slots. If the transfer takes longer than <code class="docutils literal notranslate"><span class="pre">gc_ttl_ms</span></code>, the buffer GC thread reclaims the slot automatically as a fallback.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="storage-backends">
+<h2>Storage Backends<a class="headerlink" href="#storage-backends" title="Link to this heading">#</a></h2>
+<section id="bucketstoragebackend-default">
+<h3>BucketStorageBackend (default)<a class="headerlink" href="#bucketstoragebackend-default" title="Link to this heading">#</a></h3>
+<p>Objects are grouped into <strong>buckets</strong> before being written to disk. Each bucket produces two files:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">.bucket</span></code></strong> — binary data file containing serialized key-value records</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">.meta</span></code></strong> — metadata file describing the keys and byte offsets within the data file</p></li>
+</ul>
+<p>Bucket IDs are monotonically increasing timestamps with a sequence suffix, so <code class="docutils literal notranslate"><span class="pre">buckets_</span></code> (a <code class="docutils literal notranslate"><span class="pre">std::map&lt;int64_t,</span> <span class="pre">BucketMetadata&gt;</span></code>) is always ordered by creation time.</p>
+<p><strong>Grouping strategy</strong> (<code class="docutils literal notranslate"><span class="pre">GroupOffloadingKeysByBucket</span></code>): objects are accumulated into a bucket until either <code class="docutils literal notranslate"><span class="pre">bucket_size_limit</span></code> (default 256 MB) or <code class="docutils literal notranslate"><span class="pre">bucket_keys_limit</span></code> (default 500) is reached. Objects that do not fill a complete bucket are held in <code class="docutils literal notranslate"><span class="pre">ungrouped_offloading_objects_</span></code> and retried on the next heartbeat.</p>
+<p><strong>In-flight read tracking</strong>: A <code class="docutils literal notranslate"><span class="pre">BucketReadGuard</span></code> RAII object increments <code class="docutils literal notranslate"><span class="pre">BucketMetadata::inflight_reads_</span></code> on construction and decrements it on destruction. This allows safe deletion of bucket files even when concurrent reads are in progress.</p>
+</section>
+<section id="storagebackendadaptor-fileperkey">
+<h3>StorageBackendAdaptor (FilePerKey)<a class="headerlink" href="#storagebackendadaptor-fileperkey" title="Link to this heading">#</a></h3>
+<p>Each object is stored as an individual file. The file path is derived from the key via a two-level hash-sharded directory structure to avoid large flat directories. This backend is simple and easy to inspect but does not scale well to millions of objects.</p>
+</section>
+<section id="offsetallocatorstoragebackend">
+<h3>OffsetAllocatorStorageBackend<a class="headerlink" href="#offsetallocatorstoragebackend" title="Link to this heading">#</a></h3>
+<p>A single pre-allocated file (<code class="docutils literal notranslate"><span class="pre">kv_cache.data</span></code>) is shared by all objects. Space within the file is managed by an <code class="docutils literal notranslate"><span class="pre">OffsetAllocator</span></code>. Metadata is sharded across 1024 independent maps to reduce lock contention under high concurrency. Records follow the layout <code class="docutils literal notranslate"><span class="pre">[key_len:</span> <span class="pre">u32</span> <span class="pre">|</span> <span class="pre">value_len:</span> <span class="pre">u32</span> <span class="pre">|</span> <span class="pre">key</span> <span class="pre">|</span> <span class="pre">value]</span></code>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="eviction-bucketstoragebackend">
+<h2>Eviction (BucketStorageBackend)<a class="headerlink" href="#eviction-bucketstoragebackend" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_BUCKET_MAX_TOTAL_SIZE</span></code> is set, the backend evicts existing buckets to make room before writing a new one. Eviction is disabled by default (<code class="docutils literal notranslate"><span class="pre">BucketEvictionPolicy::NONE</span></code>).</p>
+<section id="policies">
+<h3>Policies<a class="headerlink" href="#policies" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Policy</p></th>
+<th class="head"><p>Candidate selection</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FIFO</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">buckets_.begin()</span></code> — always the oldest bucket, since <code class="docutils literal notranslate"><span class="pre">buckets_</span></code> is ordered by bucket ID</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LRU</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::min_element</span></code> over <code class="docutils literal notranslate"><span class="pre">BucketMetadata::last_access_ns_</span></code> — the bucket with the smallest last-read timestamp</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">last_access_ns_</span></code> is an atomic <code class="docutils literal notranslate"><span class="pre">int64_t</span></code> updated on every <code class="docutils literal notranslate"><span class="pre">BatchLoad</span></code> with relaxed ordering. Buckets that have never been read have <code class="docutils literal notranslate"><span class="pre">last_access_ns_</span> <span class="pre">==</span> <span class="pre">0</span></code> and are therefore always evicted first under LRU, giving FIFO-among-unread semantics.</p>
+</section>
+<section id="two-phase-eviction-protocol">
+<h3>Two-phase eviction protocol<a class="headerlink" href="#two-phase-eviction-protocol" title="Link to this heading">#</a></h3>
+<p>Eviction is split into two phases to ensure that the master is notified before files are deleted, and that no in-flight reads are interrupted.</p>
+<p><strong>Phase 1 — <code class="docutils literal notranslate"><span class="pre">PrepareEviction(required_size)</span></code></strong> (called under exclusive lock):</p>
+<ol class="arabic simple">
+<li><p>Repeatedly call <code class="docutils literal notranslate"><span class="pre">SelectEvictionCandidate()</span></code> until <code class="docutils literal notranslate"><span class="pre">total_size_</span> <span class="pre">+</span> <span class="pre">required_size</span> <span class="pre">&lt;=</span> <span class="pre">max_total_size</span></code>.</p></li>
+<li><p>For each selected bucket: remove it from <code class="docutils literal notranslate"><span class="pre">buckets_</span></code> and <code class="docutils literal notranslate"><span class="pre">object_bucket_map_</span></code>, subtract its size from <code class="docutils literal notranslate"><span class="pre">total_size_</span></code>.</p></li>
+<li><p>Collect all evicted keys and bucket metadata into a <code class="docutils literal notranslate"><span class="pre">PendingEviction</span></code> struct and return it — no file I/O at this point.</p></li>
+</ol>
+<p><strong>Between phases</strong> — notify master:</p>
+<p>The caller invokes the <code class="docutils literal notranslate"><span class="pre">eviction_handler</span></code> callback with the full list of evicted keys. The handler calls <code class="docutils literal notranslate"><span class="pre">MasterClient::BatchEvictDiskReplica</span></code>, which sends a single RPC to the master to remove the disk replicas for all evicted keys atomically.</p>
+<p><strong>Phase 2 — <code class="docutils literal notranslate"><span class="pre">FinalizeEviction(pending)</span></code></strong> (called after master notification):</p>
+<p>For each evicted bucket:</p>
+<ol class="arabic simple">
+<li><p>Spin-wait (with a 10-second timeout) until <code class="docutils literal notranslate"><span class="pre">inflight_reads_</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+<li><p>Evict any stale file-handle cache entries.</p></li>
+<li><p>Delete the <code class="docutils literal notranslate"><span class="pre">.bucket</span></code> and <code class="docutils literal notranslate"><span class="pre">.meta</span></code> files.</p></li>
+</ol>
+<p>This ordering guarantees:</p>
+<ul class="simple">
+<li><p>The master never serves a stale disk-replica location for a file that has already been deleted.</p></li>
+<li><p>Ongoing reads complete successfully before their files are removed.</p></li>
+<li><p>Freed disk space is available for the incoming write before <code class="docutils literal notranslate"><span class="pre">WriteBucket</span></code> is called.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="io-uring-file-i-o">
+<h2>io_uring File I/O<a class="headerlink" href="#io-uring-file-i-o" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_USE_URING=true</span></code>, the storage backends replace POSIX <code class="docutils literal notranslate"><span class="pre">pread</span></code>/<code class="docutils literal notranslate"><span class="pre">pwrite</span></code> calls with an io_uring-based implementation (<code class="docutils literal notranslate"><span class="pre">UringFile</span></code>). The design prioritizes eliminating inter-thread lock contention, which was the dominant latency source in the previous global-ring approach.</p>
+<section id="thread-local-rings-shareduringring">
+<h3>Thread-local rings (<code class="docutils literal notranslate"><span class="pre">SharedUringRing</span></code>)<a class="headerlink" href="#thread-local-rings-shareduringring" title="Link to this heading">#</a></h3>
+<p>Each thread owns exactly one <code class="docutils literal notranslate"><span class="pre">io_uring</span></code> ring, stored in <code class="docutils literal notranslate"><span class="pre">thread_local</span></code> storage. This means:</p>
+<ul class="simple">
+<li><p><strong>No mutex between threads.</strong> Each ring is accessed only by its owning thread, so concurrent I/O from multiple threads is fully parallel with zero synchronization overhead.</p></li>
+<li><p><strong>Within-thread batching.</strong> Multiple SQEs can be enqueued before calling <code class="docutils literal notranslate"><span class="pre">io_uring_submit_and_wait</span></code>, exposing NVMe queue depth &gt; 1 within a single thread. <code class="docutils literal notranslate"><span class="pre">batch_read</span></code> exploits this to issue up to <code class="docutils literal notranslate"><span class="pre">QUEUE_DEPTH</span></code> (32) independent reads in one submission.</p></li>
+<li><p><strong>File-descriptor registration is omitted.</strong> The per-I/O <code class="docutils literal notranslate"><span class="pre">fdget()</span></code> overhead (~50 ns) is negligible compared to the lock contention (&gt; 1 ms) the old global ring imposed, so <code class="docutils literal notranslate"><span class="pre">IOSQE_FIXED_FILE</span></code> is not used.</p></li>
+</ul>
+<p>Rings are initialized lazily on first use and destroyed when the thread exits. If ring initialization fails (e.g., kernel too old), the backend falls back gracefully to POSIX I/O.</p>
+</section>
+<section id="fixed-buffer-registration">
+<h3>Fixed-buffer registration<a class="headerlink" href="#fixed-buffer-registration" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ClientBuffer</span></code> (the staging buffer used for SSD reads) is registered with io_uring as a <strong>fixed buffer</strong> via <code class="docutils literal notranslate"><span class="pre">io_uring_register_buffers</span></code>. When a read destination falls within the registered region, the backend uses <code class="docutils literal notranslate"><span class="pre">io_uring_prep_read_fixed</span></code> instead of <code class="docutils literal notranslate"><span class="pre">io_uring_prep_read</span></code>, which avoids a per-I/O <code class="docutils literal notranslate"><span class="pre">mmap</span></code>/<code class="docutils literal notranslate"><span class="pre">munmap</span></code> in the kernel and reduces system-call overhead.</p>
+<p>Buffer registration is global but applied <strong>lazily per thread</strong>: <code class="docutils literal notranslate"><span class="pre">g_buf</span></code> stores the base address and length atomically; each thread-local ring calls <code class="docutils literal notranslate"><span class="pre">ensure_buf_registered()</span></code> on its first I/O and registers the buffer independently. This avoids a global barrier at startup.</p>
+<p>To prevent <code class="docutils literal notranslate"><span class="pre">io_uring</span></code>’s <code class="docutils literal notranslate"><span class="pre">FOLL_LONGTERM</span></code> page pinning from failing on systems with Transparent Huge Pages (THP) enabled, <code class="docutils literal notranslate"><span class="pre">MADV_NOHUGEPAGE</span></code> is applied to the buffer region before registration. This forces the kernel to back the range with 4 KB pages, making long-term pinning reliable regardless of system THP policy.</p>
+</section>
+<section id="o-direct-and-alignment">
+<h3>O_DIRECT and alignment<a class="headerlink" href="#o-direct-and-alignment" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">UringFile</span></code> supports an optional <code class="docutils literal notranslate"><span class="pre">O_DIRECT</span></code> mode. When enabled:</p>
+<ul class="simple">
+<li><p>All file descriptors are opened with <code class="docutils literal notranslate"><span class="pre">O_DIRECT</span></code>.</p></li>
+<li><p>Buffers, lengths, and offsets must be aligned to 4 KB (<code class="docutils literal notranslate"><span class="pre">ALIGNMENT_</span> <span class="pre">=</span> <span class="pre">4096</span></code>).</p></li>
+<li><p>For unaligned writes (e.g., metadata serialized into a <code class="docutils literal notranslate"><span class="pre">std::string</span></code>), the backend allocates a temporary aligned bounce buffer via <code class="docutils literal notranslate"><span class="pre">posix_memalign</span></code>, copies the data, performs the aligned write, and frees the bounce buffer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_aligned</span></code> and <code class="docutils literal notranslate"><span class="pre">write_aligned</span></code> are the primary I/O paths; they assert alignment constraints and delegate directly to the ring.</p></li>
+</ul>
+</section>
+<section id="i-o-operations">
+<h3>I/O operations<a class="headerlink" href="#i-o-operations" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">read</span></code> / <code class="docutils literal notranslate"><span class="pre">write</span></code></p></td>
+<td><p>Contiguous read or write, chunked into up to <code class="docutils literal notranslate"><span class="pre">QUEUE_DEPTH</span></code> SQEs per submission</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">read_aligned</span></code> / <code class="docutils literal notranslate"><span class="pre">write_aligned</span></code></p></td>
+<td><p>Same as above but with alignment preconditions for O_DIRECT</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">batch_read</span></code></p></td>
+<td><p>Submits multiple independent reads (different offsets) in batches of up to <code class="docutils literal notranslate"><span class="pre">QUEUE_DEPTH</span></code>, maximizing NVMe queue utilization</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vector_read</span></code> / <code class="docutils literal notranslate"><span class="pre">vector_write</span></code></p></td>
+<td><p>Scatter/gather I/O: one SQE per <code class="docutils literal notranslate"><span class="pre">iovec</span></code>, submitted in batches</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">datasync</span></code></p></td>
+<td><p>Issues <code class="docutils literal notranslate"><span class="pre">IORING_FSYNC_DATASYNC</span></code> and waits for completion</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="integration-with-storage-backends">
+<h3>Integration with storage backends<a class="headerlink" href="#integration-with-storage-backends" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>BucketStorageBackend</strong>: uses <code class="docutils literal notranslate"><span class="pre">UringFile</span></code> for both bucket data files and metadata files when <code class="docutils literal notranslate"><span class="pre">use_uring_</span></code> is set. A file-handle cache (<code class="docutils literal notranslate"><span class="pre">file_cache_</span></code>) avoids repeated <code class="docutils literal notranslate"><span class="pre">open</span></code>/<code class="docutils literal notranslate"><span class="pre">close</span></code> for hot buckets. On eviction, the cache entry is explicitly removed before the file is deleted to prevent stale handles.</p></li>
+<li><p><strong>OffsetAllocatorStorageBackend</strong>: opens the single pre-allocated data file with <code class="docutils literal notranslate"><span class="pre">O_DIRECT</span></code> and <code class="docutils literal notranslate"><span class="pre">UringFile</span></code>, and uses <code class="docutils literal notranslate"><span class="pre">GetFileInstance()</span></code> to expose the file handle for external buffer registration.</p></li>
+<li><p><strong>StorageBackendAdaptor</strong> (FilePerKey): uses <code class="docutils literal notranslate"><span class="pre">UringFile</span></code> for reads when <code class="docutils literal notranslate"><span class="pre">use_uring_</span></code> is set; writes use POSIX paths.</p></li>
+</ul>
+</section>
+</section>
+<section id="metadata-recovery-on-restart">
+<h2>Metadata Recovery on Restart<a class="headerlink" href="#metadata-recovery-on-restart" title="Link to this heading">#</a></h2>
+<p>On startup, <code class="docutils literal notranslate"><span class="pre">FileStorage::Init</span></code> calls <code class="docutils literal notranslate"><span class="pre">StorageBackend::ScanMeta</span></code>, which reads on-disk metadata and invokes a callback for each discovered object. The callback calls <code class="docutils literal notranslate"><span class="pre">MasterClient::NotifyOffloadSuccess</span></code> to re-register the objects with the master. This restores the full disk-replica view without any application-level intervention for the backends that preserve restart metadata, namely <code class="docutils literal notranslate"><span class="pre">BucketStorageBackend</span></code> and the file-per-key backend.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OffsetAllocatorStorageBackend</span></code> is the exception. It truncates its pre-allocated data file during initialization and clears its in-memory metadata, so previously offloaded objects are not recoverable after a real client restart.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mooncake-store.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mooncake Store</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tent/overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TENT: Transfer Engine NEXT</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-flow">Data Flow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offload-memory-ssd">Offload (memory → SSD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ssd-memory">Load (SSD → memory)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-backends">Storage Backends</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucketstoragebackend-default">BucketStorageBackend (default)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storagebackendadaptor-fileperkey">StorageBackendAdaptor (FilePerKey)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offsetallocatorstoragebackend">OffsetAllocatorStorageBackend</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-bucketstoragebackend">Eviction (BucketStorageBackend)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policies">Policies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-phase-eviction-protocol">Two-phase eviction protocol</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#io-uring-file-i-o">io_uring File I/O</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thread-local-rings-shareduringring">Thread-local rings (<code class="docutils literal notranslate"><span class="pre">SharedUringRing</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-buffer-registration">Fixed-buffer registration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-direct-and-alignment">O_DIRECT and alignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-o-operations">I/O operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-storage-backends">Integration with storage backends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-recovery-on-restart">Metadata Recovery on Restart</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1259 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Allocator Performance &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'performance/allocator-benchmark-result';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AllocationStrategy Performance" href="allocation-strategy-benchmark-result.html" />
+    <link rel="prev" title="Mooncake KVCache Storage Benchmark" href="storage-benchmark.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="mooncake-store/index.html">Mooncake Store Performance Benchmarks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="storage-benchmark.html">Mooncake KVCache Storage Benchmark</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Allocator Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="allocation-strategy-benchmark-result.html">AllocationStrategy Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssd-offload-benchmark-results.html">Mooncake SSD Offload Benchmark</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/performance/allocator-benchmark-result.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/performance/allocator-benchmark-result.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Allocator Performance</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offsetallocator">OffsetAllocator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution">Execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result">Result</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-size-size-equals-power-of-2">Uniform size, size equals power of 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-size-size-equals-power-of-2-17">Uniform size, size equals power of 2 +/- 17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-size-size-equals-power-of-2-multiply-0-9-or-1-1">Uniform size, size equals power of 2 multiply 0.9 or 1.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-size">Random Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paired-kv-indexer-allocation-benchmark-dsa">Paired KV/Indexer Allocation Benchmark (DSA)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="allocator-performance">
+<h1>Allocator Performance<a class="headerlink" href="#allocator-performance" title="Link to this heading">#</a></h1>
+<p>Mooncake Store uses two allocators at different layers:</p>
+<ul class="simple">
+<li><p><strong>MmapArena</strong> — backs the mmap buffer path used by SGLang HiCache for host KV cache memory. When explicitly enabled, it pre-allocates a hugepage-backed pool at startup and serves allocations via lock-free atomic bump pointer (~50ns per allocation). Configured via <code class="docutils literal notranslate"><span class="pre">MC_MMAP_ARENA_POOL_SIZE</span></code> (explicit opt-in) and <code class="docutils literal notranslate"><span class="pre">MC_DISABLE_MMAP_ARENA</span></code>.</p></li>
+<li><p><strong>OffsetAllocator</strong> — manages object-level allocation within Mooncake Store segments for KV cache entries. Evaluated below.</p></li>
+</ul>
+<p>These are complementary: MmapArena handles the backing memory, OffsetAllocator manages logical object placement within that memory.</p>
+<section id="offsetallocator">
+<h2>OffsetAllocator<a class="headerlink" href="#offsetallocator" title="Link to this heading">#</a></h2>
+<p>We evaluated the performance of <a class="reference external" href="https://github.com/sebbbi/OffsetAllocator">OffsetAllocator</a>, the default memory allocator in Mooncake Store. This allocator is responsible for allocating memory from mounted segments to store the KV cache.</p>
+<p>In this context, the most important metric is <strong>memory utilization</strong>, defined as the ratio between the amount of memory that can be successfully allocated and the total available memory. A higher utilization means that more KV tensors can be cached, thereby accelerating LLM tasks. However, due to memory fragmentation, allocation may fail even when the allocated memory is well below the total available capacity.</p>
+<p>For the same allocator, memory utilization can vary significantly under different workloads. Therefore, we evaluated the allocator’s efficiency across a range of workloads.</p>
+<p>In particular, in the <strong>LLM inference</strong> scenario, once the model is fixed, the size of each KV vector is also fixed. This means memory utilization under <strong>uniform allocation sizes</strong> becomes especially important. However, the original OffsetAllocator has a limitation: when the allocation size is uniform but does not match any of OffsetAllocator’s predefined bin sizes, memory utilization can be suboptimal.</p>
+<p>To address this, we introduced targeted optimizations for uniform-size workloads on top of the original OffsetAllocator. As shown in our test results, the optimized version achieves <strong>significant performance improvements</strong> in such scenarios.</p>
+</section>
+<section id="execution">
+<h2>Execution<a class="headerlink" href="#execution" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mooncake-store/benchmarks/allocator_bench
+</pre></div>
+</div>
+</section>
+<section id="result">
+<h2>Result<a class="headerlink" href="#result" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>alloc size: The size of each object</p></li>
+<li><p>utilization ratio: The total allocated size / total space</p></li>
+<li><p>time: time in nanoseconds for each object allocation</p></li>
+<li><p>OffsetAllocator optimization: round up the allocated size to a bin size.</p></li>
+</ul>
+<section id="uniform-size-size-equals-power-of-2">
+<h3>Uniform size, size equals power of 2<a class="headerlink" href="#uniform-size-size-equals-power-of-2" title="Link to this heading">#</a></h3>
+<p><strong>OffsetAllocator (After Optimization)</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alloc Size</p></th>
+<th class="head"><p>Min Util Ratio</p></th>
+<th class="head"><p>Avg Util Ratio</p></th>
+<th class="head"><p>Time (ns)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>544</p></td>
+</tr>
+<tr class="row-odd"><td><p>128</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>417</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>174</p></td>
+</tr>
+<tr class="row-odd"><td><p>2048</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>406</p></td>
+</tr>
+<tr class="row-even"><td><p>8192</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>180</p></td>
+</tr>
+<tr class="row-odd"><td><p>32768</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>133</p></td>
+</tr>
+<tr class="row-even"><td><p>131072</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>109</p></td>
+</tr>
+<tr class="row-odd"><td><p>524288</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>2097152</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>8388608</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-even"><td><p>33554432</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>98</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>OffsetAllocator (Before Optimization)</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alloc Size</p></th>
+<th class="head"><p>Min Util Ratio</p></th>
+<th class="head"><p>Avg Util Ratio</p></th>
+<th class="head"><p>Time (ns)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>539</p></td>
+</tr>
+<tr class="row-odd"><td><p>128</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>419</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>217</p></td>
+</tr>
+<tr class="row-odd"><td><p>2048</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>408</p></td>
+</tr>
+<tr class="row-even"><td><p>8192</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>175</p></td>
+</tr>
+<tr class="row-odd"><td><p>32768</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>130</p></td>
+</tr>
+<tr class="row-even"><td><p>131072</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>107</p></td>
+</tr>
+<tr class="row-odd"><td><p>524288</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-even"><td><p>2097152</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>8388608</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>98</p></td>
+</tr>
+<tr class="row-even"><td><p>33554432</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>98</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="uniform-size-size-equals-power-of-2-17">
+<h3>Uniform size, size equals power of 2 +/- 17<a class="headerlink" href="#uniform-size-size-equals-power-of-2-17" title="Link to this heading">#</a></h3>
+<p><strong>OffsetAllocator (After Optimization)</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alloc Size</p></th>
+<th class="head"><p>Min Util Ratio</p></th>
+<th class="head"><p>Avg Util Ratio</p></th>
+<th class="head"><p>Time (ns)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>568</p></td>
+</tr>
+<tr class="row-odd"><td><p>111</p></td>
+<td><p>0.991071</p></td>
+<td><p>0.991071</p></td>
+<td><p>441</p></td>
+</tr>
+<tr class="row-even"><td><p>495</p></td>
+<td><p>0.966797</p></td>
+<td><p>0.966797</p></td>
+<td><p>178</p></td>
+</tr>
+<tr class="row-odd"><td><p>2031</p></td>
+<td><p>0.991699</p></td>
+<td><p>0.991699</p></td>
+<td><p>418</p></td>
+</tr>
+<tr class="row-even"><td><p>8175</p></td>
+<td><p>0.997925</p></td>
+<td><p>0.997925</p></td>
+<td><p>170</p></td>
+</tr>
+<tr class="row-odd"><td><p>32751</p></td>
+<td><p>0.999481</p></td>
+<td><p>0.999481</p></td>
+<td><p>133</p></td>
+</tr>
+<tr class="row-even"><td><p>131055</p></td>
+<td><p>0.99987</p></td>
+<td><p>0.99987</p></td>
+<td><p>109</p></td>
+</tr>
+<tr class="row-odd"><td><p>524271</p></td>
+<td><p>0.999968</p></td>
+<td><p>0.999968</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>2097135</p></td>
+<td><p>0.999992</p></td>
+<td><p>0.999992</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>8388591</p></td>
+<td><p>0.999998</p></td>
+<td><p>0.999998</p></td>
+<td><p>98</p></td>
+</tr>
+<tr class="row-even"><td><p>33554415</p></td>
+<td><p>0.999999</p></td>
+<td><p>0.999999</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>49</p></td>
+<td><p>0.942308</p></td>
+<td><p>0.942308</p></td>
+<td><p>508</p></td>
+</tr>
+<tr class="row-even"><td><p>145</p></td>
+<td><p>0.906249</p></td>
+<td><p>0.906249</p></td>
+<td><p>372</p></td>
+</tr>
+<tr class="row-odd"><td><p>529</p></td>
+<td><p>0.918399</p></td>
+<td><p>0.918399</p></td>
+<td><p>172</p></td>
+</tr>
+<tr class="row-even"><td><p>2065</p></td>
+<td><p>0.896267</p></td>
+<td><p>0.896267</p></td>
+<td><p>403</p></td>
+</tr>
+<tr class="row-odd"><td><p>8209</p></td>
+<td><p>0.89073</p></td>
+<td><p>0.89073</p></td>
+<td><p>174</p></td>
+</tr>
+<tr class="row-even"><td><p>32785</p></td>
+<td><p>0.889347</p></td>
+<td><p>0.889347</p></td>
+<td><p>131</p></td>
+</tr>
+<tr class="row-odd"><td><p>131089</p></td>
+<td><p>0.88897</p></td>
+<td><p>0.88897</p></td>
+<td><p>105</p></td>
+</tr>
+<tr class="row-even"><td><p>524305</p></td>
+<td><p>0.888701</p></td>
+<td><p>0.888701</p></td>
+<td><p>102</p></td>
+</tr>
+<tr class="row-odd"><td><p>2097169</p></td>
+<td><p>0.888679</p></td>
+<td><p>0.888679</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>8388625</p></td>
+<td><p>0.886721</p></td>
+<td><p>0.886721</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>33554449</p></td>
+<td><p>0.875</p></td>
+<td><p>0.875</p></td>
+<td><p>100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>OffsetAllocator (Before Optimization)</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alloc Size</p></th>
+<th class="head"><p>Min Util Ratio</p></th>
+<th class="head"><p>Avg Util Ratio</p></th>
+<th class="head"><p>Time (ns)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>566</p></td>
+</tr>
+<tr class="row-odd"><td><p>111</p></td>
+<td><p>0.669866</p></td>
+<td><p>0.710845</p></td>
+<td><p>703</p></td>
+</tr>
+<tr class="row-even"><td><p>495</p></td>
+<td><p>0.665779</p></td>
+<td><p>0.676874</p></td>
+<td><p>238</p></td>
+</tr>
+<tr class="row-odd"><td><p>2031</p></td>
+<td><p>0.668333</p></td>
+<td><p>0.705411</p></td>
+<td><p>637</p></td>
+</tr>
+<tr class="row-even"><td><p>8175</p></td>
+<td><p>0.666175</p></td>
+<td><p>0.676474</p></td>
+<td><p>242</p></td>
+</tr>
+<tr class="row-odd"><td><p>32751</p></td>
+<td><p>0.664435</p></td>
+<td><p>0.669078</p></td>
+<td><p>168</p></td>
+</tr>
+<tr class="row-even"><td><p>131055</p></td>
+<td><p>0.66062</p></td>
+<td><p>0.667341</p></td>
+<td><p>124</p></td>
+</tr>
+<tr class="row-odd"><td><p>524271</p></td>
+<td><p>0.653055</p></td>
+<td><p>0.666993</p></td>
+<td><p>118</p></td>
+</tr>
+<tr class="row-even"><td><p>2097135</p></td>
+<td><p>0.64062</p></td>
+<td><p>0.666873</p></td>
+<td><p>116</p></td>
+</tr>
+<tr class="row-odd"><td><p>8388591</p></td>
+<td><p>0.605468</p></td>
+<td><p>0.667812</p></td>
+<td><p>115</p></td>
+</tr>
+<tr class="row-even"><td><p>33554415</p></td>
+<td><p>0.5625</p></td>
+<td><p>0.670944</p></td>
+<td><p>116</p></td>
+</tr>
+<tr class="row-odd"><td><p>49</p></td>
+<td><p>0.692229</p></td>
+<td><p>0.753062</p></td>
+<td><p>1122</p></td>
+</tr>
+<tr class="row-even"><td><p>145</p></td>
+<td><p>0.667789</p></td>
+<td><p>0.700907</p></td>
+<td><p>572</p></td>
+</tr>
+<tr class="row-odd"><td><p>529</p></td>
+<td><p>0.66577</p></td>
+<td><p>0.676238</p></td>
+<td><p>238</p></td>
+</tr>
+<tr class="row-even"><td><p>2065</p></td>
+<td><p>0.667926</p></td>
+<td><p>0.704884</p></td>
+<td><p>632</p></td>
+</tr>
+<tr class="row-odd"><td><p>8209</p></td>
+<td><p>0.665708</p></td>
+<td><p>0.676372</p></td>
+<td><p>239</p></td>
+</tr>
+<tr class="row-even"><td><p>32785</p></td>
+<td><p>0.664224</p></td>
+<td><p>0.669058</p></td>
+<td><p>168</p></td>
+</tr>
+<tr class="row-odd"><td><p>131089</p></td>
+<td><p>0.659631</p></td>
+<td><p>0.667287</p></td>
+<td><p>129</p></td>
+</tr>
+<tr class="row-even"><td><p>524305</p></td>
+<td><p>0.652609</p></td>
+<td><p>0.666884</p></td>
+<td><p>122</p></td>
+</tr>
+<tr class="row-odd"><td><p>2097169</p></td>
+<td><p>0.638677</p></td>
+<td><p>0.666516</p></td>
+<td><p>120</p></td>
+</tr>
+<tr class="row-even"><td><p>8388625</p></td>
+<td><p>0.60547</p></td>
+<td><p>0.665131</p></td>
+<td><p>121</p></td>
+</tr>
+<tr class="row-odd"><td><p>33554449</p></td>
+<td><p>0.546875</p></td>
+<td><p>0.660917</p></td>
+<td><p>120</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="uniform-size-size-equals-power-of-2-multiply-0-9-or-1-1">
+<h3>Uniform size, size equals power of 2 multiply 0.9 or 1.1<a class="headerlink" href="#uniform-size-size-equals-power-of-2-multiply-0-9-or-1-1" title="Link to this heading">#</a></h3>
+<p><strong>OffsetAllocator (After Optimization)</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alloc Size</p></th>
+<th class="head"><p>Min Util Ratio</p></th>
+<th class="head"><p>Avg Util Ratio</p></th>
+<th class="head"><p>Time (ns)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>543</p></td>
+</tr>
+<tr class="row-odd"><td><p>115</p></td>
+<td><p>0.958333</p></td>
+<td><p>0.958333</p></td>
+<td><p>418</p></td>
+</tr>
+<tr class="row-even"><td><p>460</p></td>
+<td><p>0.958332</p></td>
+<td><p>0.958332</p></td>
+<td><p>189</p></td>
+</tr>
+<tr class="row-odd"><td><p>1843</p></td>
+<td><p>0.959896</p></td>
+<td><p>0.959896</p></td>
+<td><p>418</p></td>
+</tr>
+<tr class="row-even"><td><p>7372</p></td>
+<td><p>0.959895</p></td>
+<td><p>0.959895</p></td>
+<td><p>197</p></td>
+</tr>
+<tr class="row-odd"><td><p>29491</p></td>
+<td><p>0.959993</p></td>
+<td><p>0.959993</p></td>
+<td><p>135</p></td>
+</tr>
+<tr class="row-even"><td><p>117964</p></td>
+<td><p>0.959979</p></td>
+<td><p>0.959979</p></td>
+<td><p>111</p></td>
+</tr>
+<tr class="row-odd"><td><p>471859</p></td>
+<td><p>0.959985</p></td>
+<td><p>0.959985</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>1887436</p></td>
+<td><p>0.959765</p></td>
+<td><p>0.959765</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>7549747</p></td>
+<td><p>0.959766</p></td>
+<td><p>0.959766</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-even"><td><p>30198988</p></td>
+<td><p>0.95625</p></td>
+<td><p>0.95625</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>35</p></td>
+<td><p>0.972222</p></td>
+<td><p>0.972222</p></td>
+<td><p>531</p></td>
+</tr>
+<tr class="row-even"><td><p>140</p></td>
+<td><p>0.972222</p></td>
+<td><p>0.972222</p></td>
+<td><p>397</p></td>
+</tr>
+<tr class="row-odd"><td><p>563</p></td>
+<td><p>0.977427</p></td>
+<td><p>0.977427</p></td>
+<td><p>180</p></td>
+</tr>
+<tr class="row-even"><td><p>2252</p></td>
+<td><p>0.97743</p></td>
+<td><p>0.97743</p></td>
+<td><p>389</p></td>
+</tr>
+<tr class="row-odd"><td><p>9011</p></td>
+<td><p>0.977752</p></td>
+<td><p>0.977752</p></td>
+<td><p>183</p></td>
+</tr>
+<tr class="row-even"><td><p>36044</p></td>
+<td><p>0.977752</p></td>
+<td><p>0.977752</p></td>
+<td><p>133</p></td>
+</tr>
+<tr class="row-odd"><td><p>144179</p></td>
+<td><p>0.977739</p></td>
+<td><p>0.977739</p></td>
+<td><p>106</p></td>
+</tr>
+<tr class="row-even"><td><p>576716</p></td>
+<td><p>0.977538</p></td>
+<td><p>0.977538</p></td>
+<td><p>103</p></td>
+</tr>
+<tr class="row-odd"><td><p>2306867</p></td>
+<td><p>0.977539</p></td>
+<td><p>0.977539</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-even"><td><p>9227468</p></td>
+<td><p>0.975391</p></td>
+<td><p>0.975391</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>36909875</p></td>
+<td><p>0.9625</p></td>
+<td><p>0.9625</p></td>
+<td><p>100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>OffsetAllocator (Before Optimization)</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alloc Size</p></th>
+<th class="head"><p>Min Util Ratio</p></th>
+<th class="head"><p>Avg Util Ratio</p></th>
+<th class="head"><p>Time (ns)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>539</p></td>
+</tr>
+<tr class="row-odd"><td><p>115</p></td>
+<td><p>0.669299</p></td>
+<td><p>0.709245</p></td>
+<td><p>701</p></td>
+</tr>
+<tr class="row-even"><td><p>460</p></td>
+<td><p>0.665825</p></td>
+<td><p>0.677532</p></td>
+<td><p>255</p></td>
+</tr>
+<tr class="row-odd"><td><p>1843</p></td>
+<td><p>0.669352</p></td>
+<td><p>0.709202</p></td>
+<td><p>691</p></td>
+</tr>
+<tr class="row-even"><td><p>7372</p></td>
+<td><p>0.66619</p></td>
+<td><p>0.677401</p></td>
+<td><p>260</p></td>
+</tr>
+<tr class="row-odd"><td><p>29491</p></td>
+<td><p>0.664311</p></td>
+<td><p>0.669511</p></td>
+<td><p>172</p></td>
+</tr>
+<tr class="row-even"><td><p>117964</p></td>
+<td><p>0.661812</p></td>
+<td><p>0.667356</p></td>
+<td><p>133</p></td>
+</tr>
+<tr class="row-odd"><td><p>471859</p></td>
+<td><p>0.654345</p></td>
+<td><p>0.667048</p></td>
+<td><p>123</p></td>
+</tr>
+<tr class="row-even"><td><p>1887436</p></td>
+<td><p>0.640722</p></td>
+<td><p>0.666447</p></td>
+<td><p>121</p></td>
+</tr>
+<tr class="row-odd"><td><p>7549747</p></td>
+<td><p>0.611719</p></td>
+<td><p>0.666847</p></td>
+<td><p>119</p></td>
+</tr>
+<tr class="row-even"><td><p>30198988</p></td>
+<td><p>0.548437</p></td>
+<td><p>0.669799</p></td>
+<td><p>125</p></td>
+</tr>
+<tr class="row-odd"><td><p>35</p></td>
+<td><p>0.7098</p></td>
+<td><p>0.774162</p></td>
+<td><p>1306</p></td>
+</tr>
+<tr class="row-even"><td><p>140</p></td>
+<td><p>0.667934</p></td>
+<td><p>0.702151</p></td>
+<td><p>599</p></td>
+</tr>
+<tr class="row-odd"><td><p>563</p></td>
+<td><p>0.665599</p></td>
+<td><p>0.675548</p></td>
+<td><p>239</p></td>
+</tr>
+<tr class="row-even"><td><p>2252</p></td>
+<td><p>0.667371</p></td>
+<td><p>0.701623</p></td>
+<td><p>601</p></td>
+</tr>
+<tr class="row-odd"><td><p>9011</p></td>
+<td><p>0.665485</p></td>
+<td><p>0.675528</p></td>
+<td><p>244</p></td>
+</tr>
+<tr class="row-even"><td><p>36044</p></td>
+<td><p>0.663248</p></td>
+<td><p>0.668912</p></td>
+<td><p>170</p></td>
+</tr>
+<tr class="row-odd"><td><p>144179</p></td>
+<td><p>0.660308</p></td>
+<td><p>0.666934</p></td>
+<td><p>127</p></td>
+</tr>
+<tr class="row-even"><td><p>576716</p></td>
+<td><p>0.654467</p></td>
+<td><p>0.66679</p></td>
+<td><p>122</p></td>
+</tr>
+<tr class="row-odd"><td><p>2306867</p></td>
+<td><p>0.633789</p></td>
+<td><p>0.666159</p></td>
+<td><p>121</p></td>
+</tr>
+<tr class="row-even"><td><p>9227468</p></td>
+<td><p>0.597266</p></td>
+<td><p>0.666037</p></td>
+<td><p>118</p></td>
+</tr>
+<tr class="row-odd"><td><p>36909875</p></td>
+<td><p>0.55</p></td>
+<td><p>0.669564</p></td>
+<td><p>121</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="random-size">
+<h3>Random Size<a class="headerlink" href="#random-size" title="Link to this heading">#</a></h3>
+<p><strong>OffsetAllocator (After Optimization)</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">util</span> <span class="n">ratio</span> <span class="p">(</span><span class="nb">min</span> <span class="o">/</span> <span class="n">p99</span> <span class="o">/</span> <span class="n">p90</span> <span class="o">/</span> <span class="n">p50</span> <span class="o">/</span> <span class="nb">max</span> <span class="o">/</span> <span class="n">avg</span><span class="p">):</span>
+<span class="mf">0.544250</span> <span class="o">/</span> <span class="mf">0.713338</span> <span class="o">/</span> <span class="mf">0.779739</span> <span class="o">/</span> <span class="mf">0.847867</span> <span class="o">/</span> <span class="mf">0.952591</span> <span class="o">/</span> <span class="mf">0.841576</span>
+<span class="n">avg</span> <span class="n">alloc</span> <span class="n">time</span><span class="p">:</span> <span class="mf">145.575738</span> <span class="n">ns</span><span class="o">/</span><span class="n">op</span>
+</pre></div>
+</div>
+<p><strong>OffsetAllocator (Before Optimization)</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">util</span> <span class="n">ratio</span> <span class="p">(</span><span class="nb">min</span> <span class="o">/</span> <span class="n">p99</span> <span class="o">/</span> <span class="n">p90</span> <span class="o">/</span> <span class="n">p50</span> <span class="o">/</span> <span class="nb">max</span> <span class="o">/</span> <span class="n">avg</span><span class="p">):</span>
+<span class="mf">0.569255</span> <span class="o">/</span> <span class="mf">0.712076</span> <span class="o">/</span> <span class="mf">0.781224</span> <span class="o">/</span> <span class="mf">0.855046</span> <span class="o">/</span> <span class="mf">0.976057</span> <span class="o">/</span> <span class="mf">0.848873</span>
+<span class="n">avg</span> <span class="n">alloc</span> <span class="n">time</span><span class="p">:</span> <span class="mf">142.508508</span> <span class="n">ns</span><span class="o">/</span><span class="n">op</span>
+</pre></div>
+</div>
+<p><strong>OffsetAllocator (Before Optimization)</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">util</span> <span class="n">ratio</span> <span class="p">(</span><span class="nb">min</span> <span class="o">/</span> <span class="n">p99</span> <span class="o">/</span> <span class="n">p90</span> <span class="o">/</span> <span class="n">p50</span> <span class="o">/</span> <span class="nb">max</span> <span class="o">/</span> <span class="n">avg</span><span class="p">):</span>
+<span class="mf">0.569255</span> <span class="o">/</span> <span class="mf">0.712076</span> <span class="o">/</span> <span class="mf">0.781224</span> <span class="o">/</span> <span class="mf">0.855046</span> <span class="o">/</span> <span class="mf">0.976057</span> <span class="o">/</span> <span class="mf">0.848873</span>
+<span class="n">avg</span> <span class="n">alloc</span> <span class="n">time</span><span class="p">:</span> <span class="mf">142.508508</span> <span class="n">ns</span><span class="o">/</span><span class="n">op</span>
+</pre></div>
+</div>
+</section>
+<section id="paired-kv-indexer-allocation-benchmark-dsa">
+<h3>Paired KV/Indexer Allocation Benchmark (DSA)<a class="headerlink" href="#paired-kv-indexer-allocation-benchmark-dsa" title="Link to this heading">#</a></h3>
+<p>In the DSA scenario, Mooncake Store stores both KV cache objects and indexer objects.
+We evaluated OffsetAllocator under a paired allocation workload using object sizes derived from a GLM-5.1-FP8 DSA serving configuration.</p>
+<p>In this configuration, Mooncake Store stores data at the page granularity, where each page contains 64 tokens. Therefore, the object sizes observed by the allocator are the packed page-level sizes rather than the per-token sizes:</p>
+<ul class="simple">
+<li><p>KV cache object size: 3.12 MB</p></li>
+<li><p>Indexer object size: 643 KB</p></li>
+</ul>
+<p>Each benchmark round samples <code class="docutils literal notranslate"><span class="pre">N</span></code> uniformly from <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">128]</span></code>, then issues <code class="docutils literal notranslate"><span class="pre">N</span></code> KV cache allocations followed by <code class="docutils literal notranslate"><span class="pre">N</span></code> indexer allocations. The pool size is 1024 GB. On allocation failure, the benchmark randomly evicts 5% of all live objects and retries. The utilization ratio below is sampled only when eviction is triggered, immediately before evicting objects.</p>
+<p><strong>OffsetAllocator</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">util</span> <span class="n">ratio</span> <span class="p">(</span><span class="nb">min</span> <span class="o">/</span> <span class="n">p99</span> <span class="o">/</span> <span class="n">p90</span> <span class="o">/</span> <span class="n">p50</span> <span class="o">/</span> <span class="nb">max</span> <span class="o">/</span> <span class="n">avg</span><span class="p">):</span>
+<span class="mf">0.951814</span> <span class="o">/</span> <span class="mf">0.951879</span> <span class="o">/</span> <span class="mf">0.952077</span> <span class="o">/</span> <span class="mf">0.952382</span> <span class="o">/</span> <span class="mf">0.952621</span> <span class="o">/</span> <span class="mf">0.952343</span>
+<span class="n">eviction</span><span class="o">-</span><span class="n">trigger</span> <span class="n">samples</span><span class="p">:</span> <span class="mi">243</span>
+<span class="n">avg</span> <span class="n">alloc</span> <span class="n">time</span><span class="p">:</span> <span class="mf">352.207986</span> <span class="n">ns</span><span class="o">/</span><span class="n">op</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="storage-benchmark.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mooncake KVCache Storage Benchmark</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="allocation-strategy-benchmark-result.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AllocationStrategy Performance</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offsetallocator">OffsetAllocator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution">Execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result">Result</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-size-size-equals-power-of-2">Uniform size, size equals power of 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-size-size-equals-power-of-2-17">Uniform size, size equals power of 2 +/- 17</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-size-size-equals-power-of-2-multiply-0-9-or-1-1">Uniform size, size equals power of 2 multiply 0.9 or 1.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-size">Random Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paired-kv-indexer-allocation-benchmark-dsa">Paired KV/Indexer Allocation Benchmark (DSA)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

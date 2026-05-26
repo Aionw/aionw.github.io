@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>编译指南 &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh_archive/build';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/zh_archive/build.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh_archive/build.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>编译指南</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">自动安装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">建议版本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">步骤</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">手动安装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">建议版本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">编译步骤</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">高级编译选项</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-mooncake">在 Docker 容器中使用 Mooncake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">在宿主机中运行容器</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine">进入容器后，运行 transfer engine 示例</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>编译指南<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>本文档叙述了 Mooncake 框架的源码编译安装方法。</p>
+<ul>
+<li><p>注意:</p>
+<ul>
+<li><p>我们已经为 Ubuntu 22.04/24.04 预先构建了 pypi 安装包，您可以使用 pip/pip3 以更简单的方式安装和使用 mooncake。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>mooncake-transfer-engine<span class="w"> </span>--upgrade
+</pre></div>
+</div>
+</li>
+<li><p>从版本0.3.7开始，PyPi 源的 wheel 包要求用户环境已安装 cuda，如果您的环境报如下错误：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Traceback<span class="w"> </span><span class="o">(</span>most<span class="w"> </span>recent<span class="w"> </span>call<span class="w"> </span>last<span class="o">)</span>:
+File<span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w"> </span>ImportError:<span class="w"> </span>libcudart.so.12:<span class="w"> </span>cannot<span class="w"> </span>open<span class="w"> </span>shared<span class="w"> </span>object<span class="w"> </span>file:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+</pre></div>
+</div>
+<p>请切换安装如下 PyPI 源的 wheel 包:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>mooncake-transfer-engine-non-cuda
+</pre></div>
+</div>
+<p>或者请附带 <code class="docutils literal notranslate"><span class="pre">-DUSE_CUDA=OFF</span></code> 使用源码编译安装。</p>
+</li>
+</ul>
+</li>
+</ul>
+<section id="id2">
+<h2>自动安装<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>建议版本<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>OS: Ubuntu 22.04 LTS+</p></li>
+<li><p>cmake: 3.20.x</p></li>
+<li><p>gcc: 9.4+</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>步骤<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>安装依赖项（需要稳定的网络连接）：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>dependencies.sh
+</pre></div>
+</div>
+</li>
+<li><p>在项目根目录下运行以下命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..
+make<span class="w"> </span>-j
+</pre></div>
+</div>
+</li>
+<li><p>安装 Mooncake python 包和 mooncake_master 可执行文件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="id5">
+<h2>手动安装<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3>建议版本<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>cmake: 3.22.x</p></li>
+<li><p>boost-devel: 1.66.x</p></li>
+<li><p>grpc: 1.27.x</p></li>
+<li><p>googletest: 1.12.x</p></li>
+<li><p>gcc: 10.2.1</p></li>
+<li><p>go: 1.22+</p></li>
+<li><p>hiredis</p></li>
+<li><p>curl</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>编译步骤<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>通过系统源下载安装下列第三方库：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For debian/ubuntu</span>
+apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>libibverbs-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>libgoogle-glog-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>libgtest-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>libjsoncpp-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>libnuma-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>libcurl4-openssl-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>libhiredis-dev
+
+<span class="c1"># For centos/alibaba linux os</span>
+yum<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>gflags-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>glog-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>libibverbs-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>numactl-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>gtest<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>gtest-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>boost-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>openssl-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>hiredis-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>libcurl-devel
+</pre></div>
+</div>
+<p>注意：如果源没有gtest, glog, gflags, 则需要通过源码安装</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/gflags/gflags
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/google/glog
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/abseil/googletest.git
+</pre></div>
+</div>
+</li>
+<li><p>如果你要编译Nvidia GPUDirect 支持模块，首先需按照 https://docs.nvidia.com/cuda/cuda-installation-guide-linux/ 的指引安装 CUDA (确保启用 <code class="docutils literal notranslate"><span class="pre">nvidia-fs</span></code> 以正确编译 <code class="docutils literal notranslate"><span class="pre">cuFile</span></code> 模块)。之后:</p>
+<ol class="arabic simple">
+<li><p>配置 <code class="docutils literal notranslate"><span class="pre">LIBRARY_PATH</span></code> 和 <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> 以确保编译过程期间链入 <code class="docutils literal notranslate"><span class="pre">cuFile</span></code>, <code class="docutils literal notranslate"><span class="pre">cudart</span></code> 等库:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LIBRARY_PATH</span>:/usr/local/cuda/lib64
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib64
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>注意：</strong> Mooncake 可以使用 DMA-BUF 路径进行 GPU-Direct RDMA，<strong>无需</strong> <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> 内核模块。如需使用 DMA-BUF 路径，请在启动 Mooncake 前设置运行时环境变量 <code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM=0</span></code>。如果偏好依赖 <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> 的传统 <code class="docutils literal notranslate"><span class="pre">ibv_reg_mr</span></code> 路径，请设置运行时环境变量 <code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM=1</span></code>。安装 <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> 的说明见 https://docs.nvidia.com/cuda/gpudirect-rdma/ 第 3.7 节。</p>
+</div></blockquote>
+</li>
+<li><p>如果你要编译Moore Threads GPUDirect RDMA 支持模块，首先需按照 https://docs.mthreads.com/musa-sdk/musa-sdk-doc-online/install_guide 的指引安装 MUSA SDK。之后:</p>
+<ol class="arabic simple">
+<li><p>安装 <code class="docutils literal notranslate"><span class="pre">mthreads-peermem</span></code> 以启用 GPU-Direct RDMA</p></li>
+<li><p>配置 <code class="docutils literal notranslate"><span class="pre">LIBRARY_PATH</span></code> 和 <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> 以确保编译过程期间链入 <code class="docutils literal notranslate"><span class="pre">musart</span></code> 等库:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LIBRARY_PATH</span>:/usr/local/musa/lib
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/musa/lib
+</pre></div>
+</div>
+</li>
+<li><p>若需编译寒武纪 MLU 支持，请先安装寒武纪 Neuware SDK。之后：</p>
+<ol class="arabic simple">
+<li><p>导出 <code class="docutils literal notranslate"><span class="pre">NEUWARE_HOME</span></code>，或在 CMake 中传入 <code class="docutils literal notranslate"><span class="pre">-DNEUWARE_ROOT=/path/to/neuware</span></code></p></li>
+<li><p>配置 <code class="docutils literal notranslate"><span class="pre">LIBRARY_PATH</span></code> 与 <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>，确保编译时能链接 <code class="docutils literal notranslate"><span class="pre">cnrt</span></code>、<code class="docutils literal notranslate"><span class="pre">cndrv</span></code> 等 Neuware 库：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">NEUWARE_HOME</span><span class="o">=</span>/usr/local/neuware
+<span class="nb">export</span><span class="w"> </span><span class="nv">LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LIBRARY_PATH</span>:<span class="si">${</span><span class="nv">NEUWARE_HOME</span><span class="si">}</span>/lib64
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:<span class="si">${</span><span class="nv">NEUWARE_HOME</span><span class="si">}</span>/lib64
+</pre></div>
+</div>
+<p>若 Neuware 安装路径与默认头文件/库布局不一致，还可显式指定：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>..<span class="w"> </span>-DUSE_MLU<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-DMLU_INCLUDE_DIR<span class="o">=</span>/path/to/neuware/include<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-DMLU_LIB_DIR<span class="o">=</span>/path/to/neuware/lib64
+</pre></div>
+</div>
+<p>启用 MLU 后端示例：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>..<span class="w"> </span>-DUSE_MLU<span class="o">=</span>ON<span class="w"> </span>-DNEUWARE_ROOT<span class="o">=</span><span class="si">${</span><span class="nv">NEUWARE_HOME</span><span class="k">:-</span><span class="p">/usr/local/neuware</span><span class="si">}</span>
+make<span class="w"> </span>-j
+</pre></div>
+</div>
+</li>
+<li><p>若需编译沐曦 MetaX MACA 支持（如 C500），请安装 MACA SDK，使头文件与库位于 <code class="docutils literal notranslate"><span class="pre">MACA_ROOT</span></code>（优先取 <code class="docutils literal notranslate"><span class="pre">MACA_HOME</span></code> 环境变量，未设置时默认 <code class="docutils literal notranslate"><span class="pre">/opt/maca</span></code>）。不同安装包可能把库放在 <code class="docutils literal notranslate"><span class="pre">lib</span></code> 或 <code class="docutils literal notranslate"><span class="pre">lib64</span></code>，建议在环境变量中同时加入两者，避免链接或运行时找不到共享库：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MACA_HOME</span><span class="o">=</span>/opt/maca
+<span class="nb">export</span><span class="w"> </span><span class="nv">LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LIBRARY_PATH</span>:<span class="si">${</span><span class="nv">MACA_HOME</span><span class="si">}</span>/lib:<span class="si">${</span><span class="nv">MACA_HOME</span><span class="si">}</span>/lib64
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:<span class="si">${</span><span class="nv">MACA_HOME</span><span class="si">}</span>/lib:<span class="si">${</span><span class="nv">MACA_HOME</span><span class="si">}</span>/lib64
+</pre></div>
+</div>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">-DUSE_MACA=ON</span></code> 配置构建。可选覆盖项：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_ROOT=/path/to/maca</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_INCLUDE_DIR=/path/to/maca/include</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_LIB_DIR=/path/to/maca/lib64</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_RUNTIME_LIBS=&quot;mcruntime;mxc-runtime64;rt&quot;</span></code>（分号分隔的 CMake 列表）</p></li>
+</ul>
+</li>
+<li><p>安装 yalantinglibs</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alibaba/yalantinglibs.git
+<span class="nb">cd</span><span class="w"> </span>yalantinglibs
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..<span class="w"> </span>-DBUILD_EXAMPLES<span class="o">=</span>OFF<span class="w"> </span>-DBUILD_BENCHMARK<span class="o">=</span>OFF<span class="w"> </span>-DBUILD_UNIT_TESTS<span class="o">=</span>OFF
+make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+make<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+<li><p>进入项目根目录，运行下列命令进行编译</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..
+make<span class="w"> </span>-j
+</pre></div>
+</div>
+</li>
+<li><p>安装 Mooncake python 包和 mooncake_master 可执行文件</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="id8">
+<h2>高级编译选项<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>在执行 <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span></code> 期间可以使用下列选项指定是否编译 Mooncake 的某些组件。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_CUDA=[ON|OFF]</span></code>: 启用 GPU Direct RDMA 及 NVMe-of 支持</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_MUSA=[ON|OFF]</span></code>: 通过 MUSA 启用对摩尔线程 GPU 的支持</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_MACA=[ON|OFF]</span></code>: 通过 MACA 启用对沐曦 MetaX GPU 的支持。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_ROOT=/path/to/maca</span></code>: 覆盖 MACA SDK 根路径（也支持 <code class="docutils literal notranslate"><span class="pre">MACA_HOME</span></code> 环境变量，默认 <code class="docutils literal notranslate"><span class="pre">/opt/maca</span></code>）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_INCLUDE_DIR=/path/to/include</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_MACA=ON</span></code> 时覆盖 MACA 头文件目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_LIB_DIR=/path/to/lib64</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_MACA=ON</span></code> 时覆盖 MACA 库目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMACA_RUNTIME_LIBS=&quot;mcruntime;mxc-runtime64;rt&quot;</span></code>: 覆盖 <code class="docutils literal notranslate"><span class="pre">transfer_engine</span></code> 链接的 MACA 运行时库列表。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_MLU=[ON|OFF]</span></code>: 通过 Neuware 启用寒武纪 MLU 显存支持。默认 OFF；支持 MLU 显存探测、拓扑发现及 Transfer Engine 的 RDMA 注册。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DNEUWARE_ROOT=/path/to/neuware</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_MLU=ON</span></code> 时覆盖默认 Neuware SDK 根路径；未设置时使用 <code class="docutils literal notranslate"><span class="pre">NEUWARE_HOME</span></code> 或 <code class="docutils literal notranslate"><span class="pre">/usr/local/neuware</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DMLU_INCLUDE_DIR=/path/to/include</span></code> / <code class="docutils literal notranslate"><span class="pre">-DMLU_LIB_DIR=/path/to/lib64</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_MLU=ON</span></code> 时覆盖 Neuware 头文件与库目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_HIP=[ON|OFF]</span></code>: 通过 HIP/ROCm 启用对 AMD GPU 的支持</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_HYGON=[ON|OFF]</span></code>: 通过 DTK SDK 启用对海光 DCU 的支持。默认 OFF；使用 CUDA 兼容运行时。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DDTK_ROOT=/path/to/dtk</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_HYGON=ON</span></code> 时覆盖默认 DTK SDK 根路径；未设置时使用 <code class="docutils literal notranslate"><span class="pre">DTK_HOME</span></code> 或 <code class="docutils literal notranslate"><span class="pre">/opt/dtk</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DDTK_INCLUDE_DIR=/path/to/include</span></code> / <code class="docutils literal notranslate"><span class="pre">-DDTK_LIB_DIR=/path/to/lib64</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_HYGON=ON</span></code> 时覆盖 DTK 头文件与库目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_COREX=[ON|OFF]</span></code>: 启用对天数智芯 CoreX GPU 的支持。默认 OFF；使用 CUDA 兼容运行时。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCOREX_ROOT=/path/to/corex</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_COREX=ON</span></code> 时覆盖默认 CoreX SDK 根路径；未设置时使用 <code class="docutils literal notranslate"><span class="pre">COREX_HOME</span></code> 或 <code class="docutils literal notranslate"><span class="pre">/usr/local/corex</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCOREX_INCLUDE_DIR=/path/to/include</span></code> / <code class="docutils literal notranslate"><span class="pre">-DCOREX_LIB_DIR=/path/to/lib</span></code>: 在 <code class="docutils literal notranslate"><span class="pre">-DUSE_COREX=ON</span></code> 时覆盖 CoreX 头文件与库目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_CXL=[ON|OFF]</span></code>: 启用 CXL 支持</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DWITH_STORE=[ON|OFF]</span></code>: 编译 Mooncake Store 组件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DWITH_P2P_STORE=[ON|OFF]</span></code>: 启用 Golang 支持并编译 P2P Store 组件，需要 go 1.23+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DWITH_RUST_EXAMPLE=[ON|OFF]</span></code>: 编译 Transfer Engine Rust 接口与示例代码，默认关闭。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DWITH_STORE_RUST=[ON|OFF]</span></code>: 编译 Mooncake Store Rust 绑定和 CMake Rust targets，默认开启。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_REDIS=[ON|OFF]</span></code>: 启用基于 Redis 的元数据服务</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_HTTP=[ON|OFF]</span></code>: 启用基于 Http 的元数据服务</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_ETCD=[ON|OFF]</span></code>: 启用基于 etcd 的元数据服务，需要 go 1.23+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DSTORE_USE_ETCD=[ON|OFF]</span></code>: 启用基于 etcd 的 Mooncake Store 容错机制，需要 go 1.23+。<strong>注意：</strong> <code class="docutils literal notranslate"><span class="pre">-DUSE_ETCD</span></code> 和 <code class="docutils literal notranslate"><span class="pre">-DSTORE_USE_ETCD</span></code> 是两个相互独立的选项。启用 <code class="docutils literal notranslate"><span class="pre">-DSTORE_USE_ETCD</span></code> 并<strong>不依赖</strong>于 <code class="docutils literal notranslate"><span class="pre">-DUSE_ETCD</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DBUILD_SHARED_LIBS=[ON|OFF]</span></code>: 将 Transfer Engine 编译为共享库，默认为 OFF</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DBUILD_UNIT_TESTS=[ON|OFF]</span></code>: 编译单元测试，默认为 ON</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DBUILD_EXAMPLES=[ON|OFF]</span></code>: 编译示例程序，默认为 ON</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_ASCEND_DIRECT=[ON|OFF]</span></code>: 启用 Ascend Direct RDMA 及 HCCS 支持</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DUSE_MUSA=[ON|OFF]</span></code>: 启用Moore Threads GPUDirect RDMA</p></li>
+</ul>
+</section>
+<section id="docker-mooncake">
+<h2>在 Docker 容器中使用 Mooncake<a class="headerlink" href="#docker-mooncake" title="Link to this heading">#</a></h2>
+<p>Mooncake 支持基于 Docker 的部署。您可以通过以下命令获取 Docker 镜像：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>alogfans/mooncake
+</pre></div>
+</div>
+<p>为了让容器能够使用主机的网络资源（特别是 InfiniBand RDMA），您需要在启动容器时添加 –device 选项。以下是使用示例：</p>
+</section>
+<section id="id9">
+<h2>在宿主机中运行容器<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>--device<span class="o">=</span>/dev/infiniband/uverbs0<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>--device<span class="o">=</span>/dev/infiniband/rdma_cm<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>--ulimit<span class="w"> </span><span class="nv">memlock</span><span class="o">=</span>-1<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>-t<span class="w"> </span>-i<span class="w"> </span>mooncake:v0.9.0<span class="w"> </span>/bin/bash
+</pre></div>
+</div>
+</section>
+<section id="transfer-engine">
+<h2>进入容器后，运行 transfer engine 示例<a class="headerlink" href="#transfer-engine" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/app/build/mooncake-transfer-engine/example
+./transfer_engine_bench<span class="w"> </span>--device_name<span class="o">=</span>ibp6s0<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>--metadata_server<span class="o">=</span><span class="m">10</span>.1.101.3:2379<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>--mode<span class="o">=</span>target<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>--local_server_name<span class="o">=</span><span class="m">10</span>.1.100.3
+</pre></div>
+</div>
+<p>注意事项：</p>
+<p>–device 参数将宿主机的 RDMA 设备映射到容器内</p>
+<p>–ulimit memlock=-1 解除内存锁定限制，RDMA 操作需要</p>
+<p>–net=host 让容器使用宿主机的网络命名空间</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">自动安装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">建议版本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">步骤</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">手动安装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">建议版本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">编译步骤</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">高级编译选项</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-mooncake">在 Docker 容器中使用 Mooncake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">在宿主机中运行容器</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine">进入容器后，运行 transfer engine 示例</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

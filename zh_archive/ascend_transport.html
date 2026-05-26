@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ascend Transport &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh_archive/ascend_transport';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/zh_archive/ascend_transport.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh_archive/ascend_transport.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ascend Transport</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">新增依赖</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">一键式编译脚本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">注意事项（必看）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake">一键式安装脚本(不编译Mooncake)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">编译说明</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">端点管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ranktable">Ranktable管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">初始化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">metadata服务</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">数据传输</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">故障处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">测试用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">打印说明</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">超时时间配置</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">错误码</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ascend-transport">
+<h1>Ascend Transport<a class="headerlink" href="#ascend-transport" title="Link to this heading">#</a></h1>
+<p>Ascend Transport源代码路径为Mooncake/mooncake-transfer-engine/src/transport/ascend_transport，该路径下还包含自动化编译脚本、README文件。</p>
+<p>**Ascend Transport 已不再维护，昇腾平台推荐使用 <a class="reference internal" href="ascend_direct_transport.html"><span class="std std-doc">Ascend Direct Transport</span></a>. **</p>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Ascend Transport是一个单边语义的高性能零拷贝NPU数据传输库，直接兼容Mooncake Transfer Engine。要编译使用Ascend Transport库，请在mooncake-common\common.cmake文件中将USE_ASCEND开关置于”ON”。</p>
+<p>Ascend Transport支持使用单边语义进行NPU间数据传输（当前版本只支持DEVICE TO DEVICE，其它进行中），用户只需通过Mooncake Transfer Engine接口指定两端传输的节点及内存信息，即可完成点对点高性能传输。Ascend Transport为用户隐去繁琐的内部实现，自动完成一系列如建链、注册和交换内存、检查传输状态等操作。</p>
+<p>Ascend Transport支持Mooncake在transfer_engine_py.cpp中提供的批量传输接口batch_transfer_sync，支持批量传输一组目标端为同一张卡且不连续的内存块，经过测试，在传输小块不连续内存时(如128KB)，使用批量传输接口带宽较使用transferSync接口，带宽提升达到了100%+。</p>
+<section id="id2">
+<h3>新增依赖<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Ascend Transport在Mooncake本身依赖的基础上，新增了一部分HCCL的依赖：
+<strong>MPI</strong>
+yum install -y mpich mpich-devel
+或者
+apt-get install -y mpich libmpich-dev</p>
+<p><strong>昇腾Compute Architecture for Neural Networks</strong>
+更新到昇腾Compute Architecture for Neural Networks 8.2.RC1版本，不再需要pkg包。</p>
+</section>
+<section id="id3">
+<h3>一键式编译脚本<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Ascend Transport提供一键式编译脚本，脚本位置为scripts/ascend/dependencies_ascend.sh,执行命令如下：
+sh scripts/ascend/dependencies_ascend.sh
+一键式编译脚本同样考虑到用户无法直接在环境上git clone的情况，用户可以把需要git clone的依赖项源码和Mooncake的源码放在同一目录中，然后执行脚本，脚本会自动编译依赖项和Mooncake。Mooncake的输出件是libascend_transport_mem.so和mooncake-wheel/dist/mooncake_transfer_engine*.whl包。</p>
+<p>使用ascend_transport前，记得设置环境变量，命令如下：
+export LD_LIBRARY_PATH=/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:$LD_LIBRARY_PATH
+或者把so包复制到$LD_LIBRARY_PATH指向的其它路径下。</p>
+</section>
+<section id="id4">
+<h3>注意事项（必看）<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>1.调用TransferEngine initialize时需要在传入的local_server_name参数中包含运行的NPU物理Id，local_server_name参数从ip:port改为ip:port:npu_x，例如”0.0.0.0:12345:npu_2”，Ascend Transport会在内部解析获取本卡的NPU物理Id。存储在metadata的segment_name以及传输时传入的target_hostname格式不变，仍为ip:port，例如：”0.0.0.0:12345“。</p>
+<p>2.ascend_transport会建立一个host侧的tcp连接，占用端口为10000加上npu的物理Id,若该端口已被占用会自动寻找一个可用端口；</p>
+<p>3.由于内部接口限制，ascend_transport要求注册的内存是NPU内存，且必须2M对齐；</p>
+<p>4.请确保/etc路径下存在文件hccn.conf，特别是在容器内，请挂载/etc/hccn.conf或者把宿主机的文件复制到容器的/etc路径下。</p>
+<p>5.潜在的 MPI 冲突,同时安装 MPI 和 OpenMPI 可能导致冲突。如果遇到与 MPI 相关的问题，请尝试按顺序执行以下命令进行解决：</p>
+<p>sudo apt install mpich libmpich-dev        # 安装 MPICH
+sudo apt purge openmpi-bin libopenmpi-dev  # 卸载 OpenMPI</p>
+<p>6.当前版本不支持IPV6，我们会很快完成针对IPV6的适配。</p>
+</section>
+<section id="mooncake">
+<h3>一键式安装脚本(不编译Mooncake)<a class="headerlink" href="#mooncake" title="Link to this heading">#</a></h3>
+<p>用户如果在一台机器上编译过Mooncake，在其它相同系统的机器上可以不编译Mooncake只安装依赖项，直接使用Mooncake的输出件libascend_transport_mem.so和mooncake whl包。
+用户将whl包、so包和scripts/ascend/dependencies_ascend_installation.sh都放置到同一目录下，执行脚本即可，命令如下：
+./dependencies_ascend_installation.sh</p>
+<p>使用ascend_transport前，记得执行环境变量，命令如下：
+export LD_LIBRARY_PATH=/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:$LD_LIBRARY_PATH
+或者把so包复制到$LD_LIBRARY_PATH指向的其它路径下。</p>
+</section>
+<section id="id5">
+<h3>编译说明<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>在成功安装所有依赖后，正常编译Mooncake即可，如果报错，可尝试设置环境变量：
+export CPLUS_INCLUDE_PATH=$(echo $CPLUS_INCLUDE_PATH | tr ‘:’ ‘\n’ | grep -v “/usr/local/Ascend” | paste -sd: -)</p>
+</section>
+<section id="id6">
+<h3>端点管理<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>每张华为NPU卡拥有一张参数面网卡，对应使用一个TransferEngine管理该NPU卡上所有的传输操作。</p>
+</section>
+<section id="ranktable">
+<h3>Ranktable管理<a class="headerlink" href="#ranktable" title="Link to this heading">#</a></h3>
+<p>Ascend Transport不依赖全局的Ranktable信息，只需要获取当前NPU卡的本地Ranktable信息，在Ascend Transport初始化时会解析/etc/hccn.conf文件自动获取。</p>
+</section>
+<section id="id7">
+<h3>初始化<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>使用Ascend Transport时，TransferEngine 在完成构造后同样需要调用 <code class="docutils literal notranslate"><span class="pre">init</span></code> 函数进行初始化：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TransferEngine</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">TransferEngine</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">metadata_conn_string</span><span class="p">,</span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_server_name</span><span class="p">,</span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ip_or_host_name</span><span class="p">,</span>
+<span class="w">                         </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">rpc_port</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>唯一的区别在于，在TransferEngine init时需要在local_server_name参数中包含TransferEngine所在的NPU物理卡号，local_server_name参数从ip:port改为ip:port:npu_x，例如”0.0.0.0:12345:npu_2”。</p>
+<p><code class="docutils literal notranslate"><span class="pre">注意</span></code>：Ascend Transport只是在不修改Mooncake对外接口的形势下，传入所在的NPU物理卡号，只为Transport内部使用，metadata的segment_desc_name仍然还是原来的形式，即ip:port，因此，每张npu卡的port需要保证互不相同，且端口未被占用。</p>
+</section>
+<section id="metadata">
+<h3>metadata服务<a class="headerlink" href="#metadata" title="Link to this heading">#</a></h3>
+<p>Ascend Transport兼容所有Mooncake当前支持的metadata服务，包括 etcd, redis 和 http，以及p2phandshake。Ascend Transport在初始化时会注册当前NPU卡的一系列信息，包括device_id\device_ip\rank_id\server_ip等。</p>
+</section>
+<section id="id8">
+<h3>数据传输<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>Ascend Transport支持write/read语义，且会自动判断是否跨HCCS通信，选择HCCS/ROCE的底层通信协议，用户只需采用Mooncake的getTransferStatus接口即可获取每个请求的传输情况。</p>
+</section>
+<section id="id9">
+<h3>故障处理<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>Ascend Transport在HCCL本身的故障处理基础上，设计了完善的故障处理机制。针对初始化、建链、数据传输等多个阶段可能出现的故障，新增或沿用了失败重试机制。在重试仍然失败后，沿用了HCCL集合通信相关操作错误码，给出精准的报错信息。为获取更详细的错误信息，也可以查询/root/Ascend/log/debug目录下的plog日志。</p>
+</section>
+<section id="id10">
+<h3>测试用例<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>Ascend Transport提供多场景测试文件mooncake-transfer-engine/example/transfer_engine_ascend_one_sided.cpp，可以完成一对一、一对二、二对一多种场景的传输测试，以及性能测试文件mooncake-transfer-engine/example/transfer_engine_ascend_perf.cpp。编译 Transfer Engine 成功后，可在 <code class="docutils literal notranslate"><span class="pre">build/mooncake-transfer-engine/example</span></code> 目录下找到对应的测试程序。执行命令可通过传入参数配置，具体的可配置参数请查看测试文件开头DEFINE_string的参数列表。</p>
+<p>当 metadata_server 配置为 P2PHANDSHAKE 时，Mooncake 会在新的 RPC 端口映射中随机选择监听端口，以避免端口冲突。因此，测试时需要按以下步骤操作：
+1.先启动目标节点，观察其在 mooncake-transfer-engine/src/transfer_engine.cpp 中打印的日志，找到如下格式的语句：
+Transfer Engine RPC using &lt;协议&gt; listening on <IP>:&lt;实际端口&gt;，记录目标节点实际监听的端口号。
+2.修改发起节点的启动命令：
+将 –segment_id 参数的值改为目标节点的 IP + 实际监听的端口号（格式为 <IP>:&lt;端口&gt;）。
+3.启动发起节点，完成连接测试。</p>
+<p>完整命令格式见下文：</p>
+<p>多场景用例执行命令如：
+<code class="docutils literal notranslate"><span class="pre">启动发起节点：</span></code>
+./transfer_engine_ascend_one_sided –metadata_server=P2PHANDSHAKE –local_server_name=10.0.0.0:12345 –protocol=hccl –operation=write –segment_id=10.0.0.0:12346 –device_id=0 –mode=initiator –block_size=8388608 –batch_size=32
+<code class="docutils literal notranslate"><span class="pre">启动目标节点：</span></code>
+./transfer_engine_ascend_one_sided –metadata_server=P2PHANDSHAKE –local_server_name=10.0.0.0:12346 –protocol=hccl –operation=write –device_id=1 –mode=target –block_size=8388608 –batch_size=32</p>
+<p>性能用例执行命令如：
+<code class="docutils literal notranslate"><span class="pre">启动发起节点：</span></code>
+./transfer_engine_ascend_perf –metadata_server=P2PHANDSHAKE –local_server_name=10.0.0.0:12345 –protocol=hccl –operation=write –segment_id=10.0.0.0:12346 –device_id=0 –mode=initiator –block_size=16384 –batch_size=32 –block_iteration=10
+<code class="docutils literal notranslate"><span class="pre">启动目标节点：</span></code>
+./transfer_engine_ascend_perf –metadata_server=P2PHANDSHAKE –local_server_name=10.0.0.0:12346 –protocol=hccl –operation=write –device_id=1 –mode=target –block_size=16384 –batch_size=32 –block_iteration=10</p>
+<p>需要注意的是，上面传入的device_id既代表NPU逻辑id也代表物理id，如果您在容器里没有挂载所有的卡，使用上面的demo时请分别传入逻辑id和物理id，即–device_id改为–device_logicid和–device_phyid，如容器内只挂载了5卡和7卡，5卡为发起端，7卡为接收端，多场景用例执行命令改为：
+<code class="docutils literal notranslate"><span class="pre">启动发起节点：</span></code>
+./transfer_engine_ascend_one_sided –metadata_server=P2PHANDSHAKE –local_server_name=10.0.0.0:12345 –protocol=hccl –operation=write –segment_id=10.0.0.0:12346 –device_logicid=0 –device_phyid=5 –mode=initiator –block_size=8388608
+<code class="docutils literal notranslate"><span class="pre">启动目标节点：</span></code>
+./transfer_engine_ascend_one_sided –metadata_server=P2PHANDSHAKE –local_server_name=10.0.0.0:12346 –protocol=hccl –operation=write –device_logicid=1 –device_phyid=7 –mode=target –block_size=8388608</p>
+</section>
+<section id="id11">
+<h3>打印说明<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>如果需要得到每个传输request请求是否跨hccs和耗时情况，可以通过设置环境变量打开相关打印，命令如下：
+export ASCEND_TRANSPORT_PRINT=1</p>
+</section>
+<section id="id12">
+<h3>超时时间配置<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>Ascend Transport基于TCP的带外通信，连接的超时时间通过环境变量Ascend_TCP_TIMEOUT配置，默认为30秒，在主机侧recv接收超时设置为30秒，即recv阻塞超过30s未收到对端的消息会报错。</p>
+<p>hccl_socket的连接超时时间通过环境变量Ascend_HCCL_SOCKET_TIMEOUT配置，默认为30秒，超时则本次传输会报错并返回。</p>
+<p>hccl_socket有保活要求，执行超时通过环境变量HCCL_EXEC_TIMEOUT配置，超过HCCL_EXEC_TIMEOUT未进行通信，会断开hccl_socket连接。</p>
+<p>在transport_mem中，端到端之间的点对点通信涉及连接握手过程，其超时时间通过Ascend_TRANSPORT_MEM_TIMEOUT配置，默认为120秒。</p>
+</section>
+<section id="id13">
+<h3>错误码<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>Ascend传输错误码沿用HCCL集合通信传输错误码。
+typedef enum {
+HCCL_SUCCESS = 0,       /* 成功 <em>/
+HCCL_E_PARA = 1,        /</em> 参数错误 <em>/
+HCCL_E_PTR = 2,         /</em> 空指针，检查是否多次执行了如 notifypool-&gt;reset 之类的操作，导致指针被清除 <em>/
+HCCL_E_MEMORY = 3,      /</em> 内存错误 <em>/
+HCCL_E_INTERNAL = 4,    /</em> 内部错误，常见原因：内存未注册、内存注册错误、内存注册首地址未2M对齐、内存未成功交换。检查传输的内存是否在已注册内存范围内。
+在多机场景下，检查启动脚本是否混用 <em>/
+HCCL_E_NOT_SUPPORT = 5, /</em> 不支持该特性 <em>/
+HCCL_E_NOT_FOUND = 6,   /</em> 特定资源未找到 <em>/
+HCCL_E_UNAVAIL = 7,     /</em> 资源不可用 <em>/
+HCCL_E_SYSCALL = 8,     /</em> 调用系统接口出错，优先检查初始化参数是否正确传递 <em>/
+HCCL_E_TIMEOUT = 9,     /</em> 超时 <em>/
+HCCL_E_OPEN_FILE_FAILURE = 10, /</em> 打开文件失败 <em>/
+HCCL_E_TCP_CONNECT = 11, /</em> tcp 连接失败，连接失败，仅限于检查两端的端口以及连通性 <em>/
+HCCL_E_ROCE_CONNECT = 12, /</em> roce 连接失败，连接失败，仅限于检查两端的端口以及连通性 <em>/
+HCCL_E_TCP_TRANSFER = 13, /</em> tcp 传输失败，检查端口是否正确以及 SOCKET 是否混用 <em>/
+HCCL_E_ROCE_TRANSFER = 14, /</em> roce 传输失败 <em>/
+HCCL_E_RUNTIME = 15,      /</em> 调用运行时 api 失败，检查传输时传入的 transportmem 相关参数 <em>/
+HCCL_E_DRV = 16,          /</em> 调用驱动 api 失败 <em>/
+HCCL_E_PROFILING = 17,    /</em> 调用 profiling api 失败 <em>/
+HCCL_E_CCE = 18,          /</em> 调用 cce api 失败 <em>/
+HCCL_E_NETWORK = 19,      /</em> 调用网络 api 失败 <em>/
+HCCL_E_AGAIN = 20,        /</em> 操作重复，在某些情况下不是错误。例如，多次注册同一内存时，会直接返回第一次注册的句柄。如果不影响功能，则视为成功 <em>/
+HCCL_E_REMOTE = 21,       /</em> 错误的 cqe <em>/
+HCCL_E_SUSPENDING = 22,   /</em> 错误的通信挂起 <em>/
+HCCL_E_RESERVED           /</em> 保留 */
+} HcclResult;</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">新增依赖</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">一键式编译脚本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">注意事项（必看）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake">一键式安装脚本(不编译Mooncake)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">编译说明</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">端点管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ranktable">Ranktable管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">初始化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">metadata服务</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">数据传输</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">故障处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">测试用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">打印说明</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">超时时间配置</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">错误码</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1038 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SSD Offload &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deployment/ssd-offload';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Observability" href="../getting_started/observability.html" />
+    <link rel="prev" title="Mooncake Store" href="mooncake-store-deployment-guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="mooncake-store-deployment-guide.html">Mooncake Store</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">SSD Offload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html">Mooncake HF3FS Plugin (Experimental)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/deployment/ssd-offload.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/deployment/ssd-offload.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SSD Offload</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#startup-steps">Startup Steps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-create-the-ssd-storage-directory">Step 1: Create the SSD storage directory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-start-the-master">Step 2: Start the master</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3a-mode-a-start-the-application-with-embedded-real-client">Step 3A (Mode A): Start the application with embedded Real Client</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3b-mode-b-start-the-standalone-real-client-with-ssd-offload-enabled-and-connect-it-with-the-dummy-client">Step 3B (Mode B): Start the standalone real client with SSD offload enabled and connect it with the dummy client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-client-parameters">Real Client Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssd-offload-configuration">SSD Offload Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-settings">Core settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-backend-settings">Bucket backend settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-per-key-backend-settings">File-per-key backend settings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-backends">Storage Backends</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-storage-backend-recommended"><code class="docutils literal notranslate"><span class="pre">bucket_storage_backend</span></code> (recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-per-key-storage-backend"><code class="docutils literal notranslate"><span class="pre">file_per_key_storage_backend</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offset-allocator-storage-backend"><code class="docutils literal notranslate"><span class="pre">offset_allocator_storage_backend</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-bucket-backend-only">Eviction (Bucket Backend Only)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-master">Start the master</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-real-client-new-terminal">Start the real client (new terminal)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ssd-offload-is-not-triggering">SSD offload is not triggering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permission-denied-or-no-such-file-or-directory-on-the-storage-path">“Permission denied” or “No such file or directory” on the storage path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#failed-to-register-buffer-with-uringfile-warning-in-logs">“Failed to register buffer with UringFile” warning in logs</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ssd-offload">
+<h1>SSD Offload<a class="headerlink" href="#ssd-offload" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Mooncake Store supports offloading KV cache objects from distributed memory to local SSD. When memory pressure is high, the master instructs clients to persist selected objects to disk. On a cache miss, the client automatically falls back to reading from SSD.</p>
+<p>SSD offload requires the <strong>Real Client</strong> and supports two deployment modes:</p>
+<ul class="simple">
+<li><p><strong>Mode A: Embedded Real Client</strong> — the Python process embeds the Real Client, and SSD offload runs inside the Python process.</p></li>
+<li><p><strong>Mode B: Standalone Real Client + DummyClient</strong> — a standalone <code class="docutils literal notranslate"><span class="pre">mooncake_client</span></code> process runs SSD offload, and the Python process connects via a DummyClient.</p></li>
+</ul>
+<p>In both modes, all SSD reads and writes happen within the Real Client (embedded or standalone).</p>
+</section>
+<section id="startup-steps">
+<h2>Startup Steps<a class="headerlink" href="#startup-steps" title="Link to this heading">#</a></h2>
+<section id="step-1-create-the-ssd-storage-directory">
+<h3>Step 1: Create the SSD storage directory<a class="headerlink" href="#step-1-create-the-ssd-storage-directory" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>/nvme/mooncake_offload
+</pre></div>
+</div>
+</section>
+<section id="step-2-start-the-master">
+<h3>Step 2: Start the master<a class="headerlink" href="#step-2-start-the-master" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--rpc_port<span class="o">=</span><span class="m">50051</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--enable_offload<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3a-mode-a-start-the-application-with-embedded-real-client">
+<h3>Step 3A (Mode A): Start the application with embedded Real Client<a class="headerlink" href="#step-3a-mode-a-start-the-application-with-embedded-real-client" title="Link to this heading">#</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">--enable_ssd_offload</span></code> flag to enable SSD offload, and set environment variables to specify the storage path and backend:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake.store</span><span class="w"> </span><span class="kn">import</span> <span class="n">MooncakeDistributedStore</span>
+
+<span class="n">store</span> <span class="o">=</span> <span class="n">MooncakeDistributedStore</span><span class="p">()</span>
+<span class="n">store</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
+    <span class="n">local_hostname</span><span class="o">=</span><span class="s2">&quot;&lt;machine IP&gt;&quot;</span><span class="p">,</span>
+    <span class="n">metadata_server</span><span class="o">=</span><span class="s2">&quot;P2PHANDSHAKE&quot;</span><span class="p">,</span>
+    <span class="n">global_segment_size</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># 4 GB</span>
+    <span class="n">local_buffer_size</span><span class="o">=</span><span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># 512 MB</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;rdma&quot;</span><span class="p">,</span>
+    <span class="n">rdma_devices</span><span class="o">=</span><span class="s2">&quot;eth0&quot;</span><span class="p">,</span>
+    <span class="n">master_server_addr</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:50051&quot;</span><span class="p">,</span>
+    <span class="n">enable_ssd_offload</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">ssd_offload_path</span><span class="o">=</span><span class="s2">&quot;/nvme/mooncake_offload&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3b-mode-b-start-the-standalone-real-client-with-ssd-offload-enabled-and-connect-it-with-the-dummy-client">
+<h3>Step 3B (Mode B): Start the standalone real client with SSD offload enabled and connect it with the dummy client<a class="headerlink" href="#step-3b-mode-b-start-the-standalone-real-client-with-ssd-offload-enabled-and-connect-it-with-the-dummy-client" title="Link to this heading">#</a></h3>
+<p>Set the same SSD offload environment variables as in Mode A.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span><span class="o">=</span>/nvme/mooncake_offload
+<span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_STORAGE_BACKEND_DESCRIPTOR</span><span class="o">=</span>bucket_storage_backend
+
+mooncake_client<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master_server_address<span class="o">=</span><span class="m">127</span>.0.0.1:50051<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="o">=</span>&lt;machine<span class="w"> </span>IP&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span><span class="s2">&quot;rdma&quot;</span><span class="w">  </span><span class="se">\</span>
+<span class="w">    </span>--device_names<span class="o">=</span>&lt;NIC<span class="w"> </span>name,<span class="w"> </span>e.g.<span class="w"> </span>eth0&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="o">=</span><span class="m">50052</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global_segment_size<span class="o">=</span><span class="s2">&quot;4 GB&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--enable_offload<span class="o">=</span><span class="nb">true</span><span class="w">  </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span><span class="s2">&quot;P2PHANDSHAKE&quot;</span>
+</pre></div>
+</div>
+<p>The application (e.g., SGLang) connects to the standalone real client via the <code class="docutils literal notranslate"><span class="pre">MooncakeDistributedStore</span></code> Python SDK. The Python process acts as a DummyClient; SSD offload and fallback loading are handled by the standalone real client process.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake.store</span><span class="w"> </span><span class="kn">import</span> <span class="n">MooncakeDistributedStore</span>
+
+<span class="n">store</span> <span class="o">=</span> <span class="n">MooncakeDistributedStore</span><span class="p">()</span>
+<span class="n">store</span><span class="o">.</span><span class="n">setup_dummy</span><span class="p">(</span>
+    <span class="n">mem_pool_size</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># 4 GB</span>
+    <span class="n">local_buffer_size</span><span class="o">=</span><span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># 512 MB</span>
+    <span class="n">server_address</span><span class="o">=</span><span class="s2">&quot;&lt;machine IP&gt;:50052&quot;</span>   <span class="c1"># mooncake_client RPC address from Step 3</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> When using <code class="docutils literal notranslate"><span class="pre">bucket_storage_backend</span></code> or <code class="docutils literal notranslate"><span class="pre">file_per_key_storage_backend</span></code>, the real client scans existing SSD metadata on startup and reports it to the master automatically. <code class="docutils literal notranslate"><span class="pre">offset_allocator_storage_backend</span></code> is the exception: it truncates its data file during initialization and does not recover previously offloaded objects after a restart.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="real-client-parameters">
+<h2>Real Client Parameters<a class="headerlink" href="#real-client-parameters" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Flag</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--metadata_server</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/metadata</span></code></p></td>
+<td><p>Metadata server connection string</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--master_server_address</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">127.0.0.1:50051</span></code></p></td>
+<td><p>Master address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--host</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
+<td><p>This machine’s externally reachable IP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">50052</span></code></p></td>
+<td><p>Real client RPC listening port</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--device_names</span></code></p></td>
+<td><p><code class="docutils literal notranslate"> </code></p></td>
+<td><p>NIC name(s), e.g. <code class="docutils literal notranslate"><span class="pre">eth0</span></code> or <code class="docutils literal notranslate"><span class="pre">mlx5_0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--protocol</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tcp</span></code></p></td>
+<td><p>Transport protocol: <code class="docutils literal notranslate"><span class="pre">tcp</span></code> or <code class="docutils literal notranslate"><span class="pre">rdma</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--global_segment_size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">GB</span></code></p></td>
+<td><p>Memory pool size allocated for this node</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_offload</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p><strong>Must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable SSD offload</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--threads</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Number of RPC server threads</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="ssd-offload-configuration">
+<h2>SSD Offload Configuration<a class="headerlink" href="#ssd-offload-configuration" title="Link to this heading">#</a></h2>
+<section id="core-settings">
+<h3>Core settings<a class="headerlink" href="#core-settings" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/data/file_storage</span></code></p></td>
+<td><p>Absolute path to the SSD storage directory</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_STORAGE_BACKEND_DESCRIPTOR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bucket_storage_backend</span></code></p></td>
+<td><p>Storage backend type (see below)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_LOCAL_BUFFER_SIZE_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1342177280</span></code> (1.25 GB)</p></td>
+<td><p>Client-side staging buffer size</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_SCANMETA_ITERATOR_KEYS_LIMIT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">20000</span></code></p></td>
+<td><p>Max keys processed per iteration when scanning existing SSD metadata on startup</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_TOTAL_SIZE_LIMIT_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2199023255552</span></code> (2 TB)</p></td>
+<td><p>Maximum disk usage</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_TOTAL_KEYS_LIMIT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10000000</span></code></p></td>
+<td><p>Maximum number of objects on disk</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_HEARTBEAT_INTERVAL_SECONDS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p>Interval for offload heartbeat to master (seconds)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_CLIENT_BUFFER_GC_INTERVAL_SECONDS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Interval for reclaiming expired offload buffers; defaults to the heartbeat interval in the current implementation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_CLIENT_BUFFER_GC_TTL_MS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5000</span></code></p></td>
+<td><p>Lease time for buffers returned by <code class="docutils literal notranslate"><span class="pre">batch_get_offload_object</span></code> before GC reclaims them</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_USE_URING</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Enable io_uring for async file I/O</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="bucket-backend-settings">
+<h3>Bucket backend settings<a class="headerlink" href="#bucket-backend-settings" title="Link to this heading">#</a></h3>
+<p>Applies when <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_STORAGE_BACKEND_DESCRIPTOR=bucket_storage_backend</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_BUCKET_SIZE_LIMIT_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">268435456</span></code> (256 MB)</p></td>
+<td><p>Max size per bucket</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_BUCKET_KEYS_LIMIT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">500</span></code></p></td>
+<td><p>Max keys per bucket</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_BUCKET_MAX_TOTAL_SIZE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>Eviction threshold in bytes. When set to <code class="docutils literal notranslate"><span class="pre">0</span></code>, the backend uses <strong>90% of the physical disk capacity</strong> as the quota — it does not mean unlimited. Set an explicit value to control disk usage precisely.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_BUCKET_EVICTION_POLICY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></td>
+<td><p>Eviction policy: <code class="docutils literal notranslate"><span class="pre">none</span></code> / <code class="docutils literal notranslate"><span class="pre">fifo</span></code> / <code class="docutils literal notranslate"><span class="pre">lru</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="file-per-key-backend-settings">
+<h3>File-per-key backend settings<a class="headerlink" href="#file-per-key-backend-settings" title="Link to this heading">#</a></h3>
+<p>Applies when <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_STORAGE_BACKEND_DESCRIPTOR=file_per_key_storage_backend</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_FSDIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_per_key_dir</span></code></p></td>
+<td><p>Subdirectory name created under <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ENABLE_EVICTION</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Enables local-storage eviction logic for this backend</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="storage-backends">
+<h2>Storage Backends<a class="headerlink" href="#storage-backends" title="Link to this heading">#</a></h2>
+<section id="bucket-storage-backend-recommended">
+<h3><code class="docutils literal notranslate"><span class="pre">bucket_storage_backend</span></code> (recommended)<a class="headerlink" href="#bucket-storage-backend-recommended" title="Link to this heading">#</a></h3>
+<p>Groups multiple objects into bucket files. Reduces filesystem overhead, supports efficient batch I/O, and supports FIFO and LRU eviction.</p>
+<p><strong>File layout:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/nvme/mooncake_offload/
+├── 1710000000000-0.bucket   # data file (multiple KV pairs)
+├── 1710000000000-0.meta     # metadata file
+├── 1710000000001-0.bucket
+└── ...
+</pre></div>
+</div>
+<p>Best for: general-purpose use, large-scale deployments.</p>
+</section>
+<section id="file-per-key-storage-backend">
+<h3><code class="docutils literal notranslate"><span class="pre">file_per_key_storage_backend</span></code><a class="headerlink" href="#file-per-key-storage-backend" title="Link to this heading">#</a></h3>
+<p>Stores each object in an individual file. Simple and easy to inspect, but generates many small files at scale.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_FSDIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_per_key_dir</span></code></p></td>
+<td><p>Subdirectory name under <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span></code> where objects are stored</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_ENABLE_EVICTION</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Enable disk eviction when the total size exceeds the quota</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Best for: debugging or small-scale deployments.</p>
+</section>
+<section id="offset-allocator-storage-backend">
+<h3><code class="docutils literal notranslate"><span class="pre">offset_allocator_storage_backend</span></code><a class="headerlink" href="#offset-allocator-storage-backend" title="Link to this heading">#</a></h3>
+<p>Pre-allocates a single large file and manages offset-based allocation within it. Highest concurrency via 1024-shard metadata.</p>
+<blockquote>
+<div><p><strong>Warning:</strong> This backend does <strong>not</strong> support metadata recovery on restart. On initialization, the data file is truncated and all in-memory metadata is cleared. Any previously offloaded objects become inaccessible after a process restart.</p>
+</div></blockquote>
+<p><strong>Capacity:</strong> <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_TOTAL_SIZE_LIMIT_BYTES</span></code> is used directly as the pre-allocated file size (100%, no safety margin). Unlike <code class="docutils literal notranslate"><span class="pre">bucket_storage_backend</span></code>, there is no separate quota variable — this is the sole disk usage control. Set it below the physical disk capacity to avoid filling the disk; writes are rejected once usage reaches this limit.</p>
+<p>Best for: high-concurrency scenarios with many small objects where restart durability is not required.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="eviction-bucket-backend-only">
+<h2>Eviction (Bucket Backend Only)<a class="headerlink" href="#eviction-bucket-backend-only" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_BUCKET_MAX_TOTAL_SIZE</span></code> is set, the backend automatically evicts buckets before writing new ones if total disk usage would exceed the limit.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Policy</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></td>
+<td><p>No eviction (default); writes fail when disk is full</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fifo</span></code></p></td>
+<td><p>Evict the oldest bucket first</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lru</span></code></p></td>
+<td><p>Evict the least recently read bucket first</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Eviction is two-phase: the bucket is removed from metadata and master is notified first, then in-flight reads are drained before files are deleted.</p>
+</section>
+<hr class="docutils" />
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<p>The following example starts a master and a real client on a single machine.</p>
+<section id="environment">
+<h3>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Machine IP: <code class="docutils literal notranslate"><span class="pre">192.168.1.10</span></code></p></li>
+<li><p>NIC: <code class="docutils literal notranslate"><span class="pre">eth0</span></code></p></li>
+<li><p>SSD mount point: <code class="docutils literal notranslate"><span class="pre">/nvme</span></code></p></li>
+<li><p>Memory pool size: 4 GB (smaller than the total data written, to trigger offload)</p></li>
+</ul>
+</section>
+<section id="start-the-master">
+<h3>Start the master<a class="headerlink" href="#start-the-master" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--rpc_port<span class="o">=</span><span class="m">50051</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--enable_offload<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+</section>
+<section id="start-the-real-client-new-terminal">
+<h3>Start the real client (new terminal)<a class="headerlink" href="#start-the-real-client-new-terminal" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span><span class="o">=</span>/nvme/mooncake_offload
+<span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_STORAGE_BACKEND_DESCRIPTOR</span><span class="o">=</span>bucket_storage_backend
+<span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_BUCKET_MAX_TOTAL_SIZE</span><span class="o">=</span><span class="k">$((</span><span class="m">200</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1024</span><span class="k">))</span><span class="w">  </span><span class="c1"># 200 GB</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_BUCKET_EVICTION_POLICY</span><span class="o">=</span>lru
+
+mooncake_client<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master_server_address<span class="o">=</span><span class="s2">&quot;192.168.1.10:50051&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="o">=</span><span class="s2">&quot;192.168.1.10&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_names<span class="o">=</span><span class="s2">&quot;eth0&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="o">=</span><span class="m">50052</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span><span class="s2">&quot;rdma&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global_segment_size<span class="o">=</span><span class="s2">&quot;4GB&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--enable_offload<span class="o">=</span><span class="s2">&quot;true&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span></code> must be an absolute path to an existing, writable directory. Symbolic links and paths containing <code class="docutils literal notranslate"><span class="pre">..</span></code> are rejected.</p></li>
+<li><p>On real client restart, <code class="docutils literal notranslate"><span class="pre">bucket_storage_backend</span></code> and <code class="docutils literal notranslate"><span class="pre">file_per_key_storage_backend</span></code> scan existing SSD metadata and report it to the master, so previously offloaded objects remain accessible. <code class="docutils literal notranslate"><span class="pre">offset_allocator_storage_backend</span></code> does not support restart recovery.</p></li>
+<li><p>Eviction only notifies the master and deletes local files; objects replicated on other nodes are unaffected.</p></li>
+<li><p>Each machine requires its own real client process. In multi-node deployments, ensure <code class="docutils literal notranslate"><span class="pre">--host</span></code> and <code class="docutils literal notranslate"><span class="pre">--port</span></code> are correctly set so nodes can reach each other.</p></li>
+</ul>
+<p><strong>2-node example:</strong> suppose Node A (<code class="docutils literal notranslate"><span class="pre">192.168.1.10</span></code>) runs the master and Node B (<code class="docutils literal notranslate"><span class="pre">192.168.1.11</span></code>) is a second worker. Both real clients must point to the same master and advertise their own externally reachable IP:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Node A — runs the master and its own real client</span>
+mooncake_master<span class="w"> </span>--rpc_port<span class="o">=</span><span class="m">50051</span><span class="w"> </span>--enable_offload<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="p">&amp;</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span><span class="o">=</span>/nvme/mooncake_offload
+mooncake_client<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master_server_address<span class="o">=</span><span class="s2">&quot;192.168.1.10:50051&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="o">=</span><span class="s2">&quot;192.168.1.10&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">       </span><span class="c1"># externally reachable IP of Node A</span>
+<span class="w">    </span>--device_names<span class="o">=</span><span class="s2">&quot;eth0&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span><span class="s2">&quot;rdma&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span><span class="s2">&quot;P2PHANDSHAKE&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="o">=</span><span class="m">50052</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global_segment_size<span class="o">=</span><span class="s2">&quot;4GB&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--enable_offload<span class="o">=</span><span class="s2">&quot;true&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Node B — real client only; points to the same master on Node A</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span><span class="o">=</span>/nvme/mooncake_offload
+mooncake_client<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master_server_address<span class="o">=</span><span class="s2">&quot;192.168.1.10:50051&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="o">=</span><span class="s2">&quot;192.168.1.11&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">       </span><span class="c1"># externally reachable IP of Node B, NOT 127.0.0.1</span>
+<span class="w">    </span>--device_names<span class="o">=</span><span class="s2">&quot;eth0&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--protocol<span class="o">=</span><span class="s2">&quot;rdma&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metadata_server<span class="o">=</span><span class="s2">&quot;P2PHANDSHAKE&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="o">=</span><span class="m">50052</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--global_segment_size<span class="o">=</span><span class="s2">&quot;4GB&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--enable_offload<span class="o">=</span><span class="s2">&quot;true&quot;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="ssd-offload-is-not-triggering">
+<h3>SSD offload is not triggering<a class="headerlink" href="#ssd-offload-is-not-triggering" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Confirm <code class="docutils literal notranslate"><span class="pre">--enable_offload=true</span></code> is passed to both <code class="docutils literal notranslate"><span class="pre">mooncake_client</span></code> and <code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code>. Both binaries define the same gflags boolean; hyphenated aliases may work, but the underscored spelling matches the source.</p></li>
+<li><p>Check that <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_FILE_STORAGE_PATH</span></code> points to an existing, writable directory. If the path is invalid, real client setup fails during <code class="docutils literal notranslate"><span class="pre">FileStorageConfig::Validate()</span></code>.</p></li>
+<li><p>Verify memory pressure is actually high enough for the master to trigger offload. If the memory pool (<code class="docutils literal notranslate"><span class="pre">--global_segment_size</span></code>) is large relative to the data written, offload may never activate.</p></li>
+</ul>
+</section>
+<section id="permission-denied-or-no-such-file-or-directory-on-the-storage-path">
+<h3>“Permission denied” or “No such file or directory” on the storage path<a class="headerlink" href="#permission-denied-or-no-such-file-or-directory-on-the-storage-path" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ensure the directory exists before starting the client: <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">&lt;path&gt;</span></code>.</p></li>
+<li><p>Confirm the process user has read/write access to the directory.</p></li>
+<li><p>Symbolic links and paths containing <code class="docutils literal notranslate"><span class="pre">..</span></code> are rejected — use an absolute, canonical path.</p></li>
+<li><p>The path must already exist and must be a directory. Passing a regular file path also causes setup to fail.</p></li>
+</ul>
+</section>
+<section id="failed-to-register-buffer-with-uringfile-warning-in-logs">
+<h3>“Failed to register buffer with UringFile” warning in logs<a class="headerlink" href="#failed-to-register-buffer-with-uringfile-warning-in-logs" title="Link to this heading">#</a></h3>
+<p>This warning appears when <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_USE_URING=true</span></code> and the io_uring fixed-buffer registration fails. The most common cause is that <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_LOCAL_BUFFER_SIZE_BYTES</span></code> exceeds the process’s locked-memory limit (<code class="docutils literal notranslate"><span class="pre">RLIMIT_MEMLOCK</span></code>). io_uring requires the registered buffer to be pinned in physical memory, which counts against this limit.</p>
+<p>Check the current limit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">ulimit</span><span class="w"> </span>-l<span class="w">        </span><span class="c1"># in KB; &quot;unlimited&quot; means no cap</span>
+</pre></div>
+</div>
+<p>To raise it for the current session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">ulimit</span><span class="w"> </span>-l<span class="w"> </span>unlimited
+</pre></div>
+</div>
+<p>To raise it permanently, add the following to <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">soft</span> <span class="n">memlock</span> <span class="n">unlimited</span>
+<span class="o">*</span> <span class="n">hard</span> <span class="n">memlock</span> <span class="n">unlimited</span>
+</pre></div>
+</div>
+<p>Alternatively, reduce <code class="docutils literal notranslate"><span class="pre">MOONCAKE_OFFLOAD_LOCAL_BUFFER_SIZE_BYTES</span></code> to a value within the existing limit. Note that the warning does not abort startup — the client falls back to non-fixed-buffer I/O — but performance may be lower than expected.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mooncake-store-deployment-guide.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mooncake Store</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../getting_started/observability.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Observability</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#startup-steps">Startup Steps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-create-the-ssd-storage-directory">Step 1: Create the SSD storage directory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-start-the-master">Step 2: Start the master</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3a-mode-a-start-the-application-with-embedded-real-client">Step 3A (Mode A): Start the application with embedded Real Client</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3b-mode-b-start-the-standalone-real-client-with-ssd-offload-enabled-and-connect-it-with-the-dummy-client">Step 3B (Mode B): Start the standalone real client with SSD offload enabled and connect it with the dummy client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-client-parameters">Real Client Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssd-offload-configuration">SSD Offload Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-settings">Core settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-backend-settings">Bucket backend settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-per-key-backend-settings">File-per-key backend settings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-backends">Storage Backends</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-storage-backend-recommended"><code class="docutils literal notranslate"><span class="pre">bucket_storage_backend</span></code> (recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-per-key-storage-backend"><code class="docutils literal notranslate"><span class="pre">file_per_key_storage_backend</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offset-allocator-storage-backend"><code class="docutils literal notranslate"><span class="pre">offset_allocator_storage_backend</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-bucket-backend-only">Eviction (Bucket Backend Only)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-master">Start the master</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-real-client-new-terminal">Start the real client (new terminal)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ssd-offload-is-not-triggering">SSD offload is not triggering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permission-denied-or-no-such-file-or-directory-on-the-storage-path">“Permission denied” or “No such file or directory” on the storage path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#failed-to-register-buffer-with-uringfile-warning-in-logs">“Failed to register buffer with UringFile” warning in logs</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

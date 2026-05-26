@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SGLang Disaggregated Serving with MooncakeTransferEngine &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/examples/sglang-integration-v1';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Quick Start: SGLang HiCache with Mooncake Backend" href="sglang-integration/hicache-quick-start.html" />
+    <link rel="prev" title="Mooncake x SGLang Integration" href="sglang-integration/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sglang-integration/index.html">Mooncake x SGLang Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">SGLang Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sglang-integration/hicache-quick-start.html">Quick Start: SGLang HiCache with Mooncake Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sglang-integration/hicache-integration-v1.html">Complete Guide: SGLang HiCache with Mooncake Backend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/getting_started/examples/sglang-integration-v1.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/getting_started/examples/sglang-integration-v1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SGLang Disaggregated Serving with MooncakeTransferEngine</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-version-of-sglang">Install the latest version of SGLang</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-run-prefill-instance-and-decode-instance-on-different-node">To run prefill instance and decode instance on different node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-run-prefill-instance-and-decode-instance-on-the-same-node">To run prefill instance and decode instance on the same node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-enable-mooncake-ep-backend">To enable Mooncake EP Backend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-enable-mooncake-epd-backend">To enable Mooncake EPD Backend</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="sglang-disaggregated-serving-with-mooncaketransferengine">
+<h1>SGLang Disaggregated Serving with MooncakeTransferEngine<a class="headerlink" href="#sglang-disaggregated-serving-with-mooncaketransferengine" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This is the latest version of the MooncakeTransferEngine integration doc with the SGLang project based on <a class="reference external" href="https://github.com/sgl-project/sglang/pull/4654">PR 4654</a> and <a class="reference external" href="https://github.com/sgl-project/sglang/pull/4880">PR 4880</a> to support KVCache transfer for intra-node and inter-node disaggregated serving scenarios.</p>
+<p><strong><em>Please note that this is still an experimental version and will be modified anytime based on feedback from the SGLang community.</em></strong></p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="prerequisite">
+<h3>Prerequisite<a class="headerlink" href="#prerequisite" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>mooncake-transfer-engine
+</pre></div>
+</div>
+<p>Note: If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, you should uninstall this package by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build the binaries manually according to the <a class="reference internal" href="#build.md"><span class="xref myst">instructions</span></a>.</p>
+</section>
+<section id="install-the-latest-version-of-sglang">
+<h3>Install the latest version of SGLang<a class="headerlink" href="#install-the-latest-version-of-sglang" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Clone SGLang from official repo</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:sgl-project/sglang.git
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Build
+Build from source</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>sglang
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;python[all]&quot;</span><span class="w"> </span>--find-links<span class="w"> </span>https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python
+</pre></div>
+</div>
+<p>If running on AMD GPU, tried below steps to install sglang for rocm or just run in rocm docker from <a class="reference external" href="https://hub.docker.com/r/rocm/sgl-dev">docker hub</a> directly</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<span class="nb">cd</span><span class="w"> </span>sgl-kernel
+python<span class="w"> </span>setup_rocm.py<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>..
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;python[all_hip]&quot;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--network<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="o">=</span>/dev/kfd<span class="w"> </span>--device<span class="o">=</span>/dev/dri<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--ipc<span class="o">=</span>host<span class="w"> </span>--shm-size<span class="w"> </span>16G<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--group-add<span class="w"> </span>video<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cap-add<span class="o">=</span>SYS_PTRACE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--security-opt<span class="w"> </span><span class="nv">seccomp</span><span class="o">=</span>unconfined<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/home/workspace:/workspace<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>rocm/sgl-dev:20250707
+
+pip3<span class="w"> </span>install<span class="w"> </span>mooncake-transfer-engine
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libibverbs1<span class="w"> </span>libibverbs-dev<span class="w"> </span>-y
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>lsof<span class="w"> </span>net-tools<span class="w"> </span>iputils-ping<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>If you encounter any problems that you cannot solve, please refer to the <a class="reference external" href="https://docs.sglang.ai/start/install.html">SGLang official compilation guide</a>.</p>
+</section>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Update(Apr 10, 2025)</strong> Good news: The configuration file requirement has been removed since <a class="reference external" href="https://github.com/sgl-project/sglang/pull/5460">PR 5460</a>. There is no need to prepare the <em>mooncake.json</em> file anymore.</p>
+</div></blockquote>
+<section id="to-run-prefill-instance-and-decode-instance-on-different-node">
+<h3>To run prefill instance and decode instance on different node<a class="headerlink" href="#to-run-prefill-instance-and-decode-instance-on-different-node" title="Link to this heading">#</a></h3>
+<p>Prefill:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-mode<span class="w"> </span>prefill<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">30000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">192</span>.168.0.137<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tp-size<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--model-path</span></code> parameter specifies the model to use.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--host</span></code> parameter specifies the SGLang service host.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--port</span></code> parameter specifies the SGLang service port on which to listen.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--disaggregation-mode</span></code> is the node’s role, either ‘prefill’ or ‘decode’.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--disaggregation-ib-device</span></code> is the device to be used for data transmission, it is optional since we will detect this config automatically. Or you can still explicitly specify devices if needed. If multiple NIC devices are used, they can be separated by commas, such as “erdma_0,erdma_1”. Please note that there are no spaces between them.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">--tp-size</span></code> is supported. Example: append <code class="docutils literal notranslate"><span class="pre">--tp-size</span> <span class="pre">2</span></code> to the run command to run SGLang with multiple GPUs.</p></li>
+</ul>
+<p>Decode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-mode<span class="w"> </span>decode<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">30001</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">192</span>.168.0.140<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tp-size<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>Proxy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>sglang.srt.disaggregation.mini_lb<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prefill<span class="w"> </span>http://192.168.0.137:30000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--decode<span class="w"> </span>http://192.168.0.140:30001<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8000</span>
+</pre></div>
+</div>
+<p>Test:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8000/generate<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">  &quot;text&quot;: &quot;Let me tell you a long story &quot;,</span>
+<span class="s1">  &quot;sampling_params&quot;: {</span>
+<span class="s1">    &quot;temperature&quot;: 0</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="to-run-prefill-instance-and-decode-instance-on-the-same-node">
+<h3>To run prefill instance and decode instance on the same node<a class="headerlink" href="#to-run-prefill-instance-and-decode-instance-on-the-same-node" title="Link to this heading">#</a></h3>
+<p>Prefill:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-mode<span class="w"> </span>prefill<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">30000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">192</span>.168.0.137<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tp-size<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>Decode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-mode<span class="w"> </span>decode<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">30001</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--base-gpu-id<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">192</span>.168.0.137<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tp-size<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The function of <code class="docutils literal notranslate"><span class="pre">--base-gpu-id</span></code> is similar to env var<code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>, which is used to avoid reusing the 0th GPU card. The difference is that it is used to specify the starting number of the GPU. If it is set to 2, the first and second cards will be skipped, and the third card will be used directly.</p></li>
+</ul>
+<p>Proxy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>sglang.srt.disaggregation.mini_lb<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prefill<span class="w"> </span>http://192.168.0.137:30000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--decode<span class="w"> </span>http://192.168.0.137:30001<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8000</span>
+</pre></div>
+</div>
+<p>Test:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8000/generate<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">  &quot;text&quot;: &quot;Let me tell you a long story &quot;,</span>
+<span class="s1">  &quot;sampling_params&quot;: {</span>
+<span class="s1">    &quot;temperature&quot;: 0</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</pre></div>
+</div>
+<p>Note:</p>
+<ul class="simple">
+<li><p>TP is supported but not required, you can remove <code class="docutils literal notranslate"><span class="pre">--tp-size</span> <span class="pre">2</span></code> if you want.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--disaggregation-ib-device</span></code> is the device to be used for data transmission, it is optional since we will detect this config automatically. Or you can still explicitly specify devices if needed. If multiple NIC devices are used, they can be separated by commas, such as “erdma_0,erdma_1”. Please note that there are no spaces between them.</p></li>
+<li><p>XpYd is supported. It is ok to run one prefill and multiple decode instances on the same node, however, multiple prefill instances on the same node are not supported due to the port conflict of bootstrap server.</p>
+<ul>
+<li><p>e.g., <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">sglang.srt.disaggregation.mini_lb</span> <span class="pre">--prefill</span> <span class="pre">http://192.168.0.137:30000,http://192.168.0.140:30000</span> <span class="pre">--decode</span> <span class="pre">http://192.168.0.137:30001,http://192.168.0.140:30001</span> <span class="pre">--host</span> <span class="pre">0.0.0.0</span> <span class="pre">--port</span> <span class="pre">8000</span></code></p></li>
+</ul>
+</li>
+<li><p>HuggingFace timeout can be addressed by <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SGLANG_USE_MODELSCOPE=true</span></code></p></li>
+</ul>
+</section>
+<section id="to-enable-mooncake-ep-backend">
+<h3>To enable Mooncake EP Backend<a class="headerlink" href="#to-enable-mooncake-ep-backend" title="Link to this heading">#</a></h3>
+<p>Prefill:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span>deepseek-ai/DeepSeek-V3-0324<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-mode<span class="w"> </span>prefill<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">30000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">192</span>.168.0.137<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tp-size<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dp-size<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--elastic-ep-backend<span class="w"> </span>mooncake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mooncake-ib-device<span class="w"> </span>&lt;mooncake-ib-device&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--moe-a2a-backend<span class="w"> </span>mooncake
+</pre></div>
+</div>
+<p>Decode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span>deepseek-ai/DeepSeek-V3-0324<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-mode<span class="w"> </span>decode<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">30001</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">192</span>.168.0.140<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tp-size<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dp-size<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--elastic-ep-backend<span class="w"> </span>mooncake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mooncake-ib-device<span class="w"> </span>&lt;mooncake-ib-device&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--moe-a2a-backend<span class="w"> </span>mooncake
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">--elastic-ep-backend</span></code> and <code class="docutils literal notranslate"><span class="pre">--moe-a2a-backend</span></code> to “mooncake” to enable Mooncake EP Backend.</p></li>
+<li><p>The value of <code class="docutils literal notranslate"><span class="pre">--mooncake-ib-device</span></code> should be the same as <code class="docutils literal notranslate"><span class="pre">--disaggregation-ib-device</span></code>.</p></li>
+</ul>
+</section>
+<section id="to-enable-mooncake-epd-backend">
+<h3>To enable Mooncake EPD Backend<a class="headerlink" href="#to-enable-mooncake-epd-backend" title="Link to this heading">#</a></h3>
+<p>Encoder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span><span class="nv">$MODEL</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--encoder-only<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--encoder-transfer-backend<span class="w"> </span>mooncake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="nv">$PORT</span>
+</pre></div>
+</div>
+<p>Prefill:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model-path<span class="w"> </span><span class="nv">$MODEL</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-mode<span class="w"> </span>prefill<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--disaggregation-transfer-backend<span class="w"> </span>mooncake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--encoder-transfer-backend<span class="w"> </span>mooncake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tp<span class="w"> </span><span class="nv">$TP</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mem-fraction-static<span class="w"> </span><span class="nv">$MEM_FRACTION</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--chunked-prefill-size<span class="w"> </span><span class="nv">$CHUNK_SIZE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--language-only<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--encoder-urls<span class="w"> </span>http://127.0.0.1:30002<span class="w"> </span>http://127.0.0.1:30003<span class="w"> </span>http://127.0.0.1:30004<span class="w"> </span>http://127.0.0.1:30005<span class="w"> </span>http://127.0.0.1:30006<span class="w"> </span>http://127.0.0.1:30007<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="nv">$PORT</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">--encoder-transfer-backend</span></code> to “mooncake” to enable Mooncake Backend.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sglang-integration/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mooncake x SGLang Integration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sglang-integration/hicache-quick-start.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quick Start: SGLang HiCache with Mooncake Backend</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-version-of-sglang">Install the latest version of SGLang</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-run-prefill-instance-and-decode-instance-on-different-node">To run prefill instance and decode instance on different node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-run-prefill-instance-and-decode-instance-on-the-same-node">To run prefill instance and decode instance on the same node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-enable-mooncake-ep-backend">To enable Mooncake EP Backend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-enable-mooncake-epd-backend">To enable Mooncake EPD Backend</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

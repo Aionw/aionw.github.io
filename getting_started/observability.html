@@ -1,0 +1,871 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Observability &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/observability';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mooncake HF3FS Plugin (Experimental)" href="plugin-usage/3FS-USRBIO-Plugin.html" />
+    <link rel="prev" title="SSD Offload" href="../deployment/ssd-offload.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment/ssd-offload.html">SSD Offload</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Observability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-usage/3FS-USRBIO-Plugin.html">Mooncake HF3FS Plugin (Experimental)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/getting_started/observability.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/getting_started/observability.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Observability</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#master-metrics-log">Master Metrics Log</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-format">Log Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-metrics-block">Master Metrics Block</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#storage">Storage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#keys-and-clients">Keys and Clients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-success-total-per-sec">Requests (Success/Total per sec)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-requests-per-sec">Batch Requests (per sec)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-operations">Task Operations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-discard">Eviction &amp; Discard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prometheus-metrics-endpoint">Prometheus Metrics Endpoint</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoints">Endpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="observability">
+<h1>Observability<a class="headerlink" href="#observability" title="Link to this heading">#</a></h1>
+<p>This document describes how to monitor and observe a running Mooncake Store deployment.</p>
+<section id="master-metrics-log">
+<h2>Master Metrics Log<a class="headerlink" href="#master-metrics-log" title="Link to this heading">#</a></h2>
+<p>When started, the Mooncake master periodically prints a metrics summary log every 10 seconds (configurable via <code class="docutils literal notranslate"><span class="pre">kMetricReportIntervalSeconds</span></code>). This log provides a comprehensive snapshot of the master’s runtime state.</p>
+<section id="log-format">
+<h3>Log Format<a class="headerlink" href="#log-format" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I0512</span> <span class="mi">15</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">30.321475</span> <span class="mi">239489</span> <span class="n">rpc_service</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">269</span><span class="p">]</span> <span class="n">Master</span> <span class="n">Admin</span> <span class="n">Metrics</span><span class="p">:</span> <span class="n">role</span><span class="o">=</span><span class="n">leader</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">serving</span><span class="p">,</span> <span class="n">service_ready</span><span class="o">=</span><span class="n">true</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="n">ha</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="n">leader</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">50051</span><span class="p">,</span> <span class="n">view_version</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Each log line contains:</p>
+<ul class="simple">
+<li><p><strong>GLog header</strong>: timestamp, thread ID, source file and line number</p></li>
+<li><p><strong>role</strong>: HA role — <code class="docutils literal notranslate"><span class="pre">leader</span></code> or <code class="docutils literal notranslate"><span class="pre">standby</span></code></p></li>
+<li><p><strong>state</strong>: HA runtime state — <code class="docutils literal notranslate"><span class="pre">serving</span></code>, <code class="docutils literal notranslate"><span class="pre">starting</span></code>, <code class="docutils literal notranslate"><span class="pre">stopping</span></code>, etc.</p></li>
+<li><p><strong>service_ready</strong>: whether the gRPC service is accepting requests</p></li>
+<li><p><strong>master</strong>: master metrics block (see below)</p></li>
+<li><p><strong>ha</strong>: HA metrics block</p></li>
+<li><p><strong>leader</strong>: (only when available) the current leader address and view version</p></li>
+</ul>
+</section>
+<section id="master-metrics-block">
+<h3>Master Metrics Block<a class="headerlink" href="#master-metrics-block" title="Link to this heading">#</a></h3>
+<p>A typical <code class="docutils literal notranslate"><span class="pre">master={...}</span></code> block looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mem</span> <span class="n">Storage</span><span class="p">:</span> <span class="mf">94.09</span> <span class="n">MB</span> <span class="o">/</span> <span class="mf">100.00</span> <span class="n">MB</span> <span class="p">(</span><span class="mf">94.1</span><span class="o">%</span><span class="p">)</span> <span class="o">|</span> <span class="n">SSD</span> <span class="n">Storage</span><span class="p">:</span> <span class="mi">0</span> <span class="n">B</span> <span class="o">/</span> <span class="mi">0</span> <span class="n">B</span> <span class="o">|</span> <span class="n">Keys</span><span class="p">:</span> <span class="mi">16058</span> <span class="p">(</span><span class="n">soft</span><span class="o">-</span><span class="n">pinned</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="n">Clients</span><span class="p">:</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">Requests</span> <span class="p">(</span><span class="n">Success</span><span class="o">/</span><span class="n">Total</span> <span class="n">per</span> <span class="n">sec</span><span class="p">):</span> <span class="n">PutStart</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">PutEnd</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">PutRevoke</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Get</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Exist</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Del</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">DelAll</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Ping</span><span class="o">=</span><span class="mf">1.00</span><span class="o">/</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">CopyStart</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">CopyEnd</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">CopyRevoke</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">MoveStart</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">MoveEnd</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">MoveRevoke</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">EvictDiskReplica</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span> <span class="o">|</span> <span class="n">Batch</span> <span class="n">Requests</span> <span class="p">(</span><span class="n">per</span> <span class="n">sec</span><span class="p">,</span> <span class="n">Req</span><span class="o">=</span><span class="n">Success</span><span class="o">/</span><span class="n">PartialSuccess</span><span class="o">/</span><span class="n">Total</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="n">Success</span><span class="o">/</span><span class="n">Total</span><span class="p">):</span> <span class="n">PutStart</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">PutEnd</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">PutRevoke</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">Get</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">ExistKey</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">QueryIp</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">Clear</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">Item</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">CreateMoveTask</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">CreateCopyTask</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">QueryTask</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">FetchTasks</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">),</span> <span class="n">MarkTaskToComplete</span><span class="p">:(</span><span class="n">Req</span><span class="o">=</span><span class="mf">0.00</span><span class="o">/</span><span class="mf">0.00</span><span class="p">)</span> <span class="o">|</span> <span class="n">Eviction</span><span class="p">:</span> <span class="n">Success</span><span class="o">/</span><span class="n">Attempts</span><span class="o">=</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span> <span class="n">AllocFail</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">0</span> <span class="n">B</span> <span class="o">|</span> <span class="n">Discard</span><span class="p">:</span> <span class="n">Released</span><span class="o">/</span><span class="n">Total</span><span class="o">=</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span> <span class="n">StagingSize</span><span class="o">=</span><span class="mi">0</span> <span class="n">B</span> <span class="o">|</span> <span class="n">Snapshots</span><span class="p">:</span> <span class="n">Success</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">Fail</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>Request counters are reported as <strong>rates per second</strong> over the time window between two consecutive log outputs (10 seconds by default). Real-time state values (storage, key count, client count, discard staging size) are not rate-limited and reflect the current value at log time.</p>
+<p>The metrics block consists of the following sections:</p>
+<section id="storage">
+<h4>Storage<a class="headerlink" href="#storage" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Mem</span> <span class="pre">Storage</span></code></p></td>
+<td><p>Current memory usage / total memory capacity, with percentage</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SSD</span> <span class="pre">Storage</span></code></p></td>
+<td><p>Current SSD-backed storage usage / total SSD capacity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="keys-and-clients">
+<h4>Keys and Clients<a class="headerlink" href="#keys-and-clients" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Keys</span></code></p></td>
+<td><p>Total number of keys managed by the master</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">soft-pinned</span></code></p></td>
+<td><p>Number of keys with active soft-pin leases (protected from eviction)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Clients</span></code></p></td>
+<td><p>Number of currently connected clients</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="requests-success-total-per-sec">
+<h4>Requests (Success/Total per sec)<a class="headerlink" href="#requests-success-total-per-sec" title="Link to this heading">#</a></h4>
+<p>Rate counters for individual (non-batch) RPC requests over the last time window. Each shows <code class="docutils literal notranslate"><span class="pre">&lt;success_rate&gt;/&lt;total_rate&gt;</span></code> in requests per second:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Counter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PutStart</span></code></p></td>
+<td><p>Put object allocation requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PutEnd</span></code></p></td>
+<td><p>Put object commit requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PutRevoke</span></code></p></td>
+<td><p>Put object cancellation requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Get</span></code></p></td>
+<td><p>Get replica list requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Exist</span></code></p></td>
+<td><p>Key existence check requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Del</span></code></p></td>
+<td><p>Single key deletion requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DelAll</span></code></p></td>
+<td><p>Delete-all objects requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Ping</span></code></p></td>
+<td><p>Client heartbeat/ping requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CopyStart</span></code></p></td>
+<td><p>Copy object allocation requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CopyEnd</span></code></p></td>
+<td><p>Copy object commit requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CopyRevoke</span></code></p></td>
+<td><p>Copy object cancellation requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MoveStart</span></code></p></td>
+<td><p>Move object allocation requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MoveEnd</span></code></p></td>
+<td><p>Move object commit requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MoveRevoke</span></code></p></td>
+<td><p>Move object cancellation requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EvictDiskReplica</span></code></p></td>
+<td><p>Evict disk replica requests</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="batch-requests-per-sec">
+<h4>Batch Requests (per sec)<a class="headerlink" href="#batch-requests-per-sec" title="Link to this heading">#</a></h4>
+<p>Batch operations aggregate multiple items into a single RPC. Rates are per second over the last time window. Format: <code class="docutils literal notranslate"><span class="pre">Req=&lt;success&gt;/&lt;partial_success&gt;/&lt;total&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">Item=&lt;success_items&gt;/&lt;total_items&gt;</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Counter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PutStart</span></code></p></td>
+<td><p>Batch put object allocation requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PutEnd</span></code></p></td>
+<td><p>Batch put object commit requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PutRevoke</span></code></p></td>
+<td><p>Batch put object cancellation requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Get</span></code></p></td>
+<td><p>Batch get replica list requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ExistKey</span></code></p></td>
+<td><p>Batch key existence check requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">QueryIp</span></code></p></td>
+<td><p>Batch query IP requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Clear</span></code></p></td>
+<td><p>Batch replica clear requests</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A request is considered “partial success” when it succeeds for some items but not all.</p>
+</section>
+<section id="task-operations">
+<h4>Task Operations<a class="headerlink" href="#task-operations" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Counter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CreateMoveTask</span></code></p></td>
+<td><p>Move task creation requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CreateCopyTask</span></code></p></td>
+<td><p>Copy task creation requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">QueryTask</span></code></p></td>
+<td><p>Task status query requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FetchTasks</span></code></p></td>
+<td><p>Pending task fetch requests (polled by store clients)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MarkTaskToComplete</span></code></p></td>
+<td><p>Task completion acknowledgement requests</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="eviction-discard">
+<h4>Eviction &amp; Discard<a class="headerlink" href="#eviction-discard" title="Link to this heading">#</a></h4>
+<p>Eviction counters are <strong>deltas</strong> between two consecutive log outputs — they show what happened in the time window, not cumulative totals.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Eviction:</span> <span class="pre">Success/Attempts</span></code></p></td>
+<td><p>Eviction rounds that succeeded at least partially vs. total attempts in this window</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AllocFail</span></code></p></td>
+<td><p>Number of PutStart/UpsertStart failures caused by replica allocation failure (triggers eviction) in this window</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">keys</span></code></p></td>
+<td><p>Number of keys evicted in this window</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">size</span></code></p></td>
+<td><p>Total size of evicted data in this window</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Discard:</span> <span class="pre">Released/Total</span></code></p></td>
+<td><p>Released (cleaned up) vs. total discarded PutStart staging replicas (live values)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">StagingSize</span></code></p></td>
+<td><p>Current size of discarded but not-yet-released staging buffers (live value)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="prometheus-metrics-endpoint">
+<h2>Prometheus Metrics Endpoint<a class="headerlink" href="#prometheus-metrics-endpoint" title="Link to this heading">#</a></h2>
+<p>Mooncake master exposes Prometheus-format metrics at the HTTP admin endpoint. This allows integration with Prometheus, Grafana, or any Prometheus-compatible monitoring stack.</p>
+<section id="endpoints">
+<h3>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">#</a></h3>
+<p>The admin HTTP server runs on <code class="docutils literal notranslate"><span class="pre">metrics_port</span></code> (default: <strong>9003</strong>) and exposes the following endpoints:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Endpoint</p></th>
+<th class="head"><p>Content-Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metrics</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code></p></td>
+<td><p>All metrics in Prometheus exposition format</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metrics/summary</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code></p></td>
+<td><p>Human-readable summary (same content as the periodic log)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/health</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">application/json</span></code></p></td>
+<td><p>Health check with role, HA state, and service readiness</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/role</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text/plain</span></code></p></td>
+<td><p>Current HA role (<code class="docutils literal notranslate"><span class="pre">leader</span></code> / <code class="docutils literal notranslate"><span class="pre">standby</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/ha_status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text/plain</span></code></p></td>
+<td><p>Current HA runtime state (<code class="docutils literal notranslate"><span class="pre">serving</span></code> / <code class="docutils literal notranslate"><span class="pre">starting</span></code> / etc.)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h3>
+<p><strong>Scrape the /metrics endpoint with Prometheus:</strong></p>
+<p>Add a scrape config to your <code class="docutils literal notranslate"><span class="pre">prometheus.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;mooncake-master&#39;</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;&lt;master-host&gt;:9003&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/metrics&#39;</span>
+</pre></div>
+</div>
+<p><strong>Quick check with curl:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Prometheus metrics</span>
+curl<span class="w"> </span>http://&lt;master-host&gt;:9003/metrics
+
+<span class="c1"># Get human-readable summary</span>
+curl<span class="w"> </span>http://&lt;master-host&gt;:9003/metrics/summary
+
+<span class="c1"># Check health</span>
+curl<span class="w"> </span>http://&lt;master-host&gt;:9003/health
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<p>The admin HTTP server is configured in the master config file (<code class="docutils literal notranslate"><span class="pre">master.json</span></code> or <code class="docutils literal notranslate"><span class="pre">master.yaml</span></code>):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;enable_metric_reporting&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;metrics_port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9003</span><span class="p">,</span>
+<span class="w">  </span><span class="err">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">enable_metric_reporting</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable the periodic metrics log. HTTP endpoints (<code class="docutils literal notranslate"><span class="pre">/metrics</span></code>, <code class="docutils literal notranslate"><span class="pre">/health</span></code>, etc.) remain available regardless of this setting.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../deployment/ssd-offload.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SSD Offload</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plugin-usage/3FS-USRBIO-Plugin.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mooncake HF3FS Plugin (Experimental)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#master-metrics-log">Master Metrics Log</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-format">Log Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-metrics-block">Master Metrics Block</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#storage">Storage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#keys-and-clients">Keys and Clients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-success-total-per-sec">Requests (Success/Total per sec)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-requests-per-sec">Batch Requests (per sec)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#task-operations">Task Operations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-discard">Eviction &amp; Discard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prometheus-metrics-endpoint">Prometheus Metrics Endpoint</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoints">Endpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

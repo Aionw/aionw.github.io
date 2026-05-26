@@ -1,0 +1,992 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transfer Engine &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/transfer-engine/index';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="AWS EFA Transport for Mooncake" href="efa_transport.html" />
+    <link rel="prev" title="TENT Failover" href="../tent/failover.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Transfer Engine</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="efa_transport.html">AWS EFA Transport for Mooncake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ascend_direct_transport.html">Ascend Direct Transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ascend_transport.html">Ascend Transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heterogeneous_ascend.html">Heterogeneous Ascend Transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sunrise_link_transport.html">Sunrise Link Transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transfer-engine-bench-tuning.html">Transfer Engine Benchmarking &amp; Tuning Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/transfer-engine/index.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/design/transfer-engine/index.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transfer Engine</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment">Segment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ram-segment-in-memory-address-space-dram-vram">1. RAM Segment in Memory Address Space (DRAM, VRAM)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvmeof-segment">2. NVMeof Segment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchtransfer">BatchTransfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-aware-path-selection">Topology Aware Path Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoint-management">Endpoint Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-handling">Fault Handling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-transfer-engine-bench">Example: Transfer Engine Bench</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-run">Sample Run</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine-c-c-api">Transfer Engine C/C++ API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-transport-management">Multi-Transport Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-and-metadata-format">Segment Management and Metadata Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server">HTTP Metadata Server</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-transfer-engine-to-your-projects">Using Transfer Engine to Your Projects</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-c-c-interface">Using C/C++ Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-golang-interface">Using Golang Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rust-interface">Using Rust Interface</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-runtime-options">Advanced Runtime Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-api-reference">C++ API Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efa-transport-aws">EFA Transport (AWS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ascend-transport-component">Ascend Transport Component</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sunrise-link-transport-component">Sunrise Link Transport Component</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-protocols">Supported Protocols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-and-tuning-guide">Benchmark and Tuning Guide</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="transfer-engine">
+<h1>Transfer Engine<a class="headerlink" href="#transfer-engine" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Mooncake Transfer Engine is a high-performance, zero-copy data transfer library designed around two core abstractions: Segment and BatchTransfer.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#segment"><span class="xref myst"><strong>Segment</strong></span></a> represents a contiguous address space that can be remotely read and written, which can be either non-persistent storage provided by DRAM or VRAM, known as <strong>RAM Segment</strong>, or persistent storage provided by NVMeof, known as <strong>NVMeof Segment</strong>.</p></li>
+<li><p><a class="reference internal" href="#batchtransfer"><span class="xref myst"><strong>BatchTransfer</strong></span></a> encapsulates operation requests, specifically responsible for synchronizing data between a set of non-contiguous data spaces in one Segment and the corresponding spaces in another set of Segments, supporting Read/Write in both directions, thus acting like an asynchronous and more flexible AllScatter/AllGather.</p></li>
+</ul>
+<p><img alt="transfer_engine" src="../../_images/transfer-engine.png" /></p>
+<p>As shown in the diagram, each specific client corresponds to a <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code>, which not only includes a RAM Segment but also integrates management for high-speed transfers across multiple threads and network cards. The RAM Segment, in principle, corresponds to the entire virtual address space of this <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code>, but in reality, only parts of it (known as a <code class="docutils literal notranslate"><span class="pre">Buffer</span></code>) are registered for (GPUDirect) RDMA Read/Write. Each Buffer can have separate permissions (corresponding to RDMA <code class="docutils literal notranslate"><span class="pre">rkey</span></code>, etc.) and network card affinity (e.g., preferred NICs for different types of memory).</p>
+<p>Mooncake Transfer Engine provides interfaces through the <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> class (located in <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/include/transfer_engine.h</span></code>), where the specific data transfer functions for different backends are implemented by the <code class="docutils literal notranslate"><span class="pre">Transport</span></code> class, currently supporting <code class="docutils literal notranslate"><span class="pre">TcpTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">RdmaTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">EfaTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">NVMeoFTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">NvlinkTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">IntraNodeNvlinkTransport</span></code>, and <code class="docutils literal notranslate"><span class="pre">HipTransport</span></code>.</p>
+<section id="segment">
+<h3>Segment<a class="headerlink" href="#segment" title="Link to this heading">#</a></h3>
+<p>Segment represents a collection of source address ranges and target address ranges available during the data transfer process in Transfer Engine. That is, all local and remote addresses involved in <code class="docutils literal notranslate"><span class="pre">BatchTransfer</span></code> requests must be within the valid segment range. Transfer Engine supports the following two types of Segments.</p>
+<section id="ram-segment-in-memory-address-space-dram-vram">
+<h4>1. RAM Segment in Memory Address Space (DRAM, VRAM)<a class="headerlink" href="#ram-segment-in-memory-address-space-dram-vram" title="Link to this heading">#</a></h4>
+<p>When each process starts, Transfer Engine automatically creates a segment named after its own <code class="docutils literal notranslate"><span class="pre">local_hostname</span></code> (see the initialization function of <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code>, which needs to be globally unique), which logically covers the entire memory address space, including storage media such as DRAM/VRAM. When using the <code class="docutils literal notranslate"><span class="pre">BatchTransfer</span></code> interface for transfer tasks, Transfer Engine automatically determines the corresponding hardware information to choose the best transfer method. <strong>Each process has and only has one segment.</strong> Other processes can reference the segment and complete read/write operations by calling the <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> interface and passing the correct name.</p>
+<p>In actual deployment, application systems usually only use part of the memory address space for data transfer, so Transfer Engine further divides the segment into multiple buffers internally. Each Buffer represents a contiguous address space located on the same device, and when users use the <code class="docutils literal notranslate"><span class="pre">BatchTransfer</span></code> interface to complete read/write operations, if referencing a RAM Segment, each read/write task must be within one of the valid buffers.</p>
+<p>The memory range within a segment does not need to be contiguous, which means that multiple DRAM/VRAM address spaces can be allocated and included in the same segment.</p>
+<p>In addition, Transfer Engine also supports registering some <strong>local DRAM areas</strong>, which are merely used as the local side storage space for data operations, such as the DRAM PageCache area of vLLM. It is also considered a part of the effective RAM Segment in the current process but cannot be referenced by other processes by calling the <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> interface.</p>
+</section>
+<section id="nvmeof-segment">
+<h4>2. NVMeof Segment<a class="headerlink" href="#nvmeof-segment" title="Link to this heading">#</a></h4>
+<p>Transfer Engine also leverages the NVMeof protocol to support direct data transfer from files on NVMe to DRAM/VRAM via PCIe, without going through the CPU and achieving zero-copy. Users need to follow the instructions to mount remote storage nodes locally and use the <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> interface for reference to complete data read/write operations.</p>
+</section>
+</section>
+<section id="batchtransfer">
+<h3>BatchTransfer<a class="headerlink" href="#batchtransfer" title="Link to this heading">#</a></h3>
+<p>With the help of Transfer Engine, Mooncake Store can achieve local DRAM/VRAM reading and writing of specified parts in valid segments  through TCP, (GPUDirect) RDMA, NVMe-of protocols, etc.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Remote ↓ Local →</p></th>
+<th class="head"><p>DRAM</p></th>
+<th class="head"><p>VRAM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DRAM</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>VRAM</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>NVMe-of</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Local memcpy: If the target Segment is actually in the local DRAM/VRAM, direct data copy interfaces such as memcpy, cudaMemcpy are used.</p></li>
+<li><p>TCP: Supports data transfer between local DRAM and remote DRAM.</p></li>
+<li><p>RDMA: Supports data transfer between local DRAM/VRAM and remote DRAM. It supports multi-network card pooling and retry functions in implementation.</p></li>
+<li><p>HIP: Supports intra-node data transfers between GPU VRAM and GPU VRAM, as well as between GPU VRAM and CPU DRAM, using IPC handles or Shareable handles for ROCm.</p></li>
+<li><p>cuFile (GPUDirect Storage): Implements data transfer between local DRAM/VRAM and Local/Remote NVMeof.</p></li>
+</ul>
+<p>The BatchTransfer API uses an array of requests, which specify the operation type (READ or WRITE), data length, and local and remote memory addresses. The transfer operation is applicable to DRAM and GPU VRAM. The completion of these operations can be asynchronously monitored through the <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> API.</p>
+</section>
+<section id="topology-aware-path-selection">
+<h3>Topology Aware Path Selection<a class="headerlink" href="#topology-aware-path-selection" title="Link to this heading">#</a></h3>
+<p>Modern inference servers often consist of multiple CPU sockets, DRAM, GPUs, and RDMA NIC devices. Although it’s technically possible to transfer data from local DRAM or VRAM to a remote location using any RDMA NIC, these transfers can be limited by the bandwidth constraints of the Ultra Path Interconnect (UPI) or PCIe Switch. To overcome these limitations, Transfer Engine implements a topology-aware path selection algorithm.</p>
+<p>Before processing requests, each server generates a topology matrix and broadcasts it across the cluster.
+This matrix categorizes network interface cards (NICs) into preferred and secondary lists for various types of memory, which types are specified during memory registration.
+Under normal conditions, a NIC from the preferred list is selected for transfers, facilitating RDMA operations within the local NUMA or GPU Direct RDMA through the local PCIe switch only.
+In case of failures, NICs from both lists may be utilized.
+The process involves identifying the appropriate local and target NICs based on the memory addresses, establishing a connection, and executing the data transfer.</p>
+<p><img alt="topology-matrix" src="../../_images/topology-matrix.png" /></p>
+<p>For instance, as illustrated in figure above, to transfer data from buffer 0 (assigned to cpu:0) in the local node to buffer 1 (assigned to cpu:1) in the target node, the engine first identifies the preferred NICs for cpu:0 using the local server’s topology matrix and selects one, such as mlx5_1, as the local NIC. Similarly, the target NIC, such as mlx5_3, is selected based on the target memory address. This setup enables establishing an RDMA connection from mlx5_1&#64;local to mlx5_3&#64;target to carry out RDMA read and write operations.</p>
+<p>To further maximize bandwidth utilization, if a single request’s transfer is internally divided into multiple slices if its length exceeds 64KB.
+Each slice might use a different path, enabling collaborative work among all RDMA NICs.</p>
+</section>
+<section id="endpoint-management">
+<h3>Endpoint Management<a class="headerlink" href="#endpoint-management" title="Link to this heading">#</a></h3>
+<p>Mooncake Store employs a pair of endpoints to represent the connection between a local RDMA
+NIC and a remote RDMA NIC. In practice, each endpoint
+includes one or more RDMA queue pair objects. Connections in Mooncake Store are established in an on demand manner;
+endpoints remain unpaired until the first request is made.
+To prevent a large number of endpoints from slowing down
+request processing, Mooncake Store employs endpoint pooling,
+which caps the maximum number of active connections. We
+use the SIEVE algorithm to manage endpoint eviction.
+If a connection fails due to link errors, it is removed from the
+endpoint pools on both sides and re-established during the
+next data transfer attempt.</p>
+<p>Evicted and deleted endpoints are moved to an internal <code class="docutils literal notranslate"><span class="pre">waiting_list_</span></code> and reclaimed asynchronously once their outstanding slices drain. Reclaim runs on every new endpoint insertion, and additionally on a ~1 Hz heartbeat from the per-context <code class="docutils literal notranslate"><span class="pre">monitorWorker</span></code>, so the waiting list drains even under failure load where new insertions stall while evictions continue.</p>
+</section>
+<section id="fault-handling">
+<h3>Fault Handling<a class="headerlink" href="#fault-handling" title="Link to this heading">#</a></h3>
+<p>In a multi-NIC environment, one common failure scenario is the temporary unavailability of a specific NIC, while other routes may still connect two nodes.
+Mooncake Store is designed to adeptly manage such temporary
+failures effectively. If a connection is identified as unavailable,
+Mooncake Store automatically identifies an alternative, reachable
+path and resubmits the request to a different RDMA NIC
+device. Furthermore, Mooncake Store is capable of detecting problems with other RDMA resources, including RDMA contexts
+and completion queues. It temporarily avoids using these
+resources until the issue, such as a downed link, is resolved.</p>
+</section>
+</section>
+<section id="example-transfer-engine-bench">
+<h2>Example: Transfer Engine Bench<a class="headerlink" href="#example-transfer-engine-bench" title="Link to this heading">#</a></h2>
+<p>The sample program provided in <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/example/transfer_engine_bench.cpp</span></code> demonstrates the basic usage of Transfer Engine by repeatedly reading/writing data blocks from the DRAM of the target node to the initiator node through the Transfer Engine interface. It can also be used to measure read and write throughput. Currently, the Transfer Engine Bench tool supports RDMA and TCP protocols.</p>
+<p>After successfully compiling Transfer Engine, the test program <code class="docutils literal notranslate"><span class="pre">transfer_engine_bench</span></code> can be found in the <code class="docutils literal notranslate"><span class="pre">build/mooncake-transfer-engine/example</span></code> directory.</p>
+<ol class="arabic">
+<li><p><strong>Start the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> service.</strong> This service is used for the centralized highly available management of various metadata for Mooncake, including the internal connection status of Transfer Engine. It is necessary to ensure that both the initiator and target nodes can smoothly access this metadata service, so pay attention to:</p>
+<ul class="simple">
+<li><p>The listening IP of the metadata service should not be 127.0.0.1; it should be determined in conjunction with the network environment. In the experimental environment, 0.0.0.0 can be used.</p></li>
+<li><p>On some platforms, if the initiator and target nodes have set the <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> or <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> environment variables, it will also affect the communication between Transfer Engine and the metadata service.</p></li>
+</ul>
+<p>Transfer Engine support multiple kinds of metadata services, including <code class="docutils literal notranslate"><span class="pre">etcd</span></code>, <code class="docutils literal notranslate"><span class="pre">redis</span></code>, and <code class="docutils literal notranslate"><span class="pre">http</span></code>. The following describes how to start the metadata service using <code class="docutils literal notranslate"><span class="pre">etcd</span></code> and <code class="docutils literal notranslate"><span class="pre">http</span></code> as examples.</p>
+<p>1.1. <strong><code class="docutils literal notranslate"><span class="pre">etcd</span></code></strong></p>
+<p>By default, the use of etcd service is off. To use etcd service in transfer engine, in <code class="docutils literal notranslate"><span class="pre">mooncake-common/common.cmake</span></code>, change the switch of <code class="docutils literal notranslate"><span class="pre">USE_ETCD</span></code> from <code class="docutils literal notranslate"><span class="pre">OFF</span></code> to <code class="docutils literal notranslate"><span class="pre">ON</span></code>.
+For example, the following command line can be used to start the etcd service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0.0.0.0:2379<span class="w">  </span>--advertise-client-urls<span class="w"> </span>http://10.0.0.1:2379
+</pre></div>
+</div>
+<p>1.2. <strong><code class="docutils literal notranslate"><span class="pre">http</span></code></strong></p>
+<p>For example, you can use the <code class="docutils literal notranslate"><span class="pre">http</span></code> service in the <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/example/http-metadata-server</span></code> example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># cd mooncake-transfer-engine/example/http-metadata-server</span>
+go<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--addr<span class="o">=</span>:8080
+</pre></div>
+</div>
+</li>
+<li><p><strong>Start the target node.</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_bench<span class="w"> </span>--mode<span class="o">=</span>target<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>--metadata_server<span class="o">=</span>etcd://10.0.0.1:2379<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--local_server_name<span class="o">=</span>TARGET_NAME<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--device_name<span class="o">=</span>erdma_0<span class="w"> </span><span class="p">|</span><span class="w"> </span>--auto-discovery<span class="o">]</span>
+</pre></div>
+</div>
+<p>The meanings of the various parameters are as follows:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">--mode=target</span></code> indicates the start of the target node. The target node does not initiate read/write requests; it passively supplies or writes data as required by the initiator node.</p>
+<blockquote>
+<div><p>[!NOTE]
+In actual applications, there is no need to distinguish between target nodes and initiator nodes; each node can freely initiate read/write requests to other nodes in the cluster.</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--metadata_server</span></code> is the address of the metadata server. Its form is <code class="docutils literal notranslate"><span class="pre">[proto]://[hostname:port]</span></code>. For example, the following addresses are VALID:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">etcd</span></code> as metadata storage: <code class="docutils literal notranslate"><span class="pre">&quot;10.0.0.1:2379&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;etcd://10.0.0.1:2379&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;etcd://10.0.0.1:2379,10.0.0.2:2379&quot;</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">redis</span></code> as metadata storage: <code class="docutils literal notranslate"><span class="pre">&quot;redis://10.0.0.1:6379&quot;</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">http</span></code> as metadata storage: <code class="docutils literal notranslate"><span class="pre">&quot;http://10.0.0.1:8080/metadata&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--local_server_name</span></code> represents the segment name of current node, which does not need to be set in most cases. If this option is not set, the value is equivalent to the hostname of this machine (i.e., <code class="docutils literal notranslate"><span class="pre">hostname(2)</span></code>). This should keep unique among the cluster.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--device_name</span></code> indicates the name of the RDMA network card used in the transfer process (separated by commas without space). You can also specify <code class="docutils literal notranslate"><span class="pre">--auto_discovery</span></code> to enable discovery topology automatically, which generates a network card priority matrix based on the operating system configuration.</p></li>
+<li><p>In network environments that only support TCP, the <code class="docutils literal notranslate"><span class="pre">--protocol=tcp</span></code> parameter can be used; in this case, there is no need to specify the <code class="docutils literal notranslate"><span class="pre">--device_name</span></code> parameter.</p></li>
+</ul>
+</li>
+<li><p><strong>Start the initiator node.</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_bench<span class="w"> </span>--metadata_server<span class="o">=</span>etcd://10.0.0.1:2379<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>--segment_id<span class="o">=</span>TARGET_NAME<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--local_server_name<span class="o">=</span>INITIATOR_NAME<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--device_name<span class="o">=</span>erdma_1<span class="w"> </span><span class="p">|</span><span class="w"> </span>--auto-discovery<span class="o">]</span>
+</pre></div>
+</div>
+<p>The meanings of the various parameters are as follows (the rest are the same as before):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--segment_id</span></code> is the segment name of target node. It needs to be consistent with the value passed to <code class="docutils literal notranslate"><span class="pre">--local_server_name</span></code> when starting the target node (if any).</p></li>
+</ul>
+<p>Under normal circumstances, the initiator node will start the transfer operation, wait for 10 seconds, and then display the “Test completed” message, indicating that the test is complete.</p>
+<p>The initiator node can also configure the following test parameters: <code class="docutils literal notranslate"><span class="pre">--operation</span></code> (can be <code class="docutils literal notranslate"><span class="pre">&quot;read&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;write&quot;</span></code>), <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">block_size</span></code>, <code class="docutils literal notranslate"><span class="pre">duration</span></code>, <code class="docutils literal notranslate"><span class="pre">threads</span></code>, etc.</p>
+</li>
+</ol>
+<blockquote>
+<div><p>[!NOTE]
+If an exception occurs during execution, it is usually due to incorrect parameter settings. It is recommended to refer to the <a class="reference internal" href="#troubleshooting.md"><span class="xref myst">troubleshooting document</span></a> for preliminary troubleshooting.</p>
+</div></blockquote>
+<section id="sample-run">
+<h3>Sample Run<a class="headerlink" href="#sample-run" title="Link to this heading">#</a></h3>
+<p>The following video shows a normal run as described above, with the Target on the right and the Initiator on the left, at the end of the test the Initiator reports the test duration (10 seconds), IOPS (379008 requests/s), and throughput (19.87 GiB/s). The throughput here exceeds the maximum throughput supported by a single card on the host computer used.</p>
+<p><img alt="transfer-engine-running" src="../../_images/transfer-engine-running.gif" /></p>
+</section>
+</section>
+<section id="transfer-engine-c-c-api">
+<h2>Transfer Engine C/C++ API<a class="headerlink" href="#transfer-engine-c-c-api" title="Link to this heading">#</a></h2>
+<p>Transfer Engine provides interfaces through the <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> class (located in <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/include/transfer_engine.h</span></code>), where the specific data transfer functions for different backends are implemented by the <code class="docutils literal notranslate"><span class="pre">Transport</span></code> class, currently supporting <code class="docutils literal notranslate"><span class="pre">TcpTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">RdmaTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">EfaTransport</span></code> (for AWS EFA), <code class="docutils literal notranslate"><span class="pre">NVMeoFTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">NvlinkTransport</span></code> (for NVIDIA GPUs), <code class="docutils literal notranslate"><span class="pre">IntraNodeNvlinkTransport</span></code> (for NVIDIA GPUs), and <code class="docutils literal notranslate"><span class="pre">HipTransport</span></code> (for AMD GPUs).</p>
+<p>For a complete C++ API reference, see <a class="reference internal" href="cpp-api.html"><span class="std std-doc">Transfer Engine C++ API Reference</span></a>.</p>
+<section id="data-transfer">
+<h3>Data Transfer<a class="headerlink" href="#data-transfer" title="Link to this heading">#</a></h3>
+<p>Transfer Engine provides batch-based read/write transfers between segments (DRAM/VRAM/NVMeof). A typical flow is: register local memory, open a target segment, submit a batch, and poll status. Detailed function signatures and usage are documented in the C++ API reference.</p>
+</section>
+<section id="multi-transport-management">
+<h3>Multi-Transport Management<a class="headerlink" href="#multi-transport-management" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> class internally manages multiple backend <code class="docutils literal notranslate"><span class="pre">Transport</span></code> classes.
+And it will discover the topology between CPU/CUDA and RDMA devices automatically
+(more device types are working in progress, feedbacks are welcome when the automatic discovery mechanism is not accurate),
+and it will install <code class="docutils literal notranslate"><span class="pre">Transport</span></code> automatically based on the topology.</p>
+</section>
+<section id="segment-management-and-metadata-format">
+<h3>Segment Management and Metadata Format<a class="headerlink" href="#segment-management-and-metadata-format" title="Link to this heading">#</a></h3>
+<p>Segment metadata is stored in the metadata service. The following format is provided for reference.</p>
+<details>
+<summary><strong>Metadata Format</strong></summary>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// Used to find the communicable address and exposed rpc port based on server_name.
+// Created: when calling TransferEngine::init().
+// Deleted: when TransferEngine is destructed.
+Key = mooncake/rpc_meta/[server_name]
+Value = {
+    &#39;ip_or_host_name&#39;: &#39;node01&#39;
+    &#39;rpc_port&#39;: 12345
+}
+
+// For segments, the key naming method of mooncake/[proto]/[segment_name] is used, and the segment name can use the Server Name.
+// A segment corresponds to a machine, and a buffer corresponds to different segments of memory or different files or different disks on the machine. Different buffers of the same segment are in the same fault domain.
+
+// RAM Segment, used by RDMA Transport to obtain transfer information.
+// Created: command line tool register.py, at this time buffers are empty, only fill in the information that can be known in advance.
+// Modified: TransferEngine at runtime through register / unregister to add or delete Buffer.
+Key = mooncake/ram/[segment_name]
+Value = {
+    &#39;server_name&#39;: server_name,
+    &#39;protocol&#39;: rdma,
+    &#39;devices&#39;: [
+        { &#39;name&#39;: &#39;mlx5_2&#39;, &#39;lid&#39;: 17, &#39;gid&#39;: &#39;fe:00:...&#39; },
+        { &#39;name&#39;: &#39;mlx5_3&#39;, &#39;lid&#39;: 22, &#39;gid&#39;: &#39;fe:00:...&#39; }
+    ],
+    &#39;priority_matrix&#39;: {
+        &quot;cpu:0&quot;: [[&quot;mlx5_2&quot;], [&quot;mlx5_3&quot;]],
+        &quot;cpu:1&quot;: [[&quot;mlx5_3&quot;], [&quot;mlx5_2&quot;]],
+        &quot;cuda:0&quot;: [[&quot;mlx5_2&quot;], [&quot;mlx5_3&quot;]],
+    },
+    &#39;buffers&#39;: [
+        {
+            &#39;name&#39;: &#39;cpu:0&#39;,
+            &#39;addr&#39;: 0x7fa16bdf5000,
+            &#39;length&#39;: 1073741824,
+            &#39;rkey&#39;: [1fe000, 1fdf00, ...], // The length is the same as the number of elements in the &#39;devices&#39; field
+        },
+    ],
+}
+
+// Created: command line tool register.py, determine the file path that can be mounted.
+// Modified: command line tool mount.py, add a mapping of the machine mounting the file to the file path on the mounting machine to the buffers.local_path_map.
+Key = mooncake/nvmeof/[segment_name]
+Value = {
+    &#39;server_name&#39;: server_name,
+    &#39;protocol&#39;: nvmeof,
+    &#39;buffers&#39;:[
+    {
+        &#39;length&#39;: 1073741824,
+        &#39;file_path&#39;: &quot;/mnt/nvme0&quot; // The file path on this machine
+        &#39;local_path_map&#39;: {
+            &quot;node01&quot;: &quot;/mnt/transfer_engine/node01/nvme0&quot;, // The machine mounting the file -&gt; The file path on the mounting machine
+            .....
+        },
+     }，
+     {
+        &#39;length&#39;: 1073741824,
+        &#39;file_path&#39;: &quot;/mnt/nvme1&quot;,
+        &#39;local_path_map&#39;: {
+            &quot;node02&quot;: &quot;/mnt/transfer_engine/node02/nvme1&quot;,
+            .....
+        },
+     }
+    ]
+}
+</pre></div>
+</div>
+</details>
+</section>
+<section id="http-metadata-server">
+<h3>HTTP Metadata Server<a class="headerlink" href="#http-metadata-server" title="Link to this heading">#</a></h3>
+<p>The HTTP server should implement three following RESTful APIs, while the metadata server configured to <code class="docutils literal notranslate"><span class="pre">http://host:port/metadata</span></code> as an example:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metadata?key=$KEY</span></code>: Get the metadata corresponding to <code class="docutils literal notranslate"><span class="pre">$KEY</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/metadata?key=$KEY</span></code>: Update the metadata corresponding to <code class="docutils literal notranslate"><span class="pre">$KEY</span></code> to the value of the request body.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/metadata?key=$KEY</span></code>: Delete the metadata corresponding to <code class="docutils literal notranslate"><span class="pre">$KEY</span></code>.</p></li>
+</ol>
+<p>For specific implementation, refer to the demo service implemented in Golang at <a class="reference internal" href="#../../../mooncake-transfer-engine/example/http-metadata-server"><span class="xref myst">mooncake-transfer-engine/example/http-metadata-server</span></a>.</p>
+</section>
+</section>
+<section id="using-transfer-engine-to-your-projects">
+<h2>Using Transfer Engine to Your Projects<a class="headerlink" href="#using-transfer-engine-to-your-projects" title="Link to this heading">#</a></h2>
+<section id="using-c-c-interface">
+<h3>Using C/C++ Interface<a class="headerlink" href="#using-c-c-interface" title="Link to this heading">#</a></h3>
+<p>After compiling Mooncake Store, you can move the compiled static library file <code class="docutils literal notranslate"><span class="pre">libtransfer_engine.a</span></code> and the C header file <code class="docutils literal notranslate"><span class="pre">transfer_engine_c.h</span></code> into your own project. There is no need to reference other files under <code class="docutils literal notranslate"><span class="pre">src/transfer_engine</span></code>.</p>
+</section>
+<section id="using-golang-interface">
+<h3>Using Golang Interface<a class="headerlink" href="#using-golang-interface" title="Link to this heading">#</a></h3>
+<p>To support the operational needs of P2P Store, Transfer Engine provides a Golang interface wrapper, see <code class="docutils literal notranslate"><span class="pre">mooncake-p2p-store/src/p2pstore/transfer_engine.go</span></code>.</p>
+<p>When compiling the project, enable the <code class="docutils literal notranslate"><span class="pre">-DWITH_P2P_STORE=ON</span></code> option to compile the P2P Store example program at the same time.</p>
+</section>
+<section id="using-rust-interface">
+<h3>Using Rust Interface<a class="headerlink" href="#using-rust-interface" title="Link to this heading">#</a></h3>
+<p>Under <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/rust</span></code>, the Rust interface implementation of TransferEngine is provided, and a Rust version of the benchmark is implemented based on the interface, similar to <a class="reference internal" href="#../../../mooncake-transfer-engine/example/transfer_engine_bench.cpp"><span class="xref myst">transfer_engine_bench.cpp</span></a>. To compile the rust example, you need to install the Rust SDK and add <code class="docutils literal notranslate"><span class="pre">-DWITH_RUST_EXAMPLE=ON</span></code> in the cmake command.</p>
+</section>
+</section>
+<section id="advanced-runtime-options">
+<h2>Advanced Runtime Options<a class="headerlink" href="#advanced-runtime-options" title="Link to this heading">#</a></h2>
+<p>For advanced users, TransferEngine provides the following advanced runtime options, all of which can be passed in through <strong>environment variables</strong>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_NUM_CQ_PER_CTX</span></code> The number of CQs created per device instance, default value 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_NUM_COMP_CHANNELS_PER_CTX</span></code> The number of Completion Channel created per device instance, default value 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_IB_PORT</span></code> The IB port number used per device instance, default value 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_IB_TC</span></code> Adjust RDMA NIC Traffic Class when switch/NIC defaults differ or for traffic planning. Default value -1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_IB_PCI_RELAXED_ORDERING</span></code> Setting the PCIe ordering to relaxed for the network adapter sometimes results in better performance. Can set 1 to enable RO function. Default value 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MLX5_QP_UDP_SPORTS</span></code> Comma-separated list of UDP source ports (0-65535) used to override the RoCEv2 UDP source port of each QP, for spreading traffic across different ECMP/LAG paths. QP at index <em>i</em> uses <code class="docutils literal notranslate"><span class="pre">list[i</span> <span class="pre">%</span> <span class="pre">size]</span></code>. Default empty (driver chooses). <strong>Requires</strong> an mlx5 NIC + RoCEv2, and the binary built with <code class="docutils literal notranslate"><span class="pre">-DUSE_MLX5DV=ON</span></code>. Recommend ports in the dynamic range 49152-65535. Example: <code class="docutils literal notranslate"><span class="pre">MC_MLX5_QP_UDP_SPORTS=&quot;49152,49153,49154,49155&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MLX5_QP_LAG_PORT_BALANCE</span></code> Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable automatic LAG port balancing across bonded physical ports. QP at index <em>i</em> is pinned to port <code class="docutils literal notranslate"><span class="pre">(i</span> <span class="pre">%</span> <span class="pre">num_lag_ports)</span> <span class="pre">+</span> <span class="pre">1</span></code>; the number of LAG ports is queried from hardware via <code class="docutils literal notranslate"><span class="pre">mlx5dv_query_device</span></code> at startup and printed in the device log. If the device is not in LAG mode the setting is a no-op. Default: disabled. <strong>Requires</strong> the binary built with <code class="docutils literal notranslate"><span class="pre">-DUSE_MLX5DV=ON</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">MC_MLX5_QP_LAG_PORT_BALANCE=1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_GID_INDEX</span></code> The GID index used per device instance, default value 3 (or the maximum value supported by the platform)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_PKEY_INDEX</span></code> The QP <code class="docutils literal notranslate"><span class="pre">pkey_index</span></code> (partition key table index) used when transitioning the QP to the INIT state. Valid range: 0 to 65535. Default value 0. Set this when the partition key required for your fabric is not at index 0 of the HCA’s pkey table</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_CQE_PER_CTX</span></code> The CQ buffer size per device instance, default value 4096</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_EP_PER_CTX</span></code> The maximum number of active EndPoint per device instance, default value 65536. <strong>Note:</strong> For versions prior to 0.3.7.post1, the default value is 256, and it cannot be manually set to 65536. The maximum supported value is 65535!</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_NUM_QP_PER_EP</span></code> The number of QPs per EndPoint, the more the number, the better the fine-grained I/O performance, default value 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_SGE</span></code> The maximum number of SGEs supported per QP, default value 4 (or the highest value supported by the platform)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_WR</span></code> The maximum number of Work Request supported per QP, default value 256 (or the highest value supported by the platform)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_INLINE</span></code> The maximum Inline write data volume (bytes) supported per QP, default value 64 (or the highest value supported by the platform)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MTU</span></code> The MTU length used per device instance, can be 512, 1024, 2048, 4096, default value 4096 (or the maximum length supported by the platform)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_WORKERS_PER_CTX</span></code> The number of asynchronous worker threads corresponding to each device instance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_SLICE_SIZE</span></code> The segmentation granularity of user requests in Transfer Engine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_RETRY_CNT</span></code> The maximum number of retries in Transfer Engine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_LOG_LEVEL</span></code> This option can be set as <code class="docutils literal notranslate"><span class="pre">TRACE</span></code>/<code class="docutils literal notranslate"><span class="pre">INFO</span></code>/<code class="docutils literal notranslate"><span class="pre">WARNING</span></code>/<code class="docutils literal notranslate"><span class="pre">ERROR</span></code> (see <a class="reference external" href="https://github.com/google/glog/blob/master/docs/logging.md">glog doc</a>), and more detailed logs will be output during runtime</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_DISABLE_METACACHE</span></code> Disable local meta cache to prevent transfer failure due to dynamic memory registrations, which may downgrades the performance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_LISTEN_BACKLOG</span></code> The backlog size of socket listening for handshaking, default value is 128</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_MAX_LENGTH</span></code> The maximum handshake message length in bytes for P2P mode. Valid range: 1MB to 128MB. Default value is 1MB (1048576 bytes). Increase this value when using a single RDMA instance with many registered memory buffers (&gt;10,000) to avoid handshake failures. Example: set to 10485760 for 10MB</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_LOG_DIR</span></code> Specify the directory path for log redirection files. If invalid, log to stderr instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_REDIS_PASSWORD</span></code> The password for Redis storage plugin, only takes effect when Redis is specified as the metadata server. If not set, no authentication will be attempted to log in to the Redis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_REDIS_DB_INDEX</span></code> The database index for Redis storage plugin, must be an integer between 0 and 255. Only takes effect when Redis is specified as the metadata server. If not set or invalid, the default value is 0.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FRAGMENT_RATIO</span> </code> In RdmaTransport::submitTransferTask, if the last data piece after division is ≤ 1/MC_FRAGMENT_RATIO of the block size, it merges with the previous block to reduce overhead. The default value is 4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_ENABLE_DEST_DEVICE_AFFINITY</span></code> Enable device affinity for RDMA performance optimization. When enabled, Transfer Engine will prioritize communication with remote NICs that have the same name as local NICs to reduce QP count and improve network performance in rail-optimized topologies. The default value is false</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_ENABLE_PARALLEL_REG_MR</span></code> Control parallel memory region registration across multiple RDMA NICs. Valid values: -1 (auto, default), 0 (disabled), 1 (enabled). When set to -1, parallel registration is automatically enabled when multiple RNICs exist and memory has been pre-touched. Note: If memory hasn’t been touched before registration, parallel registration can be slower than sequential registration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FORCE_HCA</span></code> Force to use RDMA as the active transport, return error if no HCA has been found.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FORCE_MNNVL</span></code> Force to use Multi-Node NVLink as the active transport regardless whether RDMA devices are installed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_INTRA_NVLINK</span></code> Enable intra-node NVLINK transport, and cannot be used together with MC_FORCE_MNNVL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FORCE_TCP</span></code> Force to use TCP as the active transport regardless whether RDMA devices are installed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MIN_RPC_PORT</span></code> Specifies the minimum port number for RPC service. The default value is 15000.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_RPC_PORT</span></code> Specifies the maximum port number for RPC service. The default value is 17000.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_PATH_ROUNDROBIN</span></code> Use round-robin mode in the RDMA path selection. This may be beneficial for transferring large bulks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM</span></code> When set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">ON</span></code>, or <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, Mooncake uses <code class="docutils literal notranslate"><span class="pre">ibv_reg_mr()</span></code> directly for GPU memory registration (requires the <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> kernel module). By default (unset or <code class="docutils literal notranslate"><span class="pre">0</span></code>), Mooncake uses the DMA-BUF path which does not require <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_ENDPOINT_STORE_TYPE</span></code> Choose FIFO Endpoint Store (<code class="docutils literal notranslate"><span class="pre">FIFO</span></code>) or Sieve Endpoint Store (<code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>), default is <code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TCP_ENABLE_CONNECTION_POOL</span></code> Enable TCP Connection Pool to avoid excessive sockets.</p></li>
+</ul>
+</section>
+<section id="c-api-reference">
+<h2>C++ API Reference<a class="headerlink" href="#c-api-reference" title="Link to this heading">#</a></h2>
+<p>For the complete C++ API reference, see <a class="reference internal" href="../../api-reference/cpp/index.html"><span class="doc std std-doc">Transfer Engine C++ API</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="efa-transport-aws">
+<h2>EFA Transport (AWS)<a class="headerlink" href="#efa-transport-aws" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="efa_transport.html">AWS EFA Transport for Mooncake</a></li>
+</ul>
+</div>
+</section>
+<section id="ascend-transport-component">
+<h2>Ascend Transport Component<a class="headerlink" href="#ascend-transport-component" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ascend_direct_transport.html">Ascend Direct Transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ascend_transport.html">Ascend Transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneous_ascend.html">Heterogeneous Ascend Transport</a></li>
+</ul>
+</div>
+</section>
+<section id="sunrise-link-transport-component">
+<h2>Sunrise Link Transport Component<a class="headerlink" href="#sunrise-link-transport-component" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sunrise_link_transport.html">Sunrise Link Transport</a></li>
+</ul>
+</div>
+</section>
+<section id="supported-protocols">
+<h2>Supported Protocols<a class="headerlink" href="#supported-protocols" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
+</ul>
+</div>
+</section>
+<section id="benchmark-and-tuning-guide">
+<h2>Benchmark and Tuning Guide<a class="headerlink" href="#benchmark-and-tuning-guide" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="transfer-engine-bench-tuning.html">Transfer Engine Benchmarking &amp; Tuning Guide</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../tent/failover.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">TENT Failover</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="efa_transport.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS EFA Transport for Mooncake</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment">Segment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ram-segment-in-memory-address-space-dram-vram">1. RAM Segment in Memory Address Space (DRAM, VRAM)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvmeof-segment">2. NVMeof Segment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchtransfer">BatchTransfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-aware-path-selection">Topology Aware Path Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoint-management">Endpoint Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-handling">Fault Handling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-transfer-engine-bench">Example: Transfer Engine Bench</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-run">Sample Run</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine-c-c-api">Transfer Engine C/C++ API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-transport-management">Multi-Transport Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-and-metadata-format">Segment Management and Metadata Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server">HTTP Metadata Server</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-transfer-engine-to-your-projects">Using Transfer Engine to Your Projects</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-c-c-interface">Using C/C++ Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-golang-interface">Using Golang Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-rust-interface">Using Rust Interface</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-runtime-options">Advanced Runtime Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-api-reference">C++ API Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efa-transport-aws">EFA Transport (AWS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ascend-transport-component">Ascend Transport Component</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sunrise-link-transport-component">Sunrise Link Transport Component</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-protocols">Supported Protocols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-and-tuning-guide">Benchmark and Tuning Guide</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

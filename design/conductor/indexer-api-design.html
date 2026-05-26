@@ -1,0 +1,1083 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mooncake Conductor Indexer API &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/conductor/indexer-api-design';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Error Code Explanation" href="../../troubleshooting/error-code.html" />
+    <link rel="prev" title="Mooncake Store HTTP Service" href="../../http-api-reference/http-service.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../api-reference/http/index.html">HTTP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../http-api-reference/http-service.html">Mooncake Store HTTP Service</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mooncake Conductor Indexer API</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/conductor/indexer-api-design.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/design/conductor/indexer-api-design.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mooncake Conductor Indexer API</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts">Concepts</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-tiers">Storage tiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identity-dimensions">Identity dimensions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hashing-standard">Hashing standard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#http-apis">HTTP APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-register"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/register</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-unregister"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/unregister</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-query"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/query</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-query-by-hash"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/query_by_hash</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kv-events-api">KV Events API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#event-envelope">Event envelope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stored"><code class="docutils literal notranslate"><span class="pre">stored</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removed"><code class="docutils literal notranslate"><span class="pre">removed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cleared"><code class="docutils literal notranslate"><span class="pre">cleared</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compatibility-notes">Compatibility notes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mooncake-conductor-indexer-api">
+<h1>Mooncake Conductor Indexer API<a class="headerlink" href="#mooncake-conductor-indexer-api" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Mooncake Conductor is a KV cache indexer used by routers and gateways to make
+cache-aware scheduling decisions. It consumes KV cache events from inference
+engines or storage backends, maintains prefix-hit metadata across cache tiers,
+and exposes HTTP APIs for service registration and cache-hit queries.</p>
+<p>This document incorporates the latest API direction from:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/kvcache-ai/Mooncake/issues/1403">RFC #1403: Mooncake KV-Store Indexer API Standardization</a></p></li>
+<li><p><a class="reference external" href="https://github.com/kvcache-ai/Mooncake/issues/1527">RFC #1527: KV Events API Standardization</a></p></li>
+</ul>
+<p>The Conductor can serve multiple model groups in one process. Each query is
+scoped by model identity, block size, LoRA identity, tenant isolation, and the
+registered instance that can receive traffic.</p>
+</section>
+<section id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Link to this heading">#</a></h2>
+<section id="storage-tiers">
+<h3>Storage tiers<a class="headerlink" href="#storage-tiers" title="Link to this heading">#</a></h3>
+<p>The indexer tracks KV cache availability across three logical tiers:</p>
+<ul class="simple">
+<li><p><strong>G1, Device Pool</strong>: Device-resident KV blocks, such as GPU, NPU, HBM, or
+other accelerator memory owned by inference engines.</p></li>
+<li><p><strong>G2, Host Pool</strong>: CPU or host DRAM KV blocks, including Mooncake registered
+memory pools.</p></li>
+<li><p><strong>G3, Disk Pool</strong>: SSD, 3FS, DFS, NFS, or other disk-backed KV storage.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">medium</span></code> field identifies the concrete tier or device type. Common values
+are <code class="docutils literal notranslate"><span class="pre">gpu</span></code>, <code class="docutils literal notranslate"><span class="pre">cpu</span></code>, and <code class="docutils literal notranslate"><span class="pre">disk</span></code>. Engines may add other values as new media are
+supported.</p>
+</section>
+<section id="identity-dimensions">
+<h3>Identity dimensions<a class="headerlink" href="#identity-dimensions" title="Link to this heading">#</a></h3>
+<p>KV cache hits are interpreted under the following dimensions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dimension</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model_name</span></code> or <code class="docutils literal notranslate"><span class="pre">model</span></code></p></td>
+<td><p>Model identifier. KV blocks from different models are incompatible.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">block_size</span></code></p></td>
+<td><p>Number of tokens per KV block. Different block sizes produce different token-to-block mappings.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">additional_salt</span></code></p></td>
+<td><p>Opaque salt used to separate hash namespaces for quantization, model revision, tenant isolation, or other deployment-specific dimensions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cache_salt</span></code></p></td>
+<td><p>Ensure cached data blocks are kept separate for different customers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lora_name</span></code></p></td>
+<td><p>LoRA adapter name. Empty or <code class="docutils literal notranslate"><span class="pre">null</span></code> means the base model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tenant_id</span></code></p></td>
+<td><p>Upstream tenant or customer identity. Used for isolation and to keep query output bounded.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code></p></td>
+<td><p>Routable API server or engine instance returned by the Indexer API. Routers use this value as the scheduling target.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">backend_id</span></code></p></td>
+<td><p>KV Events identity for the entity that owns the KV blocks. It may be an inference worker, a Mooncake storage daemon, or another cache backend.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">medium</span></code></p></td>
+<td><p>Cache medium where the blocks are present.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dp_rank</span></code></p></td>
+<td><p>Data-parallel rank that owns or can serve the blocks.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code> and <code class="docutils literal notranslate"><span class="pre">backend_id</span></code> intentionally have different meanings.
+<code class="docutils literal notranslate"><span class="pre">instance_id</span></code> is the router-facing target in the Indexer API. <code class="docutils literal notranslate"><span class="pre">backend_id</span></code> is
+the event-facing cache owner in the KV Events API. In deployments where cache
+storage is decoupled from inference workers, <code class="docutils literal notranslate"><span class="pre">backend_id</span></code> can identify a cache
+daemon while <code class="docutils literal notranslate"><span class="pre">instance_id</span></code> still identifies the engine endpoint that receives
+requests.</p>
+</section>
+</section>
+<section id="hashing-standard">
+<h2>Hashing standard<a class="headerlink" href="#hashing-standard" title="Link to this heading">#</a></h2>
+<p>The standardized event contract recommends <strong>XXH3-64 with seed <code class="docutils literal notranslate"><span class="pre">S</span></code></strong>.</p>
+<ul>
+<li><p><strong>Local block hash</strong>:
+<code class="docutils literal notranslate"><span class="pre">XXH3(token_bytes_le,</span> <span class="pre">S)</span></code>, where tokens are little-endian <code class="docutils literal notranslate"><span class="pre">u32</span></code> values
+concatenated for one block.</p></li>
+<li><p><strong>Rolling sequence hash</strong>:
+The first block uses <code class="docutils literal notranslate"><span class="pre">seq_hash[0]</span> <span class="pre">=</span> <span class="pre">local_block_hash[0]</span></code>. Each subsequent
+block uses:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>seq_hash[i] = XXH3(seq_hash[i-1]_le || local_block_hash[i]_le, S)
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">||</span></code> means byte concatenation, not a logical OR.</p>
+</li>
+</ul>
+<p>All hashes used by the standardized KV Events API are rolling sequence hashes.
+A <code class="docutils literal notranslate"><span class="pre">seq_hash</span></code> identifies the whole prefix up to that block depth, so equal
+prefixes produce equal hashes until the first differing block.</p>
+<p>If an engine does not follow the standardized hashing scheme, it must provide
+<code class="docutils literal notranslate"><span class="pre">token_ids</span></code> in <code class="docutils literal notranslate"><span class="pre">stored</span></code> events so the consumer can recompute the indexer’s hash
+representation.</p>
+</section>
+<section id="http-apis">
+<h2>HTTP APIs<a class="headerlink" href="#http-apis" title="Link to this heading">#</a></h2>
+<section id="post-register">
+<h3><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/register</span></code><a class="headerlink" href="#post-register" title="Link to this heading">#</a></h3>
+<p>Registers a KV event publisher and starts consuming events from it.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp://1.1.1.1:5557&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;replay_endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp://1.1.1.1:5558&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vLLM&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;modelname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deepseek&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sql-adapter&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;instance_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vllm-prefill-node1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dp_rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;additionalsalt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;w8a8&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>ZMQ KV event publisher endpoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">replay_endpoint</span></code></p></td>
+<td><p>No</p></td>
+<td><p>ZMQ replay endpoint used to recover missed events.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Publisher type, such as <code class="docutils literal notranslate"><span class="pre">vLLM</span></code>, <code class="docutils literal notranslate"><span class="pre">SGLang</span></code>, or <code class="docutils literal notranslate"><span class="pre">Mooncake</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">modelname</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Model name for this publisher. This is the HTTP API wire name for <code class="docutils literal notranslate"><span class="pre">model_name</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lora_name</span></code></p></td>
+<td><p>No</p></td>
+<td><p>LoRA adapter name. Empty or omitted means base model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tenant_id</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Tenant identity. Defaults to <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Router-facing engine or API server instance identity.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">block_size</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>KV block size in tokens.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dp_rank</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Data-parallel rank for this publisher.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">additionalsalt</span></code></p></td>
+<td><p>No</p></td>
+<td><p>HTTP API wire name for <code class="docutils literal notranslate"><span class="pre">additional_salt</span></code>. Defaults to an empty string.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Successful response:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;registered successfully&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;instance_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vllm-prefill-node1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="post-unregister">
+<h3><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/unregister</span></code><a class="headerlink" href="#post-unregister" title="Link to this heading">#</a></h3>
+<p>Stops consuming events for a registered publisher.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vLLM&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;modelname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deepseek&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sql-adapter&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;instance_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vllm-prefill-node1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dp_rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tenant_id</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">default</span></code>. The current implementation removes the
+subscription identified by <code class="docutils literal notranslate"><span class="pre">(instance_id,</span> <span class="pre">tenant_id,</span> <span class="pre">dp_rank)</span></code>.</p>
+<p>Successful response:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unregistered successfully&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;removed_instances&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;vllm-prefill-node1|default|0&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="post-query">
+<h3><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/query</span></code><a class="headerlink" href="#post-query" title="Link to this heading">#</a></h3>
+<p>Query cache hits by token IDs.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deepseek&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sql-adapter&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;token_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">101</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;instance_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vllm-prefill-node1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cache_salt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;w8a8&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Model name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lora_name</span></code></p></td>
+<td><p>No</p></td>
+<td><p>LoRA adapter name. Empty or omitted means base model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lora_id</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Deprecated compatibility field. Do not use together with <code class="docutils literal notranslate"><span class="pre">lora_name</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">token_ids</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Prompt token IDs. Only complete blocks are considered.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tenant_id</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Tenant identity. Defaults to <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code></p></td>
+<td><p>No</p></td>
+<td><p>If set, query one instance. If omitted, query all instances registered under the tenant.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">block_size</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>KV block size in tokens.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cache_salt</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Query-side hash namespace salt. Corresponds to the event <code class="docutils literal notranslate"><span class="pre">additional_salt</span></code> concept.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Response:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;vllm-prefill-node1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;longest_matched&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;GPU&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;DP&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;CPU&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;DISK&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">longest_matched</span></code></p></td>
+<td><p>Longest continuous prefix hit in tokens across all tracked media and DP ranks for this instance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GPU</span></code>, <code class="docutils literal notranslate"><span class="pre">CPU</span></code>, <code class="docutils literal notranslate"><span class="pre">DISK</span></code></p></td>
+<td><p>Matched prefix tokens available on each medium. Names are examples; future media can be added.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DP</span></code></p></td>
+<td><p>Matched prefix tokens grouped by data-parallel rank.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="post-query-by-hash">
+<h3><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/query_by_hash</span></code><a class="headerlink" href="#post-query-by-hash" title="Link to this heading">#</a></h3>
+<p>Queries cache hits by precomputed rolling sequence hashes. This API avoids
+sending long token lists over the network.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deepseek&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sql-adapter&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;seq_hashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1234567890</span><span class="p">,</span><span class="w"> </span><span class="mi">9876543210</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;instance_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vllm-prefill-node1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cache_salt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;w8a8&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For compatibility with earlier drafts, clients may call the hash list
+<code class="docutils literal notranslate"><span class="pre">block_hash</span></code>, but new clients should use <code class="docutils literal notranslate"><span class="pre">seq_hashes</span></code> to make it explicit that
+the values are rolling sequence hashes rather than local block hashes.</p>
+<p>The response shape is the same as <code class="docutils literal notranslate"><span class="pre">/query</span></code>. For this API,
+<code class="docutils literal notranslate"><span class="pre">longest_matched</span> <span class="pre">=</span> <span class="pre">block_size</span> <span class="pre">*</span> <span class="pre">matched_hash_count</span></code>.</p>
+</section>
+</section>
+<section id="kv-events-api">
+<h2>KV Events API<a class="headerlink" href="#kv-events-api" title="Link to this heading">#</a></h2>
+<p>The KV Events API is the wire contract between cache owners and indexers.
+Conductor normalizes engine-specific events into this model.</p>
+<section id="event-envelope">
+<h3>Event envelope<a class="headerlink" href="#event-envelope" title="Link to this heading">#</a></h3>
+<p>Every standardized event carries the same envelope:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1739145600000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stored&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;llama-3.1-8b&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;additional_salt&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;backend_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;worker-0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;medium&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpu&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dp_rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">event_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u64</span></code></p></td>
+<td><p>Monotonically increasing sequence number scoped by the event stream dimensions. Authoritative for ordering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u64</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Unix epoch milliseconds. Informational only, not used for ordering.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">event_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p>One of <code class="docutils literal notranslate"><span class="pre">stored</span></code>, <code class="docutils literal notranslate"><span class="pre">removed</span></code>, or <code class="docutils literal notranslate"><span class="pre">cleared</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">model_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Model identifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">block_size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u32</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Tokens per block.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">additional_salt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Opaque deployment salt or namespace.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lora_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>LoRA adapter name, or <code class="docutils literal notranslate"><span class="pre">null</span></code> for the base model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tenant_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p>Tenant or customer identity.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">backend_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p>Entity that owns the KV blocks. This can be an engine worker or a decoupled cache daemon.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">medium</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Cache medium such as <code class="docutils literal notranslate"><span class="pre">gpu</span></code>, <code class="docutils literal notranslate"><span class="pre">cpu</span></code>, or <code class="docutils literal notranslate"><span class="pre">disk</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dp_rank</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u32</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Data-parallel rank.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Events must be processed in consecutive <code class="docutils literal notranslate"><span class="pre">event_id</span></code> order within each stream
+identified by <code class="docutils literal notranslate"><span class="pre">(model_name,</span> <span class="pre">block_size,</span> <span class="pre">additional_salt,</span> <span class="pre">lora_name,</span> <span class="pre">tenant_id,</span> <span class="pre">backend_id,</span> <span class="pre">medium,</span> <span class="pre">dp_rank)</span></code>.</p>
+</section>
+<section id="stored">
+<h3><code class="docutils literal notranslate"><span class="pre">stored</span></code><a class="headerlink" href="#stored" title="Link to this heading">#</a></h3>
+<p>Published when one or more consecutive blocks are committed to a KV cache.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1739145600000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stored&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;llama-3.1-8b&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;additional_salt&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;backend_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;worker-0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;medium&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpu&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dp_rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;seq_hashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1234567890</span><span class="p">,</span><span class="w"> </span><span class="mi">9876543210</span><span class="p">,</span><span class="w"> </span><span class="mi">1122334455</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;base_block_idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;parent_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9999999999</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;token_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seq_hashes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u64[]</span></code></p></td>
+<td><p>Rolling sequence hashes of consecutive stored blocks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">base_block_idx</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u32</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Zero-based depth of the first block in this event.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">parent_hash</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u64</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Rolling sequence hash at depth <code class="docutils literal notranslate"><span class="pre">base_block_idx</span> <span class="pre">-</span> <span class="pre">1</span></code>; <code class="docutils literal notranslate"><span class="pre">null</span></code> at the root.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">token_ids</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u32[]</span> <span class="pre">or</span> <span class="pre">null</span></code></p></td>
+<td><p>Tokens across all blocks in this event. Required when the publisher does not use the standardized hash.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>At least one of <code class="docutils literal notranslate"><span class="pre">base_block_idx</span></code> or <code class="docutils literal notranslate"><span class="pre">parent_hash</span></code> must be present so the
+consumer can locate the blocks in the sequence.</p>
+</section>
+<section id="removed">
+<h3><code class="docutils literal notranslate"><span class="pre">removed</span></code><a class="headerlink" href="#removed" title="Link to this heading">#</a></h3>
+<p>Published when one or more blocks are evicted.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1739145601000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;removed&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;llama-3.1-8b&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;additional_salt&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;backend_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;worker-0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;medium&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpu&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dp_rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;seq_hashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1122334455</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;base_block_idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">seq_hashes</span></code> is required. <code class="docutils literal notranslate"><span class="pre">base_block_idx</span></code> is optional but recommended for
+collision detection and observability.</p>
+</section>
+<section id="cleared">
+<h3><code class="docutils literal notranslate"><span class="pre">cleared</span></code><a class="headerlink" href="#cleared" title="Link to this heading">#</a></h3>
+<p>Published when all blocks for the event stream dimensions are purged.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1739145602000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cleared&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;llama-3.1-8b&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;block_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;additional_salt&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lora_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;backend_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;worker-0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;medium&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpu&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dp_rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>No additional payload fields are required.</p>
+</section>
+</section>
+<section id="compatibility-notes">
+<h2>Compatibility notes<a class="headerlink" href="#compatibility-notes" title="Link to this heading">#</a></h2>
+<p>The current Conductor implementation consumes vLLM ZMQ msgpack batches and
+normalizes <code class="docutils literal notranslate"><span class="pre">BlockStored</span></code> and <code class="docutils literal notranslate"><span class="pre">BlockRemoved</span></code> into the internal prefix index.
+Registration metadata supplies fields such as <code class="docutils literal notranslate"><span class="pre">modelname</span></code>, <code class="docutils literal notranslate"><span class="pre">tenant_id</span></code>,
+<code class="docutils literal notranslate"><span class="pre">instance_id</span></code>, <code class="docutils literal notranslate"><span class="pre">block_size</span></code>, and <code class="docutils literal notranslate"><span class="pre">additionalsalt</span></code> when the engine event does
+not carry the full standardized envelope.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../http-api-reference/http-service.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mooncake Store HTTP Service</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../troubleshooting/error-code.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Error Code Explanation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts">Concepts</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-tiers">Storage tiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identity-dimensions">Identity dimensions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hashing-standard">Hashing standard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#http-apis">HTTP APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-register"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/register</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-unregister"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/unregister</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-query"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/query</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-query-by-hash"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/query_by_hash</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kv-events-api">KV Events API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#event-envelope">Event envelope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stored"><code class="docutils literal notranslate"><span class="pre">stored</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removed"><code class="docutils literal notranslate"><span class="pre">removed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cleared"><code class="docutils literal notranslate"><span class="pre">cleared</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compatibility-notes">Compatibility notes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,832 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TENT Failover &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/tent/failover';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Transfer Engine" href="../transfer-engine/index.html" />
+    <link rel="prev" title="TENT Metrics System" href="metrics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">TENT: Transfer Engine NEXT</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">TENT Metrics System</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TENT Failover</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/tent/failover.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/design/tent/failover.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TENT Failover</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-model">Fault Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-machine">State Machine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-transport-failover">Cross-transport failover</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rdma-rail-recovery">RDMA rail recovery</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observability">Observability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric">Metric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-keywords">Log keywords</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faultproxytransport">FaultProxyTransport</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-only-injection-hook">Test-only injection hook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-suite">End-to-end suite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-manually">Running manually</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-gaps">Known Gaps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="tent-failover">
+<h1>TENT Failover<a class="headerlink" href="#tent-failover" title="Link to this heading">#</a></h1>
+<p>TENT hides transfer failures from the application by recovering inside the data path.
+This document describes how the recovery works, which knobs control it, and how it is tested.</p>
+<p>The design has two layers:</p>
+<ol class="arabic simple">
+<li><p><strong>Cross-transport failover</strong> in <code class="docutils literal notranslate"><span class="pre">TransferEngineImpl</span></code>. When a transport fails a task at the completion stage, the engine moves that task to the next available transport (for example RDMA → TCP). Submit-stage failures are not retried today; see Known Gaps.</p></li>
+<li><p><strong>Intra-RDMA rail recovery</strong> in <code class="docutils literal notranslate"><span class="pre">RailMonitor</span></code>. When a specific (local NIC, remote NIC) rail keeps failing, the monitor pauses it with exponential cooldown; a successful transfer or the cooldown expiry brings it back.</p></li>
+</ol>
+<p>Application code submits a batch and polls <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code>. It never sees a <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> task as long as any healthy path remains and the failover budget is not exhausted.</p>
+<section id="fault-model">
+<h2>Fault Model<a class="headerlink" href="#fault-model" title="Link to this heading">#</a></h2>
+<p>TENT focuses on three kinds of transient faults:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fault</p></th>
+<th class="head"><p>Surface</p></th>
+<th class="head"><p>Recovery action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Work request completion error (WC error)</p></td>
+<td><p>RDMA worker sees a bad completion</p></td>
+<td><p>Rail-level <code class="docutils literal notranslate"><span class="pre">markFailed</span></code> + task-level resubmit</p></td>
+</tr>
+<tr class="row-odd"><td><p>QP / endpoint failure</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">submitTransferTasks</span></code> returns non-OK</p></td>
+<td><p><em>Not retried today</em>: task surfaces as <code class="docutils literal notranslate"><span class="pre">FAILED</span></code>. See Known Gaps.</p></td>
+</tr>
+<tr class="row-even"><td><p>Peer disconnect mid-transfer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> returns <code class="docutils literal notranslate"><span class="pre">FAILED</span></code></p></td>
+<td><p>Cross-transport failover</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Permanent or application-visible errors (invalid arguments, out-of-memory, segment not found) are <em>not</em> retried; they are returned to the caller as-is.</p>
+</section>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                <span class="o">+-------------------------+</span>
+ <span class="n">submitTransfer</span> <span class="o">|</span>  <span class="n">TransferEngineImpl</span>     <span class="o">|</span>
+ <span class="o">---------------&gt;</span> <span class="n">classify</span> <span class="n">by</span> <span class="n">TransportType</span>
+                <span class="o">|</span>  <span class="n">submitTransferTasks</span>    <span class="o">|----</span><span class="n">failure</span><span class="o">----+</span>
+                <span class="o">+-------------------------+</span>               <span class="o">|</span>
+                      <span class="o">|</span>                                   <span class="n">v</span>
+                      <span class="o">|</span>                       <span class="n">resubmitTransferTask</span>
+                      <span class="o">|</span>                       <span class="p">(</span><span class="n">bump</span> <span class="n">priority</span><span class="p">,</span> <span class="n">pick</span> <span class="nb">next</span>
+                      <span class="o">|</span>                        <span class="n">transport</span><span class="p">,</span> <span class="n">resubmit</span><span class="p">)</span>
+                      <span class="n">v</span>
+         <span class="o">+---------------------------+</span>
+         <span class="o">|</span> <span class="n">RdmaTransport</span> <span class="o">/</span> <span class="n">workers</span>   <span class="o">|</span>
+         <span class="o">|</span>   <span class="o">+---------------------+</span> <span class="o">|</span>
+         <span class="o">|</span>   <span class="o">|</span> <span class="n">RailMonitor</span>         <span class="o">|</span> <span class="o">|</span>
+         <span class="o">|</span>   <span class="o">|</span>  <span class="n">per</span><span class="o">-</span><span class="n">rail</span> <span class="n">state</span>     <span class="o">|</span> <span class="o">|</span>
+         <span class="o">|</span>   <span class="o">|</span>  <span class="n">cooldown</span> <span class="o">/</span> <span class="n">recover</span> <span class="o">|</span> <span class="o">|</span>
+         <span class="o">|</span>   <span class="o">+---------------------+</span> <span class="o">|</span>
+         <span class="o">+---------------------------+</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Each request is owned by one <code class="docutils literal notranslate"><span class="pre">TaskInfo</span></code>. <code class="docutils literal notranslate"><span class="pre">type</span></code> names the transport currently executing the task; <code class="docutils literal notranslate"><span class="pre">xport_priority</span></code> is the index into the ranked fallback list; <code class="docutils literal notranslate"><span class="pre">failover_count</span></code> caps how many times we may re-resolve the transport.</p></li>
+<li><p>The ranked fallback list comes from <code class="docutils literal notranslate"><span class="pre">getTransportType(req,</span> <span class="pre">priority)</span></code>. Priority 0 yields the best available transport; increasing priority walks down the list; <code class="docutils literal notranslate"><span class="pre">UNSPEC</span></code> means no transport left.</p></li>
+<li><p>RDMA rail state lives in <code class="docutils literal notranslate"><span class="pre">RailMonitor</span></code>. Its lifecycle is independent of the task-level state machine: a rail can be paused while tasks keep flowing on other rails.</p></li>
+</ul>
+</section>
+<section id="state-machine">
+<h2>State Machine<a class="headerlink" href="#state-machine" title="Link to this heading">#</a></h2>
+<section id="cross-transport-failover">
+<h3>Cross-transport failover<a class="headerlink" href="#cross-transport-failover" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code> is the single entry point that promotes a failing task to the next transport:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">++</span><span class="n">task</span><span class="o">.</span><span class="n">failover_count</span>
+<span class="k">if</span> <span class="n">failover_count</span> <span class="o">&gt;</span> <span class="n">max_failover_attempts</span>  <span class="o">-&gt;</span> <span class="k">return</span> <span class="n">error</span> <span class="p">(</span><span class="n">exhausted</span><span class="p">)</span>
+
+<span class="n">task</span><span class="o">.</span><span class="n">xport_priority</span><span class="o">++</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="n">resolveTransport</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">xport_priority</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">UNSPEC</span>                          <span class="o">-&gt;</span> <span class="k">return</span> <span class="n">error</span> <span class="p">(</span><span class="n">no</span> <span class="n">transport</span><span class="p">)</span>
+
+<span class="n">transport_list_</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">submitTransferTasks</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It has two callers, one per recoverable failure surface:</p>
+<ol class="arabic simple">
+<li><p><strong>Completion-stage failure.</strong> <code class="docutils literal notranslate"><span class="pre">getTransferStatus(batch_id,</span> <span class="pre">task_id,</span> <span class="pre">status)</span></code> and the batch-form overload call <code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code> once per <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> completion. On success the task is re-marked <code class="docutils literal notranslate"><span class="pre">PENDING</span></code> so the aggregated batch status does not latch to <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> because of a task that is actually retrying.</p></li>
+<li><p><strong>Exhaustion.</strong> When the budget is hit, <code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code> sets the returned status to <code class="docutils literal notranslate"><span class="pre">InvalidEntry(&quot;Failover</span> <span class="pre">limit</span> <span class="pre">exceeded,</span> <span class="pre">all</span> <span class="pre">transports</span> <span class="pre">exhausted&quot;)</span></code>. Callers leave <code class="docutils literal notranslate"><span class="pre">task.type</span></code> unchanged; the task then reports <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> through the normal status flow.</p></li>
+</ol>
+<p>Submit-stage failures (<code class="docutils literal notranslate"><span class="pre">submitTransferTasks</span></code> returning non-OK) are <strong>not</strong> retried today. They mark the task as <code class="docutils literal notranslate"><span class="pre">UNSPEC</span></code>, and <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> short-circuits to <code class="docutils literal notranslate"><span class="pre">FAILED</span></code>. See Known Gaps for why.</p>
+</section>
+<section id="rdma-rail-recovery">
+<h3>RDMA rail recovery<a class="headerlink" href="#rdma-rail-recovery" title="Link to this heading">#</a></h3>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">RdmaTransport</span></code>, each completion drives the rail monitor:</p>
+<ul class="simple">
+<li><p>Bad completion → <code class="docutils literal notranslate"><span class="pre">rail.markFailed(local_nic,</span> <span class="pre">remote_nic)</span></code></p></li>
+<li><p>Good completion → <code class="docutils literal notranslate"><span class="pre">rail.markRecovered(local_nic,</span> <span class="pre">remote_nic)</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">markFailed</span></code> bumps <code class="docutils literal notranslate"><span class="pre">error_count</span></code> inside <code class="docutils literal notranslate"><span class="pre">error_window_</span></code>. Once the count hits <code class="docutils literal notranslate"><span class="pre">error_threshold_</span></code> the rail is paused until <code class="docutils literal notranslate"><span class="pre">now</span> <span class="pre">+</span> <span class="pre">cooldown_</span></code>; the cooldown doubles on every repeat failure up to <code class="docutils literal notranslate"><span class="pre">kMaxCooldown</span></code> (300 s).</p>
+<p><code class="docutils literal notranslate"><span class="pre">markRecovered</span></code> clears the error count, un-pauses the rail, and resets the exponential-backoff memory so the next failure cycle starts from the initial cooldown. A fast path returns without work when the rail is already healthy, which is the common case on the completion hot path.</p>
+<p><code class="docutils literal notranslate"><span class="pre">available(local,</span> <span class="pre">remote)</span></code> is the gate every work request passes through before posting. If the cooldown has expired, <code class="docutils literal notranslate"><span class="pre">available</span></code> itself resets all backoff state (error count, resume time, cooldown) and logs <code class="docutils literal notranslate"><span class="pre">Rail</span> <span class="pre">recovered:</span> <span class="pre">...</span> <span class="pre">(cooldown</span> <span class="pre">expired)</span></code>. Otherwise it returns false and the scheduler picks another rail via <code class="docutils literal notranslate"><span class="pre">findBestRemoteDevice</span></code>.</p>
+<p>This produces two independent recovery signals — cooldown expiry and live success — so a flaky rail does not stall forever if no other rail is posted to, and a recovered rail returns to service at the first good completion instead of waiting for the full cooldown.</p>
+</section>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p>All knobs live in the top-level <code class="docutils literal notranslate"><span class="pre">transfer-engine.json</span></code>. Defaults are safe for production; tune only if you have evidence.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_failover_attempts</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p>Upper bound on <code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code> calls per task. <code class="docutils literal notranslate"><span class="pre">0</span></code> disables cross-transport failover entirely. <code class="docutils literal notranslate"><span class="pre">1</span></code> allows exactly one switch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_error_threshold</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p>Number of failures inside <code class="docutils literal notranslate"><span class="pre">rail_error_window_secs</span></code> that trips a rail into the paused state.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_error_window_secs</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p>Sliding window for counting rail errors. A failure older than the window resets <code class="docutils literal notranslate"><span class="pre">error_count</span></code> to 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_cooldown_secs</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">30</span></code></p></td>
+<td><p>Initial cooldown after tripping. Doubles on each repeat failure, capped at 300 s.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The RDMA keys are read by <code class="docutils literal notranslate"><span class="pre">RailMonitor::load</span></code>. Example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;max_failover_attempts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transports&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;rdma&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;rail_error_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;rail_error_window_secs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;rail_cooldown_secs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="observability">
+<h2>Observability<a class="headerlink" href="#observability" title="Link to this heading">#</a></h2>
+<section id="metric">
+<h3>Metric<a class="headerlink" href="#metric" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">tent_transport_failover_total</span></code> is a counter incremented once per successful transport switch inside <code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code>. A non-zero rate means the engine is actively recovering; a sudden jump usually points at a single bad link or flaky peer.</p>
+<p>The counter is only built when TENT is compiled with <code class="docutils literal notranslate"><span class="pre">-DTENT_METRICS_ENABLED=ON</span></code> (see <code class="docutils literal notranslate"><span class="pre">metrics.md</span></code>). Without that flag the macro is a no-op.</p>
+</section>
+<section id="log-keywords">
+<h3>Log keywords<a class="headerlink" href="#log-keywords" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keyword</p></th>
+<th class="head"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Transport</span> <span class="pre">failover:</span> <span class="pre">X</span> <span class="pre">-&gt;</span> <span class="pre">Y</span> <span class="pre">(attempt</span> <span class="pre">N/M)</span></code></p></td>
+<td><p>A task has successfully switched transports.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Task</span> <span class="pre">failover</span> <span class="pre">limit</span> <span class="pre">reached</span> <span class="pre">(M),</span> <span class="pre">last</span> <span class="pre">transport=X</span></code></p></td>
+<td><p>Task exhausted its budget and will surface <code class="docutils literal notranslate"><span class="pre">FAILED</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">more</span> <span class="pre">transports</span> <span class="pre">available</span> <span class="pre">after</span> <span class="pre">X</span> <span class="pre">failed</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">resolveTransport</span></code> returned <code class="docutils literal notranslate"><span class="pre">UNSPEC</span></code>; no further fallback exists for this request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Rail</span> <span class="pre">recovered:</span> <span class="pre">local_nic=...</span> <span class="pre">remote_nic=...</span> <span class="pre">(cooldown</span> <span class="pre">expired)</span></code></p></td>
+<td><p>Cooldown elapsed and the rail is back in service.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rail</span> <span class="pre">recovered:</span> <span class="pre">...</span> <span class="pre">(un-paused</span> <span class="pre">by</span> <span class="pre">successful</span> <span class="pre">transfer)</span></code></p></td>
+<td><p>Live success on a previously paused rail brought it back early.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
+<p>Real hardware faults are hard to stage, so TENT tests the failover machinery with decorator-style fault injection.</p>
+<section id="faultproxytransport">
+<h3>FaultProxyTransport<a class="headerlink" href="#faultproxytransport" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">FaultProxyTransport</span></code> wraps any <code class="docutils literal notranslate"><span class="pre">Transport</span></code> and injects four policy-driven faults:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">submit_fail_rate</span></code> — probability that <code class="docutils literal notranslate"><span class="pre">submitTransferTasks</span></code> returns an error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status_corrupt_rate</span></code> — probability that <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> flips <code class="docutils literal notranslate"><span class="pre">COMPLETED</span> <span class="pre">→</span> <span class="pre">FAILED</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fail_after_n_submits</span></code> — deterministic variant: succeed the first N submits, then always fail.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fail_install</span></code> — make <code class="docutils literal notranslate"><span class="pre">install()</span></code> fail, simulating a transport that cannot come up.</p></li>
+</ul>
+<p>Because it implements the <code class="docutils literal notranslate"><span class="pre">Transport</span></code> interface, the engine sees an ordinary transport. All failover paths (<code class="docutils literal notranslate"><span class="pre">submitTransfer</span></code>, <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code>, <code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code>) run unmodified.</p>
+</section>
+<section id="test-only-injection-hook">
+<h3>Test-only injection hook<a class="headerlink" href="#test-only-injection-hook" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">TransferEngineImpl::swapTransportForTest</span></code> replaces the transport in one slot after <code class="docutils literal notranslate"><span class="pre">construct()</span></code>. This is the only way the end-to-end test can wrap the real transport with <code class="docutils literal notranslate"><span class="pre">FaultProxyTransport</span></code> without bypassing <code class="docutils literal notranslate"><span class="pre">resolveTransport</span></code> or <code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code>. Production code never calls it.</p>
+</section>
+<section id="end-to-end-suite">
+<h3>End-to-end suite<a class="headerlink" href="#end-to-end-suite" title="Link to this heading">#</a></h3>
+<p>The end-to-end failover test suite drives the real <code class="docutils literal notranslate"><span class="pre">TransferEngineImpl</span></code> with fake transports (<code class="docutils literal notranslate"><span class="pre">FakeTransport</span></code>) wrapped in <code class="docutils literal notranslate"><span class="pre">FaultProxyTransport</span></code>. It uses a <code class="docutils literal notranslate"><span class="pre">p2p</span></code> metadata backend on <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> so no external services are required — the whole suite is self-contained.</p>
+<p>Current cases:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>What it exercises</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">StatusCorruptionTriggersFailoverToSecondary</span></code></p></td>
+<td><p>Primary reports <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> in <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code>; engine must resubmit on the secondary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BothTransportsFailExhaustsFailoverBudget</span></code></p></td>
+<td><p>Both transports fail at the completion stage; task must surface <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> once the budget is drained.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MixedFaultsAcrossManySubmissions</span></code></p></td>
+<td><p>10 one-request batches with 30% completion corruption on RDMA; every task must end <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>, and submit-counter math must hold.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MaxFailoverAttemptsZeroDisablesFailover</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max_failover_attempts</span> <span class="pre">=</span> <span class="pre">0</span></code> → the first completion fault is permanent, TCP is never touched.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MaxFailoverAttemptsOneAllowsSingleFailover</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max_failover_attempts</span> <span class="pre">=</span> <span class="pre">1</span></code> → one switch allowed; RDMA fault → TCP success.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PerTaskFailoverCountsAreIndependent</span></code></p></td>
+<td><p>A failing task must not consume another task’s budget; <code class="docutils literal notranslate"><span class="pre">failover_count</span></code> is strictly per-task.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A test-local <code class="docutils literal notranslate"><span class="pre">PerRequestFaultProxy</span></code> (in the same file) subclasses <code class="docutils literal notranslate"><span class="pre">FaultProxyTransport</span></code> to take a <code class="docutils literal notranslate"><span class="pre">std::function</span></code> predicate, remembers which sub-task ids it marked as “poisoned” at submit time, and flips only those completions from <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code> to <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> at status-query time.</p>
+</section>
+<section id="running-manually">
+<h3>Running manually<a class="headerlink" href="#running-manually" title="Link to this heading">#</a></h3>
+<p>The TENT tests are <strong>not</strong> in CI today (the upstream workflow builds with <code class="docutils literal notranslate"><span class="pre">USE_TENT=OFF</span></code>). Run them locally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build-tent<span class="w"> </span>-DUSE_TENT<span class="o">=</span>ON<span class="w"> </span>-DUSE_CUDA<span class="o">=</span>OFF
+cmake<span class="w"> </span>--build<span class="w"> </span>build-tent<span class="w"> </span>--target<span class="w"> </span>tent_engine_failover_e2e_test<span class="w"> </span>-j
+./build-tent/mooncake-transfer-engine/tent/tests/tent_engine_failover_e2e_test
+</pre></div>
+</div>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">USE_CUDA=OFF</span></code> forces <code class="docutils literal notranslate"><span class="pre">CpuPlatform</span></code>, which always reports <code class="docutils literal notranslate"><span class="pre">MTYPE_CPU</span></code>. With <code class="docutils literal notranslate"><span class="pre">USE_CUDA=ON</span></code> on a host without a GPU, <code class="docutils literal notranslate"><span class="pre">cudaPointerGetAttributes</span></code> fails, <code class="docutils literal notranslate"><span class="pre">getMemoryType</span></code> returns <code class="docutils literal notranslate"><span class="pre">MTYPE_UNKNOWN</span></code>, every transport reports unavailable, and <code class="docutils literal notranslate"><span class="pre">resolveTransport</span></code> returns <code class="docutils literal notranslate"><span class="pre">UNSPEC</span></code> before the fault injection ever runs.</p>
+<p>Companion unit tests cover the rail monitor and related building blocks: <code class="docutils literal notranslate"><span class="pre">tent_rail_monitor_test</span></code>, <code class="docutils literal notranslate"><span class="pre">tent_failover_test</span></code>, <code class="docutils literal notranslate"><span class="pre">tent_fault_proxy_test</span></code>.</p>
+</section>
+</section>
+<section id="known-gaps">
+<h2>Known Gaps<a class="headerlink" href="#known-gaps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Submit-stage failures do not trigger failover.</strong> When <code class="docutils literal notranslate"><span class="pre">submitTransferTasks</span></code> returns non-OK, every task in that call is marked <code class="docutils literal notranslate"><span class="pre">UNSPEC</span></code> and surfaces as <code class="docutils literal notranslate"><span class="pre">FAILED</span></code>. A naive retry loop here is unsafe for two reasons:</p>
+<ol class="arabic simple">
+<li><p><strong>Merged requests.</strong> When <code class="docutils literal notranslate"><span class="pre">merge_requests</span></code> is enabled (default), <code class="docutils literal notranslate"><span class="pre">task_id_list[type]</span></code> contains both the real merged task and its derived aliases. Resubmitting per task-id re-posts one logical transfer multiple times on the fallback transport, breaking the deduplication the merge pass established.</p></li>
+<li><p><strong>Partial enqueue.</strong> Some transports (for example <code class="docutils literal notranslate"><span class="pre">ShmTransport::submitTransferTasks</span></code>, <code class="docutils literal notranslate"><span class="pre">NVLinkTransport::submitTransferTasks</span></code>) enqueue or start work for earlier requests in <code class="docutils literal notranslate"><span class="pre">request_list</span></code> before returning an error on a later one. The return status alone does not tell us which tasks partially succeeded, so a blanket resubmit would duplicate already-started transfers.
+A safe submit-stage recovery needs either (a) a transport-level “atomic submit” capability flag plus per-task skip of derived ids, or (b) per-request status returned from <code class="docutils literal notranslate"><span class="pre">submitTransferTasks</span></code>. Neither exists today.</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">markRecovered</span></code> (and cooldown expiry in <code class="docutils literal notranslate"><span class="pre">available</span></code>) clears the exponential-backoff memory entirely. A rail that flaps repeatedly therefore does not accumulate a growing cooldown across recovery cycles. If this becomes a problem the fix is to decay rather than reset.</p></li>
+<li><p>Cross-transport failover is driven purely by return status; there is no latency-based “this transport is healthy but too slow, try another” signal. That belongs to the scheduler, not this document.</p></li>
+<li><p>TENT tests are not exercised by CI. A follow-up can add a CI job that builds with <code class="docutils literal notranslate"><span class="pre">-DUSE_TENT=ON</span> <span class="pre">-DUSE_CUDA=OFF</span></code> and runs the <code class="docutils literal notranslate"><span class="pre">tent_*</span></code> test targets; none of the code in this document changes in that case.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="metrics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">TENT Metrics System</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../transfer-engine/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Transfer Engine</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-model">Fault Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-machine">State Machine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-transport-failover">Cross-transport failover</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rdma-rail-recovery">RDMA rail recovery</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observability">Observability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric">Metric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-keywords">Log keywords</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faultproxytransport">FaultProxyTransport</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-only-injection-hook">Test-only injection hook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-suite">End-to-end suite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-manually">Running manually</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-gaps">Known Gaps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

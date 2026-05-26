@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transfer Engine &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh_archive/transfer-engine';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/zh_archive/transfer-engine.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh_archive/transfer-engine.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transfer Engine</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment">Segment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dramvram-ram-segment">1. 位于内存地址空间（DRAM、VRAM）的 RAM Segment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvmeof-nvmeof-segment">2. 位于挂载到 NVMeof 上文件的 <strong>NVMeof Segment</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchtransfer">BatchTransfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-aware-path-selection">拓扑感知路径选择（Topology Aware Path Selection）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">端点管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">故障处理</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine-bench">范例程序：Transfer Engine Bench</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">运行示例及结果判读</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-c-api">C/C++ API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">数据传输</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-transferrequest">TransferEngine::TransferRequest</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatebatchid">TransferEngine::allocateBatchID</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer">TransferEngine::submitTransfer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransferstatus">TransferEngine::getTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freebatchid">TransferEngine::freeBatchID</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transport">多 Transport 管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">空间注册</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemory">TransferEngine::registerLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemory">TransferEngine::unregisterLocalMemory</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Segment 管理与元数据格式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http">HTTP 元数据服务</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">构造函数与初始化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">二次开发</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-c">使用 C/C++ 接口二次开发</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#golang">使用 Golang 接口二次开发</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rust">使用 Rust 接口二次开发</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">高级运行时选项</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="transfer-engine">
+<h1>Transfer Engine<a class="headerlink" href="#transfer-engine" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Mooncake Transfer Engine 是一个围绕 Segment 和 BatchTransfer 两个核心抽象设计的高性能，零拷贝数据传输库。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#segment"><span class="xref myst"><strong>Segment</strong></span></a> 代表一段可被远程读写的连续地址空间，既可以是 DRAM 或 VRAM 提供的非持久化存储 <strong>RAM Segment</strong>，也可以是 NVMeof 提供的持久化存储 <strong>NVMeof Segment</strong>。</p></li>
+<li><p><a class="reference internal" href="#batchtransfer"><span class="xref myst"><strong>BatchTransfer</strong></span></a> 封装了操作请求，具体负责将一个 Segment 中非连续的一组数据空间的数据和另外一组 Segment 的对应空间进行数据同步，支持 Read/Write 两种方向，因此类似一个异步且更灵活的的 AllScatter/AllGather。</p></li>
+</ul>
+<p><img alt="transfer_engine" src="../image/transfer-engine.png" /></p>
+<p>如上图所示，每个特定的客户端对应一个 TransferEngine，其中不仅包含一个 RAM Segment，还集成了对于多线程多网卡高速传输的管理。RAM Segment 原则上就对应这个 TransferEngine 的全部虚拟地址空间，但实际上仅仅会注册其中的部分区域（被称为一个 Buffer）供外部 (GPUDirect) RDMA Read/Write。每一段 Buffer 可以分别设置权限（对应 RDMA rkey 等）和网卡亲和性（比如基于拓扑优先从哪张卡读写等）。</p>
+<p>Mooncake Transfer Engine 通过 <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> 类对外提供接口（位于 <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/include/transfer_engine.h</span></code>），其中对应不同后端的具体的数据传输功能在内部由 <code class="docutils literal notranslate"><span class="pre">Transport</span></code> 类实现，包括<code class="docutils literal notranslate"><span class="pre">TcpTransport</span></code>、<code class="docutils literal notranslate"><span class="pre">RdmaTransport</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NVMeoFTransport</span></code>。</p>
+<section id="segment">
+<h3>Segment<a class="headerlink" href="#segment" title="Link to this heading">#</a></h3>
+<p>Segment 表示 Transfer Engine 实现数据传输过程期间可使用的源地址范围及目标地址范围集合。也就是说，所有 BatchTransfer 请求中涉及的本地与远程地址都需要位于合法的 Segment 区间里。Transfer Engine 支持以下两种类型的 Segment。</p>
+<section id="dramvram-ram-segment">
+<h4>1. 位于内存地址空间（DRAM、VRAM）的 RAM Segment<a class="headerlink" href="#dramvram-ram-segment" title="Link to this heading">#</a></h4>
+<p>每一个进程启动时， Transfer Engine 会自动创建一个以自身 <code class="docutils literal notranslate"><span class="pre">local_hostname</span></code> 为名称（见 TransferEngine 的初始化函数，需要全局唯一）的 Segment，该 Segment 在逻辑上覆盖了完整的内存地址空间，包括 DRAM/VRAM 等存储介质，Transfer Engine 在使用 BatchTransfer 接口进行传输任务时，会自动判断相应硬件信息，从而选择最佳传输方式。每个进程有且只有一个 Segment。其他进程通过调用 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 接口并传递正确名称的方式，可引用 Segment 并完成读写操作。</p>
+<p>在实际部署中，应用系统通常只使用部分内存地址空间完成数据传输，因此在 Transfer Engine 内部将 Segment 进一步划分成多个 Buffers。每个 Buffer 代表一段连续的、位于同一设备上的地址空间，用户使用 BatchTransfer 接口完成读写操作时，若引用 RAM Segment，则每次读写任务的范围必须在其中的某一个合法 Buffer 内。
+一个 Segment 内的内存范围不需要是连续的，也就是说，可以通过分配多段DRAM/VRAM 地址空间并纳入相同的 Segment。</p>
+<p>除此在外，Transfer Engine 也支持注册一些本地 DRAM 区域，这一部分区域仅仅是作为数据操作的本地侧存储空间，比如 vLLM 的 DRAM PageCache 区域。它也被视为当前进程中有效 RAM Segment 的一部分，但不能被其他进程通过调用 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 接口引用。</p>
+</section>
+<section id="nvmeof-nvmeof-segment">
+<h4>2. 位于挂载到 NVMeof 上文件的 <strong>NVMeof Segment</strong><a class="headerlink" href="#nvmeof-nvmeof-segment" title="Link to this heading">#</a></h4>
+<p>Transfer Engine 也借助 NVMeof 协议，支持从 NVMe 上直接将文件指定偏移的数据，通过 PCIe 直传方式直达 DRAM/VRAM，无需经过 CPU 且实现零拷贝。用户需要按照指引的说明将远程存储节点挂载到本地，并使用 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 接口进行引用，从而完成数据读写操作。</p>
+</section>
+</section>
+<section id="batchtransfer">
+<h3>BatchTransfer<a class="headerlink" href="#batchtransfer" title="Link to this heading">#</a></h3>
+<p>借助 Transfer Engine，Mooncake Store 可实现本地 DRAM/VRAM 通过(GPUDirect) RDMA、NVMe-of 协议等读写本地/远端的有效 Segment（即注册的 DRAM/VRAM 区间及 NVMe 文件）中的指定部分。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>远程 ↓ 本地→</p></th>
+<th class="head"><p>DRAM</p></th>
+<th class="head"><p>VRAM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DRAM</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>VRAM</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>NVMe-of</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Local memcpy: 如果目标 Segment 其实就在本地 DRAM/VRAM 的话，直接使用 memcpy、cudaMemcpy 等数据复制接口。</p></li>
+<li><p>RDMA: 支持本地 DRAM/VRAM 与远程 DRAM 之间的数据传递。在实现上支持多网卡池化及重试等功能。</p></li>
+<li><p>cuFile (GPUDirect Storage): 实现本地 DRAM/VRAM 与 Local/Remote NVMeof 之间的数据传递。</p></li>
+</ul>
+<p>BatchTransfer API 使用请求（Request）对象数组传入用户请求，需指定操作类型（READ 或 WRITE）、数据长度以及本地和远程内存的地址。传输操作适用于 DRAM 和 GPU VRAM，并在最佳情况下利用 GPU 直接 RDMA，前提是指定的内存区域已预先注册。这些操作的完成情况可通过 <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> API 来异步监控这些操作的完成情况。</p>
+</section>
+<section id="topology-aware-path-selection">
+<h3>拓扑感知路径选择（Topology Aware Path Selection）<a class="headerlink" href="#topology-aware-path-selection" title="Link to this heading">#</a></h3>
+<p>现代推理服务器通常由多个CPU插槽、DRAM、GPU和RDMA NIC设备组成。尽管从技术上讲，使用任何RDMA NIC将数据从本地DRAM或VRAM传输到远程位置是可能的，但这些传输可能会受到Ultra Path Interconnect (UPI)或PCIe交换机带宽限制的制约。为了克服这些限制，Transfer Engine 实现了拓扑感知路径选择算法。在处理请求之前，每个服务器生成一个拓扑矩阵（Topology Matrix）并将其广播到整个集群。拓扑矩阵将网络接口卡（NIC）分类为各种类型的内存的“首选”和“次要”列表，这些类型在内存注册时指定。在正常情况下，选择首选列表中的NIC进行传输，便于在本地NUMA或仅通过本地PCIe交换机进行GPU Direct RDMA操作。在出现故障的情况下，两个列表中的所有NIC都可能被使用。上述过程包括根据内存地址识别适当的本地和目标NIC，建立连接，并执行数据传输。</p>
+<p><img alt="topology-matrix" src="../image/topology-matrix.png" /></p>
+<p>例如，如图所示，要将数据从本地节点分配给 <code class="docutils literal notranslate"><span class="pre">cpu:0</span></code> 的缓冲区0传输到目标节点分配给<code class="docutils literal notranslate"><span class="pre">cpu:1</span></code>的缓冲区1，引擎首先使用本地服务器的拓扑矩阵识别<code class="docutils literal notranslate"><span class="pre">cpu:0</span></code>的首选NIC，并选择一个，如<code class="docutils literal notranslate"><span class="pre">mlx5_1</span></code>，作为本地NIC。同样，根据目标内存地址选择目标NIC，如<code class="docutils literal notranslate"><span class="pre">mlx5_3</span></code>。这种设置允许建立从<code class="docutils literal notranslate"><span class="pre">mlx5_1&#64;本地</span></code>到<code class="docutils literal notranslate"><span class="pre">mlx5_3&#64;目标</span></code>的RDMA连接，以执行RDMA读写操作。</p>
+<p>为了进一步最大化带宽利用率，如果单个请求的传输长度超过64KB，则其内部被划分为多个切片。每个切片可能使用不同的路径，使所有RDMA NIC能够协同工作。</p>
+</section>
+<section id="id2">
+<h3>端点管理<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Transfer Engine 使用一对端点来表示本地RDMA NIC和远程RDMA NIC之间的连接。实际上，每个端点包括一个或多个RDMA QP对象。
+Transfer Engine 中的连接是按需建立的；端点在第一次请求之前保持未配对状态。
+为了防止大量端点减慢请求处理速度，Transfer Engine 采用端点池，限制最大活动连接数。
+Transfer Engine 使用SIEVE算法来管理端点的逐出。如果由于链路错误导致连接失败，它将从两端的端点池中移除，并在下一次数据传输尝试期间重新建立。</p>
+</section>
+<section id="id3">
+<h3>故障处理<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>在多NIC环境中，一个常见的故障场景是特定NIC的暂时不可用，而其他路由仍然可以连接两个节点。Transfer Engine 旨在有效地管理这种暂时性故障。如果识别到连接不可用，Transfer Engine 会自动识别一个替代的、可达的路径，并将请求重新提交给不同的RDMA NIC设备。此外，Transfer Engine 能够检测到其他RDMA资源的问题，包括RDMA上下文和完成队列。它会暂时避免使用这些资源，直到问题得到解决。</p>
+</section>
+</section>
+<section id="transfer-engine-bench">
+<h2>范例程序：Transfer Engine Bench<a class="headerlink" href="#transfer-engine-bench" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/example/transfer_engine_bench.cpp</span></code> 提供了一个范例程序，通过调用 Transfer Engine API 接口，发起节点从目标节点的 DRAM 处反复读取/写入数据块，以展示 Transfer Engine 的基本用法，并可用于测量读写吞吐率。目前 Transfer Engine Bench 工具支持 RDMA 及 TCP 协议。</p>
+<p>编译 Transfer Engine 成功后，可在 <code class="docutils literal notranslate"><span class="pre">build/mooncake-transfer-engine/example</span></code> 目录下产生测试程序 <code class="docutils literal notranslate"><span class="pre">transfer_engine_bench</span></code>。</p>
+<ol class="arabic">
+<li><p><strong>启动 <code class="docutils literal notranslate"><span class="pre">metadata</span></code> 服务。</strong> 该服务用于 Mooncake 各类元数据的集中高可用管理，包括 Transfer Engine 的内部连接状态等。需确保发起节点和目标节点都能顺利通达该 metadata 服务，因此需要注意：</p>
+<ul class="simple">
+<li><p>metadata 服务的监听 IP 不应为 127.0.0.1，需结合网络环境确定。在实验环境中，可使用 0.0.0.0。</p></li>
+<li><p>在某些平台下，如果发起节点和目标节点设置了 <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> 或 <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> 环境变量，也会影响 Transfer Engine 与 metadata 服务的通信。</p></li>
+</ul>
+<p>Transfer Engine 支持多种 metadata 服务，包括 <code class="docutils literal notranslate"><span class="pre">etcd</span></code>, <code class="docutils literal notranslate"><span class="pre">redis</span></code> 和 <code class="docutils literal notranslate"><span class="pre">http</span></code>。下面以 <code class="docutils literal notranslate"><span class="pre">etcd</span></code> 和 <code class="docutils literal notranslate"><span class="pre">http</span></code> 为例说明如何启动 metadata 服务。</p>
+<p>1.1. <strong><code class="docutils literal notranslate"><span class="pre">etcd</span></code></strong></p>
+<p>默认状态下不会使用etcd服务，要在transfer engine中使用etcd服务，需要在<code class="docutils literal notranslate"><span class="pre">mooncake-common/common.cmake</span></code>文件中，把<code class="docutils literal notranslate"><span class="pre">USE_ETCD</span></code>变量的值设为<code class="docutils literal notranslate"><span class="pre">ON</span></code>，就可以使用了。</p>
+<p>例如，可使用如下命令行启动 <code class="docutils literal notranslate"><span class="pre">etcd</span></code> 服务：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0.0.0.0:2379<span class="w"> </span>--advertise-client-urls<span class="w"> </span>http://10.0.0.1:2379
+</pre></div>
+</div>
+<p>1.2. <strong>启动 <code class="docutils literal notranslate"><span class="pre">http</span></code> 作为 <code class="docutils literal notranslate"><span class="pre">metadata</span></code> 服务</strong></p>
+<p>例如，可使用 <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/example/http-metadata-server</span></code> 示例中的 <code class="docutils literal notranslate"><span class="pre">http</span></code> 服务：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>mooncake-transfer-engine/example/http-metadata-server
+go<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--addr<span class="o">=</span>:8080
+</pre></div>
+</div>
+</li>
+<li><p><strong>启动目标节点。</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./transfer_engine_bench<span class="w"> </span>--mode<span class="o">=</span>target<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>--metadata_server<span class="o">=</span>etcd://10.0.0.1:2379<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--local_server_name<span class="o">=</span>TARGET_NAME<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--device_name<span class="o">=</span>erdma_0<span class="w"> </span><span class="p">|</span><span class="w"> </span>--auto-discovery<span class="o">]</span>
+</pre></div>
+</div>
+<p>各个参数的含义如下：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">--mode=target</span></code> 表示启动目标节点。目标节点不发起读写请求，只是被动按发起节点的要求供给或写入数据。</p>
+<blockquote>
+<div><p>[!NOTE]
+实际应用中可不区分目标节点和发起节点，每个节点可以向集群内其他节点自由发起读写请求。</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--metadata_server</span></code> 为元数据服务器地址，一般形式是 <code class="docutils literal notranslate"><span class="pre">[proto]://[hostname:port]</span></code>。例如，下列元数据服务器地址是合法的：</p>
+<ul class="simple">
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">etcd</span></code> 作为元数据存储服务：<code class="docutils literal notranslate"><span class="pre">&quot;10.0.0.1:2379&quot;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">&quot;etcd://10.0.0.1:2379&quot;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">&quot;etcd://10.0.0.1:2379,10.0.0.2:2379&quot;</span></code></p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">redis</span></code> 作为元数据存储服务：<code class="docutils literal notranslate"><span class="pre">&quot;redis://10.0.0.1:6379&quot;</span></code></p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">http</span></code> 作为元数据存储服务：<code class="docutils literal notranslate"><span class="pre">&quot;http://10.0.0.1:8080/metadata&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--local_server_name</span></code> 表示本节点创建段（segment）名称，供发起节点引用。大多数情况下无需设置。如果不设置该选项，则该值等同于本机的主机名（即 <code class="docutils literal notranslate"><span class="pre">hostname(2)</span></code> ）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--device_name</span></code> 表示传输期间所用的网卡列表（使用逗号分割，不要添加空格）。也可使用<code class="docutils literal notranslate"><span class="pre">--auto_discovery</span></code> 检测安装的所有网卡列表并进行使用。</p></li>
+<li><p>在仅支持 TCP 的网络环境中，可使用 <code class="docutils literal notranslate"><span class="pre">--protocol=tcp</span></code> 参数，此时不需要指定 <code class="docutils literal notranslate"><span class="pre">--device_name</span></code> 参数。</p></li>
+</ul>
+</li>
+<li><p><strong>启动发起节点。</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MC_GID_INDEX</span><span class="o">=</span>n
+./transfer_engine_bench<span class="w"> </span>--metadata_server<span class="o">=</span>etcd://10.0.0.1:2379<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>--segment_id<span class="o">=</span>TARGET_NAME<span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--local_server_name<span class="o">=</span>INITIATOR_NAME<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span><span class="o">[</span>--device_name<span class="o">=</span>erdma_1<span class="w"> </span><span class="p">|</span><span class="w"> </span>--auto-discovery<span class="o">]</span>
+</pre></div>
+</div>
+<p>各个参数的含义如下（其余同前）：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--segment_id</span></code> 可以简单理解为目标节点对应的段名称，需要和启动目标节点时 <code class="docutils literal notranslate"><span class="pre">--local_server_name</span></code> 传入的值（如果有）保持一致。</p></li>
+</ul>
+<p>正常情况下，发起节点将开始进行传输操作，等待 10s 后回显“Test completed”信息，表明测试完成。</p>
+<p>发起节点还可以配置下列测试参数：<code class="docutils literal notranslate"><span class="pre">--operation</span></code>（可为 <code class="docutils literal notranslate"><span class="pre">&quot;read&quot;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">&quot;write&quot;</span></code>）、<code class="docutils literal notranslate"><span class="pre">batch_size</span></code>、<code class="docutils literal notranslate"><span class="pre">block_size</span></code>、<code class="docutils literal notranslate"><span class="pre">duration</span></code>、<code class="docutils literal notranslate"><span class="pre">threads</span></code> 等。</p>
+</li>
+</ol>
+<section id="id4">
+<h3>运行示例及结果判读<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>下面的视频显示了按上述操作正常运行的过程，其中右侧是 Target，左侧是 Initiator。测试结束后，Initiator 会报告测试时长（10 秒）、IOPS（379008 次请求/s）、吞吐率（19.87 GiB/s）等信息。这里的吞吐率超出了所用主机单卡支持的最大吞吐率。</p>
+<p><img alt="transfer-engine-running" src="../image/transfer-engine-running.gif" /></p>
+<blockquote>
+<div><p>[!NOTE]
+如果在执行期间发生异常，大多数情况是参数设置不正确所致，建议参考<a class="reference internal" href="troubleshooting.html"><span class="std std-doc">故障排除文档</span></a>先行排查。</p>
+</div></blockquote>
+</section>
+</section>
+<section id="c-c-api">
+<h2>C/C++ API<a class="headerlink" href="#c-c-api" title="Link to this heading">#</a></h2>
+<p>Transfer Engine 通过 <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> 类统一对外提供接口（位于 <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/include/transfer_engine.h</span></code>），其中对应不同后端的具体的数据传输功能在内部由 <code class="docutils literal notranslate"><span class="pre">Transport</span></code> 类实现，目前支持 <code class="docutils literal notranslate"><span class="pre">TcpTransport</span></code>,<code class="docutils literal notranslate"><span class="pre">RdmaTransport</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NVMeoFTransport</span></code>。</p>
+<section id="id5">
+<h3>数据传输<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="transferengine-transferrequest">
+<h4>TransferEngine::TransferRequest<a class="headerlink" href="#transferengine-transferrequest" title="Link to this heading">#</a></h4>
+<p>Mooncake Transfer Engine 提供的最核心 API 是：通过 <code class="docutils literal notranslate"><span class="pre">submitTransfer()</span></code> 接口提交一组异步的由 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 结构体表示的任务，并通过 <code class="docutils literal notranslate"><span class="pre">getTransferStatus()</span></code> 接口查询其状态。每个 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 结构体规定从本地的起始地址 <code class="docutils literal notranslate"><span class="pre">source</span></code> 开始，读取或写入长度为 <code class="docutils literal notranslate"><span class="pre">length</span></code> 的连续数据空间，到 <code class="docutils literal notranslate"><span class="pre">target_id</span></code> 对应的段、从 <code class="docutils literal notranslate"><span class="pre">target_offset</span></code> 开始的位置。</p>
+<p><code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 结构体定义如下：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SegmentID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int32_t</span><span class="p">;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">TransferRequest</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="nc">OpCode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">READ</span><span class="p">,</span><span class="w"> </span><span class="n">WRITE</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">OpCode</span><span class="w"> </span><span class="n">opcode</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">source</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SegmentID</span><span class="w"> </span><span class="n">target_id</span><span class="p">;</span><span class="w"> </span><span class="c1">// 目标 segment 的 ID，可能对应本地或远程的 DRAM/VRAM/NVMeof，具体的选路逻辑被隐藏</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">target_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code> 取值为 <code class="docutils literal notranslate"><span class="pre">READ</span></code> 或 <code class="docutils literal notranslate"><span class="pre">WRITE</span></code>。<code class="docutils literal notranslate"><span class="pre">READ</span></code> 表示数据从 <code class="docutils literal notranslate"><span class="pre">&lt;target_id,</span> <span class="pre">target_offset&gt;</span></code> 表示的目标地址复制到本地的起始地址 <code class="docutils literal notranslate"><span class="pre">source</span></code>；<code class="docutils literal notranslate"><span class="pre">WRITE</span></code> 表示数据从 <code class="docutils literal notranslate"><span class="pre">source</span></code> 复制到 <code class="docutils literal notranslate"><span class="pre">&lt;target_id,</span> <span class="pre">target_offset&gt;</span></code> 表示的地址。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> 表示当前 <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> 管理的 DRAM/VRAM buffer，需提前已经被 <code class="docutils literal notranslate"><span class="pre">registerLocalMemory</span></code> 接口注册</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_id</span></code> 表示传输目标的 Segment ID。Segment ID 的获取需要用到 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 接口。Segment 分为以下两种类型：</p>
+<ul>
+<li><p>RAM 空间型，涵盖 DRAM/VRAM 两种形态。如前所述，同一进程（或者说是 <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> 实例）下只有一个 Segment，这个 Segment 内含多种不同种类的 Buffer（DRAM/VRAM）。此时 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 接口传入的 Segment 名称等同于服务器主机名。<code class="docutils literal notranslate"><span class="pre">target_offset</span></code> 为目标服务器的虚拟地址。</p></li>
+<li><p>NVMeOF 空间型，每个文件对应一个 Segment。此时 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 接口传入的 Segment 名称等同于文件的唯一标识符。<code class="docutils literal notranslate"><span class="pre">target_offset</span></code> 为目标文件的偏移量。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> 表示传输的数据量。TransferEngine 在内部可能会进一步拆分成多个读写请求。</p></li>
+</ul>
+</section>
+<section id="transferengine-allocatebatchid">
+<h4>TransferEngine::allocateBatchID<a class="headerlink" href="#transferengine-allocatebatchid" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BatchID</span><span class="w"> </span><span class="nf">allocateBatchID</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">batch_size</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>分配 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>。同一 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> 下最多可提交 <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> 个 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code>。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>: 同一 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> 下最多可提交的 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 数量；</p></li>
+<li><p>返回值：若成功，返回 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>（非负）；否则返回负数值。</p></li>
+</ul>
+</section>
+<section id="transferengine-submittransfer">
+<h4>TransferEngine::submitTransfer<a class="headerlink" href="#transferengine-submittransfer" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">submitTransfer</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TransferRequest</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">entries</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>向 <code class="docutils literal notranslate"><span class="pre">batch_id</span></code> 追加提交新的 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 任务。该任务被异步提交到后台线程池。同一 <code class="docutils literal notranslate"><span class="pre">batch_id</span></code> 下累计的 <code class="docutils literal notranslate"><span class="pre">entries</span></code> 数量不应超过创建时定义的 <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: 所属的 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entries</span></code>: <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 数组；</p></li>
+<li><p>返回值：若成功，返回 0；否则返回负数值。</p></li>
+</ul>
+</section>
+<section id="transferengine-gettransferstatus">
+<h4>TransferEngine::getTransferStatus<a class="headerlink" href="#transferengine-gettransferstatus" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="nc">TaskStatus</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">WAITING</span><span class="p">,</span><span class="w">   </span><span class="c1">// 正在处于传输阶段</span>
+<span class="w">  </span><span class="n">PENDING</span><span class="p">,</span><span class="w">   </span><span class="c1">// 暂不支持</span>
+<span class="w">  </span><span class="n">INVALID</span><span class="p">,</span><span class="w">   </span><span class="c1">// 参数不合法</span>
+<span class="w">  </span><span class="n">CANCELED</span><span class="p">,</span><span class="w">  </span><span class="c1">// 暂不支持</span>
+<span class="w">  </span><span class="n">COMPLETED</span><span class="p">,</span><span class="w"> </span><span class="c1">// 传输完毕</span>
+<span class="w">  </span><span class="n">TIMEOUT</span><span class="p">,</span><span class="w">   </span><span class="c1">// 暂不支持</span>
+<span class="w">  </span><span class="n">FAILED</span><span class="w">     </span><span class="c1">// 即使经过重试仍传输失败</span>
+<span class="p">};</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">TransferStatus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">TaskStatus</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">transferred</span><span class="p">;</span><span class="w"> </span><span class="c1">// 已成功传输了多少数据（不一定是准确值，确保是 lower bound）</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">getTransferStatus</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">task_id</span><span class="p">,</span><span class="w"> </span><span class="n">TransferStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>获取 <code class="docutils literal notranslate"><span class="pre">batch_id</span></code> 中第 <code class="docutils literal notranslate"><span class="pre">task_id</span></code> 个 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 的运行状态。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: 所属的 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code>: 要查询的 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 序号；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: 输出 Transfer 状态；</p></li>
+<li><p>返回值：若成功，返回 0；否则返回负数值。</p></li>
+</ul>
+</section>
+<section id="transferengine-freebatchid">
+<h4>TransferEngine::freeBatchID<a class="headerlink" href="#transferengine-freebatchid" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">freeBatchID</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>回收 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>，之后对此的 <code class="docutils literal notranslate"><span class="pre">submitTransfer</span></code> 及 <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> 操作均是未定义的。若 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> 内仍有 <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> 未完成，则拒绝操作。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: 所属的 <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>；</p></li>
+<li><p>返回值：若成功，返回 0；否则返回负数值。</p></li>
+</ul>
+</section>
+</section>
+<section id="transport">
+<h3>多 Transport 管理<a class="headerlink" href="#transport" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> 类内部管理多后端的 <code class="docutils literal notranslate"><span class="pre">Transport</span></code> 类，并且会自动探查 CPU/CUDA 和 RDMA 网卡之间的拓扑关系（更多设备种类的支持正在开发中，如无法给出准确的硬件拓扑，欢迎您的反馈和改进建议)，以及自动安装合适的 <code class="docutils literal notranslate"><span class="pre">Transport</span></code>。</p>
+</section>
+<section id="id6">
+<h3>空间注册<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>对于 RDMA 的传输过程，作为源端指针的 <code class="docutils literal notranslate"><span class="pre">TransferRequest::source</span></code> 必须提前注册为 RDMA 可读写的 Memory Region 空间，即纳入当前进程中 RAM Segment 的一部分。因此需要用到如下函数：</p>
+<section id="transferengine-registerlocalmemory">
+<h4>TransferEngine::registerLocalMemory<a class="headerlink" href="#transferengine-registerlocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">registerLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">remote_accessible</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>在本地 DRAM/VRAM 上注册起始地址为 <code class="docutils literal notranslate"><span class="pre">addr</span></code>，长度为 <code class="docutils literal notranslate"><span class="pre">size</span></code> 的空间。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: 注册空间起始地址；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>：注册空间长度；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: 这一段内存对应的 <code class="docutils literal notranslate"><span class="pre">device</span></code>，比如 <code class="docutils literal notranslate"><span class="pre">cuda:0</span></code> 表示对应 GPU 设备，<code class="docutils literal notranslate"><span class="pre">cpu:0</span></code> 表示对应 CPU socket，通过和网卡优先级顺序表（见<code class="docutils literal notranslate"><span class="pre">installTransport</span></code>） 匹配，识别优选的网卡。 也可以使用 <code class="docutils literal notranslate"><span class="pre">*</span></code>，Transfer Engine 会尽量自动识别 <code class="docutils literal notranslate"><span class="pre">addr</span></code> 对应的 <code class="docutils literal notranslate"><span class="pre">device</span></code>，如果识别失败，将打印 <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> 级别日志，并且使用全部的网卡，不再区分优选网卡。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remote_accessible</span></code>: 标识这一块内存能否被远端节点访问。</p></li>
+<li><p>返回值：若成功，返回 0；否则返回负数值。</p></li>
+</ul>
+</section>
+<section id="transferengine-unregisterlocalmemory">
+<h4>TransferEngine::unregisterLocalMemory<a class="headerlink" href="#transferengine-unregisterlocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">unregisterLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>解注册区域。</p>
+<ul class="simple">
+<li><p>addr: 注册空间起始地址；</p></li>
+<li><p>返回值：若成功，返回 0；否则返回负数值。</p></li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h3>Segment 管理与元数据格式<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>TransferEngine 提供 <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> 函数，该函数获取一个 <code class="docutils literal notranslate"><span class="pre">SegmentHandle</span></code>，用于后续 <code class="docutils literal notranslate"><span class="pre">Transport</span></code> 的传输。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">SegmentHandle</span><span class="w"> </span><span class="nf">openSegment</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">segment_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_name</span></code>：segment 的唯一标志符。对于 RAM Segment，这需要与对端进程初始化 TransferEngine 对象时填写的 <code class="docutils literal notranslate"><span class="pre">server_name</span></code> 保持一致。</p></li>
+<li><p>返回值：若成功，返回对应的 SegmentHandle；否则返回负数值。</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">closeSegment</span><span class="p">(</span><span class="n">SegmentHandle</span><span class="w"> </span><span class="n">segment_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_id</span></code>：segment 的唯一标志符。</p></li>
+<li><p>返回值：若成功，返回 0；否则返回负数值。</p></li>
+</ul>
+<details>
+<summary><strong>元数据格式</strong></summary>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// 用于根据 server_name 查找可通信的地址以及暴露的 rpc 端口。
+// 创建：调用 TransferEngine::init() 时。
+// 删除：TransferEngine 被析构时。
+Key = mooncake/rpc_meta/[server_name]
+Value = {
+    &#39;ip_or_host_name&#39;: &#39;node01&#39;
+    &#39;rpc_port&#39;: 12345
+}
+
+// 对于 segment，采用 mooncake/[proto]/[segment_name] 的 key 命名方式，segment name 可以采用 Server Name。
+// Segment 对应机器，buffer 对应机器内的不同段内存或者不同的文件或者不同的盘。同一个 segment 的不同 buffer 处于同一个故障域。
+
+// RAM Segment，用于 RDMA Transport 获取传输信息。
+// 创建：命令行工具 register.py，此时 buffers 为空，仅填入可预先获知的信息。
+// 修改：TransferEngine 在运行时通过 register / unregister 添加或删除 Buffer。
+Key = mooncake/ram/[segment_name]
+Value = {
+    &#39;server_name&#39;: server_name,
+    &#39;protocol&#39;: rdma,
+    &#39;devices&#39;: [
+        { &#39;name&#39;: &#39;mlx5_2&#39;, &#39;lid&#39;: 17, &#39;gid&#39;: &#39;fe:00:...&#39; },
+        { &#39;name&#39;: &#39;mlx5_3&#39;, &#39;lid&#39;: 22, &#39;gid&#39;: &#39;fe:00:...&#39; }
+    ],
+    &#39;priority_matrix&#39;: {
+        &quot;cpu:0&quot;: [[&quot;mlx5_2&quot;], [&quot;mlx5_3&quot;]],
+        &quot;cpu:1&quot;: [[&quot;mlx5_3&quot;], [&quot;mlx5_2&quot;]],
+        &quot;cuda:0&quot;: [[&quot;mlx5_2&quot;], [&quot;mlx5_3&quot;]],
+    },
+    &#39;buffers&#39;: [
+        {
+            &#39;name&#39;: &#39;cpu:0&#39;,
+            &#39;addr&#39;: 0x7fa16bdf5000,
+            &#39;length&#39;: 1073741824,
+            &#39;rkey&#39;: [1fe000, 1fdf00, ...], // 长度等同于 &#39;devices&#39; 字段的元素长度
+        },
+    ],
+}
+
+// 创建：命令行工具 register.py，确定可被挂载的文件路径。
+// 修改：命令行工具 mount.py，向被挂载的 buffers.local_path_map 中添加挂载该文件的机器 -&gt; 挂载机器上的文件路径的映射。
+Key = mooncake/nvmeof/[segment_name]
+Value = {
+    &#39;server_name&#39;: server_name,
+    &#39;protocol&#39;: nvmeof,
+    &#39;buffers&#39;:[
+    {
+        &#39;length&#39;: 1073741824,
+        &#39;file_path&#39;: &quot;/mnt/nvme0&quot; // 本机器上的文件路径
+        &#39;local_path_map&#39;: {
+            &quot;node01&quot;: &quot;/mnt/transfer_engine/node01/nvme0&quot;, // 挂载该文件的机器 -&gt; 挂载机器上的文件路径
+            ....
+        },
+     }，
+     {
+        &#39;length&#39;: 1073741824,
+        &#39;file_path&#39;: &quot;/mnt/nvme1&quot;,
+        &#39;local_path_map&#39;: {
+            &quot;node02&quot;: &quot;/mnt/transfer_engine/node02/nvme1&quot;,
+            ....
+        },
+     }
+    ]
+}
+</pre></div>
+</div>
+</details>
+</section>
+<section id="http">
+<h3>HTTP 元数据服务<a class="headerlink" href="#http" title="Link to this heading">#</a></h3>
+<p>使用 HTTP 作为 metadata 元数据服务时，HTTP 服务端需要提供三个接口，以 metadata_server 配置为 <code class="docutils literal notranslate"><span class="pre">http://host:port/metadata</span></code> 举例：</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metadata?key=$KEY</span></code>：获取 <code class="docutils literal notranslate"><span class="pre">$KEY</span></code> 对应的元数据。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/metadata?key=$KEY</span></code>：更新 <code class="docutils literal notranslate"><span class="pre">$KEY</span></code> 对应的元数据为请求 body 的值。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/metadata?key=$KEY</span></code>：删除 <code class="docutils literal notranslate"><span class="pre">$KEY</span></code> 对应的元数据。</p></li>
+</ol>
+<p>具体实现，可以参考 <a class="reference internal" href="#../../mooncake-transfer-engine/example/http-metadata-server"><span class="xref myst">mooncake-transfer-engine/example/http-metadata-server</span></a> 用 Golang 实现的 demo 服务。</p>
+</section>
+<section id="id8">
+<h3>构造函数与初始化<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>TransferEngine 在完成构造后需要调用 <code class="docutils literal notranslate"><span class="pre">init</span></code> 函数进行初始化：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TransferEngine</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">metadata_conn_string</span><span class="p">,</span>
+<span class="w">         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_server_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>metadata_conn_string: 元数据存储服务连接字符串，表示 <code class="docutils literal notranslate"><span class="pre">etcd</span></code>/<code class="docutils literal notranslate"><span class="pre">redis</span></code> 的 IP 地址/主机名，或者 http 服务的 URI。一般形式是 <code class="docutils literal notranslate"><span class="pre">[proto]://[hostname:port]</span></code>。例如，下列元数据服务器地址是合法的：</p>
+<ul>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">etcd</span></code> 作为元数据存储服务：<code class="docutils literal notranslate"><span class="pre">&quot;10.0.0.1:2379&quot;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">&quot;etcd://10.0.0.1:2379&quot;</span></code></p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">redis</span></code> 作为元数据存储服务：<code class="docutils literal notranslate"><span class="pre">&quot;redis://10.0.0.1:6379&quot;</span></code></p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">http</span></code> 作为元数据存储服务：<code class="docutils literal notranslate"><span class="pre">&quot;http://10.0.0.1:8080/metadata&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p>local_server_name: 本地的 server name，保证在集群内唯一。它同时作为其他节点引用当前实例所属 RAM Segment 的名称（即 Segment Name）</p></li>
+<li><p>返回值：若成功，返回 0；若 TransferEngine 已被 init 过，返回 -1。</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">~</span><span class="n">TransferEngine</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>回收分配的所有类型资源，同时也会删除掉全局 meta data server 上的信息。</p>
+</section>
+</section>
+<section id="id9">
+<h2>二次开发<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="c-c">
+<h3>使用 C/C++ 接口二次开发<a class="headerlink" href="#c-c" title="Link to this heading">#</a></h3>
+<p>在完成 Mooncake Store 编译后，可将编译好的静态库文件 <code class="docutils literal notranslate"><span class="pre">libtransfer_engine.a</span></code> 及 C 头文件 <code class="docutils literal notranslate"><span class="pre">transfer_engine_c.h</span></code>，移入到你自己的项目里。不需要引用 <code class="docutils literal notranslate"><span class="pre">src/transfer_engine</span></code> 下的其他文件。</p>
+</section>
+<section id="golang">
+<h3>使用 Golang 接口二次开发<a class="headerlink" href="#golang" title="Link to this heading">#</a></h3>
+<p>为了支撑 P2P Store 的运行需求，Transfer Engine 提供了 Golang 接口的封装，详见 <code class="docutils literal notranslate"><span class="pre">mooncake-p2p-store/src/p2pstore/transfer_engine.go</span></code>。</p>
+<p>编译项目时启用 <code class="docutils literal notranslate"><span class="pre">-DWITH_P2P_STORE=ON</span></code> 选项，则可以一并编译 P2P Store 样例程序。</p>
+</section>
+<section id="rust">
+<h3>使用 Rust 接口二次开发<a class="headerlink" href="#rust" title="Link to this heading">#</a></h3>
+<p>在 <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/rust</span></code> 下给出了 TransferEngine 的 Rust 接口实现，并根据该接口实现了 Rust 版本的样例程序，逻辑类似于 <a class="reference internal" href="#../../mooncake-transfer-engine/example/transfer_engine_bench.cpp"><span class="xref myst">transfer_engine_bench.cpp</span></a>。若想编译 rust example，需安装 Rust SDK，并在 cmake 命令中添加 <code class="docutils literal notranslate"><span class="pre">-DWITH_RUST_EXAMPLE=ON</span></code>。</p>
+</section>
+</section>
+<section id="id10">
+<h2>高级运行时选项<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>对于高级用户，TransferEngine 提供了如下所示的高级运行时选项，均可通过 <strong>环境变量（environment variable）</strong> 方式传入。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_NUM_CQ_PER_CTX</span></code> 每个设备实例创建的 CQ 数量，默认值 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_NUM_COMP_CHANNELS_PER_CTX</span></code> 每个设备实例创建的 Completion Channel 数量，默认值 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_IB_PORT</span></code> 每个设备实例使用的 IB 端口号，默认值 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_IB_TC</span></code> 当使用<code class="docutils literal notranslate"><span class="pre">RDMA</span></code>通信协议时，在交换机和网卡默认配置不一致场景/需要流量规划场景下，可能需要修改 RDMA 网卡的 Traffic Class 配置，默认值 -1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_IB_PCI_RELAXED_ORDERING</span></code> 将网络适配器的PCIe顺序设置为放宽有时会带来更好的性能。可设置 1 以启用RO功能，默认值 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_GID_INDEX</span></code> 每个设备实例使用的 GID 序号，默认值 3（或平台支持的最大值）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_PKEY_INDEX</span></code> QP 转换到 INIT 状态时使用的 <code class="docutils literal notranslate"><span class="pre">pkey_index</span></code>（partition key 表索引）。有效范围：0 到 65535，默认值 0。当 fabric 所需的 partition key 不在 HCA pkey 表的 0 号位置时需要设置该值</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_CQE_PER_CTX</span></code> 每个设备实例中 CQ 缓冲区大小，默认值 4096</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_EP_PER_CTX</span></code> 每个设备实例中活跃 EndPoint 数量上限，默认值 65536。<strong>注意：</strong> 小于 0.3.7.post1 的版本，这里默认值是 256，但是无法手动设置为 65536，最大值支持 65535！请注意</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_NUM_QP_PER_EP</span></code> 每个 EndPoint 中 QP 数量，数量越多则细粒度 I/O 性能越好，默认值 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_SGE</span></code> 每个 QP 最大可支持的 SGE 数量，默认值 4（或平台支持的最高值）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_WR</span></code> 每个 QP 最大可支持的 Work Request 数量，默认值 256（或平台支持的最高值）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_INLINE</span></code> 每个 QP 最大可支持的 Inline 写数据量（字节），默认值 64（或平台支持的最高值）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MTU</span></code> 每个设备实例使用的 MTU 长度，可为 512、1024、2048、4096，默认值 4096（或平台支持的最大长度）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_WORKERS_PER_CTX</span></code> 每个设备实例对应的异步工作线程数量</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_SLICE_SIZE</span></code> Transfer Engine 中用户请求的切分粒度</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_RETRY_CNT</span></code> Transfer Engine 中最大重试次数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_LOG_LEVEL</span></code> 该选项可以设置成<code class="docutils literal notranslate"><span class="pre">TRACE</span></code>/<code class="docutils literal notranslate"><span class="pre">INFO</span></code>/<code class="docutils literal notranslate"><span class="pre">WARNING</span></code>/<code class="docutils literal notranslate"><span class="pre">ERROR</span></code>（详情见 <a class="reference external" href="https://github.com/google/glog/blob/master/docs/logging.md">glog doc</a>），则在运行时会输出更详细的日志</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_LISTEN_BACKLOG</span></code> 监听握手连接的 backlog 大小, 默认值 128</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_MAX_LENGTH</span></code> P2P 模式下握手消息的最大长度（字节）。有效范围：1MB 到 128MB。默认值为 1MB (1048576 字节)。当单个 RDMA 实例注册大量内存缓冲区（&gt;10,000）时，需要增大此值以避免握手失败。示例：设置为 10485760 表示 10MB</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_LOG_DIR</span></code> 该选项指定存放日志重定向文件的目录路径。如果路径无效，glog将回退到向标准错误[stderr]输出日志。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_REDIS_PASSWORD</span></code> Redis 存储插件的密码，仅在指定 Redis 作为 metadata server 时生效。如果未设置，将不会尝试进行密码认证登录 Redis。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_REDIS_DB_INDEX</span></code> Redis 存储插件的数据库索引，必须为 0 到 255 之间的整数。仅在指定 Redis 作为 metadata server 时生效。如果未设置或无效，默认值为 0。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FRAGMENT_RATIO</span></code> 在将RdmaTransport::submitTransferTask中切割传输任务为传输块时，当切割完成后最后一块数据大小小于等于切割块大小的1/MC_FRAGMENT_RATIO，最后一块数据将合并进前一块的切割块进行传输以减少开销，默认值为4。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_ENABLE_DEST_DEVICE_AFFINITY</span></code> 启用设备亲和性以优化 RDMA 性能。启用后，Transfer Engine 将优先选择和本地网卡同名的远端网卡进行通信，以减少 QP 数量并改善 Rail-optimized 拓扑中的网络性能。默认值为 false</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FORCE_HCA</span></code> 强制使用RDMA作为主要传输方式，如果没有探测到有效的RDMA网卡，返回失败</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FORCE_MNNVL</span></code> 强制使用 Multi-Node NVLink 作为主要传输方式，无论是否安装了有效的 RDMA 网卡</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_INTRA_NVLINK</span></code> 指定使用Intra-Node NVLink 作为主要传输方式，同时注意该设置不能与MC_FORCE_MNNVL一起使用</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_FORCE_TCP</span></code> 强制使用 TCP 作为主要传输方式，无论是否安装了有效的 RDMA 网卡</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MIN_RPC_PORT</span></code> 指定 RPC 服务使用的最小端口号。默认值为 15000。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_RPC_PORT</span></code> 指定 RPC 服务使用的最大端口号。默认值为 17000。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_PATH_ROUNDROBIN</span></code> 指定 RDMA 路径选择使用 Round Robin 模式，这对于传输大块数据可能有利。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">1</span></code>、<code class="docutils literal notranslate"><span class="pre">ON</span></code> 或 <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> 时，Mooncake 使用 <code class="docutils literal notranslate"><span class="pre">ibv_reg_mr()</span></code> 直接注册 GPU 内存（需要 <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> 内核模块）。默认情况下（未设置或为 <code class="docutils literal notranslate"><span class="pre">0</span></code>），Mooncake 使用不需要 <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> 的 DMA-BUF 路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_ENDPOINT_STORE_TYPE</span></code> 选择 FIFO Endpoint Store (<code class="docutils literal notranslate"><span class="pre">FIFO</span></code>) 或者 Sieve Endpoint Store (<code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>)，模式是 <code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>。</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment">Segment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dramvram-ram-segment">1. 位于内存地址空间（DRAM、VRAM）的 RAM Segment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvmeof-nvmeof-segment">2. 位于挂载到 NVMeof 上文件的 <strong>NVMeof Segment</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchtransfer">BatchTransfer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-aware-path-selection">拓扑感知路径选择（Topology Aware Path Selection）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">端点管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">故障处理</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine-bench">范例程序：Transfer Engine Bench</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">运行示例及结果判读</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-c-api">C/C++ API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">数据传输</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-transferrequest">TransferEngine::TransferRequest</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatebatchid">TransferEngine::allocateBatchID</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer">TransferEngine::submitTransfer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransferstatus">TransferEngine::getTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freebatchid">TransferEngine::freeBatchID</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transport">多 Transport 管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">空间注册</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemory">TransferEngine::registerLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemory">TransferEngine::unregisterLocalMemory</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Segment 管理与元数据格式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http">HTTP 元数据服务</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">构造函数与初始化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">二次开发</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-c">使用 C/C++ 接口二次开发</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#golang">使用 Golang 接口二次开发</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rust">使用 Rust 接口二次开发</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">高级运行时选项</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

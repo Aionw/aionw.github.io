@@ -1,0 +1,1238 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transfer Engine C++ API Reference &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/transfer-engine/cpp-api';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TENT C++ API Reference" href="../tent/cpp-api.html" />
+    <link rel="prev" title="C/C++ API Reference" href="../../api-reference/cpp/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../api-reference/cpp/index.html">C/C++ API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Transfer Engine C++ API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tent/cpp-api.html">TENT C++ API Reference</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/transfer-engine/cpp-api.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/design/transfer-engine/cpp-api.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transfer Engine C++ API Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-apis">Core APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage-path-c">Core Usage Path (C++)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors">Constructors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-transferrequest">TransferEngine::TransferRequest</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatebatchid">TransferEngine::allocateBatchID</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer">TransferEngine::submitTransfer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransferstatus">TransferEngine::getTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getbatchtransferstatus">TransferEngine::getBatchTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freebatchid">TransferEngine::freeBatchID</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-registration">Space Registration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemory">TransferEngine::registerLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemory">TransferEngine::unregisterLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemorybatch">TransferEngine::registerLocalMemoryBatch</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemorybatch">TransferEngine::unregisterLocalMemoryBatch</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-and-metadata-format">Segment Management and Metadata Format</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-removelocalsegment">TransferEngine::removeLocalSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-checksegmentstatus">TransferEngine::CheckSegmentStatus</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server">HTTP Metadata Server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freeengine">TransferEngine::freeEngine</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-apis">Advanced APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-transport-management">Multi-Transport Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-installtransport">TransferEngine::installTransport</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-uninstalltransport">TransferEngine::uninstallTransport</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransport">TransferEngine::getTransport</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notifications">Notifications</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransferwithnotify">TransferEngine::submitTransferWithNotify</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getnotifies">TransferEngine::getNotifies</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-sendnotifybyid">TransferEngine::sendNotifyByID</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-sendnotifybyname">TransferEngine::sendNotifyByName</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-cache-and-metadata-access">Segment Cache and Metadata Access</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-syncsegmentcache">TransferEngine::syncSegmentCache</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getmetadata">TransferEngine::getMetadata</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-and-discovery">Topology and Discovery</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-setautodiscover">TransferEngine::setAutoDiscover</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-setwhitelistfilters">TransferEngine::setWhitelistFilters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-numcontexts">TransferEngine::numContexts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getlocaltopology">TransferEngine::getLocalTopology</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introspection-and-safety">Introspection and Safety</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getlocalipandport">TransferEngine::getLocalIpAndPort</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getrpcport">TransferEngine::getRpcPort</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-checkoverlap">TransferEngine::checkOverlap</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="transfer-engine-c-api-reference">
+<h1>Transfer Engine C++ API Reference<a class="headerlink" href="#transfer-engine-c-api-reference" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This page summarizes the C++ APIs in <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/include/transfer_engine.h</span></code>.
+It follows the same narrative style as the design doc, while covering the full set of public C++ APIs.</p>
+<p>For conceptual background, see <a class="reference internal" href="index.html"><span class="std std-doc">Transfer Engine</span></a>.</p>
+<p><strong>Core APIs vs Advanced APIs</strong></p>
+<ul class="simple">
+<li><p>Core APIs form the minimal path to move data: initialize the engine, register memory, open segments, submit transfers, and query status.</p></li>
+<li><p>Advanced APIs are optional; they help with transport control, notifications, metadata/cache maintenance, topology discovery, and debugging.</p></li>
+</ul>
+</section>
+<section id="core-apis">
+<h2>Core APIs<a class="headerlink" href="#core-apis" title="Link to this heading">#</a></h2>
+<section id="core-usage-path-c">
+<h3>Core Usage Path (C++)<a class="headerlink" href="#core-usage-path-c" title="Link to this heading">#</a></h3>
+<p>Most integrations follow a short, repeatable path: initialize the engine, register local memory, open a target segment, submit a batch transfer, poll status, and finally free resources (batch, segment, memory). A minimal example is shown below.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;transfer_engine.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">TransferEngine</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">TransferRequest</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">TransferStatus</span><span class="p">;</span>
+
+<span class="n">TransferEngine</span><span class="w"> </span><span class="nf">engine</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="s">&quot;etcd://127.0.0.1:2379&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;node0&quot;</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">local_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* local buffer address */</span><span class="p">;</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* bytes to transfer */</span><span class="p">;</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">remote_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* remote address or file offset */</span><span class="p">;</span>
+
+<span class="n">engine</span><span class="p">.</span><span class="n">registerLocalMemory</span><span class="p">(</span><span class="n">local_addr</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cpu:0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">segment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="n">openSegment</span><span class="p">(</span><span class="s">&quot;node1&quot;</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="n">allocateBatchID</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">TransferRequest</span><span class="w"> </span><span class="n">req</span><span class="p">{};</span>
+<span class="n">req</span><span class="p">.</span><span class="n">opcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TransferRequest</span><span class="o">::</span><span class="n">WRITE</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local_addr</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">target_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">segment</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">target_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remote_addr</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">;</span>
+
+<span class="n">engine</span><span class="p">.</span><span class="n">submitTransfer</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">req</span><span class="p">});</span>
+
+<span class="n">TransferStatus</span><span class="w"> </span><span class="n">status</span><span class="p">{};</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">getTransferStatus</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="n">engine</span><span class="p">.</span><span class="n">freeBatchID</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">closeSegment</span><span class="p">(</span><span class="n">segment</span><span class="p">);</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">unregisterLocalMemory</span><span class="p">(</span><span class="n">local_addr</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="constructors">
+<h3>Constructors<a class="headerlink" href="#constructors" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TransferEngine</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">auto_discover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="n">TransferEngine</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">auto_discover</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">filter</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Constructs a Transfer Engine instance. <code class="docutils literal notranslate"><span class="pre">auto_discover</span></code> enables topology discovery; <code class="docutils literal notranslate"><span class="pre">filter</span></code> constrains discovery or device selection with a whitelist.</p>
+</section>
+<section id="data-transfer">
+<h3>Data Transfer<a class="headerlink" href="#data-transfer" title="Link to this heading">#</a></h3>
+<section id="transferengine-transferrequest">
+<h4>TransferEngine::TransferRequest<a class="headerlink" href="#transferengine-transferrequest" title="Link to this heading">#</a></h4>
+<p>The core API provided by Mooncake Transfer Engine is submitting a group of asynchronous <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> tasks through the <code class="docutils literal notranslate"><span class="pre">submitTransfer</span></code> interface, and querying their status through the <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> interface. Each <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> specifies reading or writing a continuous data space of <code class="docutils literal notranslate"><span class="pre">length</span></code> starting from the local starting address <code class="docutils literal notranslate"><span class="pre">source</span></code>, to the position starting at <code class="docutils literal notranslate"><span class="pre">target_offset</span></code> in the segment corresponding to <code class="docutils literal notranslate"><span class="pre">target_id</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> structure is defined as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">TransferRequest</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="nc">OpCode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">READ</span><span class="p">,</span><span class="w"> </span><span class="n">WRITE</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">OpCode</span><span class="w"> </span><span class="n">opcode</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">source</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SegmentID</span><span class="w"> </span><span class="n">target_id</span><span class="p">;</span><span class="w"> </span><span class="c1">// The ID of the target segment, which may correspond to local or remote DRAM/VRAM/NVMeof, with the specific routing logic hidden</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">target_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">advise_retry_cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code> takes the values <code class="docutils literal notranslate"><span class="pre">READ</span></code> or <code class="docutils literal notranslate"><span class="pre">WRITE</span></code>. <code class="docutils literal notranslate"><span class="pre">READ</span></code> indicates that data is copied from the target address indicated by <code class="docutils literal notranslate"><span class="pre">&lt;target_id,</span> <span class="pre">target_offset&gt;</span></code> to the local starting address <code class="docutils literal notranslate"><span class="pre">source</span></code>; <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> indicates that data is copied from <code class="docutils literal notranslate"><span class="pre">source</span></code> to the address indicated by <code class="docutils literal notranslate"><span class="pre">&lt;target_id,</span> <span class="pre">target_offset&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> represents the DRAM/VRAM buffer managed by the current <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code>, which must have been registered in advance by the <code class="docutils literal notranslate"><span class="pre">registerLocalMemory</span></code> interface.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_id</span></code> represents the segment ID of the transfer target. The segment ID is obtained using the <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> interface. Segments are divided into the following types:</p>
+<ul>
+<li><p>RAM space type, covering DRAM/VRAM. As mentioned earlier, there is only one segment under the same process (or <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> instance), which contains various types of Buffers (DRAM/VRAM). In this case, the segment name passed to the <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> interface is equivalent to the server hostname. <code class="docutils literal notranslate"><span class="pre">target_offset</span></code> is the virtual address of the target server.</p></li>
+<li><p>NVMeOF space type, where each file corresponds to a segment. In this case, the segment name passed to the <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> interface is equivalent to the unique identifier of the file. <code class="docutils literal notranslate"><span class="pre">target_offset</span></code> is the offset of the target file.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> represents the amount of data transferred. TransferEngine may further split this into multiple read/write requests internally.</p></li>
+</ul>
+</section>
+<section id="transferengine-allocatebatchid">
+<h4>TransferEngine::allocateBatchID<a class="headerlink" href="#transferengine-allocatebatchid" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BatchID</span><span class="w"> </span><span class="nf">allocateBatchID</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">batch_size</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Allocates a <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>. A maximum of <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code>s can be submitted under the same <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>: The maximum number of <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code>s that can be submitted under the same <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>;</p></li>
+<li><p>Return value: If successful, returns a <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>; on failure, returns an invalid handle (for example <code class="docutils literal notranslate"><span class="pre">INVALID_BATCH_ID</span></code>).</p></li>
+</ul>
+</section>
+<section id="transferengine-submittransfer">
+<h4>TransferEngine::submitTransfer<a class="headerlink" href="#transferengine-submittransfer" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">submitTransfer</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TransferRequest</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">entries</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Submits new <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> tasks to <code class="docutils literal notranslate"><span class="pre">batch_id</span></code>. The task is asynchronously submitted to the background thread pool. The total number of <code class="docutils literal notranslate"><span class="pre">entries</span></code> accumulated under the same <code class="docutils literal notranslate"><span class="pre">batch_id</span></code> should not exceed the <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> defined at creation.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: The <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> it belongs to;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entries</span></code>: Array of <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code>;</p></li>
+<li><p>Return value: If successful, returns an OK status; otherwise, returns a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-gettransferstatus">
+<h4>TransferEngine::getTransferStatus<a class="headerlink" href="#transferengine-gettransferstatus" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="nc">TransferStatusEnum</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">WAITING</span><span class="p">,</span><span class="w">   </span><span class="c1">// In the transfer phase</span>
+<span class="w">  </span><span class="n">PENDING</span><span class="p">,</span><span class="w">   </span><span class="c1">// Not supported</span>
+<span class="w">  </span><span class="n">INVALID</span><span class="p">,</span><span class="w">   </span><span class="c1">// Invalid parameters</span>
+<span class="w">  </span><span class="n">CANCELED</span><span class="p">,</span><span class="w">  </span><span class="c1">// Not supported</span>
+<span class="w">  </span><span class="n">COMPLETED</span><span class="p">,</span><span class="w"> </span><span class="c1">// Transfer completed</span>
+<span class="w">  </span><span class="n">TIMEOUT</span><span class="p">,</span><span class="w">   </span><span class="c1">// Not supported</span>
+<span class="w">  </span><span class="n">FAILED</span><span class="w">     </span><span class="c1">// Transfer failed even after retries</span>
+<span class="p">};</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">TransferStatus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">TransferStatusEnum</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">transferred_bytes</span><span class="p">;</span><span class="w"> </span><span class="c1">// How much data has been successfully transferred (not necessarily an accurate value, but it is a lower bound)</span>
+<span class="p">};</span>
+<span class="n">Status</span><span class="w"> </span><span class="n">getTransferStatus</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">task_id</span><span class="p">,</span><span class="w"> </span><span class="n">TransferStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Obtains the running status of the <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> with <code class="docutils literal notranslate"><span class="pre">task_id</span></code> in <code class="docutils literal notranslate"><span class="pre">batch_id</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: The <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> it belongs to;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code>: The sequence number of the <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> to query;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: Output Transfer status;</p></li>
+<li><p>Return value: If successful, returns an OK status; otherwise, returns a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-getbatchtransferstatus">
+<h4>TransferEngine::getBatchTransferStatus<a class="headerlink" href="#transferengine-getbatchtransferstatus" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">getBatchTransferStatus</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span><span class="w"> </span><span class="n">TransferStatus</span><span class="o">&amp;</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Obtains the aggregated status of the batch and the total transferred bytes.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: The <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> it belongs to;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: Output Transfer status;</p></li>
+<li><p>Return value: If successful, returns an OK status; otherwise, returns a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-freebatchid">
+<h4>TransferEngine::freeBatchID<a class="headerlink" href="#transferengine-freebatchid" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">freeBatchID</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Recycles <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>, and subsequent operations on <code class="docutils literal notranslate"><span class="pre">submitTransfer</span></code> and <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> are undefined. If there are still <code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code>s pending completion in the <code class="docutils literal notranslate"><span class="pre">BatchID</span></code>, the operation is refused.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: The <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> it belongs to;</p></li>
+<li><p>Return value: If successful, returns an OK status; otherwise, returns a non-OK status.</p></li>
+</ul>
+</section>
+</section>
+<section id="space-registration">
+<h3>Space Registration<a class="headerlink" href="#space-registration" title="Link to this heading">#</a></h3>
+<p>For the RDMA transfer process, the source pointer <code class="docutils literal notranslate"><span class="pre">TransferRequest::source</span></code> must be registered in advance as an RDMA readable/writable Memory Region space, that is, included as part of the RAM Segment of the current process. Therefore, the following functions are needed:</p>
+<section id="transferengine-registerlocalmemory">
+<h4>TransferEngine::registerLocalMemory<a class="headerlink" href="#transferengine-registerlocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">registerLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">,</span>
+<span class="w">                        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">,</span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kWildcardLocation</span><span class="p">,</span>
+<span class="w">                        </span><span class="kt">bool</span><span class="w"> </span><span class="n">remote_accessible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">                        </span><span class="kt">bool</span><span class="w"> </span><span class="n">update_metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Registers a space starting at address <code class="docutils literal notranslate"><span class="pre">addr</span></code> with a length of <code class="docutils literal notranslate"><span class="pre">length</span></code> on the local DRAM/VRAM.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: The starting address of the registration space;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: The length of the registration space;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: The <code class="docutils literal notranslate"><span class="pre">device</span></code> corresponding to this memory segment, such as <code class="docutils literal notranslate"><span class="pre">cuda:0</span></code> indicating the GPU device, <code class="docutils literal notranslate"><span class="pre">cpu:0</span></code> indicating the CPU socket, by matching with the network card priority order table (see <code class="docutils literal notranslate"><span class="pre">installTransport</span></code>), the preferred network card is identified. You can also use <code class="docutils literal notranslate"><span class="pre">*</span></code>, Transfer Engine will try to automatically recognize the <code class="docutils literal notranslate"><span class="pre">device</span></code> corresponding to <code class="docutils literal notranslate"><span class="pre">addr</span></code>, if it fails to recognize the device, it will print a <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> level log and use all network cards, no preferred network cards.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remote_accessible</span></code>: Indicates whether this memory can be accessed by remote nodes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_metadata</span></code>: Whether to publish the registration to the metadata service.</p></li>
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+</ul>
+</section>
+<section id="transferengine-unregisterlocalmemory">
+<h4>TransferEngine::unregisterLocalMemory<a class="headerlink" href="#transferengine-unregisterlocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">unregisterLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">update_metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Unregisters the region.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: The starting address of the registration space;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_metadata</span></code>: Whether to publish the unregistration to the metadata service.</p></li>
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+</ul>
+</section>
+<section id="transferengine-registerlocalmemorybatch">
+<h4>TransferEngine::registerLocalMemoryBatch<a class="headerlink" href="#transferengine-registerlocalmemorybatch" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">registerLocalMemoryBatch</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BufferEntry</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">buffer_list</span><span class="p">,</span>
+<span class="w">                             </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">location</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Registers multiple buffers in one call to reduce registration overhead.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_list</span></code>: A list of <code class="docutils literal notranslate"><span class="pre">{addr,</span> <span class="pre">length}</span></code> entries.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: The <code class="docutils literal notranslate"><span class="pre">device</span></code> corresponding to these buffers.</p></li>
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+</ul>
+</section>
+<section id="transferengine-unregisterlocalmemorybatch">
+<h4>TransferEngine::unregisterLocalMemoryBatch<a class="headerlink" href="#transferengine-unregisterlocalmemorybatch" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">unregisterLocalMemoryBatch</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;&amp;</span><span class="w"> </span><span class="n">addr_list</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Unregisters multiple buffers in one call.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr_list</span></code>: A list of buffer start addresses.</p></li>
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+</ul>
+</section>
+</section>
+<section id="segment-management-and-metadata-format">
+<h3>Segment Management and Metadata Format<a class="headerlink" href="#segment-management-and-metadata-format" title="Link to this heading">#</a></h3>
+<p>TransferEngine provides the <code class="docutils literal notranslate"><span class="pre">openSegment</span></code> function, which obtains a <code class="docutils literal notranslate"><span class="pre">SegmentHandle</span></code> for subsequent <code class="docutils literal notranslate"><span class="pre">Transport</span></code> transfers.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">SegmentHandle</span><span class="w"> </span><span class="nf">openSegment</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">segment_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_name</span></code>: The unique identifier of the segment. For RAM Segment, this needs to be consistent with the <code class="docutils literal notranslate"><span class="pre">server_name</span></code> filled in by the peer process when initializing the TransferEngine object.</p></li>
+<li><p>Return value: If successful, returns the corresponding <code class="docutils literal notranslate"><span class="pre">SegmentHandle</span></code>; otherwise, returns an invalid handle.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">closeSegment</span><span class="p">(</span><span class="n">SegmentHandle</span><span class="w"> </span><span class="n">segment_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_id</span></code>: The unique identifier of the segment.</p></li>
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+</ul>
+<section id="transferengine-removelocalsegment">
+<h4>TransferEngine::removeLocalSegment<a class="headerlink" href="#transferengine-removelocalsegment" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">removeLocalSegment</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">segment_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Removes local segment metadata entries.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_name</span></code>: The local segment name to remove.</p></li>
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+</ul>
+</section>
+<section id="transferengine-checksegmentstatus">
+<h4>TransferEngine::CheckSegmentStatus<a class="headerlink" href="#transferengine-checksegmentstatus" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">CheckSegmentStatus</span><span class="p">(</span><span class="n">SegmentID</span><span class="w"> </span><span class="n">sid</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Checks whether a segment is reachable and valid.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sid</span></code>: The segment identifier.</p></li>
+<li><p>Return value: If successful, returns an OK status; otherwise, returns a non-OK status.</p></li>
+</ul>
+<details>
+<summary><strong>Metadata Format</strong></summary>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Used</span> <span class="n">to</span> <span class="n">find</span> <span class="n">the</span> <span class="n">communicable</span> <span class="n">address</span> <span class="ow">and</span> <span class="n">exposed</span> <span class="n">rpc</span> <span class="n">port</span> <span class="n">based</span> <span class="n">on</span> <span class="n">server_name</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">Created</span><span class="p">:</span> <span class="n">when</span> <span class="n">calling</span> <span class="n">TransferEngine</span><span class="p">::</span><span class="n">init</span><span class="p">()</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">Deleted</span><span class="p">:</span> <span class="n">when</span> <span class="n">TransferEngine</span> <span class="ow">is</span> <span class="n">destructed</span><span class="o">.</span>
+<span class="n">Key</span> <span class="o">=</span> <span class="n">mooncake</span><span class="o">/</span><span class="n">rpc_meta</span><span class="o">/</span><span class="p">[</span><span class="n">server_name</span><span class="p">]</span>
+<span class="n">Value</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ip_or_host_name&#39;</span><span class="p">:</span> <span class="s1">&#39;node01&#39;</span>
+    <span class="s1">&#39;rpc_port&#39;</span><span class="p">:</span> <span class="mi">12345</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">For</span> <span class="n">segments</span><span class="p">,</span> <span class="n">the</span> <span class="n">key</span> <span class="n">naming</span> <span class="n">method</span> <span class="n">of</span> <span class="n">mooncake</span><span class="o">/</span><span class="p">[</span><span class="n">proto</span><span class="p">]</span><span class="o">/</span><span class="p">[</span><span class="n">segment_name</span><span class="p">]</span> <span class="ow">is</span> <span class="n">used</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">segment</span> <span class="n">name</span> <span class="n">can</span> <span class="n">use</span> <span class="n">the</span> <span class="n">Server</span> <span class="n">Name</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">A</span> <span class="n">segment</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">a</span> <span class="n">machine</span><span class="p">,</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">buffer</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">different</span> <span class="n">segments</span> <span class="n">of</span> <span class="n">memory</span> <span class="ow">or</span> <span class="n">different</span> <span class="n">files</span> <span class="ow">or</span> <span class="n">different</span> <span class="n">disks</span> <span class="n">on</span> <span class="n">the</span> <span class="n">machine</span><span class="o">.</span> <span class="n">Different</span> <span class="n">buffers</span> <span class="n">of</span> <span class="n">the</span> <span class="n">same</span> <span class="n">segment</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">same</span> <span class="n">fault</span> <span class="n">domain</span><span class="o">.</span>
+
+<span class="o">//</span> <span class="n">RAM</span> <span class="n">Segment</span><span class="p">,</span> <span class="n">used</span> <span class="n">by</span> <span class="n">RDMA</span> <span class="n">Transport</span> <span class="n">to</span> <span class="n">obtain</span> <span class="n">transfer</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">Created</span><span class="p">:</span> <span class="n">command</span> <span class="n">line</span> <span class="n">tool</span> <span class="n">register</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">at</span> <span class="n">this</span> <span class="n">time</span> <span class="n">buffers</span> <span class="n">are</span> <span class="n">empty</span><span class="p">,</span> <span class="n">only</span> <span class="n">fill</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">information</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span> <span class="n">known</span> <span class="ow">in</span> <span class="n">advance</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">Modified</span><span class="p">:</span> <span class="n">TransferEngine</span> <span class="n">at</span> <span class="n">runtime</span> <span class="n">through</span> <span class="n">register</span> <span class="o">/</span> <span class="n">unregister</span> <span class="n">to</span> <span class="n">add</span> <span class="ow">or</span> <span class="n">delete</span> <span class="n">Buffer</span><span class="o">.</span>
+<span class="n">Key</span> <span class="o">=</span> <span class="n">mooncake</span><span class="o">/</span><span class="n">ram</span><span class="o">/</span><span class="p">[</span><span class="n">segment_name</span><span class="p">]</span>
+<span class="n">Value</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;server_name&#39;</span><span class="p">:</span> <span class="n">server_name</span><span class="p">,</span>
+    <span class="s1">&#39;protocol&#39;</span><span class="p">:</span> <span class="n">rdma</span><span class="p">,</span>
+    <span class="s1">&#39;devices&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;mlx5_2&#39;</span><span class="p">,</span> <span class="s1">&#39;lid&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;gid&#39;</span><span class="p">:</span> <span class="s1">&#39;fe:00:...&#39;</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;mlx5_3&#39;</span><span class="p">,</span> <span class="s1">&#39;lid&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s1">&#39;gid&#39;</span><span class="p">:</span> <span class="s1">&#39;fe:00:...&#39;</span> <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;priority_matrix&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;cpu:0&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;mlx5_2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;mlx5_3&quot;</span><span class="p">]],</span>
+        <span class="s2">&quot;cpu:1&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;mlx5_3&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;mlx5_2&quot;</span><span class="p">]],</span>
+        <span class="s2">&quot;cuda:0&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;mlx5_2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;mlx5_3&quot;</span><span class="p">]],</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;buffers&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;cpu:0&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;addr&#39;</span><span class="p">:</span> <span class="mh">0x7fa16bdf5000</span><span class="p">,</span>
+            <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="mi">1073741824</span><span class="p">,</span>
+            <span class="s1">&#39;rkey&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">fe000</span><span class="p">,</span> <span class="mi">1</span><span class="n">fdf00</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="o">//</span> <span class="n">The</span> <span class="n">length</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">elements</span> <span class="ow">in</span> <span class="n">the</span> <span class="s1">&#39;devices&#39;</span> <span class="n">field</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">Created</span><span class="p">:</span> <span class="n">command</span> <span class="n">line</span> <span class="n">tool</span> <span class="n">register</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">determine</span> <span class="n">the</span> <span class="n">file</span> <span class="n">path</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span> <span class="n">mounted</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">Modified</span><span class="p">:</span> <span class="n">command</span> <span class="n">line</span> <span class="n">tool</span> <span class="n">mount</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">add</span> <span class="n">a</span> <span class="n">mapping</span> <span class="n">of</span> <span class="n">the</span> <span class="n">machine</span> <span class="n">mounting</span> <span class="n">the</span> <span class="n">file</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">path</span> <span class="n">on</span> <span class="n">the</span> <span class="n">mounting</span> <span class="n">machine</span> <span class="n">to</span> <span class="n">the</span> <span class="n">buffers</span><span class="o">.</span><span class="n">local_path_map</span><span class="o">.</span>
+<span class="n">Key</span> <span class="o">=</span> <span class="n">mooncake</span><span class="o">/</span><span class="n">nvmeof</span><span class="o">/</span><span class="p">[</span><span class="n">segment_name</span><span class="p">]</span>
+<span class="n">Value</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;server_name&#39;</span><span class="p">:</span> <span class="n">server_name</span><span class="p">,</span>
+    <span class="s1">&#39;protocol&#39;</span><span class="p">:</span> <span class="n">nvmeof</span><span class="p">,</span>
+    <span class="s1">&#39;buffers&#39;</span><span class="p">:[{</span>
+        <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="mi">1073741824</span><span class="p">,</span>
+        <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="s2">&quot;/mnt/nvme0&quot;</span> <span class="o">//</span> <span class="n">The</span> <span class="n">file</span> <span class="n">path</span> <span class="n">on</span> <span class="n">this</span> <span class="n">machine</span>
+        <span class="s1">&#39;local_path_map&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;node01&quot;</span><span class="p">:</span> <span class="s2">&quot;/mnt/transfer_engine/node01/nvme0&quot;</span><span class="p">,</span> <span class="o">//</span> <span class="n">The</span> <span class="n">machine</span> <span class="n">mounting</span> <span class="n">the</span> <span class="n">file</span> <span class="o">-&gt;</span> <span class="n">The</span> <span class="n">file</span> <span class="n">path</span> <span class="n">on</span> <span class="n">the</span> <span class="n">mounting</span> <span class="n">machine</span>
+            <span class="o">...</span>
+        <span class="p">},</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+        <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="mi">1073741824</span><span class="p">,</span>
+        <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="s2">&quot;/mnt/nvme1&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;local_path_map&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;node02&quot;</span><span class="p">:</span> <span class="s2">&quot;/mnt/transfer_engine/node02/nvme1&quot;</span><span class="p">,</span>
+            <span class="o">...</span>
+        <span class="p">},</span>
+     <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details>
+</section>
+</section>
+<section id="http-metadata-server">
+<h3>HTTP Metadata Server<a class="headerlink" href="#http-metadata-server" title="Link to this heading">#</a></h3>
+<p>The HTTP server should implement three following RESTful APIs, while the metadata server configured to <code class="docutils literal notranslate"><span class="pre">http://host:port/metadata</span></code> as an example:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/metadata?key=$KEY</span></code>: Get the metadata corresponding to <code class="docutils literal notranslate"><span class="pre">$KEY</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/metadata?key=$KEY</span></code>: Update the metadata corresponding to <code class="docutils literal notranslate"><span class="pre">$KEY</span></code> to the value of the request body.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/metadata?key=$KEY</span></code>: Delete the metadata corresponding to <code class="docutils literal notranslate"><span class="pre">$KEY</span></code>.</p></li>
+</ol>
+<p>For specific implementation, refer to the demo service implemented in Golang at <a class="reference internal" href="#../../../mooncake-transfer-engine/example/http-metadata-server"><span class="xref myst">mooncake-transfer-engine/example/http-metadata-server</span></a>.</p>
+</section>
+<section id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h3>
+<p>TransferEngine needs to be initialized by calling the <code class="docutils literal notranslate"><span class="pre">init</span></code> method before further actions:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TransferEngine</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">metadata_conn_string</span><span class="p">,</span>
+<span class="w">         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_server_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There is also an extended form to override RPC binding:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">metadata_conn_string</span><span class="p">,</span>
+<span class="w">         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_server_name</span><span class="p">,</span>
+<span class="w">         </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ip_or_host_name</span><span class="p">,</span>
+<span class="w">         </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">rpc_port</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata_conn_string</span></code>: Connecting string of metadata storage servers, i.e., the IP address/hostname of <code class="docutils literal notranslate"><span class="pre">etcd</span></code>/<code class="docutils literal notranslate"><span class="pre">redis</span></code> or the URI of the http service.
+The general form is <code class="docutils literal notranslate"><span class="pre">[proto]://[hostname:port]</span></code>. For example, the following metadata server addresses are legal:</p>
+<ul>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">etcd</span></code> as a metadata storage service: <code class="docutils literal notranslate"><span class="pre">&quot;10.0.0.1:2379&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;etcd://10.0.0.1:2379&quot;</span></code>.</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">redis</span></code> as a metadata storage service: <code class="docutils literal notranslate"><span class="pre">&quot;redis://10.0.0.1:6379&quot;</span></code></p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">http</span></code> as a metadata storage service: <code class="docutils literal notranslate"><span class="pre">&quot;http://10.0.0.1:8080/metadata&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_server_name</span></code>: The local server name, ensuring uniqueness within the cluster. It also serves as the name of the RAM Segment that other nodes refer to the current instance (i.e., Segment Name).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ip_or_host_name</span></code>: Optional explicit bind address or hostname for the RPC service.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rpc_port</span></code>: Optional explicit RPC port.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="o">~</span><span class="n">TransferEngine</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Reclaims all allocated resources and also deletes the global metadata server information.</p>
+<section id="transferengine-freeengine">
+<h4>TransferEngine::freeEngine<a class="headerlink" href="#transferengine-freeengine" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">freeEngine</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Releases resources early without waiting for destruction.</p>
+</section>
+</section>
+</section>
+<section id="advanced-apis">
+<h2>Advanced APIs<a class="headerlink" href="#advanced-apis" title="Link to this heading">#</a></h2>
+<p>These APIs are optional; use them when you need manual transport control, coordination notifications, metadata/cache refresh, topology discovery, or debugging. They are not required for the basic data path.</p>
+<section id="multi-transport-management">
+<h3>Multi-Transport Management<a class="headerlink" href="#multi-transport-management" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> class internally manages multiple backend <code class="docutils literal notranslate"><span class="pre">Transport</span></code> classes.
+And it will discover the topology between CPU/CUDA and RDMA devices automatically
+(more device types are working in progress, feedbacks are welcome when the automatic discovery mechanism is not accurate),
+and it will install <code class="docutils literal notranslate"><span class="pre">Transport</span></code> automatically based on the topology.</p>
+<section id="transferengine-installtransport">
+<h4>TransferEngine::installTransport<a class="headerlink" href="#transferengine-installtransport" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Transport</span><span class="o">*</span><span class="w"> </span><span class="nf">installTransport</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">proto</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">**</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Installs a transport backend explicitly.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">proto</span></code>: Transport protocol name, such as <code class="docutils literal notranslate"><span class="pre">rdma</span></code>, <code class="docutils literal notranslate"><span class="pre">tcp</span></code>, or <code class="docutils literal notranslate"><span class="pre">nvmeof</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">args</span></code>: Transport-specific arguments.</p></li>
+</ul>
+<blockquote>
+<div><p>Note: In TENT, <code class="docutils literal notranslate"><span class="pre">installTransport</span></code> is not exposed (removed from the public API, including compatibility surfaces). Transport selection is internal to TENT.</p>
+</div></blockquote>
+</section>
+<section id="transferengine-uninstalltransport">
+<h4>TransferEngine::uninstallTransport<a class="headerlink" href="#transferengine-uninstalltransport" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">uninstallTransport</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">proto</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Uninstalls a transport backend.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">proto</span></code>: Transport protocol name.</p></li>
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+</ul>
+</section>
+<section id="transferengine-gettransport">
+<h4>TransferEngine::getTransport<a class="headerlink" href="#transferengine-gettransport" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Transport</span><span class="o">*</span><span class="w"> </span><span class="nf">getTransport</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">proto</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Returns a transport instance by protocol name, mainly for advanced inspection or debugging.</p>
+</section>
+</section>
+<section id="notifications">
+<h3>Notifications<a class="headerlink" href="#notifications" title="Link to this heading">#</a></h3>
+<p>TransferEngine can send and receive lightweight notifications across segments to coordinate data movement.</p>
+<section id="transferengine-submittransferwithnotify">
+<h4>TransferEngine::submitTransferWithNotify<a class="headerlink" href="#transferengine-submittransferwithnotify" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">submitTransferWithNotify</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span>
+<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TransferRequest</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">entries</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">TransferMetadata</span><span class="o">::</span><span class="n">NotifyDesc</span><span class="w"> </span><span class="n">notify_msg</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Submits a batch transfer and delivers a notification upon completion.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">notify_msg</span></code>: A <code class="docutils literal notranslate"><span class="pre">{name,</span> <span class="pre">msg}</span></code> payload delivered to the receiver.</p></li>
+<li><p>Typical use: signal that a transferred buffer or KV-cache slice is ready to consume on the receiver side.</p></li>
+</ul>
+</section>
+<section id="transferengine-getnotifies">
+<h4>TransferEngine::getNotifies<a class="headerlink" href="#transferengine-getnotifies" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">getNotifies</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TransferMetadata</span><span class="o">::</span><span class="n">NotifyDesc</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">notifies</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Gets pending notifications from peers.</p>
+<ul class="simple">
+<li><p>Return value: If successful, returns 0; otherwise, returns a negative value.</p></li>
+<li><p>Typical use: receiver-side polling loop to trigger follow-up actions (e.g., attaching the transferred buffer to a scheduler or cache).</p></li>
+</ul>
+</section>
+<section id="transferengine-sendnotifybyid">
+<h4>TransferEngine::sendNotifyByID<a class="headerlink" href="#transferengine-sendnotifybyid" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">sendNotifyByID</span><span class="p">(</span><span class="n">SegmentID</span><span class="w"> </span><span class="n">target_id</span><span class="p">,</span><span class="w"> </span><span class="n">TransferMetadata</span><span class="o">::</span><span class="n">NotifyDesc</span><span class="w"> </span><span class="n">notify_msg</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Sends a notification to a specific segment by ID.</p>
+<ul class="simple">
+<li><p>Typical use: control-plane message such as “ready”, “invalidate”, or “retry” tied to a known segment handle.</p></li>
+</ul>
+</section>
+<section id="transferengine-sendnotifybyname">
+<h4>TransferEngine::sendNotifyByName<a class="headerlink" href="#transferengine-sendnotifybyname" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">sendNotifyByName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">remote_agent</span><span class="p">,</span><span class="w"> </span><span class="n">TransferMetadata</span><span class="o">::</span><span class="n">NotifyDesc</span><span class="w"> </span><span class="n">notify_msg</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Sends a notification to a remote agent by name.</p>
+<ul class="simple">
+<li><p>Typical use: best-effort coordination when you only know the peer’s name (segment name), not the handle.</p></li>
+</ul>
+</section>
+</section>
+<section id="segment-cache-and-metadata-access">
+<h3>Segment Cache and Metadata Access<a class="headerlink" href="#segment-cache-and-metadata-access" title="Link to this heading">#</a></h3>
+<section id="transferengine-syncsegmentcache">
+<h4>TransferEngine::syncSegmentCache<a class="headerlink" href="#transferengine-syncsegmentcache" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">syncSegmentCache</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">segment_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Synchronizes local segment cache from the metadata service.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_name</span></code>: If empty, refreshes all segments; otherwise, refreshes the specified segment.</p></li>
+<li><p>Typical use: when peers dynamically register/unregister buffers and you need to refresh before opening or submitting transfers.</p></li>
+</ul>
+</section>
+<section id="transferengine-getmetadata">
+<h4>TransferEngine::getMetadata<a class="headerlink" href="#transferengine-getmetadata" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">TransferMetadata</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getMetadata</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns the metadata subsystem instance for advanced workflows.</p>
+<ul class="simple">
+<li><p>Typical use: advanced integration or debugging of metadata content beyond the standard APIs.</p></li>
+</ul>
+</section>
+</section>
+<section id="topology-and-discovery">
+<h3>Topology and Discovery<a class="headerlink" href="#topology-and-discovery" title="Link to this heading">#</a></h3>
+<section id="transferengine-setautodiscover">
+<h4>TransferEngine::setAutoDiscover<a class="headerlink" href="#transferengine-setautodiscover" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">setAutoDiscover</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">auto_discover</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Enables or disables topology discovery.</p>
+<ul class="simple">
+<li><p>Typical use: controlled environments or debugging where auto discovery is not desired.</p></li>
+</ul>
+</section>
+<section id="transferengine-setwhitelistfilters">
+<h4>TransferEngine::setWhitelistFilters<a class="headerlink" href="#transferengine-setwhitelistfilters" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">setWhitelistFilters</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">filters</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Sets the device whitelist used during topology discovery.</p>
+<ul class="simple">
+<li><p>Typical use: restrict transfers to a subset of NICs or GPUs for performance isolation or testing.</p></li>
+</ul>
+</section>
+<section id="transferengine-numcontexts">
+<h4>TransferEngine::numContexts<a class="headerlink" href="#transferengine-numcontexts" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">numContexts</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Returns the number of active transport contexts.</p>
+<ul class="simple">
+<li><p>Typical use: introspection and resource monitoring.</p></li>
+</ul>
+</section>
+<section id="transferengine-getlocaltopology">
+<h4>TransferEngine::getLocalTopology<a class="headerlink" href="#transferengine-getlocaltopology" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Topology</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getLocalTopology</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns the local topology model used for path selection.</p>
+<ul class="simple">
+<li><p>Typical use: diagnose path selection or export topology to a scheduler.</p></li>
+</ul>
+</section>
+</section>
+<section id="introspection-and-safety">
+<h3>Introspection and Safety<a class="headerlink" href="#introspection-and-safety" title="Link to this heading">#</a></h3>
+<section id="transferengine-getlocalipandport">
+<h4>TransferEngine::getLocalIpAndPort<a class="headerlink" href="#transferengine-getlocalipandport" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getLocalIpAndPort</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns the resolved local RPC address.</p>
+<ul class="simple">
+<li><p>Typical use: publish the resolved address to external components or logs.</p></li>
+</ul>
+</section>
+<section id="transferengine-getrpcport">
+<h4>TransferEngine::getRpcPort<a class="headerlink" href="#transferengine-getrpcport" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">getRpcPort</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns the active RPC port.</p>
+<ul class="simple">
+<li><p>Typical use: verify port binding when dynamic ports are used.</p></li>
+</ul>
+</section>
+<section id="transferengine-checkoverlap">
+<h4>TransferEngine::checkOverlap<a class="headerlink" href="#transferengine-checkoverlap" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">checkOverlap</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">length</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Checks whether a given address range overlaps with existing registered buffers.</p>
+<ul class="simple">
+<li><p>Typical use: validate registration plans before calling <code class="docutils literal notranslate"><span class="pre">registerLocalMemory</span></code> in complex buffer managers.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../api-reference/cpp/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">C/C++ API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../tent/cpp-api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TENT C++ API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-apis">Core APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage-path-c">Core Usage Path (C++)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors">Constructors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-transferrequest">TransferEngine::TransferRequest</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatebatchid">TransferEngine::allocateBatchID</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer">TransferEngine::submitTransfer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransferstatus">TransferEngine::getTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getbatchtransferstatus">TransferEngine::getBatchTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freebatchid">TransferEngine::freeBatchID</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-registration">Space Registration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemory">TransferEngine::registerLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemory">TransferEngine::unregisterLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemorybatch">TransferEngine::registerLocalMemoryBatch</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemorybatch">TransferEngine::unregisterLocalMemoryBatch</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-and-metadata-format">Segment Management and Metadata Format</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-removelocalsegment">TransferEngine::removeLocalSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-checksegmentstatus">TransferEngine::CheckSegmentStatus</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server">HTTP Metadata Server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freeengine">TransferEngine::freeEngine</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-apis">Advanced APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-transport-management">Multi-Transport Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-installtransport">TransferEngine::installTransport</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-uninstalltransport">TransferEngine::uninstallTransport</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransport">TransferEngine::getTransport</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notifications">Notifications</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransferwithnotify">TransferEngine::submitTransferWithNotify</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getnotifies">TransferEngine::getNotifies</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-sendnotifybyid">TransferEngine::sendNotifyByID</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-sendnotifybyname">TransferEngine::sendNotifyByName</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-cache-and-metadata-access">Segment Cache and Metadata Access</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-syncsegmentcache">TransferEngine::syncSegmentCache</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getmetadata">TransferEngine::getMetadata</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-and-discovery">Topology and Discovery</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-setautodiscover">TransferEngine::setAutoDiscover</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-setwhitelistfilters">TransferEngine::setWhitelistFilters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-numcontexts">TransferEngine::numContexts</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getlocaltopology">TransferEngine::getLocalTopology</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introspection-and-safety">Introspection and Safety</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getlocalipandport">TransferEngine::getLocalIpAndPort</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getrpcport">TransferEngine::getRpcPort</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-checkoverlap">TransferEngine::checkOverlap</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

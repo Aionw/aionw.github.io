@@ -1,0 +1,1448 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TENT C++ API Reference &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/tent/cpp-api';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="HTTP" href="../../api-reference/http/index.html" />
+    <link rel="prev" title="Transfer Engine C++ API Reference" href="../transfer-engine/cpp-api.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../api-reference/cpp/index.html">C/C++ API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../transfer-engine/cpp-api.html">Transfer Engine C++ API Reference</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TENT C++ API Reference</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/tent/cpp-api.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/design/tent/cpp-api.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TENT C++ API Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences-from-transfer-engine">Key Differences from Transfer Engine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-philosophy">Design Philosophy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-mapping-te-to-tent">API Mapping: TE to TENT</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-backward-compatible-shim">Using the Backward-Compatible Shim</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-apis">Core APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage-path-c">Core Usage Path (C++)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors">Constructors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types">Types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request">Request</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferstatus">TransferStatus</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatebatch">TransferEngine::allocateBatch</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer">TransferEngine::submitTransfer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransferstatus">TransferEngine::getTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freebatch">TransferEngine::freeBatch</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-management">Memory Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatelocalmemory">TransferEngine::allocateLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freelocalmemory">TransferEngine::freeLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemory">TransferEngine::registerLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemory">TransferEngine::unregisterLocalMemory</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management">Segment Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-opensegment">TransferEngine::openSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-closesegment">TransferEngine::closeSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getsegmentinfo">TransferEngine::getSegmentInfo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-apis">Advanced APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-export-and-import">Segment Export and Import</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-exportlocalsegment">TransferEngine::exportLocalSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-importremotesegment">TransferEngine::importRemoteSegment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notifications">Notifications</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer-with-notification">TransferEngine::submitTransfer (with notification)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-sendnotification">TransferEngine::sendNotification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-receivenotification">TransferEngine::receiveNotification</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#engine-introspection">Engine Introspection</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-available">TransferEngine::available</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getsegmentname">TransferEngine::getSegmentName</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getrpcserveraddress">TransferEngine::getRpcServerAddress</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getrpcserverport">TransferEngine::getRpcServerPort</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-reference">Type Reference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permission">Permission</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#location">Location</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transporttype">TransportType</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memoryoptions">MemoryOptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentinfo">SegmentInfo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notification">Notification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#status">Status</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="tent-c-api-reference">
+<h1>TENT C++ API Reference<a class="headerlink" href="#tent-c-api-reference" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This page summarizes the C++ APIs in <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine/tent/include/tent/transfer_engine.h</span></code>.
+It follows the same structure as the Transfer Engine API documentation.</p>
+<p>For conceptual background, see <a class="reference internal" href="overview.html"><span class="std std-doc">TENT Overview</span></a>.</p>
+<p><strong>Prerequisites and API modes</strong></p>
+<ul class="simple">
+<li><p><strong>Build</strong> with <code class="docutils literal notranslate"><span class="pre">-DUSE_TENT=ON</span></code> to enable TENT.</p></li>
+<li><p>TENT provides two API surfaces:</p>
+<ul>
+<li><p><strong>TENT-native API</strong> (documented below).</p></li>
+<li><p><strong>TE-compatible API</strong> via the compatibility shim (set <code class="docutils literal notranslate"><span class="pre">MC_USE_TENT=1</span></code>). For TE-compatible API, see <a class="reference internal" href="../transfer-engine/cpp-api.html"><span class="std std-doc">TE C++ API Reference</span></a></p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Core APIs vs Advanced APIs</strong></p>
+<ul class="simple">
+<li><p>Core APIs form the minimal path to move data: create the engine, register memory, open segments, submit transfers, and query status.</p></li>
+<li><p>Advanced APIs are optional; they help with segment export/import, notifications, and engine introspection.</p></li>
+</ul>
+</section>
+<section id="key-differences-from-transfer-engine">
+<h2>Key Differences from Transfer Engine<a class="headerlink" href="#key-differences-from-transfer-engine" title="Link to this heading">#</a></h2>
+<p>TENT redesigns the API surface based on different design goals. The following table summarizes the key differences and the rationale behind them.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Transfer Engine (TE)</p></th>
+<th class="head"><p>TENT</p></th>
+<th class="head"><p>Rationale</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Initialization</strong></p></td>
+<td><p>Two-step: constructor + <code class="docutils literal notranslate"><span class="pre">init(metadata_conn_string,</span> <span class="pre">server_name,</span> <span class="pre">...)</span></code></p></td>
+<td><p>Single-step: constructor with <code class="docutils literal notranslate"><span class="pre">Config</span></code> object or config file path</p></td>
+<td><p>Simplifies initialization; centralizes configuration in a single place</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Transport Management</strong></p></td>
+<td><p>Manual: <code class="docutils literal notranslate"><span class="pre">installTransport()</span></code>, <code class="docutils literal notranslate"><span class="pre">uninstallTransport()</span></code>, <code class="docutils literal notranslate"><span class="pre">getTransport()</span></code></p></td>
+<td><p>Removed from public API</p></td>
+<td><p>TENT performs dynamic transport selection at runtime; applications should not manage transports directly</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Memory Allocation</strong></p></td>
+<td><p>Not provided; users allocate memory externally</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">allocateLocalMemory()</span></code> / <code class="docutils literal notranslate"><span class="pre">freeLocalMemory()</span></code></p></td>
+<td><p>Provides integrated memory management with automatic registration</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Memory Registration</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">registerLocalMemory(addr,</span> <span class="pre">len,</span> <span class="pre">location,</span> <span class="pre">remote_accessible,</span> <span class="pre">update_metadata)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">registerLocalMemory(addr,</span> <span class="pre">size,</span> <span class="pre">Permission)</span></code> or <code class="docutils literal notranslate"><span class="pre">MemoryOptions</span></code></p></td>
+<td><p>Cleaner semantics; <code class="docutils literal notranslate"><span class="pre">Permission</span></code> replaces boolean flags; metadata updates are internal</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Segment Discovery</strong></p></td>
+<td><p>Via metadata service; manual cache sync with <code class="docutils literal notranslate"><span class="pre">syncSegmentCache()</span></code></p></td>
+<td><p>Internal control plane (metadata type = <code class="docutils literal notranslate"><span class="pre">p2p</span></code> or central); no manual sync</p></td>
+<td><p>Simplifies metadata management; discovery handled inside runtime</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Error Handling</strong></p></td>
+<td><p>Mixed: some APIs return <code class="docutils literal notranslate"><span class="pre">int</span></code>, others return <code class="docutils literal notranslate"><span class="pre">Status</span></code></p></td>
+<td><p>Consistent: all APIs return <code class="docutils literal notranslate"><span class="pre">Status</span></code></p></td>
+<td><p>Uniform error handling across the API</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Topology/Introspection</strong></p></td>
+<td><p>Exposed: <code class="docutils literal notranslate"><span class="pre">getLocalTopology()</span></code>, <code class="docutils literal notranslate"><span class="pre">getMetadata()</span></code>, <code class="docutils literal notranslate"><span class="pre">checkOverlap()</span></code>, etc.</p></td>
+<td><p>Internalized; not exposed</p></td>
+<td><p>TENT handles topology and path selection internally; reduces API complexity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="design-philosophy">
+<h3>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Declarative over Imperative</strong>: Applications describe <em>what</em> data to move, not <em>how</em> to move it. Transport selection, path optimization, and failure handling are delegated to the TENT runtime.</p></li>
+<li><p><strong>Single Initialization</strong>: Instead of a two-phase <code class="docutils literal notranslate"><span class="pre">constructor</span> <span class="pre">+</span> <span class="pre">init()</span></code> pattern, TENT uses configuration objects that fully describe the engine state at construction time.</p></li>
+<li><p><strong>Internal Metadata Management</strong>: TENT does not expose metadata internals (<code class="docutils literal notranslate"><span class="pre">TransferMetadata</span></code>, <code class="docutils literal notranslate"><span class="pre">Topology</span></code>). Segment discovery is handled by the control plane (P2P or central), and the cache is managed automatically.</p></li>
+<li><p><strong>Consistent Error Model</strong>: All TENT APIs return <code class="docutils literal notranslate"><span class="pre">Status</span></code> objects, eliminating the mixed <code class="docutils literal notranslate"><span class="pre">int</span></code> / <code class="docutils literal notranslate"><span class="pre">Status</span></code> return types in TE.</p></li>
+</ol>
+</section>
+</section>
+<section id="api-mapping-te-to-tent">
+<h2>API Mapping: TE to TENT<a class="headerlink" href="#api-mapping-te-to-tent" title="Link to this heading">#</a></h2>
+<p>For users migrating from Transfer Engine, the following table shows how TE APIs map to TENT APIs. TENT provides a backward-compatible shim (<code class="docutils literal notranslate"><span class="pre">MC_USE_TENT=1</span></code>) that allows existing TE code to run on the TENT runtime.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Transfer Engine API</p></th>
+<th class="head"><p>TENT API</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Initialization</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TransferEngine(auto_discover)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TransferEngine()</span></code></p></td>
+<td><p>TENT ignores <code class="docutils literal notranslate"><span class="pre">auto_discover</span></code>; discovery is always automatic</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init(conn_string,</span> <span class="pre">server_name,</span> <span class="pre">ip,</span> <span class="pre">port)</span></code></p></td>
+<td><p>Constructor with <code class="docutils literal notranslate"><span class="pre">Config</span></code></p></td>
+<td><p>Config sets <code class="docutils literal notranslate"><span class="pre">metadata_type</span></code>, <code class="docutils literal notranslate"><span class="pre">metadata_servers</span></code>, <code class="docutils literal notranslate"><span class="pre">local_segment_name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">freeEngine()</span></code></p></td>
+<td><p>Destructor</p></td>
+<td><p>Resources released automatically on destruction</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Transport</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">installTransport(proto,</span> <span class="pre">args)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Transport selection is internal to TENT</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">uninstallTransport(proto)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getTransport(proto)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Memory</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">registerLocalMemory(addr,</span> <span class="pre">len,</span> <span class="pre">location,</span> <span class="pre">remote_accessible,</span> <span class="pre">update_metadata)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">registerLocalMemory(addr,</span> <span class="pre">size,</span> <span class="pre">MemoryOptions)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MemoryOptions.location</span></code> replaces <code class="docutils literal notranslate"><span class="pre">location</span></code>; <code class="docutils literal notranslate"><span class="pre">MemoryOptions.perm</span></code> replaces <code class="docutils literal notranslate"><span class="pre">remote_accessible</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unregisterLocalMemory(addr,</span> <span class="pre">update_metadata)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unregisterLocalMemory(addr)</span></code></p></td>
+<td><p>Metadata update is internal</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">registerLocalMemoryBatch(buffer_list,</span> <span class="pre">location)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">registerLocalMemory(addr_list,</span> <span class="pre">size_list,</span> <span class="pre">MemoryOptions)</span></code></p></td>
+<td><p>Batch API uses vectors instead of <code class="docutils literal notranslate"><span class="pre">BufferEntry</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unregisterLocalMemoryBatch(addr_list)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unregisterLocalMemory(addr_list)</span></code></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Not available</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">allocateLocalMemory(addr,</span> <span class="pre">size,</span> <span class="pre">location)</span></code></p></td>
+<td><p>TENT-only: allocates and registers in one call</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Not available</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">freeLocalMemory(addr)</span></code></p></td>
+<td><p>TENT-only: frees allocated memory</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Segment</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">openSegment(segment_name)</span></code> → returns handle</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">openSegment(handle,</span> <span class="pre">segment_name)</span></code> → via output param</p></td>
+<td><p>Return style differs; <code class="docutils literal notranslate"><span class="pre">Status</span></code> indicates success/failure</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">closeSegment(handle)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">closeSegment(handle)</span></code></p></td>
+<td><p>Same semantics</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">removeLocalSegment(segment_name)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Segment lifecycle managed internally</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CheckSegmentStatus(sid)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Status checking is internal</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">syncSegmentCache(segment_name)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Cache sync is automatic</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Not available</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">exportLocalSegment(shared_handle)</span></code></p></td>
+<td><p>Declared in TENT API but currently not implemented</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Not available</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">importRemoteSegment(handle,</span> <span class="pre">shared_handle)</span></code></p></td>
+<td><p>Declared in TENT API but currently not implemented</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getSegmentInfo(handle,</span> <span class="pre">info)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getSegmentInfo(handle,</span> <span class="pre">info)</span></code></p></td>
+<td><p>Same semantics</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Batch &amp; Transfer</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">allocateBatchID(batch_size)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">allocateBatch(batch_size)</span></code></p></td>
+<td><p>Renamed</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">freeBatchID(batch_id)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">freeBatch(batch_id)</span></code></p></td>
+<td><p>Renamed</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">submitTransfer(batch_id,</span> <span class="pre">entries)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">submitTransfer(batch_id,</span> <span class="pre">request_list)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TransferRequest</span></code> → <code class="docutils literal notranslate"><span class="pre">Request</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">submitTransferWithNotify(batch_id,</span> <span class="pre">entries,</span> <span class="pre">notify_msg)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">submitTransfer(batch_id,</span> <span class="pre">request_list,</span> <span class="pre">notifi)</span></code></p></td>
+<td><p>Unified API with optional notification</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getTransferStatus(batch_id,</span> <span class="pre">task_id,</span> <span class="pre">status)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getTransferStatus(batch_id,</span> <span class="pre">task_id,</span> <span class="pre">status)</span></code></p></td>
+<td><p>Same</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getBatchTransferStatus(batch_id,</span> <span class="pre">status)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getTransferStatus(batch_id,</span> <span class="pre">status)</span></code></p></td>
+<td><p>Overloaded; single <code class="docutils literal notranslate"><span class="pre">TransferStatus</span></code> output = overall status</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Not available</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getTransferStatus(batch_id,</span> <span class="pre">status_list)</span></code></p></td>
+<td><p>TENT-only: get all task statuses at once</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Notification</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sendNotifyByID(target_id,</span> <span class="pre">notify_msg)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sendNotification(target_id,</span> <span class="pre">notifi)</span></code></p></td>
+<td><p>Renamed; uses <code class="docutils literal notranslate"><span class="pre">Notification</span></code> struct</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sendNotifyByName(remote_agent,</span> <span class="pre">notify_msg)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">openSegment()</span></code> + <code class="docutils literal notranslate"><span class="pre">sendNotification()</span></code></p></td>
+<td><p>TENT requires explicit segment handle</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getNotifies(notifies)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">receiveNotification(notifi_list)</span></code></p></td>
+<td><p>Renamed; uses <code class="docutils literal notranslate"><span class="pre">Notification</span></code> struct</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Introspection</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getLocalIpAndPort()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getRpcServerAddress()</span></code> + <code class="docutils literal notranslate"><span class="pre">getRpcServerPort()</span></code></p></td>
+<td><p>Split into two methods</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getRpcPort()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getRpcServerPort()</span></code></p></td>
+<td><p>Same</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getMetadata()</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Metadata internals not exposed</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getLocalTopology()</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Topology internals not exposed</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">checkOverlap(addr,</span> <span class="pre">length)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setAutoDiscover(auto_discover)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Always enabled (ignored under <code class="docutils literal notranslate"><span class="pre">MC_USE_TENT</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">setWhitelistFilters(filters)</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>Configure via <code class="docutils literal notranslate"><span class="pre">Config</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numContexts()</span></code></p></td>
+<td><p><em>Not available</em></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Not available</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">available()</span></code></p></td>
+<td><p>TENT-only: check if engine initialized successfully</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Not available</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">getSegmentName()</span></code></p></td>
+<td><p>TENT-only: get local segment name</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="using-the-backward-compatible-shim">
+<h3>Using the Backward-Compatible Shim<a class="headerlink" href="#using-the-backward-compatible-shim" title="Link to this heading">#</a></h3>
+<p>Existing Transfer Engine code can run on TENT by setting the environment variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MC_USE_TENT</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>When this variable is set, the <code class="docutils literal notranslate"><span class="pre">mooncake::TransferEngine</span></code> class internally delegates to <code class="docutils literal notranslate"><span class="pre">mooncake::tent::TransferEngine</span></code>. Most TE APIs are translated automatically. APIs that have no TENT equivalent (e.g., <code class="docutils literal notranslate"><span class="pre">installTransport</span></code>, <code class="docutils literal notranslate"><span class="pre">getMetadata</span></code>) become no-ops or return placeholder values.</p>
+</section>
+</section>
+<section id="core-apis">
+<h2>Core APIs<a class="headerlink" href="#core-apis" title="Link to this heading">#</a></h2>
+<section id="core-usage-path-c">
+<h3>Core Usage Path (C++)<a class="headerlink" href="#core-usage-path-c" title="Link to this heading">#</a></h3>
+<p>Most integrations follow a short, repeatable path: create the engine, register local memory, open a target segment, submit a batch transfer, poll status, and finally free resources. A minimal example is shown below.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tent/transfer_engine.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">tent</span><span class="o">::</span><span class="n">TransferEngine</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">tent</span><span class="o">::</span><span class="n">Request</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">tent</span><span class="o">::</span><span class="n">TransferStatus</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">tent</span><span class="o">::</span><span class="n">SegmentID</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">tent</span><span class="o">::</span><span class="n">BatchID</span><span class="p">;</span>
+
+<span class="c1">// Create engine (loads config from default path or environment)</span>
+<span class="n">TransferEngine</span><span class="w"> </span><span class="n">engine</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">engine</span><span class="p">.</span><span class="n">available</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// handle initialization failure</span>
+<span class="p">}</span>
+
+<span class="c1">// Allocate and register local memory</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">local_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span><span class="w">  </span><span class="c1">// 1MB</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">allocateLocalMemory</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local_addr</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cuda:0&quot;</span><span class="p">);</span>
+
+<span class="c1">// Open remote segment</span>
+<span class="n">SegmentID</span><span class="w"> </span><span class="n">remote_segment</span><span class="p">;</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">openSegment</span><span class="p">(</span><span class="n">remote_segment</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;remote_node&quot;</span><span class="p">);</span>
+
+<span class="c1">// Prepare transfer request</span>
+<span class="n">Request</span><span class="w"> </span><span class="n">req</span><span class="p">{};</span>
+<span class="n">req</span><span class="p">.</span><span class="n">opcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Request</span><span class="o">::</span><span class="n">WRITE</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local_addr</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">target_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remote_segment</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">target_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">req</span><span class="p">.</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">;</span>
+
+<span class="c1">// Allocate batch and submit transfer</span>
+<span class="n">BatchID</span><span class="w"> </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="n">allocateBatch</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">submitTransfer</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">req</span><span class="p">});</span>
+
+<span class="c1">// Poll for completion</span>
+<span class="n">TransferStatus</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">engine</span><span class="p">.</span><span class="n">getTransferStatus</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">.</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mooncake</span><span class="o">::</span><span class="n">tent</span><span class="o">::</span><span class="n">PENDING</span><span class="p">);</span>
+
+<span class="c1">// Cleanup</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">freeBatch</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">closeSegment</span><span class="p">(</span><span class="n">remote_segment</span><span class="p">);</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">freeLocalMemory</span><span class="p">(</span><span class="n">local_addr</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="constructors">
+<h3>Constructors<a class="headerlink" href="#constructors" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TransferEngine</span><span class="p">();</span>
+<span class="n">TransferEngine</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">config_path</span><span class="p">);</span>
+<span class="n">TransferEngine</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="w"> </span><span class="n">config</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Constructs a TENT Transfer Engine instance.</p>
+<ul class="simple">
+<li><p>Default constructor: Loads configuration from the default path or environment variables.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_path</span></code>: Path to a JSON configuration file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: A pre-constructed <code class="docutils literal notranslate"><span class="pre">Config</span></code> object for programmatic configuration.</p></li>
+</ul>
+<p>The engine is ready to use after construction if <code class="docutils literal notranslate"><span class="pre">available()</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</section>
+<section id="types">
+<h3>Types<a class="headerlink" href="#types" title="Link to this heading">#</a></h3>
+<section id="request">
+<h4>Request<a class="headerlink" href="#request" title="Link to this heading">#</a></h4>
+<p>The core API provided by TENT is submitting a group of asynchronous <code class="docutils literal notranslate"><span class="pre">Request</span></code> tasks through the <code class="docutils literal notranslate"><span class="pre">submitTransfer</span></code> interface, and querying their status through the <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> interface.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Request</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="nc">OpCode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">READ</span><span class="p">,</span><span class="w"> </span><span class="n">WRITE</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">OpCode</span><span class="w"> </span><span class="n">opcode</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">source</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SegmentID</span><span class="w"> </span><span class="n">target_id</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">target_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code>: <code class="docutils literal notranslate"><span class="pre">READ</span></code> copies data from <code class="docutils literal notranslate"><span class="pre">&lt;target_id,</span> <span class="pre">target_offset&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">source</span></code>; <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> copies data from <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;target_id,</span> <span class="pre">target_offset&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code>: Local buffer address, must be registered via <code class="docutils literal notranslate"><span class="pre">registerLocalMemory</span></code> or allocated via <code class="docutils literal notranslate"><span class="pre">allocateLocalMemory</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_id</span></code>: Segment ID obtained from <code class="docutils literal notranslate"><span class="pre">openSegment</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_offset</span></code>: Offset within the target segment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Number of bytes to transfer.</p></li>
+</ul>
+</section>
+<section id="transferstatus">
+<h4>TransferStatus<a class="headerlink" href="#transferstatus" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="nc">TransferStatusEnum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">INITIAL</span><span class="p">,</span><span class="w">    </span><span class="c1">// Not yet started</span>
+<span class="w">    </span><span class="n">PENDING</span><span class="p">,</span><span class="w">    </span><span class="c1">// Transfer in progress</span>
+<span class="w">    </span><span class="n">INVALID</span><span class="p">,</span><span class="w">    </span><span class="c1">// Invalid parameters</span>
+<span class="w">    </span><span class="n">CANCELED</span><span class="p">,</span><span class="w">   </span><span class="c1">// Transfer canceled</span>
+<span class="w">    </span><span class="n">COMPLETED</span><span class="p">,</span><span class="w">  </span><span class="c1">// Transfer completed successfully</span>
+<span class="w">    </span><span class="n">TIMEOUT</span><span class="p">,</span><span class="w">    </span><span class="c1">// Transfer timed out</span>
+<span class="w">    </span><span class="n">FAILED</span><span class="w">      </span><span class="c1">// Transfer failed</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">TransferStatus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">TransferStatusEnum</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">transferred_bytes</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s</span></code>: Current status of the transfer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transferred_bytes</span></code>: Number of bytes successfully transferred (lower bound).</p></li>
+</ul>
+</section>
+</section>
+<section id="data-transfer">
+<h3>Data Transfer<a class="headerlink" href="#data-transfer" title="Link to this heading">#</a></h3>
+<section id="transferengine-allocatebatch">
+<h4>TransferEngine::allocateBatch<a class="headerlink" href="#transferengine-allocatebatch" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BatchID</span><span class="w"> </span><span class="nf">allocateBatch</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">batch_size</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Allocates a <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> that can hold up to <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> transfer requests.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>: Maximum number of requests that can be submitted under this batch.</p></li>
+<li><p>Return value: A valid <code class="docutils literal notranslate"><span class="pre">BatchID</span></code> on success.</p></li>
+</ul>
+</section>
+<section id="transferengine-submittransfer">
+<h4>TransferEngine::submitTransfer<a class="headerlink" href="#transferengine-submittransfer" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">submitTransfer</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Request</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">request_list</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Submits transfer requests to the specified batch. Requests are executed asynchronously.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: The batch to submit requests to.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request_list</span></code>: Vector of <code class="docutils literal notranslate"><span class="pre">Request</span></code> objects.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-gettransferstatus">
+<h4>TransferEngine::getTransferStatus<a class="headerlink" href="#transferengine-gettransferstatus" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get status of a single task</span>
+<span class="n">Status</span><span class="w"> </span><span class="nf">getTransferStatus</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">task_id</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">TransferStatus</span><span class="o">&amp;</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="c1">// Get status of all tasks in a batch</span>
+<span class="n">Status</span><span class="w"> </span><span class="nf">getTransferStatus</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TransferStatus</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">status_list</span><span class="p">);</span>
+
+<span class="c1">// Get overall batch status</span>
+<span class="n">Status</span><span class="w"> </span><span class="nf">getTransferStatus</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span><span class="w"> </span><span class="n">TransferStatus</span><span class="o">&amp;</span><span class="w"> </span><span class="n">overall_status</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Queries the status of transfer requests.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: The batch to query.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code>: Index of the specific task (for single-task query).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code> / <code class="docutils literal notranslate"><span class="pre">status_list</span></code> / <code class="docutils literal notranslate"><span class="pre">overall_status</span></code>: Output parameter(s) for status.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-freebatch">
+<h4>TransferEngine::freeBatch<a class="headerlink" href="#transferengine-freebatch" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">freeBatch</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Releases a batch. All transfers in the batch must be completed before calling this.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code>: The batch to release.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+</section>
+<section id="memory-management">
+<h3>Memory Management<a class="headerlink" href="#memory-management" title="Link to this heading">#</a></h3>
+<section id="transferengine-allocatelocalmemory">
+<h4>TransferEngine::allocateLocalMemory<a class="headerlink" href="#transferengine-allocatelocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">allocateLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">Location</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kWildcardLocation</span><span class="p">);</span>
+
+<span class="c1">// Advanced version with MemoryOptions</span>
+<span class="n">Status</span><span class="w"> </span><span class="nf">allocateLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="o">**</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">MemoryOptions</span><span class="o">&amp;</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Allocates memory that is automatically registered for transfers.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: Output pointer to the allocated memory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: Size in bytes to allocate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: Device location hint (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;cuda:0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cpu:0&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> for auto-detect).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: Advanced options including location, permission, and transport type.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-freelocalmemory">
+<h4>TransferEngine::freeLocalMemory<a class="headerlink" href="#transferengine-freelocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">freeLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Frees memory previously allocated with <code class="docutils literal notranslate"><span class="pre">allocateLocalMemory</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: Pointer to the memory to free.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-registerlocalmemory">
+<h4>TransferEngine::registerLocalMemory<a class="headerlink" href="#transferengine-registerlocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">registerLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">Permission</span><span class="w"> </span><span class="n">permission</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kGlobalReadWrite</span><span class="p">);</span>
+
+<span class="c1">// Batch registration</span>
+<span class="n">Status</span><span class="w"> </span><span class="nf">registerLocalMemory</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">addr_list</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">size_list</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">Permission</span><span class="w"> </span><span class="n">permission</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kGlobalReadWrite</span><span class="p">);</span>
+
+<span class="c1">// Advanced version with MemoryOptions</span>
+<span class="n">Status</span><span class="w"> </span><span class="nf">registerLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">MemoryOptions</span><span class="o">&amp;</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Registers externally allocated memory for use in transfers.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: Starting address of the memory region.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: Size in bytes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">permission</span></code>: Access permission (<code class="docutils literal notranslate"><span class="pre">kLocalReadWrite</span></code>, <code class="docutils literal notranslate"><span class="pre">kGlobalReadOnly</span></code>, <code class="docutils literal notranslate"><span class="pre">kGlobalReadWrite</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addr_list</span></code> / <code class="docutils literal notranslate"><span class="pre">size_list</span></code>: For batch registration of multiple buffers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: Advanced options for fine-grained control.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-unregisterlocalmemory">
+<h4>TransferEngine::unregisterLocalMemory<a class="headerlink" href="#transferengine-unregisterlocalmemory" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">unregisterLocalMemory</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// Batch unregistration</span>
+<span class="n">Status</span><span class="w"> </span><span class="nf">unregisterLocalMemory</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">addr_list</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">size_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{});</span>
+</pre></div>
+</div>
+<p>Unregisters previously registered memory.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: Starting address of the memory region.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: Size in bytes (optional, can be 0 if the engine tracks it).</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+</section>
+<section id="segment-management">
+<h3>Segment Management<a class="headerlink" href="#segment-management" title="Link to this heading">#</a></h3>
+<section id="transferengine-opensegment">
+<h4>TransferEngine::openSegment<a class="headerlink" href="#transferengine-opensegment" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">openSegment</span><span class="p">(</span><span class="n">SegmentID</span><span class="o">&amp;</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">segment_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Opens a segment by name and returns a handle for use in transfers.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span></code>: Output parameter for the segment ID.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_name</span></code>: Name of the segment to open (typically the remote node name).</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-closesegment">
+<h4>TransferEngine::closeSegment<a class="headerlink" href="#transferengine-closesegment" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">closeSegment</span><span class="p">(</span><span class="n">SegmentID</span><span class="w"> </span><span class="n">handle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Closes a previously opened segment.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span></code>: The segment ID to close.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-getsegmentinfo">
+<h4>TransferEngine::getSegmentInfo<a class="headerlink" href="#transferengine-getsegmentinfo" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">getSegmentInfo</span><span class="p">(</span><span class="n">SegmentID</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">SegmentInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Retrieves information about a segment.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span></code>: The segment ID.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span></code>: Output parameter containing segment details (type, buffers).</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="advanced-apis">
+<h2>Advanced APIs<a class="headerlink" href="#advanced-apis" title="Link to this heading">#</a></h2>
+<p>These APIs are optional; use them for segment export/import, notifications, or engine introspection.</p>
+<section id="segment-export-and-import">
+<h3>Segment Export and Import<a class="headerlink" href="#segment-export-and-import" title="Link to this heading">#</a></h3>
+<p>Reserved for future use. These APIs are declared but currently return
+<code class="docutils literal notranslate"><span class="pre">Status::NotImplemented</span></code>.</p>
+<section id="transferengine-exportlocalsegment">
+<h4>TransferEngine::exportLocalSegment<a class="headerlink" href="#transferengine-exportlocalsegment" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">exportLocalSegment</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shared_handle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Exports the local segment as a shareable handle string.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">shared_handle</span></code>: Output string that can be passed to remote nodes.</p></li>
+<li><p>Return value: Currently returns <code class="docutils literal notranslate"><span class="pre">Status::NotImplemented</span></code>.</p></li>
+<li><p>Typical use: Share segment information through an external channel (e.g., gRPC, Redis).</p></li>
+</ul>
+</section>
+<section id="transferengine-importremotesegment">
+<h4>TransferEngine::importRemoteSegment<a class="headerlink" href="#transferengine-importremotesegment" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">importRemoteSegment</span><span class="p">(</span><span class="n">SegmentID</span><span class="o">&amp;</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shared_handle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Imports a remote segment from a shared handle string.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span></code>: Output segment ID.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shared_handle</span></code>: The handle string obtained from <code class="docutils literal notranslate"><span class="pre">exportLocalSegment</span></code> on the remote side.</p></li>
+<li><p>Return value: Currently returns <code class="docutils literal notranslate"><span class="pre">Status::NotImplemented</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="notifications">
+<h3>Notifications<a class="headerlink" href="#notifications" title="Link to this heading">#</a></h3>
+<p>TENT supports lightweight notifications to coordinate data movement between nodes.</p>
+<section id="transferengine-submittransfer-with-notification">
+<h4>TransferEngine::submitTransfer (with notification)<a class="headerlink" href="#transferengine-submittransfer-with-notification" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">submitTransfer</span><span class="p">(</span><span class="n">BatchID</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Request</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">request_list</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="n">Notification</span><span class="o">&amp;</span><span class="w"> </span><span class="n">notifi</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Submits transfers and sends a notification upon completion.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">notifi</span></code>: A <code class="docutils literal notranslate"><span class="pre">{name,</span> <span class="pre">msg}</span></code> payload delivered to the receiver when the transfer completes.</p></li>
+<li><p>Typical use: Signal that transferred data is ready for consumption.</p></li>
+</ul>
+</section>
+<section id="transferengine-sendnotification">
+<h4>TransferEngine::sendNotification<a class="headerlink" href="#transferengine-sendnotification" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">sendNotification</span><span class="p">(</span><span class="n">SegmentID</span><span class="w"> </span><span class="n">target_id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Notification</span><span class="o">&amp;</span><span class="w"> </span><span class="n">notifi</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Sends a notification to a specific segment without data transfer.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">target_id</span></code>: The segment to notify.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">notifi</span></code>: The notification payload.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+</ul>
+</section>
+<section id="transferengine-receivenotification">
+<h4>TransferEngine::receiveNotification<a class="headerlink" href="#transferengine-receivenotification" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="w"> </span><span class="nf">receiveNotification</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Notification</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">notifi_list</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Receives pending notifications from peers.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">notifi_list</span></code>: Output vector of received notifications.</p></li>
+<li><p>Return value: <code class="docutils literal notranslate"><span class="pre">Status::OK()</span></code> on success; otherwise a non-OK status.</p></li>
+<li><p>Typical use: Polling loop to trigger follow-up actions on received data.</p></li>
+</ul>
+</section>
+</section>
+<section id="engine-introspection">
+<h3>Engine Introspection<a class="headerlink" href="#engine-introspection" title="Link to this heading">#</a></h3>
+<section id="transferengine-available">
+<h4>TransferEngine::available<a class="headerlink" href="#transferengine-available" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">available</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the engine was initialized successfully and is ready for use.</p>
+</section>
+<section id="transferengine-getsegmentname">
+<h4>TransferEngine::getSegmentName<a class="headerlink" href="#transferengine-getsegmentname" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getSegmentName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Returns the local segment name (node identifier).</p>
+</section>
+<section id="transferengine-getrpcserveraddress">
+<h4>TransferEngine::getRpcServerAddress<a class="headerlink" href="#transferengine-getrpcserveraddress" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getRpcServerAddress</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Returns the RPC server address for this engine instance.</p>
+</section>
+<section id="transferengine-getrpcserverport">
+<h4>TransferEngine::getRpcServerPort<a class="headerlink" href="#transferengine-getrpcserverport" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">getRpcServerPort</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Returns the RPC server port for this engine instance.</p>
+</section>
+</section>
+</section>
+<section id="type-reference">
+<h2>Type Reference<a class="headerlink" href="#type-reference" title="Link to this heading">#</a></h2>
+<section id="permission">
+<h3>Permission<a class="headerlink" href="#permission" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="nc">Permission</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">kLocalReadWrite</span><span class="p">,</span><span class="w">   </span><span class="c1">// Only local access</span>
+<span class="w">    </span><span class="n">kGlobalReadOnly</span><span class="p">,</span><span class="w">   </span><span class="c1">// Remote read access</span>
+<span class="w">    </span><span class="n">kGlobalReadWrite</span><span class="p">,</span><span class="w">  </span><span class="c1">// Remote read/write access</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="location">
+<h3>Location<a class="headerlink" href="#location" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">kWildcardLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Location strings identify device affinity: <code class="docutils literal notranslate"><span class="pre">&quot;cpu:0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cuda:0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cuda:1&quot;</span></code>, etc. Use <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> for automatic detection.</p>
+</section>
+<section id="transporttype">
+<h3>TransportType<a class="headerlink" href="#transporttype" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="nc">TransportType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">RDMA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MNNVL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">SHM</span><span class="p">,</span>
+<span class="w">    </span><span class="n">NVLINK</span><span class="p">,</span>
+<span class="w">    </span><span class="n">GDS</span><span class="p">,</span>
+<span class="w">    </span><span class="n">IOURING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">TCP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">AscendDirect</span><span class="p">,</span>
+<span class="w">    </span><span class="n">UNSPEC</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Transport types used internally by TENT. Applications typically do not need to specify these directly.</p>
+</section>
+<section id="memoryoptions">
+<h3>MemoryOptions<a class="headerlink" href="#memoryoptions" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">MemoryOptions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Location</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kWildcardLocation</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Permission</span><span class="w"> </span><span class="n">perm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kGlobalReadWrite</span><span class="p">;</span>
+<span class="w">    </span><span class="n">TransportType</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UNSPEC</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">shm_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">shm_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">internal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Advanced options for memory allocation and registration.</p>
+</section>
+<section id="segmentinfo">
+<h3>SegmentInfo<a class="headerlink" href="#segmentinfo" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">SegmentInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="nc">Type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Memory</span><span class="p">,</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Buffer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Location</span><span class="w"> </span><span class="n">location</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Buffer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">buffers</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Information about a segment, including its type and registered buffers.</p>
+</section>
+<section id="notification">
+<h3>Notification<a class="headerlink" href="#notification" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Notification</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">msg</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Lightweight notification payload for coordination between nodes.</p>
+</section>
+<section id="status">
+<h3>Status<a class="headerlink" href="#status" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Status</span></code> class is used for error handling throughout the API. Key methods:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">ok</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">           </span><span class="c1">// Returns true if operation succeeded</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">  </span><span class="c1">// Human-readable error description</span>
+
+<span class="c1">// Common status factory methods</span>
+<span class="k">static</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="nf">OK</span><span class="p">();</span>
+<span class="k">static</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="nf">InvalidArgument</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<span class="k">static</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="nf">InternalError</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<span class="c1">// ... and more</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../transfer-engine/cpp-api.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Transfer Engine C++ API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../api-reference/http/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">HTTP</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences-from-transfer-engine">Key Differences from Transfer Engine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-philosophy">Design Philosophy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-mapping-te-to-tent">API Mapping: TE to TENT</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-backward-compatible-shim">Using the Backward-Compatible Shim</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-apis">Core APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage-path-c">Core Usage Path (C++)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors">Constructors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types">Types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request">Request</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferstatus">TransferStatus</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer">Data Transfer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatebatch">TransferEngine::allocateBatch</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer">TransferEngine::submitTransfer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-gettransferstatus">TransferEngine::getTransferStatus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freebatch">TransferEngine::freeBatch</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-management">Memory Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-allocatelocalmemory">TransferEngine::allocateLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-freelocalmemory">TransferEngine::freeLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-registerlocalmemory">TransferEngine::registerLocalMemory</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-unregisterlocalmemory">TransferEngine::unregisterLocalMemory</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management">Segment Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-opensegment">TransferEngine::openSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-closesegment">TransferEngine::closeSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getsegmentinfo">TransferEngine::getSegmentInfo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-apis">Advanced APIs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-export-and-import">Segment Export and Import</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-exportlocalsegment">TransferEngine::exportLocalSegment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-importremotesegment">TransferEngine::importRemoteSegment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notifications">Notifications</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-submittransfer-with-notification">TransferEngine::submitTransfer (with notification)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-sendnotification">TransferEngine::sendNotification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-receivenotification">TransferEngine::receiveNotification</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#engine-introspection">Engine Introspection</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-available">TransferEngine::available</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getsegmentname">TransferEngine::getSegmentName</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getrpcserveraddress">TransferEngine::getRpcServerAddress</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine-getrpcserverport">TransferEngine::getRpcServerPort</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-reference">Type Reference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permission">Permission</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#location">Location</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transporttype">TransportType</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memoryoptions">MemoryOptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentinfo">SegmentInfo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notification">Notification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#status">Status</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

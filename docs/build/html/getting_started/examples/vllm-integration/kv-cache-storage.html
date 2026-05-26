@@ -1,0 +1,956 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>KV Cache Storage &amp; Sharing with MooncakeStore &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/examples/vllm-integration/kv-cache-storage';</script>
+    <script src="../../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Guide: vLLM MooncakeStoreConnector" href="vllm-mooncakestoreconnector.html" />
+    <link rel="prev" title="Disaggregated Prefill-Decode with MooncakeConnector" href="disagg-prefill-decode.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="disagg-prefill-decode.html">Disaggregated Prefill-Decode with MooncakeConnector</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">KV Cache Storage &amp; Sharing with MooncakeStore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/getting_started/examples/vllm-integration/kv-cache-storage.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/getting_started/examples/vllm-integration/kv-cache-storage.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>KV Cache Storage & Sharing with MooncakeStore</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-your-vllm-backend">Choose Your vLLM Backend</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-vllm-v1-recommended">Using vLLM V1 (Recommended)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">1. Prerequisites</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-master-server">2. Mooncake Master Server</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">3. Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-vllm-v0-legacy">Using vLLM V0 (Legacy)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-vllm">Install vLLM</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-configuration-for-rdma">Prepare configuration for RDMA</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-configuration-for-tcp">Prepare configuration for TCP</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-example">Run Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-xpyd-adjustment">Dynamic XpYd Adjustment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test">Test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance">Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="kv-cache-storage-sharing-with-mooncakestore">
+<h1>KV Cache Storage &amp; Sharing with MooncakeStore<a class="headerlink" href="#kv-cache-storage-sharing-with-mooncakestore" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This guide demonstrates how to use <code class="docutils literal notranslate"><span class="pre">MooncakeStore</span></code> / <code class="docutils literal notranslate"><span class="pre">MooncakeStoreConnector</span></code> with vLLM to build a distributed KV cache storage pool. It enables KV cache offloading to CPU/SSD, hash-based prefix caching across multiple vLLM instances, and flexible XpYd disaggregated deployment — where you can dynamically adjust prefill and decode group sizes at runtime.</p>
+<p>Compared to Redis-based backends, MooncakeStore achieves significantly lower TTFT (e.g., <strong>~32% improvement</strong> in mean TTFT for 2P2D tp=2 under RDMA). See <a class="reference internal" href="../../../performance/vllm-benchmark-results-v1.html"><span class="std std-doc">benchmark results</span></a> for details.</p>
+</section>
+<hr class="docutils" />
+<section id="choose-your-vllm-backend">
+<h2>Choose Your vLLM Backend<a class="headerlink" href="#choose-your-vllm-backend" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Backend</p></th>
+<th class="head"><p>Connector</p></th>
+<th class="head"><p>vLLM Version</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Guide</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>vLLM V1</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MooncakeStoreConnector</span></code></p></td>
+<td><p>Latest</p></td>
+<td><p>Recommended</p></td>
+<td><p><a class="reference internal" href="#using-vllm-v1-recommended">Jump to V1 guide</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vLLM V0</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MooncakeStore</span></code></p></td>
+<td><p>≤ v0.6.4.post1</p></td>
+<td><p>Legacy</p></td>
+<td><p><a class="reference internal" href="#using-vllm-v0-legacy">Jump to V0 guide</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">New Users</p>
+<p>If you are starting a new deployment, use the <strong>vLLM V1</strong> backend with <code class="docutils literal notranslate"><span class="pre">MooncakeStoreConnector</span></code>. V0 support is maintained for existing deployments only.</p>
+</div>
+<p>Key differences from v0.x to v1:</p>
+<ul class="simple">
+<li><p><strong>XpYd support and orchestration</strong>: Dynamically change the population of prefill and decode groups</p></li>
+<li><p><strong>More stable and fault-tolerant</strong>: A sudden crash of a single vLLM instance is tolerable; instance-to-instance connections are removed, so each instance works as a vanilla vLLM instance capable of handling requests independently</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="using-vllm-v1-recommended">
+<h2>Using vLLM V1 (Recommended)<a class="headerlink" href="#using-vllm-v1-recommended" title="Link to this heading">#</a></h2>
+<p>This section covers <code class="docutils literal notranslate"><span class="pre">MooncakeStoreConnector</span></code> — the new vLLM KV connector that uses <code class="docutils literal notranslate"><span class="pre">MooncakeDistributedStore</span></code> as a shared KV cache pool. It enables:</p>
+<ul class="simple">
+<li><p><strong>CPU/Disk offloading</strong>: Extend effective KV cache capacity by offloading to CPU memory or SSD via Mooncake’s transfer engine.</p></li>
+<li><p><strong>Hash-based prefix caching across instances</strong>: Multiple vLLM instances share cached KV blocks through the store using block-hash deduplication.</p></li>
+<li><p><strong>Flexible deployment</strong>: Works as a single-node KV cache extension (<code class="docutils literal notranslate"><span class="pre">kv_both</span></code>), or in disaggregated prefill-decode setups (<code class="docutils literal notranslate"><span class="pre">kv_producer</span></code> / <code class="docutils literal notranslate"><span class="pre">kv_consumer</span></code>).</p></li>
+</ul>
+<section id="deployment">
+<h3>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h3>
+<section id="prerequisites">
+<h4>1. Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/vllm-project/vllm">vLLM</a> is installed</p></li>
+<li><p><a class="reference external" href="https://github.com/kvcache-ai/Mooncake">Mooncake</a> is installed</p></li>
+</ul>
+<p>Refer to the <a class="reference external" href="https://github.com/vllm-project/vllm">vLLM official repository</a> and <a class="reference external" href="https://github.com/kvcache-ai/Mooncake">Mooncake official repository</a> for installation instructions and building from source.</p>
+</section>
+<section id="mooncake-master-server">
+<h4>2. Mooncake Master Server<a class="headerlink" href="#mooncake-master-server" title="Link to this heading">#</a></h4>
+<p><strong>Start:</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span>--port<span class="w"> </span><span class="m">50063</span>
+</pre></div>
+</div>
+<p><strong>Configure Mooncake</strong>: Create a JSON configuration file (e.g., <code class="docutils literal notranslate"><span class="pre">mooncake_config.json</span></code>):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;metadata_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://127.0.0.1:8092/metadata&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;master_server_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1:50063&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;global_segment_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;local_buffer_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2147483648&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdma&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;device_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Set environment variable:</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>/path/to/mooncake_config.json
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h4>3. Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h4>
+<p><strong>3.1 Single-Node KV Cache Offloading</strong> (<code class="docutils literal notranslate"><span class="pre">kv_both</span></code>):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>mooncake_config.json<span class="w"> </span><span class="se">\</span>
+vllm<span class="w"> </span>serve<span class="w"> </span>meta-llama/Llama-3.1-8B-Instruct<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_both&quot;}&#39;</span>
+</pre></div>
+</div>
+<p><strong>3.2 XpYd Disaggregated Prefill-Decode</strong> (<code class="docutils literal notranslate"><span class="pre">kv_producer/kv_consumer</span></code>):</p>
+<p>Prefill Node:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>mooncake_config.json<span class="w"> </span><span class="se">\</span>
+<span class="nv">VLLM_MOONCAKE_BOOTSTRAP_PORT</span><span class="o">=</span><span class="m">50052</span><span class="w"> </span><span class="se">\</span>
+vllm<span class="w"> </span>serve<span class="w"> </span>meta-llama/Llama-3.1-8B-Instruct<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">        &quot;kv_connector&quot;: &quot;MultiConnector&quot;,</span>
+<span class="s1">        &quot;kv_role&quot;: &quot;kv_producer&quot;,</span>
+<span class="s1">        &quot;kv_connector_extra_config&quot;: {</span>
+<span class="s1">            &quot;connectors&quot;: [</span>
+<span class="s1">                {</span>
+<span class="s1">                    &quot;kv_connector&quot;: &quot;MooncakeConnector&quot;,</span>
+<span class="s1">                    &quot;kv_role&quot;: &quot;kv_producer&quot;</span>
+<span class="s1">                },</span>
+<span class="s1">                {</span>
+<span class="s1">                    &quot;kv_connector&quot;: &quot;MooncakeStoreConnector&quot;,</span>
+<span class="s1">                    &quot;kv_role&quot;: &quot;kv_producer&quot;</span>
+<span class="s1">                }</span>
+<span class="s1">            ]</span>
+<span class="s1">        }</span>
+<span class="s1">    }&#39;</span>
+</pre></div>
+</div>
+<p>Decode Node:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>mooncake_config.json<span class="w"> </span><span class="se">\</span>
+<span class="nv">VLLM_MOONCAKE_BOOTSTRAP_PORT</span><span class="o">=</span><span class="m">50053</span><span class="w"> </span><span class="se">\</span>
+vllm<span class="w"> </span>serve<span class="w"> </span>meta-llama/Llama-3.1-8B-Instruct<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8200</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">        &quot;kv_connector&quot;: &quot;MultiConnector&quot;,</span>
+<span class="s1">        &quot;kv_role&quot;: &quot;kv_consumer&quot;,</span>
+<span class="s1">        &quot;kv_connector_extra_config&quot;: {</span>
+<span class="s1">            &quot;connectors&quot;: [</span>
+<span class="s1">                {</span>
+<span class="s1">                    &quot;kv_connector&quot;: &quot;MooncakeConnector&quot;,</span>
+<span class="s1">                    &quot;kv_role&quot;: &quot;kv_consumer&quot;</span>
+<span class="s1">                },</span>
+<span class="s1">                {</span>
+<span class="s1">                    &quot;kv_connector&quot;: &quot;MooncakeStoreConnector&quot;,</span>
+<span class="s1">                    &quot;kv_role&quot;: &quot;kv_consumer&quot;</span>
+<span class="s1">                }</span>
+<span class="s1">            ]</span>
+<span class="s1">        }</span>
+<span class="s1">    }&#39;</span>
+</pre></div>
+</div>
+<p>Proxy:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>examples/disaggregated/disaggregated_serving/mooncake_connector/mooncake_connector_proxy.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prefill<span class="w"> </span>http://192.168.0.2:8100<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--decode<span class="w"> </span>http://192.168.0.3:8200
+</pre></div>
+</div>
+<blockquote>
+<div><p>When running with data parallelism, set a fixed <code class="docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code> so that block hashes are consistent across DP ranks:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">PYTHONHASHSEED</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>vllm<span class="w"> </span>serve<span class="w"> </span>...
+</pre></div>
+</div>
+<p>Without this, identical prompts may produce different block hashes on different DP ranks, preventing cross-instance prefix cache hits.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="using-vllm-v0-legacy">
+<h2>Using vLLM V0 (Legacy)<a class="headerlink" href="#using-vllm-v0-legacy" title="Link to this heading">#</a></h2>
+<div class="warning admonition">
+<p class="admonition-title">Legacy Backend</p>
+<p>This section is for vLLM V0 backend with <code class="docutils literal notranslate"><span class="pre">MooncakeStore</span></code>. For new deployments, use the <a class="reference internal" href="#using-vllm-v1-recommended">V1 backend with <code class="docutils literal notranslate"><span class="pre">MooncakeStoreConnector</span></code></a> above.</p>
+</div>
+<p>This integration is based on <a class="reference external" href="https://github.com/vllm-project/vllm/pull/10502">PR 10502</a> and <a class="reference external" href="https://github.com/vllm-project/vllm/pull/12957">PR 12957</a> to support KVCache transfer for intra-node and inter-node disaggregated serving.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<section id="prerequisite">
+<h4>Prerequisite<a class="headerlink" href="#prerequisite" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>mooncake-transfer-engine
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, uninstall by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build manually according to the <a class="reference internal" href="#build.md"><span class="xref myst">instructions</span></a>.</p></li>
+<li><p>For vLLM version ≤ v0.8.4, it requires <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span> <span class="pre">≤</span> <span class="pre">0.3.3.post2</span></code>. The interface <code class="docutils literal notranslate"><span class="pre">mooncake_vllm_adaptor</span></code> has been deprecated in the latest release.</p></li>
+</ul>
+</div>
+</section>
+<section id="install-vllm">
+<h4>Install vLLM<a class="headerlink" href="#install-vllm" title="Link to this heading">#</a></h4>
+<p><strong>1. Clone vLLM:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:vllm-project/vllm.git
+</pre></div>
+</div>
+<p><strong>2. Build from source:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>vllm
+pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>If you encounter problems, refer to the <a class="reference external" href="https://docs.vllm.ai/en/latest/getting_started/installation/index.html">vLLM official compilation guide</a>.</p>
+</section>
+</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<section id="prepare-configuration-for-rdma">
+<h4>Prepare configuration for RDMA<a class="headerlink" href="#prepare-configuration-for-rdma" title="Link to this heading">#</a></h4>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">mooncake.json</span></code> file:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;local_hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.0.137&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;metadata_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;etcd://192.168.0.137:2379&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdma&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;erdma_0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;master_server_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.0.137:50001&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_hostname</span></code>: The IP address of the current node. All prefill and decode instances on the same node can share this config.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata_server</span></code>: The metadata server. Supports <code class="docutils literal notranslate"><span class="pre">etcd</span></code>, <code class="docutils literal notranslate"><span class="pre">redis</span></code>, and <code class="docutils literal notranslate"><span class="pre">http</span></code> backends.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;rdma&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;tcp&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_name</span></code>: Required for RDMA. Multiple NICs separated by commas (<code class="docutils literal notranslate"><span class="pre">&quot;erdma_0,erdma_1&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">master_server_address</span></code>: The IP address and port of the MooncakeStore master daemon.</p></li>
+</ul>
+</section>
+<section id="prepare-configuration-for-tcp">
+<h4>Prepare configuration for TCP<a class="headerlink" href="#prepare-configuration-for-tcp" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;local_hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.0.137&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;metadata_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;etcd://192.168.0.137:2379&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;master_server_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.0.137:50001&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="run-example">
+<h3>Run Example<a class="headerlink" href="#run-example" title="Link to this heading">#</a></h3>
+<p>Change the IP addresses and ports according to your environment. <code class="docutils literal notranslate"><span class="pre">VLLM_USE_V1=0</span></code> is required for vLLM V0 backend.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Start the etcd server</span>
+etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0.0.0.0:2379<span class="w"> </span>--advertise-client-urls<span class="w"> </span>http://localhost:2379
+
+<span class="c1"># 2. Start the mooncake_master server</span>
+mooncake_master<span class="w"> </span>--port<span class="w"> </span><span class="m">50001</span>
+
+<span class="c1"># 3. Run vLLM instances as kv_producer</span>
+<span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_producer&quot;}&#39;</span>
+
+<span class="c1"># Add more producers as needed...</span>
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8101</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_producer&quot;}&#39;</span>
+
+<span class="c1"># 4. Run vLLM instances as kv_consumer</span>
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8200</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_consumer&quot;}&#39;</span>
+
+<span class="c1"># 5. Start the proxy server</span>
+<span class="nb">cd</span><span class="w"> </span>vllm
+python3<span class="w"> </span>examples/online_serving/disagg_examples/disagg_proxy_demo.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prefill<span class="w"> </span>localhost:8100<span class="w"> </span>localhost:8101<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--decode<span class="w"> </span>localhost:8200<span class="w"> </span>localhost:8201<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8000</span>
+</pre></div>
+</div>
+<p><strong>Key parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--kv-transfer-config</span></code>: Set <code class="docutils literal notranslate"><span class="pre">kv_connector</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeStoreConnector&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">kv_role</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;kv_producer&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;kv_consumer&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;kv_both&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--tensor-parallel-size</span></code> / <code class="docutils literal notranslate"><span class="pre">-tp</span></code>: Supported. All instances should have the same TP size. Use different <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> for instances on the same node.</p></li>
+<li><p>If some vLLM instances exit unexpectedly, connection metadata may be corrupted. Restart <code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code> before another test.</p></li>
+</ul>
+<section id="dynamic-xpyd-adjustment">
+<h4>Dynamic XpYd Adjustment<a class="headerlink" href="#dynamic-xpyd-adjustment" title="Link to this heading">#</a></h4>
+<p>To dynamically adjust prefill and decode instances at runtime:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ADMIN_API_KEY</span><span class="o">=</span><span class="s2">&quot;xxxxxxxx&quot;</span>
+
+<span class="nv">ADMIN_API_KEY</span><span class="o">=</span><span class="s2">&quot;xxxxxxxx&quot;</span><span class="w"> </span>python3<span class="w"> </span>vllm/examples/online_serving/disagg_examples/disagg_demo.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prefill<span class="w"> </span>localhost:8100<span class="w"> </span>localhost:8101<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--decode<span class="w"> </span>localhost:8200<span class="w"> </span>localhost:8201<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--scheduling<span class="w"> </span>round_robin
+
+<span class="c1"># Add instances to groups dynamically</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/instances/add&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-Key: </span><span class="nv">$ADMIN_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;type&quot;: &quot;prefill&quot;, &quot;instance&quot;: &quot;localhost:8102&quot;}&#39;</span>
+
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/instances/add&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-Key: </span><span class="nv">$ADMIN_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;type&quot;: &quot;decode&quot;, &quot;instance&quot;: &quot;localhost:8202&quot;}&#39;</span>
+
+<span class="c1"># Get proxy status</span>
+curl<span class="w"> </span>localhost:8000/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mooncake team provides this simple round-robin proxy as a demo. In production, you can implement custom global proxy strategies.</p>
+</div>
+</section>
+</section>
+<section id="test">
+<h3>Test<a class="headerlink" href="#test" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8000/v1/completions<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;model&quot;: &quot;Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4&quot;,</span>
+<span class="s1">    &quot;prompt&quot;: &quot;San Francisco is a&quot;,</span>
+<span class="s1">    &quot;max_tokens&quot;: 1000</span>
+<span class="s1">  }&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario</p></th>
+<th class="head"><p>Document</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>V1 MooncakeStoreConnector vs Redis</p></td>
+<td><p><a class="reference internal" href="../../../performance/vllm-benchmark-results-v1.html"><span class="std std-doc">Benchmark V1</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>V0 MooncakeStore vs Redis</p></td>
+<td><p><a class="reference internal" href="../../../performance/vllm-benchmark-results-v0.2.html"><span class="std std-doc">Benchmark V0</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If you encounter connection issues, check that:</p>
+<ul>
+<li><p>All nodes can reach each other over the network</p></li>
+<li><p>Firewall rules allow traffic on the specified ports</p></li>
+<li><p>RDMA devices are properly configured</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code> is running and reachable</p></li>
+</ul>
+</li>
+<li><p>For missing library errors, rebuild <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span></code> from source</p></li>
+<li><p>If vLLM instances exit unexpectedly, restart <code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code> to clean up corrupted metadata</p></li>
+<li><p>Enable debug logging with <code class="docutils literal notranslate"><span class="pre">VLLM_LOGGING_LEVEL=DEBUG</span></code> for detailed diagnostics</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="disagg-prefill-decode.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Disaggregated Prefill-Decode with MooncakeConnector</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="vllm-mooncakestoreconnector.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Guide: vLLM MooncakeStoreConnector</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-your-vllm-backend">Choose Your vLLM Backend</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-vllm-v1-recommended">Using vLLM V1 (Recommended)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">1. Prerequisites</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-master-server">2. Mooncake Master Server</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">3. Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-vllm-v0-legacy">Using vLLM V0 (Legacy)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-vllm">Install vLLM</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-configuration-for-rdma">Prepare configuration for RDMA</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-configuration-for-tcp">Prepare configuration for TCP</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-example">Run Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-xpyd-adjustment">Dynamic XpYd Adjustment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test">Test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance">Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

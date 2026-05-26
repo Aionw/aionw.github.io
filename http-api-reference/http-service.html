@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mooncake Store HTTP Service &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'http-api-reference/http-service';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mooncake Conductor Indexer API" href="../design/conductor/indexer-api-design.html" />
+    <link rel="prev" title="HTTP" href="../api-reference/http/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mooncake Store HTTP Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design/conductor/indexer-api-design.html">Mooncake Conductor Indexer API</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/http-api-reference/http-service.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/http-api-reference/http-service.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mooncake Store HTTP Service</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#http-endpoints">HTTP Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics"><code class="docutils literal notranslate"><span class="pre">/metrics</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-summary"><code class="docutils literal notranslate"><span class="pre">/metrics/summary</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-management-endpoints">Data Management Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#query-key"><code class="docutils literal notranslate"><span class="pre">/query_key</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-query-keys"><code class="docutils literal notranslate"><span class="pre">/batch_query_keys</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-all-keys"><code class="docutils literal notranslate"><span class="pre">/get_all_keys</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-endpoints">Segment Management Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-all-segments"><code class="docutils literal notranslate"><span class="pre">/get_all_segments</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#query-segment"><code class="docutils literal notranslate"><span class="pre">/query_segment</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#health-check-endpoints">Health Check Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#health"><code class="docutils literal notranslate"><span class="pre">/health</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#store-rest-api-endpoints">Store REST API Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-mount-shm"><code class="docutils literal notranslate"><span class="pre">/api/mount_shm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-unmount-shm"><code class="docutils literal notranslate"><span class="pre">/api/unmount_shm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-mount"><code class="docutils literal notranslate"><span class="pre">/api/mount</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-unmount"><code class="docutils literal notranslate"><span class="pre">/api/unmount</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mooncake-store-http-service">
+<h1>Mooncake Store HTTP Service<a class="headerlink" href="#mooncake-store-http-service" title="Link to this heading">#</a></h1>
+<p>The Mooncake Store HTTP Service provides RESTful endpoints for cluster management, monitoring, and data operations. This service is embedded within the <code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code> process and can be enabled alongside the primary RPC services.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The HTTP service serves multiple purposes:</p>
+<ul class="simple">
+<li><p><strong>Metrics &amp; Monitoring</strong>: Prometheus-compatible metrics endpoints</p></li>
+<li><p><strong>Cluster Management</strong>: Query and manage distributed storage segments</p></li>
+<li><p><strong>Data Inspection</strong>: Examine stored objects and their replicas</p></li>
+<li><p><strong>Health Checks</strong>: Service availability and status verification</p></li>
+</ul>
+<p>The Python <code class="docutils literal notranslate"><span class="pre">mooncake.mooncake_store_service</span></code> module also provides a lightweight
+Store REST API for data operations and standalone segment mount/unmount
+workflows. Unless configured otherwise, it listens on port <code class="docutils literal notranslate"><span class="pre">8080</span></code>.</p>
+</section>
+<section id="http-endpoints">
+<h2>HTTP Endpoints<a class="headerlink" href="#http-endpoints" title="Link to this heading">#</a></h2>
+<section id="metrics-endpoints">
+<h3>Metrics Endpoints<a class="headerlink" href="#metrics-endpoints" title="Link to this heading">#</a></h3>
+<section id="metrics">
+<h4><code class="docutils literal notranslate"><span class="pre">/metrics</span></code><a class="headerlink" href="#metrics" title="Link to this heading">#</a></h4>
+<p>Prometheus-compatible metrics endpoint providing detailed system metrics in text format.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>
+<strong>Response</strong>: Comprehensive metrics including request counts, error rates, latency statistics, and resource utilization</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>http://localhost:8080/metrics
+</pre></div>
+</div>
+</section>
+<section id="metrics-summary">
+<h4><code class="docutils literal notranslate"><span class="pre">/metrics/summary</span></code><a class="headerlink" href="#metrics-summary" title="Link to this heading">#</a></h4>
+<p>Human-readable metrics summary with key performance indicators.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>
+<strong>Response</strong>: Condensed overview of system health and performance metrics</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>http://localhost:8080/metrics/summary
+</pre></div>
+</div>
+</section>
+</section>
+<section id="data-management-endpoints">
+<h3>Data Management Endpoints<a class="headerlink" href="#data-management-endpoints" title="Link to this heading">#</a></h3>
+<section id="query-key">
+<h4><code class="docutils literal notranslate"><span class="pre">/query_key</span></code><a class="headerlink" href="#query-key" title="Link to this heading">#</a></h4>
+<p>Retrieve replica information for a specific key, including memory locations and transport endpoints.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Parameters</strong>: <code class="docutils literal notranslate"><span class="pre">key</span></code> (query parameter) - The object key to query
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>
+<strong>Response</strong>: JSON-formatted replica descriptors for memory replicas</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/query_key?key=my_object&quot;</span>
+</pre></div>
+</div>
+<p><strong>Response Format</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;transport_endpoint_&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hostname:port&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;buffer_descriptors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-query-keys">
+<h4><code class="docutils literal notranslate"><span class="pre">/batch_query_keys</span></code><a class="headerlink" href="#batch-query-keys" title="Link to this heading">#</a></h4>
+<p>Retrieve replica information for multiple keys in a single request, including memory locations and transport endpoints for each key.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Parameters</strong>: <code class="docutils literal notranslate"><span class="pre">keys</span></code> (query parameter) - Comma-separated list of object keys to query (format: key1,key2,key3)
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">application/json;</span> <span class="pre">charset=utf-8</span></code>
+<strong>Response</strong>: JSON-formatted mapping of keys to their respective replica descriptors</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/batch_query_keys?keys=key1,key2,key3&quot;</span>
+</pre></div>
+</div>
+<p><strong>Response Format</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;key1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;ok&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;transport_endpoint_&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hostname:port&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;buffer_descriptor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;key2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;ok&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error message&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="get-all-keys">
+<h4><code class="docutils literal notranslate"><span class="pre">/get_all_keys</span></code><a class="headerlink" href="#get-all-keys" title="Link to this heading">#</a></h4>
+<p>List all keys currently stored in the distributed system.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>
+<strong>Response</strong>: Newline-separated list of all stored keys</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>http://localhost:8080/get_all_keys
+</pre></div>
+</div>
+</section>
+</section>
+<section id="segment-management-endpoints">
+<h3>Segment Management Endpoints<a class="headerlink" href="#segment-management-endpoints" title="Link to this heading">#</a></h3>
+<section id="get-all-segments">
+<h4><code class="docutils literal notranslate"><span class="pre">/get_all_segments</span></code><a class="headerlink" href="#get-all-segments" title="Link to this heading">#</a></h4>
+<p>List all mounted segments in the cluster.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>
+<strong>Response</strong>: Newline-separated list of segment names</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>http://localhost:8080/get_all_segments
+</pre></div>
+</div>
+</section>
+<section id="query-segment">
+<h4><code class="docutils literal notranslate"><span class="pre">/query_segment</span></code><a class="headerlink" href="#query-segment" title="Link to this heading">#</a></h4>
+<p>Query detailed information about a specific segment, including used and available capacity.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Parameters</strong>: <code class="docutils literal notranslate"><span class="pre">segment</span></code> (query parameter) - Segment name to query
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>
+<strong>Response</strong>: Multi-line text with segment details</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/query_segment?segment=segment_name&quot;</span>
+</pre></div>
+</div>
+<p><strong>Response Format</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">segment_name</span>
+<span class="n">Used</span><span class="p">(</span><span class="nb">bytes</span><span class="p">):</span> <span class="mi">1073741824</span>
+<span class="n">Capacity</span><span class="p">(</span><span class="nb">bytes</span><span class="p">):</span> <span class="mi">4294967296</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="health-check-endpoints">
+<h3>Health Check Endpoints<a class="headerlink" href="#health-check-endpoints" title="Link to this heading">#</a></h3>
+<section id="health">
+<h4><code class="docutils literal notranslate"><span class="pre">/health</span></code><a class="headerlink" href="#health" title="Link to this heading">#</a></h4>
+<p>Basic health check endpoint for service availability verification.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">text/plain;</span> <span class="pre">version=0.0.4</span></code>
+<strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">OK</span></code> when service is healthy
+<strong>Status Codes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code>: Service is healthy</p></li>
+<li><p>Other: Service may be experiencing issues</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>http://localhost:8080/health
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="store-rest-api-endpoints">
+<h2>Store REST API Endpoints<a class="headerlink" href="#store-rest-api-endpoints" title="Link to this heading">#</a></h2>
+<p>The following endpoints are served by the Python store REST service, which wraps
+<code class="docutils literal notranslate"><span class="pre">MooncakeDistributedStore</span></code> with an aiohttp service. The HTTP handlers live in
+Python, while mount and unmount operations are delegated to the underlying store
+binding. Start the service with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>mooncake.mooncake_store_service<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--config<span class="w"> </span>/path/to/mooncake_config.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--port<span class="w"> </span><span class="m">8080</span>
+</pre></div>
+</div>
+<p>If the wheel console scripts are installed, the equivalent command is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mc_store_rest_server<span class="w"> </span>--config<span class="w"> </span>/path/to/mooncake_config.json<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
+</pre></div>
+</div>
+<section id="api-mount-shm">
+<h3><code class="docutils literal notranslate"><span class="pre">/api/mount_shm</span></code><a class="headerlink" href="#api-mount-shm" title="Link to this heading">#</a></h3>
+<p>Mount a named shared memory object as one or more Mooncake store segments. If
+the requested size exceeds the maximum registration size, the service may split
+the region and return multiple segment ids.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mooncake_segment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16777216</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Fields</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string, required): Named shared memory object name. A leading <code class="docutils literal notranslate"><span class="pre">/</span></code> is
+accepted, but path separators are not.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code> (integer, required): Number of bytes to mount.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code> (integer, optional): File offset in bytes. Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code> (string, optional): Transfer protocol. Defaults to the service
+configuration protocol.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code> (string, optional): Device or locality hint. Defaults to an empty
+string.</p></li>
+</ul>
+<p><strong>Success Response</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;segment_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;00000000-0000-0000-0000-000000000001&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/mount_shm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">        &quot;name&quot;: &quot;mooncake_segment&quot;,</span>
+<span class="s1">        &quot;size&quot;: 16777216,</span>
+<span class="s1">        &quot;offset&quot;: 0,</span>
+<span class="s1">        &quot;protocol&quot;: &quot;tcp&quot;,</span>
+<span class="s1">        &quot;location&quot;: &quot;&quot;</span>
+<span class="s1">      }&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="api-unmount-shm">
+<h3><code class="docutils literal notranslate"><span class="pre">/api/unmount_shm</span></code><a class="headerlink" href="#api-unmount-shm" title="Link to this heading">#</a></h3>
+<p>Unmount one or more segment ids previously returned by <code class="docutils literal notranslate"><span class="pre">/api/mount_shm</span></code>.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;segment_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;00000000-0000-0000-0000-000000000001&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;grace_period_seconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">segment_ids</span></code> may also be provided as a single string for one segment.
+<code class="docutils literal notranslate"><span class="pre">grace_period_seconds</span></code> is optional and defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>, which keeps the
+existing immediate unmount behavior. When set to a positive value, the master
+keeps the segment readable for that grace period while preventing new
+allocations, then completes the unmount.</p>
+<p><strong>Success Response</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/unmount_shm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;segment_ids&quot;: [&quot;00000000-0000-0000-0000-000000000001&quot;],</span>
+<span class="s1">       &quot;grace_period_seconds&quot;: 30}&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="api-mount">
+<h3><code class="docutils literal notranslate"><span class="pre">/api/mount</span></code><a class="headerlink" href="#api-mount" title="Link to this heading">#</a></h3>
+<p>Allocate memory inside the store process and mount it as one or more Mooncake
+store segments. If the requested size exceeds the maximum registration size,
+the service may split it and return multiple segment ids. The response includes
+the actual allocated size after alignment.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16777216</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Fields</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code> (integer, required): Number of bytes requested. Must be positive.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code> (string, optional): Transfer protocol. Defaults to the service
+configuration protocol.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code> (string, optional): Device or locality hint. Defaults to an empty
+string.</p></li>
+</ul>
+<p><strong>Success Response</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;segment_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;00000000-0000-0000-0000-000000000002&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;allocated_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16777216</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/mount<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;size&quot;: 16777216, &quot;protocol&quot;: &quot;tcp&quot;, &quot;location&quot;: &quot;&quot;}&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="api-unmount">
+<h3><code class="docutils literal notranslate"><span class="pre">/api/unmount</span></code><a class="headerlink" href="#api-unmount" title="Link to this heading">#</a></h3>
+<p>Unmount one or more segment ids previously returned by <code class="docutils literal notranslate"><span class="pre">/api/mount</span></code> and free
+the memory allocated by the store process.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;segment_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;00000000-0000-0000-0000-000000000002&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;grace_period_seconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">segment_ids</span></code> may also be provided as a single string for one segment.
+<code class="docutils literal notranslate"><span class="pre">grace_period_seconds</span></code> is optional and defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>, which keeps the
+existing immediate unmount-and-free behavior. When set to a positive value, the
+master keeps the segment readable for that grace period while preventing new
+allocations, then the store releases the local allocated memory after cleanup.</p>
+<p><strong>Success Response</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/unmount<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;segment_ids&quot;: [&quot;00000000-0000-0000-0000-000000000002&quot;],</span>
+<span class="s1">       &quot;grace_period_seconds&quot;: 30}&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../api-reference/http/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">HTTP</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../design/conductor/indexer-api-design.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mooncake Conductor Indexer API</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#http-endpoints">HTTP Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics"><code class="docutils literal notranslate"><span class="pre">/metrics</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-summary"><code class="docutils literal notranslate"><span class="pre">/metrics/summary</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-management-endpoints">Data Management Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#query-key"><code class="docutils literal notranslate"><span class="pre">/query_key</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-query-keys"><code class="docutils literal notranslate"><span class="pre">/batch_query_keys</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-all-keys"><code class="docutils literal notranslate"><span class="pre">/get_all_keys</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-endpoints">Segment Management Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-all-segments"><code class="docutils literal notranslate"><span class="pre">/get_all_segments</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#query-segment"><code class="docutils literal notranslate"><span class="pre">/query_segment</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#health-check-endpoints">Health Check Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#health"><code class="docutils literal notranslate"><span class="pre">/health</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#store-rest-api-endpoints">Store REST API Endpoints</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-mount-shm"><code class="docutils literal notranslate"><span class="pre">/api/mount_shm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-unmount-shm"><code class="docutils literal notranslate"><span class="pre">/api/unmount_shm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-mount"><code class="docutils literal notranslate"><span class="pre">/api/mount</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-unmount"><code class="docutils literal notranslate"><span class="pre">/api/unmount</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

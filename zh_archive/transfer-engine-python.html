@@ -1,0 +1,1121 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transfer Engine Python API 文档 &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh_archive/transfer-engine-python';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/zh_archive/transfer-engine-python.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh_archive/transfer-engine-python.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transfer Engine Python API 文档</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">安装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine">类：TransferEngine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">构造函数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">初始化方法</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize">initialize()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-ext">initialize_ext()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">网络信息</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-rpc-port">get_rpc_port()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">缓冲区管理</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allocate-managed-buffer">allocate_managed_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#free-managed-buffer">free_managed_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-first-buffer-address">get_first_buffer_address()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">数据传输操作</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-sync-write">transfer_sync_write()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-sync-read">transfer_sync_read()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-sync">transfer_sync()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-submit-write">transfer_submit_write()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-check-status">transfer_check_status()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-o">缓冲区I/O操作</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-bytes-to-buffer">write_bytes_to_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-bytes-from-buffer">read_bytes_from_buffer()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">内存注册（实验性）</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#register-memory">register_memory()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-memory">unregister_memory()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">枚举</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferopcode">TransferOpcode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">环境变量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">使用示例</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">基本设置和数据传输</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">异步传输</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">托管缓冲区分配</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">使用环境变量的配置示例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">错误处理和重试机制</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">错误处理</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">性能考虑</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">线程安全</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">故障排除</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">最佳实践</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="transfer-engine-python-api">
+<h1>Transfer Engine Python API 文档<a class="headerlink" href="#transfer-engine-python-api" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Transfer Engine Python API 提供了一个高级接口，用于在分布式系统之间使用RDMA（远程直接内存访问）和其他传输协议进行高效的数据传输。它能够在集群节点之间实现快速、低延迟的数据移动。</p>
+</section>
+<section id="id2">
+<h2>安装<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransferEngine</span>
+</pre></div>
+</div>
+</section>
+<section id="transferengine">
+<h2>类：TransferEngine<a class="headerlink" href="#transferengine" title="Link to this heading">#</a></h2>
+<p>提供所有传输引擎功能的主类。</p>
+<section id="id3">
+<h3>构造函数<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TransferEngine</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>使用默认设置创建新的TransferEngine实例。</p>
+</section>
+<section id="id4">
+<h3>初始化方法<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="initialize">
+<h4>initialize()<a class="headerlink" href="#initialize" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">initialize</span><span class="p">(</span><span class="n">local_hostname</span><span class="p">,</span> <span class="n">metadata_server</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">device_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用基本配置初始化传输引擎。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_hostname</span></code> (str): 本地服务器的主机名和端口（例如：”127.0.0.1:12345”）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> (str): 元数据服务器连接字符串（例如：”127.0.0.1:2379” 或 “etcd://127.0.0.1:2379”）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code> (str): 要使用的传输协议（”rdma”、”tcp” 等）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_name</span></code> (str): 要过滤的设备名称的逗号分隔列表，或空字符串表示所有设备</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="initialize-ext">
+<h4>initialize_ext()<a class="headerlink" href="#initialize-ext" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">initialize_ext</span><span class="p">(</span><span class="n">local_hostname</span><span class="p">,</span> <span class="n">metadata_server</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">metadata_type</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用扩展配置初始化传输引擎，包括元数据类型规范。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_hostname</span></code> (str): 本地服务器的主机名和端口</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> (str): 元数据服务器连接字符串</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code> (str): 要使用的传输协议</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_name</span></code> (str): 要过滤的设备名称的逗号分隔列表</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata_type</span></code> (str): 元数据服务器的类型（”etcd”、”p2p” 等）</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h3>网络信息<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="get-rpc-port">
+<h4>get_rpc_port()<a class="headerlink" href="#get-rpc-port" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">get_rpc_port</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>获取传输引擎正在监听的RPC端口。</p>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: RPC端口号</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h3>缓冲区管理<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="allocate-managed-buffer">
+<h4>allocate_managed_buffer()<a class="headerlink" href="#allocate-managed-buffer" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">allocate_managed_buffer</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用伙伴分配系统分配指定大小的托管缓冲区，以实现高效的内存管理。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 要分配的缓冲区大小（字节）</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 分配的缓冲区的内存地址（整数），失败时返回0</p></li>
+</ul>
+</section>
+<section id="free-managed-buffer">
+<h4>free_managed_buffer()<a class="headerlink" href="#free-managed-buffer" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">free_managed_buffer</span><span class="p">(</span><span class="n">buffer_addr</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>释放之前分配的托管缓冲区。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_addr</span></code> (int): 要释放的缓冲区的内存地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 缓冲区的大小（字节）</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="get-first-buffer-address">
+<h4>get_first_buffer_address()<a class="headerlink" href="#get-first-buffer-address" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">get_first_buffer_address</span><span class="p">(</span><span class="n">segment_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>获取指定段中第一个缓冲区的地址。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_name</span></code> (str): 段的名称</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 段中第一个缓冲区的内存地址，如果段不存在或没有已注册的缓冲区则返回 0</p></li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h3>数据传输操作<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="transfer-sync-write">
+<h4>transfer_sync_write()<a class="headerlink" href="#transfer-sync-write" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>执行同步写操作，将数据从本地缓冲区传输到远程缓冲区。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">target_hostname</span></code> (str): 目标服务器的主机名</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code> (int): 本地缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): 远程缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 要传输的字节数</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="transfer-sync-read">
+<h4>transfer_sync_read()<a class="headerlink" href="#transfer-sync-read" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync_read</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>执行同步读操作，将数据从远程缓冲区传输到本地缓冲区。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">target_hostname</span></code> (str): 目标服务器的主机名</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code> (int): 本地缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): 远程缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 要传输的字节数</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="transfer-sync">
+<h4>transfer_sync()<a class="headerlink" href="#transfer-sync" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">opcode</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用指定的操作码执行同步传输操作。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">target_hostname</span></code> (str): 目标服务器的主机名</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code> (int): 本地缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): 远程缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 要传输的字节数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code> (TransferOpcode): 传输操作类型（READ 或 WRITE）</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="transfer-submit-write">
+<h4>transfer_submit_write()<a class="headerlink" href="#transfer-submit-write" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_submit_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>提交异步写操作并立即返回。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">target_hostname</span></code> (str): 目标服务器的主机名</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code> (int): 本地缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): 远程缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 要传输的字节数</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 用于跟踪操作的批次ID，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="transfer-check-status">
+<h4>transfer_check_status()<a class="headerlink" href="#transfer-check-status" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_check_status</span><span class="p">(</span><span class="n">batch_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>检查异步传输操作的状态。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_id</span></code> (int): 从transfer_submit_write()返回的批次ID</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
+<ul>
+<li><p>1: 传输成功完成</p></li>
+<li><p>0: 传输仍在进行中</p></li>
+<li><p>-1: 传输失败</p></li>
+<li><p>-2: 传输超时</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="i-o">
+<h3>缓冲区I/O操作<a class="headerlink" href="#i-o" title="Link to this heading">#</a></h3>
+<section id="write-bytes-to-buffer">
+<h4>write_bytes_to_buffer()<a class="headerlink" href="#write-bytes-to-buffer" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">write_bytes_to_buffer</span><span class="p">(</span><span class="n">dest_address</span><span class="p">,</span> <span class="n">src_ptr</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>将Python字节对象中的字节写入指定地址的缓冲区。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dest_address</span></code> (int): 目标缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src_ptr</span></code> (bytes): 要写入的源字节</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 要写入的字节数</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="read-bytes-from-buffer">
+<h4>read_bytes_from_buffer()<a class="headerlink" href="#read-bytes-from-buffer" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read_bytes_from_buffer</span><span class="p">(</span><span class="n">source_address</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>从指定地址的缓冲区读取字节，并将其作为Python字节对象返回。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">source_address</span></code> (int): 源缓冲区地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): 要读取的字节数</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bytes</span></code>: 从缓冲区读取的字节</p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h3>内存注册（实验性）<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="register-memory">
+<h4>register_memory()<a class="headerlink" href="#register-memory" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">register_memory</span><span class="p">(</span><span class="n">buffer_addr</span><span class="p">,</span> <span class="n">capacity</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>注册内存区域以供RDMA访问（实验性功能）。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_addr</span></code> (int): 要注册的内存地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">capacity</span></code> (int): 内存区域的大小（字节）</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+<section id="unregister-memory">
+<h4>unregister_memory()<a class="headerlink" href="#unregister-memory" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">unregister_memory</span><span class="p">(</span><span class="n">buffer_addr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>注销之前注册的内存区域。</p>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_addr</span></code> (int): 要注销的内存地址</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: 成功时返回0，失败时返回负值</p></li>
+</ul>
+</section>
+</section>
+<section id="id9">
+<h3>枚举<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<section id="transferopcode">
+<h4>TransferOpcode<a class="headerlink" href="#transferopcode" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TransferOpcode</span><span class="o">.</span><span class="n">READ</span>   <span class="c1"># 读操作</span>
+<span class="n">TransferOpcode</span><span class="o">.</span><span class="n">WRITE</span>  <span class="c1"># 写操作</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="id10">
+<h2>环境变量<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>传输引擎支持以下环境变量：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TRANSFER_TIMEOUT</span></code>: 设置传输超时时间（秒）（默认：30）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_METADATA_SERVER</span></code>: 默认元数据服务器地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_LEGACY_RPC_PORT_BINDING</span></code>: 启用传统RPC端口绑定行为</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TCP_BIND_ADDRESS</span></code>: 指定TCP绑定地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_CUSTOM_TOPO_JSON</span></code>: 自定义拓扑JSON文件路径</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC</span></code>: 启用指标报告（设置为”1”、”true”、”yes”或”on”）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC_INTERVAL_SECONDS</span></code>: 设置指标报告间隔（秒）</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>使用示例<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<section id="id12">
+<h3>基本设置和数据传输<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransferEngine</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Create transfer engine instance</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">TransferEngine</span><span class="p">()</span>
+
+<span class="c1"># Initialize with basic configuration</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+    <span class="n">local_hostname</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:12345&quot;</span><span class="p">,</span>
+    <span class="n">metadata_server</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:2379&quot;</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;rdma&quot;</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initialization failed with code </span><span class="si">{</span><span class="n">ret</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Allocate and initialize client buffer (1MB)</span>
+<span class="n">client_buffer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>  <span class="c1"># Fill with ones</span>
+<span class="n">buffer_data</span> <span class="o">=</span> <span class="n">client_buffer</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span>
+<span class="n">buffer_data_len</span> <span class="o">=</span> <span class="n">client_buffer</span><span class="o">.</span><span class="n">nbytes</span>
+
+<span class="c1"># Prepare data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello, Transfer Engine!&quot;</span>
+<span class="n">data_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">engine</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">buffer_data</span><span class="p">,</span> <span class="n">buffer_data_len</span><span class="p">)</span>
+
+<span class="c1"># Get Remote Addr from ZMQ or upper-layer inference framework</span>
+<span class="n">remote_addr</span> <span class="o">=</span> <span class="err">??</span>
+
+<span class="c1"># Transfer data to remote node</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">transfer_sync_write</span><span class="p">(</span>
+    <span class="n">target_hostname</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:12346&quot;</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">peer_buffer_address</span><span class="o">=</span><span class="n">remote_addr</span><span class="p">,</span>
+    <span class="n">length</span><span class="o">=</span><span class="n">data_len</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data transfer completed successfully&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data transfer failed with code </span><span class="si">{</span><span class="n">ret</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">engine</span><span class="o">.</span><span class="n">deregister</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>异步传输<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Submit asynchronous write</span>
+<span class="n">batch_id</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">transfer_submit_write</span><span class="p">(</span>
+    <span class="n">target_hostname</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:12346&quot;</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="o">=</span><span class="n">local_addr</span><span class="p">,</span>
+    <span class="n">peer_buffer_address</span><span class="o">=</span><span class="n">remote_addr</span><span class="p">,</span>
+    <span class="n">length</span><span class="o">=</span><span class="n">data_len</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">batch_id</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to submit transfer with code </span><span class="si">{</span><span class="n">batch_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Poll for completion</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">transfer_check_status</span><span class="p">(</span><span class="n">batch_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transfer completed successfully&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transfer failed&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transfer timed out&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="c1"># Transfer still in progress, continue polling</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>  <span class="c1"># Small delay to avoid busy waiting</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3>托管缓冲区分配<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Allocate managed buffer</span>
+<span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 1MB</span>
+<span class="n">buffer_addr</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">allocate_managed_buffer</span><span class="p">(</span><span class="n">buffer_size</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">buffer_addr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to allocate buffer&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Use the buffer</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Test data for managed buffer&quot;</span>
+    <span class="n">engine</span><span class="o">.</span><span class="n">write_bytes_to_buffer</span><span class="p">(</span><span class="n">buffer_addr</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">))</span>
+
+    <span class="c1"># Read back</span>
+    <span class="n">read_data</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">read_bytes_from_buffer</span><span class="p">(</span><span class="n">buffer_addr</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Read data: </span><span class="si">{</span><span class="n">read_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Free the buffer when done</span>
+    <span class="n">engine</span><span class="o">.</span><span class="n">free_managed_buffer</span><span class="p">(</span><span class="n">buffer_addr</span><span class="p">,</span> <span class="n">buffer_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h3>使用环境变量的配置示例<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># 设置环境变量</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MC_TRANSFER_TIMEOUT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;60&quot;</span>  <span class="c1"># 60秒超时</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MC_METADATA_SERVER&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;etcd://192.168.1.100:2379&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MC_TE_METRIC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>  <span class="c1"># 启用指标报告</span>
+
+<span class="c1"># 创建并初始化传输引擎</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">TransferEngine</span><span class="p">()</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+    <span class="n">local_hostname</span><span class="o">=</span><span class="s2">&quot;192.168.1.101:12345&quot;</span><span class="p">,</span>
+    <span class="n">metadata_server</span><span class="o">=</span><span class="s2">&quot;192.168.1.100:2379&quot;</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;rdma&quot;</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;mlx5_0,mlx5_1&quot;</span>  <span class="c1"># 指定RDMA设备</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h3>错误处理和重试机制<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="id17">
+<h2>错误处理<a class="headerlink" href="#id17" title="Link to this heading">#</a></h2>
+<p>所有方法都返回整数状态码：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: 成功</p></li>
+<li><p>负值: 表示各种失败条件的错误代码</p></li>
+</ul>
+<p>常见错误场景：</p>
+<ul class="simple">
+<li><p>网络连接问题</p></li>
+<li><p>无效的缓冲区地址</p></li>
+<li><p>内存分配失败</p></li>
+<li><p>传输超时</p></li>
+<li><p>元数据服务器连接问题</p></li>
+</ul>
+</section>
+<section id="id18">
+<h2>性能考虑<a class="headerlink" href="#id18" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>缓冲区重用</strong>: 尽可能重用分配的缓冲区，避免频繁的分配/释放开销</p></li>
+<li><p><strong>批处理操作</strong>: 当需要多个传输时，使用<code class="docutils literal notranslate"><span class="pre">transfer_submit_write()</span></code>和<code class="docutils literal notranslate"><span class="pre">transfer_check_status()</span></code>以获得更好的吞吐量</p></li>
+<li><p><strong>内存对齐</strong>: 确保缓冲区正确对齐以获得最佳RDMA性能</p></li>
+<li><p><strong>超时配置</strong>: 根据网络特性和数据大小调整<code class="docutils literal notranslate"><span class="pre">MC_TRANSFER_TIMEOUT</span></code></p></li>
+</ol>
+</section>
+<section id="id19">
+<h2>线程安全<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
+<p>Transfer Engine Python API在大多数操作中都是线程安全的。但是，建议：</p>
+<ul class="simple">
+<li><p>尽可能为不同线程使用单独的TransferEngine实例</p></li>
+<li><p>避免对同一缓冲区地址进行并发修改</p></li>
+<li><p>在线程间共享缓冲区地址时使用适当的同步机制</p></li>
+</ul>
+</section>
+<section id="id20">
+<h2>故障排除<a class="headerlink" href="#id20" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>初始化失败</strong>: 检查元数据服务器连接性和网络配置</p></li>
+<li><p><strong>传输失败</strong>: 验证目标主机名是否正确以及网络连接是否建立</p></li>
+<li><p><strong>内存问题</strong>: 确保系统内存充足且缓冲区对齐正确</p></li>
+<li><p><strong>性能问题</strong>: 检查RDMA设备配置和网络拓扑</p></li>
+</ol>
+</section>
+<section id="id21">
+<h2>最佳实践<a class="headerlink" href="#id21" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>资源管理</strong>: 始终在完成后释放分配的缓冲区</p></li>
+<li><p><strong>错误检查</strong>: 检查所有API调用的返回值</p></li>
+<li><p><strong>配置优化</strong>: 根据硬件环境调整环境变量</p></li>
+<li><p><strong>监控</strong>: 启用指标报告以监控传输性能</p></li>
+<li><p><strong>测试</strong>: 在生产环境中使用前进行充分的测试</p></li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">安装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transferengine">类：TransferEngine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">构造函数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">初始化方法</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize">initialize()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-ext">initialize_ext()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">网络信息</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-rpc-port">get_rpc_port()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">缓冲区管理</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allocate-managed-buffer">allocate_managed_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#free-managed-buffer">free_managed_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-first-buffer-address">get_first_buffer_address()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">数据传输操作</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-sync-write">transfer_sync_write()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-sync-read">transfer_sync_read()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-sync">transfer_sync()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-submit-write">transfer_submit_write()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-check-status">transfer_check_status()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-o">缓冲区I/O操作</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-bytes-to-buffer">write_bytes_to_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-bytes-from-buffer">read_bytes_from_buffer()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">内存注册（实验性）</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#register-memory">register_memory()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-memory">unregister_memory()</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">枚举</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transferopcode">TransferOpcode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">环境变量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">使用示例</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">基本设置和数据传输</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">异步传输</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">托管缓冲区分配</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">使用环境变量的配置示例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">错误处理和重试机制</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">错误处理</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">性能考虑</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">线程安全</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">故障排除</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">最佳实践</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
