@@ -185,7 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -434,10 +434,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-scenarios">Deployment Scenarios</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-tcp-development-quick-evaluation">Single-Node (TCP) — Development / Quick Evaluation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-rdma-production-with-rdma-transport">Single-Node (RDMA) — Production with RDMA Transport</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-etcd-production-ha">High-Availability (etcd) — Production HA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-redis-alternative-ha-backend">High-Availability (Redis) — Alternative HA Backend</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-aware-allocation-memory-tiering">CXL-Aware Allocation — Memory Tiering</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore-backup-disaster-recovery">Snapshot &amp; Restore — Backup / Disaster Recovery</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-modes">Client Modes</a></li>
@@ -631,31 +628,6 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9003/metr
 <p>Clients must also set <code class="docutils literal notranslate"><span class="pre">MC_RPC_PROTOCOL=rdma</span></code> and pass valid <code class="docutils literal notranslate"><span class="pre">rdma_devices</span></code> to the Python <code class="docutils literal notranslate"><span class="pre">setup()</span></code> call. The same single-master limitation applies.</p>
 </section>
 <hr class="docutils" />
-<section id="high-availability-etcd-production-ha">
-<h3>High-Availability (etcd) — Production HA<a class="headerlink" href="#high-availability-etcd-production-ha" title="Link to this heading">#</a></h3>
-<p>Runs a cluster of master instances coordinated through etcd. If the leader fails, the remaining instances elect a new leader automatically.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start each master instance with:</span>
-mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable-ha<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--etcd-endpoints<span class="o">=</span><span class="s2">&quot;10.0.0.1:2379;10.0.0.2:2379;10.0.0.3:2379&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rpc-address<span class="o">=</span><span class="m">10</span>.0.0.1
-</pre></div>
-</div>
-<p>Each instance must specify its own reachable <code class="docutils literal notranslate"><span class="pre">--rpc-address</span></code>. The etcd cluster used for HA can be shared with or separate from the Transfer Engine’s metadata etcd.</p>
-</section>
-<hr class="docutils" />
-<section id="high-availability-redis-alternative-ha-backend">
-<h3>High-Availability (Redis) — Alternative HA Backend<a class="headerlink" href="#high-availability-redis-alternative-ha-backend" title="Link to this heading">#</a></h3>
-<p>Same HA semantics but using Redis instead of etcd for leader election:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable-ha<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--ha_backend_type<span class="o">=</span>redis<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--ha_backend_connstring<span class="o">=</span><span class="s2">&quot;redis://127.0.0.1:6379&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rpc-address<span class="o">=</span><span class="m">10</span>.0.0.1
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
 <section id="tiered-storage-with-ssd-offload-cost-effective-capacity">
 <h3>Tiered Storage with SSD Offload — Cost-Effective Capacity<a class="headerlink" href="#tiered-storage-with-ssd-offload-cost-effective-capacity" title="Link to this heading">#</a></h3>
 <p>Extends the cache pool from DRAM to SSD. New objects land in DRAM; cold data is moved to SSD at eviction time; frequently re-accessed objects are promoted back to DRAM.</p>
@@ -667,18 +639,6 @@ mooncake_master<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--root_fs_dir<span class="o">=</span>/mnt/ssd_cache<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="cxl-aware-allocation-memory-tiering">
-<h3>CXL-Aware Allocation — Memory Tiering<a class="headerlink" href="#cxl-aware-allocation-memory-tiering" title="Link to this heading">#</a></h3>
-<p>When the host has CXL-attached memory, the master can preferentially allocate new objects on the CXL tier, reserving local DRAM for latency-sensitive operations.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_cxl<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cxl_path<span class="o">=</span>/dev/dax0.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cxl_size<span class="o">=</span><span class="m">17179869184</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--allocation_strategy<span class="o">=</span>cxl
 </pre></div>
 </div>
 </section>
@@ -1450,10 +1410,7 @@ grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;Huge
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-scenarios">Deployment Scenarios</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-tcp-development-quick-evaluation">Single-Node (TCP) — Development / Quick Evaluation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-rdma-production-with-rdma-transport">Single-Node (RDMA) — Production with RDMA Transport</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-etcd-production-ha">High-Availability (etcd) — Production HA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-redis-alternative-ha-backend">High-Availability (Redis) — Alternative HA Backend</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-aware-allocation-memory-tiering">CXL-Aware Allocation — Memory Tiering</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore-backup-disaster-recovery">Snapshot &amp; Restore — Backup / Disaster Recovery</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-modes">Client Modes</a></li>

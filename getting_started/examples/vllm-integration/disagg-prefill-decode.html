@@ -185,7 +185,7 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -741,17 +741,12 @@ etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_connector</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeConnector&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_role</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;kv_producer&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;kv_consumer&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_rank</span></code>: 0 for producer, 1 for consumer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kv_parallel_size</span></code>: Fixed to 2 currently</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kv_parallel_size</span></code>: Fixed to 2</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_buffer_size</span></code>: KVCache lookup buffer size; increase for longer prompts. If OOM occurs, decrease <code class="docutils literal notranslate"><span class="pre">--gpu-memory-utilization</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kv_ip</span></code> and <code class="docutils literal notranslate"><span class="pre">kv_port</span></code>: Used to specify the IP address and port of the master node for <code class="docutils literal notranslate"><span class="pre">&quot;PyNcclConnector&quot;</span></code> distributed setup. Not used for <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeConnector&quot;</span></code> currently. Instead, <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeConnector&quot;</span></code> uses a config file to set up the distributed connection.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--tensor-parallel-size</span></code> / <code class="docutils literal notranslate"><span class="pre">-tp</span></code>: Supported. If running on the same node, set different <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>.</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If running prefill and decode on the same node, set a different port for <code class="docutils literal notranslate"><span class="pre">decode_url</span></code>. To avoid port conflicts, ensure the decode port differs by at least 50 from the <code class="docutils literal notranslate"><span class="pre">prefill_url</span></code> port (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;decode_url&quot;:</span> <span class="pre">&quot;192.168.0.137:13103&quot;</span></code>). If the same URL is set for both, the port of <code class="docutils literal notranslate"><span class="pre">decode_url</span></code> will be automatically incremented by 100.</p>
-</div>
 <p><strong>Proxy Server:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>proxy_server.py
 </pre></div>

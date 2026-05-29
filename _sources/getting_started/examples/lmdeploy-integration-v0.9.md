@@ -1,6 +1,4 @@
-# Mooncake x LMDeploy Integration
-
-**LMDeploy Disaggregated Serving with MooncakeTransferEngine**
+# LMDeploy Disaggregated Serving with MooncakeTransferEngine
 
 ## Overview
 

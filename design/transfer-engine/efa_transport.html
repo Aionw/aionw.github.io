@@ -181,7 +181,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -452,7 +452,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#p5-48xlarge-h100-32-efa-100-gbps">4. p5.48xlarge (H100, 32 EFA × 100 Gbps)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-host-loopback">Single-host loopback</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-tips">Tuning Tips</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-request-latency">First-request latency</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducing-the-numbers-efa-first-submit-probe">Reproducing the numbers — <code class="docutils literal notranslate"><span class="pre">efa_first_submit_probe</span></code></a></li>
@@ -1131,29 +1130,6 @@ again.</p>
 </div></blockquote>
 </section>
 </section>
-<section id="single-host-loopback">
-<h3>Single-host loopback<a class="headerlink" href="#single-host-loopback" title="Link to this heading">#</a></h3>
-<p>EFA NICs have no hardware loopback short-circuit: even when both endpoints resolve to the same host, <code class="docutils literal notranslate"><span class="pre">fi_write</span></code>/<code class="docutils literal notranslate"><span class="pre">fi_read</span></code> drive a real DMA round-trip through the EFA device. For deployments where the producer and consumer run as <strong>separate processes on the same host</strong> (single-machine development, benchmarks, co-located workers), this is strictly slower than libfabric’s emulated RDMA path, which resolves the same-host case to a memcpy and skips the NIC entirely.</p>
-<p>Set <code class="docutils literal notranslate"><span class="pre">FI_EFA_USE_DEVICE_RDMA=0</span></code> (a libfabric provider env, <a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa-runtime-tuning.html">documented by the EFA installer</a>) on processes that only do same-host transfers; leave it unset (default <code class="docutils literal notranslate"><span class="pre">1</span></code>) on cross-host or mixed processes. Mooncake does not wrap this knob — it is a provider-level flag resolved at <code class="docutils literal notranslate"><span class="pre">fi_getinfo</span></code> time, and a single <code class="docutils literal notranslate"><span class="pre">EfaTransport</span></code> instance may serve a mix of loopback and cross-host peers, so flipping it disables device RDMA for <strong>every</strong> transfer in the process. Apply it per-process based on that process’s traffic pattern.</p>
-<p>Measured on p5.48xlarge (1 NIC, ~1.2 GiB per <code class="docutils literal notranslate"><span class="pre">put_from</span></code> call, same-host producer/consumer):</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">FI_EFA_USE_DEVICE_RDMA</span></code></p></th>
-<th class="head text-right"><p>per-write latency</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (default after #2041, device RDMA)</p></td>
-<td class="text-right"><p>~830 ms</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (emulated, same-host memcpy fast path)</p></td>
-<td class="text-right"><p>~390 ms</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>For reference, a cross-host <code class="docutils literal notranslate"><span class="pre">put_from</span></code> of the same payload (device RDMA, 1 NIC) is ~340 ms — i.e., device RDMA on a same-host loopback is <em>slower</em> than going over the wire to another host, because the NIC has no fast-path for loopback. Cross-host benchmarks are unaffected by this env: leave <code class="docutils literal notranslate"><span class="pre">FI_EFA_USE_DEVICE_RDMA</span></code> at its default on any process that also talks to remote peers.</p>
-</section>
 <section id="tuning-tips">
 <h3>Tuning Tips<a class="headerlink" href="#tuning-tips" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1644,7 +1620,6 @@ make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</s
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#p5-48xlarge-h100-32-efa-100-gbps">4. p5.48xlarge (H100, 32 EFA × 100 Gbps)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-host-loopback">Single-host loopback</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-tips">Tuning Tips</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-request-latency">First-request latency</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducing-the-numbers-efa-first-submit-probe">Reproducing the numbers — <code class="docutils literal notranslate"><span class="pre">efa_first_submit_probe</span></code></a></li>
