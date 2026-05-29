@@ -176,13 +176,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -197,10 +196,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -221,6 +222,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -464,6 +472,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-hard-pin">with_hard_pin</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preferred-segment">preferred_segment</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prefer-alloc-in-same-node">prefer_alloc_in_same_node</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#group-ids">group_ids</a></li>
 </ul>
 </li>
 </ul>
@@ -1167,7 +1176,31 @@ If you only want part of an object, do not call <code class="docutils literal no
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (empty string)
 <strong>Description:</strong> Enables the preference for allocating data on the same node. Currently, this only supports <code class="docutils literal notranslate"><span class="pre">batch_put_from_multi_buffers</span></code>. Additionally, it does not support disk segments, and the <code class="docutils literal notranslate"><span class="pre">replica_num</span></code> can only be set to 1.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ReplicateConfig</span><span class="p">()</span>
-<span class="n">config</span><span class="o">.</span><span class="n">prefer_alloc_in_same_node</span> <span class="o">=</span> <span class="s2">&quot;True</span>
+<span class="n">config</span><span class="o">.</span><span class="n">prefer_alloc_in_same_node</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="group-ids">
+<h4>group_ids<a class="headerlink" href="#group-ids" title="Link to this heading">#</a></h4>
+<p><strong>Type:</strong> <code class="docutils literal notranslate"><span class="pre">List[str]</span> <span class="pre">|</span> <span class="pre">None</span></code>
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">None</span></code>
+<strong>Description:</strong> Optionally assigns object metadata to routing groups during writes. When this field is unset, Mooncake Store preserves the default ungrouped behavior. When it is set, each group ID maps to the object at the same position in the write request. Empty string (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>) explicitly stores that object as ungrouped.</p>
+<p>For batch write APIs, the number of group IDs must match the number of keys:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ReplicateConfig</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">group_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;session-a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;session-b&quot;</span><span class="p">]</span>
+
+<span class="n">store</span><span class="o">.</span><span class="n">put_batch</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;key-a&quot;</span><span class="p">,</span> <span class="s2">&quot;key-b&quot;</span><span class="p">,</span> <span class="s2">&quot;key-c&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="sa">b</span><span class="s2">&quot;value-a&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;value-b&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;value-c&quot;</span><span class="p">],</span>
+    <span class="n">config</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For a single-object write, provide one group ID:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ReplicateConfig</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">group_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;session-a&quot;</span><span class="p">]</span>
+
+<span class="n">store</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;key-a&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;value-a&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -3351,7 +3384,6 @@ use layout <code class="docutils literal notranslate"><span class="pre">[TensorO
 <span class="n">bind_to_numa_node</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<hr class="docutils" />
 </section>
 </section>
 <hr class="docutils" />
@@ -3380,7 +3412,6 @@ use layout <code class="docutils literal notranslate"><span class="pre">[TensorO
 <li><p><strong>Use soft pinning</strong> for frequently accessed objects to keep them in memory</p></li>
 <li><p><strong>Choose RDMA protocol</strong> when available for maximum performance</p></li>
 </ol>
-<hr class="docutils" />
 </section>
 </section>
 
@@ -3477,6 +3508,7 @@ use layout <code class="docutils literal notranslate"><span class="pre">[TensorO
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-hard-pin">with_hard_pin</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preferred-segment">preferred_segment</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prefer-alloc-in-same-node">prefer_alloc_in_same_node</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#group-ids">group_ids</a></li>
 </ul>
 </li>
 </ul>

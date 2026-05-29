@@ -58,8 +58,8 @@
     <link rel="icon" href="../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Mooncake HF3FS Plugin (Experimental)" href="plugin-usage/3FS-USRBIO-Plugin.html" />
-    <link rel="prev" title="SSD Offload" href="../deployment/ssd-offload.html" />
+    <link rel="next" title="Python" href="../api-reference/python/index.html" />
+    <link rel="prev" title="Mooncake Transfer Engine Benchmark Tool (tebench) Guide" href="../design/tent/tebench.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,19 +175,13 @@
 <li class="toctree-l1"><a class="reference internal" href="build.html">Build Guide</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../deployment/ssd-offload.html">SSD Offload</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Observability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-usage/3FS-USRBIO-Plugin.html">Mooncake HF3FS Plugin (Experimental)</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -196,16 +190,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -221,6 +217,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -738,11 +741,11 @@ curl<span class="w"> </span>http://&lt;master-host&gt;:9003/health
 <section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
 <p>The admin HTTP server is configured in the master config file (<code class="docutils literal notranslate"><span class="pre">master.json</span></code> or <code class="docutils literal notranslate"><span class="pre">master.yaml</span></code>):</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;enable_metric_reporting&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;metrics_port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9003</span><span class="p">,</span>
-<span class="w">  </span><span class="err">...</span>
-<span class="p">}</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;enable_metric_reporting&quot;: true,
+  &quot;metrics_port&quot;: 9003,
+  ...
+}
 </pre></div>
 </div>
 <p>Set <code class="docutils literal notranslate"><span class="pre">enable_metric_reporting</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable the periodic metrics log. HTTP endpoints (<code class="docutils literal notranslate"><span class="pre">/metrics</span></code>, <code class="docutils literal notranslate"><span class="pre">/health</span></code>, etc.) remain available regardless of this setting.</p>
@@ -762,20 +765,20 @@ curl<span class="w"> </span>http://&lt;master-host&gt;:9003/health
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../deployment/ssd-offload.html"
+       href="../design/tent/tebench.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">SSD Offload</p>
+        <p class="prev-next-title">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</p>
       </div>
     </a>
     <a class="right-next"
-       href="plugin-usage/3FS-USRBIO-Plugin.html"
+       href="../api-reference/python/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mooncake HF3FS Plugin (Experimental)</p>
+        <p class="prev-next-title">Python</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

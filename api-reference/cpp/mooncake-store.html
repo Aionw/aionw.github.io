@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mooncake Store C++ API Reference &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api-reference/cpp/mooncake-store';</script>
+    <script src="../../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="HTTP" href="../http/index.html" />
+    <link rel="prev" title="TENT C++ API Reference" href="../../design/tent/cpp-api.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">C/C++ API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../design/transfer-engine/cpp-api.html">Transfer Engine C++ API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../design/tent/cpp-api.html">TENT C++ API Reference</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mooncake Store C++ API Reference</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/api-reference/cpp/mooncake-store.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/api-reference/cpp/mooncake-store.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mooncake Store C++ API Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-c-api">Client C++ API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructor-and-initialization-init">Constructor and Initialization <code class="docutils literal notranslate"><span class="pre">Init</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get">Get</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#put">Put</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">Upsert</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove">Remove</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#createcopytask">CreateCopyTask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#createmovetask">CreateMoveTask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querytask">QueryTask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchqueryip">BatchQueryIp</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchreplicaclear">BatchReplicaClear</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querybyregex">QueryByRegex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removebyregex">RemoveByRegex</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mooncake-store-c-api-reference">
+<h1>Mooncake Store C++ API Reference<a class="headerlink" href="#mooncake-store-c-api-reference" title="Link to this heading">#</a></h1>
+<section id="client-c-api">
+<h2>Client C++ API<a class="headerlink" href="#client-c-api" title="Link to this heading">#</a></h2>
+<section id="constructor-and-initialization-init">
+<h3>Constructor and Initialization <code class="docutils literal notranslate"><span class="pre">Init</span></code><a class="headerlink" href="#constructor-and-initialization-init" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">ErrorCode</span><span class="w"> </span><span class="nf">Init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">local_hostname</span><span class="p">,</span>
+<span class="w">               </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">metadata_connstring</span><span class="p">,</span>
+<span class="w">               </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">protocol</span><span class="p">,</span>
+<span class="w">               </span><span class="kt">void</span><span class="o">**</span><span class="w"> </span><span class="n">protocol_args</span><span class="p">,</span>
+<span class="w">               </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">master_server_entry</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Initializes the Mooncake Store client. The parameters are as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_hostname</span></code>: The <code class="docutils literal notranslate"><span class="pre">IP:Port</span></code> of the local machine or an accessible domain name (default value used if port is not included)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata_connstring</span></code>: The address of the metadata service (e.g., etcd/Redis) required for Transfer Engine initialization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code>: The protocol supported by the Transfer Engine, including RDMA and TCP</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol_args</span></code>: Protocol parameters required by the Transfer Engine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">master_server_entry</span></code>: The address information of the Master (<code class="docutils literal notranslate"><span class="pre">IP:Port</span></code> for default mode and <code class="docutils literal notranslate"><span class="pre">etcd://IP:Port;IP:Port;...;IP:Port</span></code> for high availability mode)</p></li>
+</ul>
+</section>
+<section id="get">
+<h3>Get<a class="headerlink" href="#get" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Get</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">object_key</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Slice</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">slices</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Get</span></code> retrieves the value of <code class="docutils literal notranslate"><span class="pre">object_key</span></code> into the provided <code class="docutils literal notranslate"><span class="pre">slices</span></code>. The returned data is guaranteed to be complete and correct. Each slice must reference local DRAM/VRAM memory that has been pre-registered with <code class="docutils literal notranslate"><span class="pre">registerLocalMemory(addr,</span> <span class="pre">len)</span></code> (not the global segments that contribute to the distributed memory pool). When persistence is enabled and the requested data is not found in the distributed memory pool, <code class="docutils literal notranslate"><span class="pre">Get</span></code> will fall back to loading the data from SSD.</p>
+</section>
+<section id="put">
+<h3>Put<a class="headerlink" href="#put" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ObjectKey</span><span class="o">&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Slice</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">slices</span><span class="p">,</span>
+<span class="w">                                  </span><span class="k">const</span><span class="w"> </span><span class="n">ReplicateConfig</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Put</span></code> stores the value associated with <code class="docutils literal notranslate"><span class="pre">key</span></code> in the distributed memory pool. The <code class="docutils literal notranslate"><span class="pre">config</span></code> parameter allows specifying the required number of replicas as well as the preferred segment for storing the value. When persistence is enabled, <code class="docutils literal notranslate"><span class="pre">Put</span></code> also asynchronously triggers a persistence operation to SSD.</p>
+<p><strong>Replication Guarantees and Best Effort Behavior:</strong></p>
+<ul class="simple">
+<li><p>Each slice of an object is guaranteed to be replicated to different segments, ensuring distribution across separate storage nodes</p></li>
+<li><p>Different slices from different objects may be placed in the same segment</p></li>
+<li><p>Replication operates on a best-effort basis: if insufficient space is available for all requested replicas, the object will still be written with as many replicas as possible</p></li>
+</ul>
+<p>The data structure details of <code class="docutils literal notranslate"><span class="pre">ReplicateConfig</span></code> are as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ReplicateConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">replica_num</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w">                    </span><span class="c1">// Total number of replicas for the object</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">with_soft_pin</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w">               </span><span class="c1">// Whether to enable soft pin mechanism for this object</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">with_hard_pin</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w">               </span><span class="c1">// Whether to enable hard pin (never evicted)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">preferred_segment</span><span class="p">{};</span><span class="w">         </span><span class="c1">// Preferred segment for allocation</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="upsert">
+<h3>Upsert<a class="headerlink" href="#upsert" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Upsert</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ObjectKey</span><span class="o">&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Slice</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">slices</span><span class="p">,</span>
+<span class="w">                                     </span><span class="k">const</span><span class="w"> </span><span class="n">ReplicateConfig</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">BatchUpsert</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ObjectKey</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">keys</span><span class="p">,</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Slice</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">batched_slices</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ReplicateConfig</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Upsert</span></code> inserts <code class="docutils literal notranslate"><span class="pre">key</span></code> if it does not exist and updates the existing object if
+it does. It uses the same replication configuration model as <code class="docutils literal notranslate"><span class="pre">Put</span></code>, while
+allowing the store to reuse existing placement for in-place updates when the
+current layout permits it. <code class="docutils literal notranslate"><span class="pre">BatchUpsert</span></code> performs the same operation for
+multiple keys using a shared replication configuration.</p>
+</section>
+<section id="remove">
+<h3>Remove<a class="headerlink" href="#remove" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Remove</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ObjectKey</span><span class="o">&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Used to delete the object corresponding to the specified key. This interface marks all data replicas associated with the key in the storage engine as deleted, without needing to communicate with the corresponding storage node (Client).</p>
+</section>
+<section id="createcopytask">
+<h3>CreateCopyTask<a class="headerlink" href="#createcopytask" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CreateCopyTask</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">targets</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CreateCopyTask</span></code> creates an asynchronous copy task that will be executed by the client’s task execution system. This is useful when you want to submit multiple copy operations without waiting for each one to complete. The task is submitted to the master service, assigned a unique task ID, and executed asynchronously by an available client. The task status can be queried using <code class="docutils literal notranslate"><span class="pre">QueryTask</span></code>.</p>
+<p><strong>Task Execution and Result Reporting:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Task Assignment</strong>: The master service assigns the task to an available client during the client’s periodic ping operation</p></li>
+<li><p><strong>Task Execution</strong>: The assigned client executes the copy operation asynchronously in a background thread pool</p></li>
+<li><p><strong>Result Reporting</strong>: Upon completion (success or failure), the client automatically reports the result to the master service via <code class="docutils literal notranslate"><span class="pre">MarkTaskToComplete</span></code>:</p>
+<ul class="simple">
+<li><p>On success: <code class="docutils literal notranslate"><span class="pre">status</span> <span class="pre">=</span> <span class="pre">SUCCESS</span></code>, <code class="docutils literal notranslate"><span class="pre">message</span> <span class="pre">=</span> <span class="pre">&quot;Task</span> <span class="pre">completed</span> <span class="pre">successfully&quot;</span></code></p></li>
+<li><p>On failure: <code class="docutils literal notranslate"><span class="pre">status</span> <span class="pre">=</span> <span class="pre">FAILED</span></code>, <code class="docutils literal notranslate"><span class="pre">message</span> <span class="pre">=</span> <span class="pre">&lt;error</span> <span class="pre">description&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Status Query</strong>: You can query the task status at any time using <code class="docutils literal notranslate"><span class="pre">QueryTask</span></code> to monitor progress</p></li>
+</ol>
+</section>
+<section id="createmovetask">
+<h3>CreateMoveTask<a class="headerlink" href="#createmovetask" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CreateMoveTask</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">target</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CreateMoveTask</span></code> creates an asynchronous move task that will be executed by the client’s task execution system. This is useful when you want to submit multiple move operations without waiting for each one to complete. The task is submitted to the master service, assigned a unique task ID, and executed asynchronously by an available client. The task status can be queried using <code class="docutils literal notranslate"><span class="pre">QueryTask</span></code>.</p>
+<p><strong>Task Execution and Result Reporting:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Task Assignment</strong>: The master service assigns the task to an available client during the client’s periodic ping operation</p></li>
+<li><p><strong>Task Execution</strong>: The assigned client executes the move operation asynchronously in a background thread pool</p></li>
+<li><p><strong>Result Reporting</strong>: Upon completion (success or failure), the client automatically reports the result to the master service via <code class="docutils literal notranslate"><span class="pre">MarkTaskToComplete</span></code>:</p>
+<ul class="simple">
+<li><p>On success: <code class="docutils literal notranslate"><span class="pre">status</span> <span class="pre">=</span> <span class="pre">SUCCESS</span></code>, <code class="docutils literal notranslate"><span class="pre">message</span> <span class="pre">=</span> <span class="pre">&quot;Task</span> <span class="pre">completed</span> <span class="pre">successfully&quot;</span></code></p></li>
+<li><p>On failure: <code class="docutils literal notranslate"><span class="pre">status</span> <span class="pre">=</span> <span class="pre">FAILED</span></code>, <code class="docutils literal notranslate"><span class="pre">message</span> <span class="pre">=</span> <span class="pre">&lt;error</span> <span class="pre">description&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Status Query</strong>: You can query the task status at any time using <code class="docutils literal notranslate"><span class="pre">QueryTask</span></code> to monitor progress</p></li>
+</ol>
+</section>
+<section id="querytask">
+<h3>QueryTask<a class="headerlink" href="#querytask" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">QueryTaskResponse</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">QueryTask</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">UUID</span><span class="o">&amp;</span><span class="w"> </span><span class="n">task_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">QueryTask</span></code> queries the status of an asynchronous task (copy or move). This allows you to monitor the progress of task-based operations. The response includes task status, type, creation time, last update time, assigned client, and status message.</p>
+<p>The data structure details of <code class="docutils literal notranslate"><span class="pre">QueryTaskResponse</span></code> are as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">QueryTaskResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">UUID</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">                                    </span><span class="c1">// Task UUID</span>
+<span class="w">    </span><span class="n">TaskType</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w">                              </span><span class="c1">// Task type (REPLICA_COPY or REPLICA_MOVE)</span>
+<span class="w">    </span><span class="n">TaskStatus</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w">                          </span><span class="c1">// Task status (PENDING, PROCESSING, SUCCESS, or FAILED)</span>
+<span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">created_at_ms_epoch</span><span class="p">;</span><span class="w">                </span><span class="c1">// Task creation timestamp in milliseconds</span>
+<span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">last_updated_at_ms_epoch</span><span class="p">;</span><span class="w">           </span><span class="c1">// Last update timestamp in milliseconds</span>
+<span class="w">    </span><span class="n">UUID</span><span class="w"> </span><span class="n">assigned_client</span><span class="p">;</span><span class="w">                       </span><span class="c1">// UUID of the client assigned to execute the task</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w">                        </span><span class="c1">// Status message or error description</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="batchqueryip">
+<h3>BatchQueryIp<a class="headerlink" href="#batchqueryip" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">hash</span><span class="o">&lt;</span><span class="n">UUID</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span>
+<span class="n">BatchQueryIp</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">UUID</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">client_ids</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Used to batch query the IP addresses for multiple client IDs. For each client ID in the input list, this interface retrieves the unique IP addresses from all segments mounted by that client. The operation is performed on the Master Service and returns a map from client ID to their IP address lists. Only client IDs that have successfully mounted segments are included in the result map. This is useful for discovering the network locations of storage nodes in the cluster.</p>
+</section>
+<section id="batchreplicaclear">
+<h3>BatchReplicaClear<a class="headerlink" href="#batchreplicaclear" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span>
+<span class="n">BatchReplicaClear</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">object_keys</span><span class="p">,</span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">UUID</span><span class="o">&amp;</span><span class="w"> </span><span class="n">client_id</span><span class="p">,</span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">segment_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Used to batch clear replicas for multiple object keys belonging to a specific client ID. This interface allows clearing replicas either on a specific segment or across all segments. If segment_name is empty, all replicas of the specified objects are cleared (the objects are deleted entirely). If segment_name is provided, only replicas located on that specific segment are cleared. The operation is performed on the Master Service and returns a list of object keys that were successfully cleared. Only objects that belong to the specified <code class="docutils literal notranslate"><span class="pre">client_id</span></code>, have expired leases, and meet the clearing criteria are processed. This is useful for managing storage resources and cleaning up data on specific storage nodes.</p>
+</section>
+<section id="querybyregex">
+<h3>QueryByRegex<a class="headerlink" href="#querybyregex" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Replica</span><span class="o">::</span><span class="n">Descriptor</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span>
+<span class="n">QueryByRegex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">str</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Used to query the replica information for all objects whose keys match the given regular expression. This is useful for batch operations or for retrieving a group of related objects. The operation is performed on the Master and returns a map of keys to their replica lists.</p>
+</section>
+<section id="removebyregex">
+<h3>RemoveByRegex<a class="headerlink" href="#removebyregex" title="Link to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="kt">long</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">RemoveByRegex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ObjectKey</span><span class="o">&amp;</span><span class="w"> </span><span class="n">str</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Used to delete all objects from the store whose keys match the specified regular expression. This provides a powerful way to perform bulk deletions. The command returns the number of objects that were successfully removed.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../design/tent/cpp-api.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">TENT C++ API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../http/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">HTTP</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-c-api">Client C++ API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructor-and-initialization-init">Constructor and Initialization <code class="docutils literal notranslate"><span class="pre">Init</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get">Get</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#put">Put</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upsert">Upsert</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove">Remove</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#createcopytask">CreateCopyTask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#createmovetask">CreateMoveTask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querytask">QueryTask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchqueryip">BatchQueryIp</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batchreplicaclear">BatchReplicaClear</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querybyregex">QueryByRegex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removebyregex">RemoveByRegex</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

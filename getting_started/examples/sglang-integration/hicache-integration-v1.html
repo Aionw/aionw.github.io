@@ -176,8 +176,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Mooncake x SGLang Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">SGLang x Mooncake Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../sglang-integration-v1.html">SGLang Disaggregated Serving with MooncakeTransferEngine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hicache-quick-start.html">Quick Start: SGLang HiCache with Mooncake Backend</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Complete Guide: SGLang HiCache with Mooncake Backend</a></li>
@@ -186,8 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -202,10 +201,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -221,6 +222,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -417,7 +425,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-sglang-hicache">About SGLang HiCache</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-sglang-hicache">Mooncake &amp; SGLang HiCache</a></li>
 </ul>
 </li>
@@ -458,13 +465,6 @@ document.write(`
 </div></blockquote>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<section id="about-sglang-hicache">
-<h3>About SGLang HiCache<a class="headerlink" href="#about-sglang-hicache" title="Link to this heading">#</a></h3>
-<p>SGLang HiCache is a hierarchical KV caching system that extends SGLang’s RadixAttention with advanced multi-tier memory management capabilities. It implements a scalable hierarchical storage architecture that spans GPU memory, CPU memory, and external storage layers, delivering significant performance improvements for large language model inference.</p>
-<p>HiCache introduces a <strong>HiRadixTree</strong> that acts as a page table for referencing KV caches across different memory tiers: <strong>GPU Memory (L1)</strong>, <strong>CPU Memory (L2)</strong>, <strong>Mooncake and other Storage Backends (L3)</strong>.</p>
-<p>The system includes an intelligent cache controller that automatically manages data movement between tiers, implementing optimized prefetching strategies and multiple write policies (write-through, write-through-selective, and write-back).</p>
-<p>For more details about SGLang HiCache, please refer to <a class="reference external" href="https://docs.sglang.ai/advanced_features/hicache_design.html">HiCache system design document</a> and <a class="reference external" href="https://lmsys.org/blog/2025-09-10-sglang-hicache/">this blog</a>.</p>
-</section>
 <section id="mooncake-sglang-hicache">
 <h3>Mooncake &amp; SGLang HiCache<a class="headerlink" href="#mooncake-sglang-hicache" title="Link to this heading">#</a></h3>
 <p>Mooncake serves as a high-performance L3 storage backend for SGLang HiCache, enabling distributed KV cache storage across multiple servers with RDMA-accelerated data transfer. This integration addresses the capacity limitations of traditional GPU-only or GPU+CPU caching by providing virtually unlimited cache storage through a distributed memory pool.</p>
@@ -905,7 +905,6 @@ python3<span class="w"> </span><span class="o">[</span>path<span class="w"> </sp
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-sglang-hicache">About SGLang HiCache</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-sglang-hicache">Mooncake &amp; SGLang HiCache</a></li>
 </ul>
 </li>

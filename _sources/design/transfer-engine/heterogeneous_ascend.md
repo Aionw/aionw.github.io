@@ -65,27 +65,10 @@ When `metadata_server=P2PHANDSHAKE` is configured, the system automatically sele
 ### Example Commands
 **Target (H20)**:
 ```bash
-./rdma_transport_test \
-    --mode=target \
-    --local_server_name=10.10.10.10 \
-    --metadata_server=P2PHANDSHAKE \
-    --operation=write \
-    --protocol=rdma \
-    --device_name=mlx5_1 \
-    --use_vram=true \
-    --gpu_id=0
+./rdma_transport_test --mode=target --local_server_name=10.10.10.10 --metadata_server=P2PHANDSHAKE --operation=write --protocol=rdma --device_name=mlx5_1 --use_vram=true --gpu_id=0
 ```
 
 **Initiator (910B)**:
 ```bash
-./transfer_engine_heterogeneous_ascend_perf_initiator \
-    --mode=initiator \
-    --local_server_name=10.10.10.10 \
-    --metadata_server=P2PHANDSHAKE \
-    --operation=write \
-    --npu_id=1 \
-    --segment_id=10.10.10.10:12345 \
-    --device_name=mlx5_1 \
-    --block_size=65536 \
-    --batch_size=128
+./transfer_engine_heterogeneous_ascend_perf_initiator --mode=initiator --local_server_name=10.10.10.10 --metadata_server=P2PHANDSHAKE --operation=write --npu_id=1 --segment_id=10.10.10.10:12345 --device_name=mlx5_1 --block_size=65536 --batch_size=128
 ```

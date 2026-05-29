@@ -158,59 +158,24 @@ Refer to the command format shown below:
 
 **Start Initiator Node:**
 ```bash
-./transfer_engine_ascend_one_sided \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=10.0.0.0:12345 \
-    --protocol=hccl \
-    --operation=write \
-    --segment_id=10.0.0.0:12346 \
-    --device_id=0 \
-    --mode=initiator \
-    --block_size=8388608 \
-    --batch_size=32 
+./transfer_engine_ascend_one_sided --metadata_server=P2PHANDSHAKE --local_server_name=10.0.0.0:12345 --protocol=hccl --operation=write --segment_id=10.0.0.0:12346 --device_id=0 --mode=initiator --block_size=8388608 --batch_size=32 
 ```
 
 **Start Target Node:**
 ```bash
-./transfer_engine_ascend_one_sided \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=10.0.0.0:12346 \
-    --protocol=hccl \
-    --operation=write \
-    --device_id=1 \
-    --mode=target \
-    --block_size=8388608 \
-    --batch_size=32 
+./transfer_engine_ascend_one_sided --metadata_server=P2PHANDSHAKE --local_server_name=10.0.0.0:12346 --protocol=hccl --operation=write --device_id=1 --mode=target --block_size=8388608 --batch_size=32 
 ```
 
 #### Example Commands for Performance Testing
 
 **Start Initiator Node:**
 ```bash
-./transfer_engine_ascend_perf \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=10.0.0.0:12345 \
-    --protocol=hccl \
-    --operation=write \
-    --segment_id=10.0.0.0:12346 \
-    --device_id=0 \
-    --mode=initiator \
-    --block_size=16384 \
-    --batch_size=32 \
-    --block_iteration=10
+./transfer_engine_ascend_perf --metadata_server=P2PHANDSHAKE --local_server_name=10.0.0.0:12345 --protocol=hccl --operation=write --segment_id=10.0.0.0:12346 --device_id=0 --mode=initiator --block_size=16384 --batch_size=32 --block_iteration=10
 ```
 
 **Start Target Node:**
 ```bash
-./transfer_engine_ascend_perf \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=10.0.0.0:12346 \
-    --protocol=hccl \
-    --operation=write \
-    --device_id=1 \
-    --mode=target \
-    --batch_size=32 \
-    --block_iteration=10
+./transfer_engine_ascend_perf --metadata_server=P2PHANDSHAKE --local_server_name=10.0.0.0:12346 --protocol=hccl --operation=write --device_id=1 --mode=target --batch_size=32 --block_iteration=10
 ```
 
 **Note:** The `device_id` parameter mentioned above represents both the NPU logical ID and physical ID. If not all devices are mounted in your container, please specify the logical ID and physical ID separately when using the demo above. Replace `--device_id` with `--device_logicid` and `--device_phyid`.
@@ -219,29 +184,12 @@ For example, if only device 5 and device 7 are mounted in the container, with de
 
 **Start the initiator node:**
 ```bash
-./transfer_engine_ascend_one_sided \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=10.0.0.0:12345 \
-    --protocol=hccl \
-    --operation=write \
-    --segment_id=10.0.0.0:12346 \
-    --device_logicid=0 \
-    --device_phyid=5 \
-    --mode=initiator \
-    --block_size=8388608
+./transfer_engine_ascend_one_sided --metadata_server=P2PHANDSHAKE --local_server_name=10.0.0.0:12345 --protocol=hccl --operation=write --segment_id=10.0.0.0:12346 --device_logicid=0 --device_phyid=5 --mode=initiator --block_size=8388608
 ```
 
 **Start the target node:**
 ```bash
-./transfer_engine_ascend_one_sided \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=10.0.0.0:12346 \
-    --protocol=hccl \
-    --operation=write \
-    --device_logicid=1 \
-    --device_phyid=7 \
-    --mode=target \
-    --block_size=8388608
+./transfer_engine_ascend_one_sided --metadata_server=P2PHANDSHAKE --local_server_name=10.0.0.0:12346 --protocol=hccl --operation=write --device_logicid=1 --device_phyid=7 --mode=target --block_size=8388608
 ```
 
 ### Print Description

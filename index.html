@@ -177,13 +177,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -198,10 +197,12 @@
 <li class="toctree-l1"><a class="reference internal" href="design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -217,6 +218,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -499,23 +507,25 @@ This repository also hosts its technical report and the open-sourced traces.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html">Mooncake Store</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#deployment-examples">Deployment Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#observability">Observability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#client-engine-tuning-env-vars-with-defaults">Client/Engine Tuning (Env Vars, with defaults)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#master-startup-flags-with-defaults">Master Startup Flags (with defaults)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#deployment-scenarios">Deployment Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#metrics-endpoints">Metrics Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#quick-tips">Quick Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#reference-master-startup-flags">Reference: Master Startup Flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/mooncake-store-deployment-guide.html#reference-client-engine-tuning-env-vars">Reference: Client &amp; Engine Tuning (Env Vars)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html#integration-scenarios">Integration Scenarios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html#pd-disaggregation">PD Disaggregation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/examples/sglang-integration/index.html#hicache-with-mooncake-store">HiCache with Mooncake Store</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/examples/vllm-integration/index.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/examples/vllm-integration/index.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/examples/vllm-integration/index.html#legacy-archives">Legacy Archives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/examples/vllm-integration/index.html#archived-documentation">Archived Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
@@ -528,8 +538,7 @@ This repository also hosts its technical report and the open-sourced traces.</p>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/examples/lmcache-integration.html#future-developments">Future Developments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html#lmdeploy-disaggregated-serving-with-mooncaketransferengine">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/examples/lmdeploy-integration-v0.9.html#configuration">Configuration</a></li>
@@ -557,6 +566,17 @@ This repository also hosts its technical report and the open-sourced traces.</p>
 <li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#architecture">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#client-c-api">Client C++ API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#master-service">Master Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#buffer-allocator">Buffer Allocator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#allocationstrategy">AllocationStrategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#eviction-policy">Eviction Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#lease">Lease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#soft-pin">Soft Pin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#hard-pin">Hard Pin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#zombie-object-cleanup">Zombie Object Cleanup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#preferred-segment-allocation">Preferred Segment Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#multi-layer-storage-support">Multi-layer Storage Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#builtin-metadata-server">Builtin Metadata Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#mooncake-store-python-api">Mooncake Store Python API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#compilation-and-usage">Compilation and Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/mooncake-store.html#example-code">Example Code</a></li>
@@ -571,6 +591,9 @@ This repository also hosts its technical report and the open-sourced traces.</p>
 <li class="toctree-l2"><a class="reference internal" href="design/tent/overview.html#summary">Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/tent/overview.html#tent-c-api-reference">TENT C++ API Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/tent/overview.html#tent-metrics-system">TENT Metrics System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/tent/overview.html#tent-transport-selector">TENT Transport Selector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/tent/overview.html#tent-quality-of-service">TENT Quality of Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/tent/overview.html#tent-slice-spraying">TENT Slice Spraying</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/tent/overview.html#tent-failover">TENT Failover</a></li>
 </ul>
 </li>
@@ -599,6 +622,23 @@ This repository also hosts its technical report and the open-sourced traces.</p>
 <li class="toctree-l2"><a class="reference internal" href="design/conductor/conductor-architecture-design.html#environment-variables">Environment variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/conductor/conductor-architecture-design.html#build-and-run">Build and run</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design/conductor/conductor-architecture-design.html#project-structure">Project structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#goal">Goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#design-principles">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#core-model">Core model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#public-api-shape">Public API shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#caller-inputs-vs-internal-derived-fields">Caller inputs vs internal derived fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#why-readtarget-is-required">Why <code class="docutils literal notranslate"><span class="pre">ReadTarget</span></code> is required</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#mixed-parallel-scenarios-in-training-and-inference">Mixed-parallel scenarios in training and inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#write-side-matrix">Write-side matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#read-side-matrix">Read-side matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#source-layout-to-target-layout-matrix">Source-layout to target-layout matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#compatibility-wrappers">Compatibility wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#runtime-lowering-direction">Runtime lowering direction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#current-implementation-status">Current implementation status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design/unified-parallel-tensor-io.html#scope-still-intentionally-limited">Scope still intentionally limited</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="design/p2p-store.html">P2P Store</a><ul>
@@ -638,6 +678,11 @@ This repository also hosts its technical report and the open-sourced traces.</p>
 <li class="toctree-l2"><a class="reference internal" href="design/tent/tebench.html#runtime-configuration">5. Runtime Configuration</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/observability.html">Observability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/observability.html#master-metrics-log">Master Metrics Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/observability.html#prometheus-metrics-endpoint">Prometheus Metrics Endpoint</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -659,6 +704,15 @@ This repository also hosts its technical report and the open-sourced traces.</p>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="community/governance.html">Governance</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 </div>
 </section>

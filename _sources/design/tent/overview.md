@@ -90,6 +90,30 @@ For the complete C++ API reference, see [TENT C++ API](../../api-reference/cpp/i
 metrics
 :::
 
+## TENT Transport Selector
+
+:::{toctree}
+:maxdepth: 1
+
+transport-selector
+:::
+
+## TENT Quality of Service
+
+:::{toctree}
+:maxdepth: 1
+
+qos
+:::
+
+## TENT Slice Spraying
+
+:::{toctree}
+:maxdepth: 1
+
+slice-spraying
+:::
+
 ## TENT Failover
 
 :::{toctree}

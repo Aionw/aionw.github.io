@@ -176,21 +176,16 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Mooncake x vLLM Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="disagg-prefill-decode.html">Disaggregated Prefill-Decode with MooncakeConnector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kv-cache-storage.html">KV Cache Storage &amp; Sharing with MooncakeStore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -205,10 +200,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -224,6 +221,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -425,7 +429,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kv-cache-storage-sharing">KV Cache Storage &amp; Sharing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legacy-archives">Legacy Archives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archived-documentation">Archived Documentation</a></li>
 </ul>
             </nav>
         </div>
@@ -493,14 +497,9 @@ document.write(`
 </section>
 </section>
 <hr class="docutils" />
-<section id="legacy-archives">
-<h2>Legacy Archives<a class="headerlink" href="#legacy-archives" title="Link to this heading">#</a></h2>
-<div class="warning admonition">
-<p class="admonition-title">Archived Pages</p>
-<p>The following pages are <strong>archived</strong> and no longer maintained. All content has been consolidated into the scenario-based guides above.</p>
-</div>
-<div class="toctree-wrapper compound">
-</div>
+<section id="archived-documentation">
+<h2>Archived Documentation<a class="headerlink" href="#archived-documentation" title="Link to this heading">#</a></h2>
+<p>The following pages are from earlier versions of the integration and are no longer maintained. All content has been consolidated into the scenario-based guides above.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="vllm-mooncakestoreconnector.html"><span class="doc std std-doc">MooncakeStoreConnector (Original)</span></a></p></li>
 <li><p><a class="reference internal" href="vllm-integration-v0.2.html"><span class="doc std std-doc">vLLM V0 PD Disaggregation Demo (Original)</span></a></p></li>
@@ -561,7 +560,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kv-cache-storage-sharing">KV Cache Storage &amp; Sharing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legacy-archives">Legacy Archives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archived-documentation">Archived Documentation</a></li>
 </ul>
   </nav></div>
 

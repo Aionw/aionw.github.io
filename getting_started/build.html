@@ -58,7 +58,7 @@
     <link rel="icon" href="../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Mooncake Store" href="../deployment/mooncake-store-deployment-guide.html" />
+    <link rel="next" title="Mooncake Store Deployment" href="../deployment/mooncake-store-deployment-guide.html" />
     <link rel="prev" title="Quick Start" href="quick-start.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -176,13 +176,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -197,10 +196,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -216,6 +217,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -428,8 +436,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-backend-support">GPU Backend Support</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transport-protocols">Transport Protocols</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-services">Metadata Services</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tent">TENT</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-features">Advanced Features</a></li>
 </ul>
 </li>
 </ul>
@@ -545,9 +551,10 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/absei
 <span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib64
 </pre></div>
 </div>
-<blockquote>
-<div><p><strong>Note:</strong> Mooncake could use the DMA-BUF path for GPU-Direct RDMA, which does <strong>not</strong> require the <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> kernel module. If you prefer the DMA-BUF path, please set the runtime environment variable <code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM=0</span></code> before starting Mooncake. If you prefer the legacy <code class="docutils literal notranslate"><span class="pre">ibv_reg_mr</span></code> path (which requires <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code>), set the runtime environment variable <code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM=1</span></code>. See Section 3.7 of https://docs.nvidia.com/cuda/gpudirect-rdma/ for instructions on installing <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code>.</p>
-</div></blockquote>
+<div class="note admonition">
+<p class="admonition-title">GPU-Direct RDMA</p>
+<p>Mooncake could use the DMA-BUF path for GPU-Direct RDMA, which does <strong>not</strong> require the <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> kernel module. If you prefer the DMA-BUF path, please set the runtime environment variable <code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM=0</span></code> before starting Mooncake. If you prefer the legacy <code class="docutils literal notranslate"><span class="pre">ibv_reg_mr</span></code> path (which requires <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code>), set the runtime environment variable <code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM=1</span></code>. See Section 3.7 of https://docs.nvidia.com/cuda/gpudirect-rdma/ for instructions on installing <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code>.</p>
+</div>
 </li>
 <li><p>If you want to compile the Moore Mthreads GPUDirect support module, first follow the instructions in https://docs.mthreads.com/musa-sdk/musa-sdk-doc-online/install_guide to install MUSA. After that:</p>
 <ol class="arabic simple">
@@ -688,18 +695,6 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
 <td><p>ON</p></td>
 <td><p>Build examples</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BUILD_BENCHMARK</span></code></p></td>
-<td><p>ON</p></td>
-<td><p>Build benchmarks</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ENABLE_ASAN</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable AddressSanitizer for memory error detection</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ENABLE_SCCACHE</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable sccache for compilation caching</p></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -714,17 +709,9 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_TE</span></code></p></td>
-<td><p>ON</p></td>
-<td><p>Build Mooncake Transfer Engine</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_STORE</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_STORE</span></code></p></td>
 <td><p>ON</p></td>
 <td><p>Build Mooncake Store component</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_STORE_GO</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Build Go bindings for Mooncake Store</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_P2P_STORE</span></code></p></td>
 <td><p>OFF</p></td>
@@ -732,39 +719,15 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_EP</span></code></p></td>
 <td><p>OFF</p></td>
-<td><p>Build EP (Expert Parallelism) and PG Python extensions for CUDA. Requires CUDA toolkit and PyTorch</p></td>
+<td><p>Build EP (Expert Parallelism) and PG Python extensions for CUDA. Requires CUDA toolkit and PyTorch. Use <code class="docutils literal notranslate"><span class="pre">EP_TORCH_VERSIONS=&quot;2.9.1&quot;</span></code> (semicolon-separated) to build for specific PyTorch versions, or leave empty to use the currently-installed torch</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">EP_TORCH_VERSIONS</span></code></p></td>
-<td><p>—</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">TORCH_CUDA_ARCH_LIST</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">8.0;9.0</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">EP_USE_IDE</span></code></p></td>
-<td><p>OFF</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_RUST_EXAMPLE</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_RUST_EXAMPLE</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>Build the Transfer Engine Rust interface and sample code</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_STORE_RUST</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_STORE_RUST</span></code></p></td>
 <td><p>ON</p></td>
 <td><p>Build Mooncake Store Rust bindings</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_NOF</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Build Mooncake Store with NoF SSD pool support</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">STORE_USE_JEMALLOC</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Use jemalloc in Mooncake Store master</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">STORE_USE_K8S_LEASE</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>K8s Lease leader election for Mooncake Store. Mutually exclusive with <code class="docutils literal notranslate"><span class="pre">STORE_USE_ETCD</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -881,26 +844,6 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
 <td><p>—</p></td>
 <td><p>Neuware library directory</p></td>
 </tr>
-<tr class="row-even"><td><p>Huawei Ascend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">USE_ASCEND</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>NPU support via HCCL transport</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">USE_ASCEND_DIRECT</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>NPU support via ADXL direct engine</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">USE_UBSHMEM</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>NPU support via shared memory transport</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">USE_ASCEND_HETEROGENEOUS</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Heterogeneous data transfer between Ascend NPU and GPU</p></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -915,41 +858,21 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_TCP</span></code></p></td>
-<td><p>ON</p></td>
-<td><p>TCP transport</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_MNNVL</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_MNNVL</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>Multi-Node NVLink transport. Requires <code class="docutils literal notranslate"><span class="pre">USE_CUDA=ON</span></code> unless using MUSA/HIP/MACA</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_INTRA_NVLINK</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_INTRA_NVLINK</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>Intra-Node NVLink transport</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_EFA</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_EFA</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>AWS Elastic Fabric Adapter transport via libfabric. See <a class="reference internal" href="../design/transfer-engine/efa_transport.html"><span class="std std-doc">EFA Transport</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_CXL</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_CXL</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>CXL transport</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_NVMEOF</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>NVMe over Fabric transport. Enables <code class="docutils literal notranslate"><span class="pre">USE_CUDA=ON</span></code> automatically</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_UB</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>UB protocol transport</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_BAREX</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>accel-barex transport</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_MLX5DV</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable mlx5 direct verbs (libmlx5) for QP UDP source port override</p></td>
 </tr>
 </tbody>
 </table>
@@ -966,84 +889,24 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_HTTP</span></code></p></td>
-<td><p>ON</p></td>
+<td><p>OFF</p></td>
 <td><p>HTTP-based metadata service for Transfer Engine</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_ETCD</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>etcd-based metadata service for Transfer Engine, requires go 1.23+</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_ETCD_LEGACY</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>etcd-based metadata service using etcd-cpp-api-v3 (deprecated)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_REDIS</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_REDIS</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>Redis-based metadata service for Transfer Engine, requires hiredis</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">STORE_USE_ETCD</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">STORE_USE_ETCD</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>etcd-based failover for Mooncake Store, requires go 1.23+. Independent from <code class="docutils literal notranslate"><span class="pre">USE_ETCD</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">STORE_USE_REDIS</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">STORE_USE_REDIS</span></code></p></td>
 <td><p>OFF</p></td>
 <td><p>Redis-based failover for Mooncake Store, requires hiredis. Independent from <code class="docutils literal notranslate"><span class="pre">USE_REDIS</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="tent">
-<h3>TENT<a class="headerlink" href="#tent" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Option</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_TENT</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Build Mooncake TENT component</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TENT_METRICS_ENABLED</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable TENT metrics collection</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="advanced-features">
-<h3>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Option</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WITH_METRICS</span></code></p></td>
-<td><p>ON</p></td>
-<td><p>Enable metrics collection and reporting thread</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ENABLE_MULTI_PROTOCOL</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable multi-protocol support in Transfer Engine</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_EVENT_DRIVEN_COMPLETION</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable event-driven completion (store &amp; transfer engine)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USE_LRU_MASTER</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable LRU eviction in master service</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USE_3FS</span></code></p></td>
-<td><p>OFF</p></td>
-<td><p>Enable 3FS storage backend for Mooncake Store</p></td>
 </tr>
 </tbody>
 </table>
@@ -1077,7 +940,7 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mooncake Store</p>
+        <p class="prev-next-title">Mooncake Store Deployment</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1114,8 +977,6 @@ Without <code class="docutils literal notranslate"><span class="pre">MC_STORE_US
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-backend-support">GPU Backend Support</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transport-protocols">Transport Protocols</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-services">Metadata Services</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tent">TENT</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-features">Advanced Features</a></li>
 </ul>
 </li>
 </ul>

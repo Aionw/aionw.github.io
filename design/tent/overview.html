@@ -176,13 +176,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -196,15 +195,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">TENT: Transfer Engine NEXT</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">TENT Metrics System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transport-selector.html">TENT Transport Selector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qos.html">TENT Quality of Service (QoS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slice-spraying.html">TENT Slice Spraying</a></li>
 <li class="toctree-l2"><a class="reference internal" href="failover.html">TENT Failover</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -220,6 +224,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -427,6 +438,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-c-api-reference">TENT C++ API Reference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-metrics-system">TENT Metrics System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-transport-selector">TENT Transport Selector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-quality-of-service">TENT Quality of Service</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-slice-spraying">TENT Slice Spraying</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-failover">TENT Failover</a></li>
 </ul>
             </nav>
@@ -518,6 +532,30 @@ It is the successor to the classic Mooncake Transfer Engine (TE) and is designed
 </ul>
 </div>
 </section>
+<section id="tent-transport-selector">
+<h2>TENT Transport Selector<a class="headerlink" href="#tent-transport-selector" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="transport-selector.html">TENT Transport Selector</a></li>
+</ul>
+</div>
+</section>
+<section id="tent-quality-of-service">
+<h2>TENT Quality of Service<a class="headerlink" href="#tent-quality-of-service" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qos.html">TENT Quality of Service (QoS)</a></li>
+</ul>
+</div>
+</section>
+<section id="tent-slice-spraying">
+<h2>TENT Slice Spraying<a class="headerlink" href="#tent-slice-spraying" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="slice-spraying.html">TENT Slice Spraying</a></li>
+</ul>
+</div>
+</section>
 <section id="tent-failover">
 <h2>TENT Failover<a class="headerlink" href="#tent-failover" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
@@ -585,6 +623,9 @@ It is the successor to the classic Mooncake Transfer Engine (TE) and is designed
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-c-api-reference">TENT C++ API Reference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-metrics-system">TENT Metrics System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-transport-selector">TENT Transport Selector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-quality-of-service">TENT Quality of Service</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-slice-spraying">TENT Slice Spraying</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-failover">TENT Failover</a></li>
 </ul>
   </nav></div>

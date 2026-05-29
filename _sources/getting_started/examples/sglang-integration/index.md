@@ -1,46 +1,95 @@
-# Mooncake x SGLang Integration
+# SGLang x Mooncake Integration
 
-[Mooncake](https://github.com/kvcache-ai/Mooncake) and [SGLang](https://github.com/sgl-project/sglang) have a deep, multi-faceted integration that spans multiple inference acceleration scenarios. Mooncake provides both the **Transfer Engine** — a high-performance RDMA data plane for zero-copy KV cache transfer — and **Mooncake Store** — a distributed KV cache storage engine — as backends for SGLang's disaggregated serving and hierarchical caching systems.
-
----
-
-## Integration Scenarios
-
-### 1. PD Disaggregation (Transfer Engine)
-
-Mooncake Transfer Engine serves as the KV cache transfer backend for SGLang's Prefill-Decode disaggregation. It uses GPUDirect RDMA to transfer KV caches between prefill and decode nodes with zero-copy, saturating multi-NIC bandwidth while keeping CPU overhead negligible. This is also the foundation for **Mooncake EP Backend** (expert parallelism for MoE models like DeepSeek-V3) and **EPD Disaggregation** (encoder-prefill-decode for multimodal models with Vision Transformers).
-
-**Key Results (1P1D vs 2 Regular instances, Qwen2.5-7B):**
-- ~30% lower Inter-Token Latency (ITL) at comparable throughput
-- Better TTFT under higher request rates
-- See [PD Disaggregation Performance](../../../performance/sglang-benchmark-results-v1) for full benchmarks.
-
-### 2. HiCache L3 Backend (Mooncake Store)
-
-Mooncake Store serves as the L3 storage backend for SGLang HiCache, a hierarchical KV caching system spanning GPU (L1) → CPU (L2) → Distributed Memory Pool (L3). It aggregates memory across the entire cluster into a large distributed pool, enabling KV caches to be shared by all SGLang instances with RDMA-accelerated data transfer.
-
-**Key Results (multi-turn conversation benchmark):**
-- Mooncake-backed HiCache maintains a consistently high KV cache hit rate as conversation rounds grow, while L2-only drops off sharply once CPU memory is exhausted
-- Pre-populated Mooncake achieves the best prefill performance (lowest TTFT)
-- See [HiCache Benchmark Results](../../../performance/sglang-hicache-benchmark-results-v1) for full benchmarks.
+Mooncake integrates with SGLang through two paths — **PD Disaggregation** for cross-instance KV cache transfer via the Transfer Engine, and **HiCache L3 Backend** for hierarchical KV cache storage with Mooncake Store.
 
 ---
 
-## Getting Started
+## PD Disaggregation
 
-Choose your scenario:
+SGLang uses Mooncake's Transfer Engine for direct zero-copy KV cache transfer between prefill and decode instances over RDMA.
 
-| Scenario | Document |
-|----------|----------|
-| PD Disaggregation (KVCache transfer) | [PD Disaggregation Guide](../sglang-integration-v1) |
-| HiCache L3 Backend (Quick Start) | [HiCache Quick Start](hicache-quick-start) |
-| HiCache L3 Backend (Complete Guide) | [HiCache Complete Guide](hicache-integration-v1) |
+```
+  +-----------+   Transfer Engine (RDMA)    +-----------+
+  | SGLang    | ◄━━━━━━━━━━━━━━━━━━━━━━► | SGLang     |
+  | Prefill   |     KV cache blocks        | Decode     |
+  +-----------+                            +-----------+
+```
 
-::: {toctree}
+Since [PR 5460](https://github.com/sgl-project/sglang/pull/5460), no `mooncake.json` is needed — devices are auto-detected.
+
+```bash
+# Prefill node
+python -m sglang.launch_server \
+  --model-path Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+  --disaggregation-mode prefill \
+  --port 30000 --host 192.168.0.137 --tp-size 2
+
+# Decode node
+python -m sglang.launch_server \
+  --model-path Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+  --disaggregation-mode decode \
+  --port 30001 --host 192.168.0.140 --tp-size 2
+
+# Router (front the pair with sglang_router)
+python3 -m sglang_router.launch_router \
+  --pd-disaggregation \
+  --prefill "http://192.168.0.137:30000" \
+  --decode  "http://192.168.0.140:30001" \
+  --policy round_robin \
+  --host 0.0.0.0 --port 8000
+```
+
+Both prefill and decode can run on the same node with `--base-gpu-id` to avoid GPU conflicts. XpYd topology (multiple prefills, multiple decodes) is supported.
+
+**Related:** [Full PD Disaggregation Guide](../sglang-integration-v1) — installation, EP/EPD backends, and advanced configuration.
+
+---
+
+## HiCache with Mooncake Store
+
+HiCache extends SGLang's RadixAttention with three memory tiers, using Mooncake Store as the distributed L3 backend.
+
+```
+  +----------------------------------------------+
+  | SGLang + HiCache                             |
+  |  ┌─────────┐  ┌─────────┐  ┌──────────────┐ |
+  |  │ L1(GPU) │  │ L2(CPU) │  │ L3(Mooncake) │ |
+  |  └─────────┘  └─────────┘  └──────┬───────┘ |
+  +------------------------------------+----------+
+                                      |
+                             +--------+--------+
+                             | Mooncake Store  |
+                             | Distributed Pool |
+                             +-----------------+
+```
+
+When local cache misses, HiCache automatically prefetches KV blocks from remote storage via RDMA.
+
+```bash
+# 1. Start Mooncake Store master
+mooncake_master --enable_http_metadata_server=true
+
+# 2. Launch SGLang with HiCache + Mooncake L3
+export MOONCAKE_MASTER=127.0.0.1:50051
+export MC_STORE_USE_HUGEPAGE="1"
+
+python -m sglang.launch_server \
+  --model-path Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+  --enable-hicache \
+  --hicache-l3-backend mooncake \
+  --tp-size 4 \
+  --mem-fraction-static 0.6
+```
+
+**Related:**
+- [HiCache Quick Start](hicache-quick-start) — comprehensive setup including hugepage sizing
+- [HiCache Complete Guide](hicache-integration-v1) — prefetch strategies, tuning, and architecture deep dive
+
+::::{toctree}
 :maxdepth: 1
 :hidden:
 
 ../sglang-integration-v1
 hicache-quick-start
 hicache-integration-v1
-:::
+::::

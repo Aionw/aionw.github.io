@@ -58,7 +58,6 @@
     <link rel="icon" href="../../../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Mooncake x LMCache Integration" href="../lmcache-integration.html" />
     <link rel="prev" title="vLLM V0 Disaggregated Serving with MooncakeStore" href="vllm-integration-v0.3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,22 +174,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../build.html">Build Guide</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="disagg-prefill-decode.html">Disaggregated Prefill-Decode with MooncakeConnector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kv-cache-storage.html">KV Cache Storage &amp; Sharing with MooncakeStore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
-</ul>
-</details></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -205,10 +195,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -224,6 +216,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -474,7 +473,7 @@ document.write(`
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mooncake-transfer-engine
 </pre></div>
 </div>
-<p>Note: If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, you should uninstall this package by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build the binaries manually according to the <a class="reference internal" href="#../build.md"><span class="xref myst">instructions</span></a>.</p>
+<p>Note: If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, you should uninstall this package by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build the binaries manually according to the <a class="reference internal" href="../../build.html"><span class="std std-doc">instructions</span></a>.</p>
 </section>
 <section id="install-vllm">
 <h3>Install vLLM<a class="headerlink" href="#install-vllm" title="Link to this heading">#</a></h3>
@@ -591,7 +590,7 @@ vllm<span class="w"> </span>serve<span class="w"> </span>Qwen/Qwen2.5-7B-Instruc
 </section>
 <section id="performance">
 <h2>Performance<a class="headerlink" href="#performance" title="Link to this heading">#</a></h2>
-<p>For detailed performance benchmarks and results, see the <a class="reference internal" href="#../../performance/vllm-v1-support-benchmark.md"><span class="xref myst">vLLM Benchmark</span></a> documentation.</p>
+<p>For detailed performance benchmarks and results, see the <a class="reference internal" href="../../../performance/vllm-v1-support-benchmark.html"><span class="std std-doc">vLLM Benchmark</span></a> documentation.</p>
 </section>
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
@@ -637,15 +636,6 @@ vllm<span class="w"> </span>serve<span class="w"> </span>Qwen/Qwen2.5-7B-Instruc
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">vLLM V0 Disaggregated Serving with MooncakeStore</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="../lmcache-integration.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mooncake x LMCache Integration</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

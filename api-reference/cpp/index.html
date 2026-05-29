@@ -176,13 +176,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -197,10 +196,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -208,6 +209,7 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">C/C++ API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../design/transfer-engine/cpp-api.html">Transfer Engine C++ API Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../design/tent/cpp-api.html">TENT C++ API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mooncake-store.html">Mooncake Store C++ API Reference</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../http/index.html">HTTP</a></li>
@@ -220,6 +222,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -432,7 +441,7 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="../../design/tent/cpp-api.html"><span class="doc std std-doc">TENT C++ API</span></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">mooncake::tent::TransferEngine</span></code> — next-gen transfer engine with automatic transport selection and fault tolerance</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#../../design/mooncake-store#client-c-api"><span class="xref myst">Mooncake Store Client C++ API</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="mooncake-store.html"><span class="doc std std-doc">Mooncake Store Client C++ API</span></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">Client</span></code> class — <code class="docutils literal notranslate"><span class="pre">Put</span></code>/<code class="docutils literal notranslate"><span class="pre">Get</span></code>/<code class="docutils literal notranslate"><span class="pre">Remove</span></code>/<code class="docutils literal notranslate"><span class="pre">Replicate</span></code> operations, <code class="docutils literal notranslate"><span class="pre">BufferAllocatorBase</span></code> interface</p></td>
 </tr>
 </tbody>

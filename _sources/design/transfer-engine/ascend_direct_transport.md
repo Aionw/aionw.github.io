@@ -34,29 +34,12 @@ Complete command format is shown below:
 
 **Start target node:**
 ```shell
-./transfer_engine_ascend_direct_perf \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=127.0.0.1:12345 \
-    --operation=write \
-    --device_logicid=0 \
-    --mode=target \
-    --block_size=16384 \
-    --batch_size=32 \
-    --block_iteration=10
+./transfer_engine_ascend_direct_perf --metadata_server=P2PHANDSHAKE --local_server_name=127.0.0.1:12345 --operation=write --device_logicid=0 --mode=target --block_size=16384 --batch_size=32 --block_iteration=10
 ```
 
 **Start initiator node:**
 ```shell
-./transfer_engine_ascend_direct_perf \
-    --metadata_server=P2PHANDSHAKE \
-    --local_server_name=127.0.0.1:12346 \
-    --operation=write \
-    --device_logicid=1 \
-    --mode=initiator \
-    --block_size=16384 \
-    --batch_size=32 \
-    --block_iteration=10 \
-    --segment_id=127.0.0.1:real_port
+./transfer_engine_ascend_direct_perf --metadata_server=P2PHANDSHAKE --local_server_name=127.0.0.1:12346 --operation=write --device_logicid=1 --mode=initiator --block_size=16384 --batch_size=32 --block_iteration=10  --segment_id=127.0.0.1:real_port
 ```
 
 ### Environment Variables Configuration

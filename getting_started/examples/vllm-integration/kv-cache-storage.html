@@ -58,7 +58,7 @@
     <link rel="icon" href="../../../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Guide: vLLM MooncakeStoreConnector" href="vllm-mooncakestoreconnector.html" />
+    <link rel="next" title="Mooncake x LMCache Integration" href="../lmcache-integration.html" />
     <link rel="prev" title="Disaggregated Prefill-Decode with MooncakeConnector" href="disagg-prefill-decode.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -176,21 +176,16 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="disagg-prefill-decode.html">Disaggregated Prefill-Decode with MooncakeConnector</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">KV Cache Storage &amp; Sharing with MooncakeStore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -205,10 +200,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -224,6 +221,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -636,7 +640,7 @@ vllm<span class="w"> </span>serve<span class="w"> </span>meta-llama/Llama-3.1-8B
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, uninstall by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build manually according to the <a class="reference internal" href="#build.md"><span class="xref myst">instructions</span></a>.</p></li>
+<li><p>If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, uninstall by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build manually according to the <a class="reference internal" href="../../build.html"><span class="std std-doc">instructions</span></a>.</p></li>
 <li><p>For vLLM version ≤ v0.8.4, it requires <code class="docutils literal notranslate"><span class="pre">mooncake-transfer-engine</span> <span class="pre">≤</span> <span class="pre">0.3.3.post2</span></code>. The interface <code class="docutils literal notranslate"><span class="pre">mooncake_vllm_adaptor</span></code> has been deprecated in the latest release.</p></li>
 </ul>
 </div>
@@ -693,13 +697,20 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
 <section id="run-example">
 <h3>Run Example<a class="headerlink" href="#run-example" title="Link to this heading">#</a></h3>
 <p>Change the IP addresses and ports according to your environment. <code class="docutils literal notranslate"><span class="pre">VLLM_USE_V1=0</span></code> is required for vLLM V0 backend.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Start the etcd server</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Begin from root of your cloned repo!</span>
+
+<span class="c1"># 1. Start the etcd server</span>
 etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0.0.0.0:2379<span class="w"> </span>--advertise-client-urls<span class="w"> </span>http://localhost:2379
+<span class="c1"># You may need to terminate other etcd processes before running the above command</span>
 
 <span class="c1"># 2. Start the mooncake_master server</span>
 mooncake_master<span class="w"> </span>--port<span class="w"> </span><span class="m">50001</span>
+<span class="c1"># If some vllm instances exit unexpectedly, some connection metadata will be</span>
+<span class="c1"># corrupted since they are not properly cleaned. In that case, we recommend</span>
+<span class="c1"># you restart the mooncake_master before running another test.</span>
 
-<span class="c1"># 3. Run vLLM instances as kv_producer</span>
+<span class="c1"># 3. Run multiple vllm instances</span>
+<span class="c1"># kv_producer role</span>
 <span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--port<span class="w"> </span><span class="m">8100</span><span class="w"> </span><span class="se">\</span>
@@ -707,7 +718,6 @@ mooncake_master<span class="w"> </span>--port<span class="w"> </span><span class
 <span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_producer&quot;}&#39;</span>
 
-<span class="c1"># Add more producers as needed...</span>
 <span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--port<span class="w"> </span><span class="m">8101</span><span class="w"> </span><span class="se">\</span>
@@ -715,7 +725,21 @@ mooncake_master<span class="w"> </span>--port<span class="w"> </span><span class
 <span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_producer&quot;}&#39;</span>
 
-<span class="c1"># 4. Run vLLM instances as kv_consumer</span>
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8102</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_producer&quot;}&#39;</span>
+
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8103</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_producer&quot;}&#39;</span>
+
+<span class="c1"># kv_consumer role</span>
 <span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--port<span class="w"> </span><span class="m">8200</span><span class="w"> </span><span class="se">\</span>
@@ -723,7 +747,41 @@ mooncake_master<span class="w"> </span>--port<span class="w"> </span><span class
 <span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_consumer&quot;}&#39;</span>
 
-<span class="c1"># 5. Start the proxy server</span>
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8201</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_consumer&quot;}&#39;</span>
+
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">6</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8202</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_consumer&quot;}&#39;</span>
+
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">7</span><span class="w"> </span><span class="nv">MOONCAKE_CONFIG_PATH</span><span class="o">=</span>./mooncake.json<span class="w"> </span><span class="nv">VLLM_USE_V1</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>vllm.entrypoints.openai.api_server<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8203</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-model-len<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{&quot;kv_connector&quot;:&quot;MooncakeStoreConnector&quot;,&quot;kv_role&quot;:&quot;kv_consumer&quot;}&#39;</span>
+</pre></div>
+</div>
+<p><strong>Key parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MOONCAKE_CONFIG_PATH</span></code>: Path to the mooncake.json configuration file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VLLM_USE_MODELSCOPE</span></code>: Optional. Remove if you have HuggingFace access.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VLLM_USE_V1=0</span></code>: Required since the disaggregated feature is currently only supported on V0 vLLM. You can also <code class="docutils literal notranslate"><span class="pre">export</span></code> this configuration to the env instead of putting it in front of every command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--model</span></code>: The model to use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--port</span></code>: The vllm service port on which to listen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--max-model-len</span></code>: The maximum length of the model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--tensor-parallel-size</span></code> / <code class="docutils literal notranslate"><span class="pre">-tp</span></code>: Supported. All instances should have the same tensor_parallel_size. If running prefill and decode on the same node, set different <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES=0,1</span></code> for prefill and <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES=2,3</span></code> for decode).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--kv-transfer-config</span></code>: Set <code class="docutils literal notranslate"><span class="pre">kv_connector</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeStoreConnector&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">kv_role</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;kv_producer&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;kv_consumer&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;kv_both&quot;</span></code>.</p></li>
+<li><p>If some vLLM instances exit unexpectedly, connection metadata may be corrupted. Restart <code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code> before another test.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Start the proxy server</span>
 <span class="nb">cd</span><span class="w"> </span>vllm
 python3<span class="w"> </span>examples/online_serving/disagg_examples/disagg_proxy_demo.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
@@ -732,17 +790,18 @@ python3<span class="w"> </span>examples/online_serving/disagg_examples/disagg_pr
 <span class="w">    </span>--port<span class="w"> </span><span class="m">8000</span>
 </pre></div>
 </div>
-<p><strong>Key parameters:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--kv-transfer-config</span></code>: Set <code class="docutils literal notranslate"><span class="pre">kv_connector</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeStoreConnector&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">kv_role</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;kv_producer&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;kv_consumer&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;kv_both&quot;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--tensor-parallel-size</span></code> / <code class="docutils literal notranslate"><span class="pre">-tp</span></code>: Supported. All instances should have the same TP size. Use different <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> for instances on the same node.</p></li>
-<li><p>If some vLLM instances exit unexpectedly, connection metadata may be corrupted. Restart <code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code> before another test.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--model</span></code>: The model and tokenizer used by the proxy server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--port</span></code>: The proxy server port on which to listen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--prefill</span></code> / <code class="docutils literal notranslate"><span class="pre">-p</span></code>: IP and port of the vllm prefill instances.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--decode</span></code> / <code class="docutils literal notranslate"><span class="pre">-d</span></code>: IP and port of the vllm decode instances.</p></li>
 </ul>
 <section id="dynamic-xpyd-adjustment">
 <h4>Dynamic XpYd Adjustment<a class="headerlink" href="#dynamic-xpyd-adjustment" title="Link to this heading">#</a></h4>
 <p>To dynamically adjust prefill and decode instances at runtime:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ADMIN_API_KEY</span><span class="o">=</span><span class="s2">&quot;xxxxxxxx&quot;</span>
 
+<span class="c1"># or add it before the command:</span>
 <span class="nv">ADMIN_API_KEY</span><span class="o">=</span><span class="s2">&quot;xxxxxxxx&quot;</span><span class="w"> </span>python3<span class="w"> </span>vllm/examples/online_serving/disagg_examples/disagg_demo.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--model<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--prefill<span class="w"> </span>localhost:8100<span class="w"> </span>localhost:8101<span class="w"> </span><span class="se">\</span>
@@ -759,7 +818,17 @@ curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </spa
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/instances/add&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-Key: </span><span class="nv">$ADMIN_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;type&quot;: &quot;prefill&quot;, &quot;instance&quot;: &quot;localhost:8103&quot;}&#39;</span>
+
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/instances/add&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-Key: </span><span class="nv">$ADMIN_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;type&quot;: &quot;decode&quot;, &quot;instance&quot;: &quot;localhost:8202&quot;}&#39;</span>
+
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/instances/add&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-Key: </span><span class="nv">$ADMIN_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;type&quot;: &quot;decode&quot;, &quot;instance&quot;: &quot;localhost:8203&quot;}&#39;</span>
 
 <span class="c1"># Get proxy status</span>
 curl<span class="w"> </span>localhost:8000/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
@@ -769,6 +838,7 @@ curl<span class="w"> </span>localhost:8000/status<span class="w"> </span><span c
 <p class="admonition-title">Note</p>
 <p>Mooncake team provides this simple round-robin proxy as a demo. In production, you can implement custom global proxy strategies.</p>
 </div>
+<p><strong>Be sure to change the IP address in the commands.</strong></p>
 </section>
 </section>
 <section id="test">
@@ -782,6 +852,9 @@ curl<span class="w"> </span>localhost:8000/status<span class="w"> </span><span c
 <span class="s1">  }&#39;</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>If you are not testing on the proxy server, change <code class="docutils literal notranslate"><span class="pre">localhost</span></code> to the IP address of the proxy server.</p></li>
+</ul>
 </section>
 </section>
 <hr class="docutils" />
@@ -844,11 +917,11 @@ curl<span class="w"> </span>localhost:8000/status<span class="w"> </span><span c
       </div>
     </a>
     <a class="right-next"
-       href="vllm-mooncakestoreconnector.html"
+       href="../lmcache-integration.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Guide: vLLM MooncakeStoreConnector</p>
+        <p class="prev-next-title">Mooncake x LMCache Integration</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -176,13 +176,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -197,10 +196,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -216,6 +217,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -451,16 +459,18 @@ document.write(`
 </pre></div>
 </div>
 <p>📦 <strong>Package Details</strong>: <a class="reference external" href="https://pypi.org/project/mooncake-transfer-engine-non-cuda/">https://pypi.org/project/mooncake-transfer-engine-non-cuda/</a></p>
-<blockquote>
-<div><p><strong>Note</strong>: The CUDA version includes Mooncake-EP and GPU topology detection, requiring CUDA 12.1+. The non-CUDA version is for environments without CUDA dependencies.</p>
-<p><strong>Note on supported protocols</strong>: The pre-built PyPI wheels only bundle <strong>RDMA</strong> and <strong>TCP</strong> transports. Other transports such as NVMe-oF, CXL, NVLink, AWS EFA, and Ascend/NPU are not included and require <a class="reference internal" href="build.html"><span class="std std-doc">building from source</span></a>.</p>
-</div></blockquote>
+<div class="note admonition">
+<p class="admonition-title">CUDA Version &amp; Supported Protocols</p>
+<p>The CUDA version includes Mooncake-EP and GPU topology detection, requiring CUDA 12.1+. The non-CUDA version is for environments without CUDA dependencies.</p>
+<p>The pre-built PyPI wheels only bundle <strong>RDMA</strong> and <strong>TCP</strong> transports. Other transports such as NVMe-oF, CXL, NVLink, AWS EFA, and Ascend/NPU are not included and require <a class="reference internal" href="build.html"><span class="std std-doc">building from source</span></a>.</p>
+</div>
 </section>
 <section id="transfer-engine-quick-start">
 <h2>Transfer Engine Quick Start<a class="headerlink" href="#transfer-engine-quick-start" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>Note</strong>: When using RDMA protocol, you may need to run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for proper permissions.</p>
-</div></blockquote>
+<div class="admonition-rdma admonition">
+<p class="admonition-title">RDMA</p>
+<p>When using RDMA protocol, you may need to run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for proper permissions.</p>
+</div>
 <section id="start-transfer-engine-receiver-server">
 <h3>Start Transfer Engine Receiver (Server)<a class="headerlink" href="#start-transfer-engine-receiver-server" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>

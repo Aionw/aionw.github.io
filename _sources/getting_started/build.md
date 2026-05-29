@@ -87,7 +87,11 @@ This document describes how to build Mooncake.
     export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/cuda/lib64
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
     ```
-    > **Note:** Mooncake could use the DMA-BUF path for GPU-Direct RDMA, which does **not** require the `nvidia-peermem` kernel module. If you prefer the DMA-BUF path, please set the runtime environment variable `WITH_NVIDIA_PEERMEM=0` before starting Mooncake. If you prefer the legacy `ibv_reg_mr` path (which requires `nvidia-peermem`), set the runtime environment variable `WITH_NVIDIA_PEERMEM=1`. See Section 3.7 of https://docs.nvidia.com/cuda/gpudirect-rdma/ for instructions on installing `nvidia-peermem`.
+
+    ```{admonition} GPU-Direct RDMA
+    :class: note
+    Mooncake could use the DMA-BUF path for GPU-Direct RDMA, which does **not** require the `nvidia-peermem` kernel module. If you prefer the DMA-BUF path, please set the runtime environment variable `WITH_NVIDIA_PEERMEM=0` before starting Mooncake. If you prefer the legacy `ibv_reg_mr` path (which requires `nvidia-peermem`), set the runtime environment variable `WITH_NVIDIA_PEERMEM=1`. See Section 3.7 of https://docs.nvidia.com/cuda/gpudirect-rdma/ for instructions on installing `nvidia-peermem`.
+    ```
 
 3. If you want to compile the Moore Mthreads GPUDirect support module, first follow the instructions in https://docs.mthreads.com/musa-sdk/musa-sdk-doc-online/install_guide to install MUSA. After that:
     1) Install `mthreads-peermem` for enabling GPU-Direct RDMA
@@ -209,27 +213,16 @@ The following options can be used during `cmake ..` to specify whether to compil
 | `BUILD_SHARED_LIBS` | OFF | Build Transfer Engine as shared library |
 | `BUILD_UNIT_TESTS` | ON | Build unit tests |
 | `BUILD_EXAMPLES` | ON | Build examples |
-| `BUILD_BENCHMARK` | ON | Build benchmarks |
-| `ENABLE_ASAN` | OFF | Enable AddressSanitizer for memory error detection |
-| `ENABLE_SCCACHE` | OFF | Enable sccache for compilation caching |
 
 ### Component Build
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `WITH_TE` | ON | Build Mooncake Transfer Engine |
 | `WITH_STORE` | ON | Build Mooncake Store component |
-| `WITH_STORE_GO` | OFF | Build Go bindings for Mooncake Store |
 | `WITH_P2P_STORE` | OFF | Build P2P Store component, requires go 1.23+ |
-| `WITH_EP` | OFF | Build EP (Expert Parallelism) and PG Python extensions for CUDA. Requires CUDA toolkit and PyTorch |
-| | `EP_TORCH_VERSIONS` | — | PyTorch versions for EP/PG extensions, semicolon-separated (e.g. `"2.9.1;2.8.0"`). Empty means use currently-installed torch |
-| | `TORCH_CUDA_ARCH_LIST` | `8.0;9.0` | CUDA architecture list for EP/PG extension builds |
-| | `EP_USE_IDE` | OFF | Enable IDE-friendly indexing for EP code. Not for production builds |
+| `WITH_EP` | OFF | Build EP (Expert Parallelism) and PG Python extensions for CUDA. Requires CUDA toolkit and PyTorch. Use `EP_TORCH_VERSIONS="2.9.1"` (semicolon-separated) to build for specific PyTorch versions, or leave empty to use the currently-installed torch |
 | `WITH_RUST_EXAMPLE` | OFF | Build the Transfer Engine Rust interface and sample code |
 | `WITH_STORE_RUST` | ON | Build Mooncake Store Rust bindings |
-| `USE_NOF` | OFF | Build Mooncake Store with NoF SSD pool support |
-| `STORE_USE_JEMALLOC` | OFF | Use jemalloc in Mooncake Store master |
-| `STORE_USE_K8S_LEASE` | OFF | K8s Lease leader election for Mooncake Store. Mutually exclusive with `STORE_USE_ETCD` |
 
 ### GPU Backend Support
 
@@ -255,50 +248,23 @@ The following options can be used during `cmake ..` to specify whether to compil
 | | `NEUWARE_ROOT` | `/usr/local/neuware` | Neuware SDK root path |
 | | `MLU_INCLUDE_DIR` | — | Neuware include directory |
 | | `MLU_LIB_DIR` | — | Neuware library directory |
-| Huawei Ascend | `USE_ASCEND` | OFF | NPU support via HCCL transport |
-| | `USE_ASCEND_DIRECT` | OFF | NPU support via ADXL direct engine |
-| | `USE_UBSHMEM` | OFF | NPU support via shared memory transport |
-| | `USE_ASCEND_HETEROGENEOUS` | OFF | Heterogeneous data transfer between Ascend NPU and GPU |
 
 ### Transport Protocols
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `USE_TCP` | ON | TCP transport |
 | `USE_MNNVL` | OFF | Multi-Node NVLink transport. Requires `USE_CUDA=ON` unless using MUSA/HIP/MACA |
 | `USE_INTRA_NVLINK` | OFF | Intra-Node NVLink transport |
 | `USE_EFA` | OFF | AWS Elastic Fabric Adapter transport via libfabric. See [EFA Transport](../design/transfer-engine/efa_transport.md) |
 | `USE_CXL` | OFF | CXL transport |
-| `USE_NVMEOF` | OFF | NVMe over Fabric transport. Enables `USE_CUDA=ON` automatically |
-| `USE_UB` | OFF | UB protocol transport |
-| `USE_BAREX` | OFF | accel-barex transport |
-| `USE_MLX5DV` | OFF | Enable mlx5 direct verbs (libmlx5) for QP UDP source port override |
 
 ### Metadata Services
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `USE_HTTP` | ON | HTTP-based metadata service for Transfer Engine |
+| `USE_HTTP` | OFF | HTTP-based metadata service for Transfer Engine |
 | `USE_ETCD` | OFF | etcd-based metadata service for Transfer Engine, requires go 1.23+ |
-| `USE_ETCD_LEGACY` | OFF | etcd-based metadata service using etcd-cpp-api-v3 (deprecated) |
 | `USE_REDIS` | OFF | Redis-based metadata service for Transfer Engine, requires hiredis |
 | `STORE_USE_ETCD` | OFF | etcd-based failover for Mooncake Store, requires go 1.23+. Independent from `USE_ETCD` |
 | `STORE_USE_REDIS` | OFF | Redis-based failover for Mooncake Store, requires hiredis. Independent from `USE_REDIS` |
-
-### TENT
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `USE_TENT` | OFF | Build Mooncake TENT component |
-| `TENT_METRICS_ENABLED` | OFF | Enable TENT metrics collection |
-
-### Advanced Features
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `WITH_METRICS` | ON | Enable metrics collection and reporting thread |
-| `ENABLE_MULTI_PROTOCOL` | OFF | Enable multi-protocol support in Transfer Engine |
-| `USE_EVENT_DRIVEN_COMPLETION` | OFF | Enable event-driven completion (store & transfer engine) |
-| `USE_LRU_MASTER` | OFF | Enable LRU eviction in master service |
-| `USE_3FS` | OFF | Enable 3FS storage backend for Mooncake Store |
 

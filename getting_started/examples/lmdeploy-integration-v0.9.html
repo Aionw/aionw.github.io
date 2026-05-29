@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Mooncake x LLMDeploy &#8212; Mooncake</title>
+    <title>Mooncake x LMDeploy Integration &#8212; Mooncake</title>
   
   
   
@@ -176,13 +176,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -197,10 +196,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -216,6 +217,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -401,7 +409,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mooncake x LLMDeploy</h1>
+    <h1>Mooncake x LMDeploy Integration</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,15 +419,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mooncake x LLMDeploy</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lmdeploy-disaggregated-serving-with-mooncaketransferengine">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-version-of-lmdeploy">Install the latest version of LMDeploy</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-lmdeploy-from-the-official-repo">1. Clone LMDeploy from the official repo</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build">2. Build</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-from-source">2.1 Build from source</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build">2. Build</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#build-from-source">2.1 Build from source</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -443,9 +451,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -456,11 +461,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mooncake-x-llmdeploy">
-<h1>Mooncake x LLMDeploy<a class="headerlink" href="#mooncake-x-llmdeploy" title="Link to this heading">#</a></h1>
-</section>
-<section id="lmdeploy-disaggregated-serving-with-mooncaketransferengine">
-<h1>LMDeploy Disaggregated Serving with MooncakeTransferEngine<a class="headerlink" href="#lmdeploy-disaggregated-serving-with-mooncaketransferengine" title="Link to this heading">#</a></h1>
+  <section id="mooncake-x-lmdeploy-integration">
+<h1>Mooncake x LMDeploy Integration<a class="headerlink" href="#mooncake-x-lmdeploy-integration" title="Link to this heading">#</a></h1>
+<p><strong>LMDeploy Disaggregated Serving with MooncakeTransferEngine</strong></p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This is the latest version of the MooncakeTransferEngine integration doc with the LMDeploy project based on <a class="reference external" href="https://github.com/InternLM/lmdeploy/pull/3304#issue-2940383503">PR 3304</a> and <a class="reference external" href="https://github.com/InternLM/lmdeploy/pull/3620">PR 3620</a> to support KVCache transfer for intra-node and inter-node disaggregated serving scenarios.</p>
@@ -475,7 +478,7 @@ document.write(`
 </div>
 <p>Note:</p>
 <ul class="simple">
-<li><p>If any <code class="docutils literal notranslate"><span class="pre">.so</span></code> file is missing, uninstall the pip package with <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build the binaries manually from source following the <a class="reference external" href="https://github.com/kvcache-ai/Mooncake/blob/main/doc/en/build.md">build instructions</a>.</p></li>
+<li><p>If any <code class="docutils literal notranslate"><span class="pre">.so</span></code> file is missing, uninstall the pip package with <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build the binaries manually from source following the <a class="reference internal" href="../build.html"><span class="std std-doc">build instructions</span></a>.</p></li>
 </ul>
 </section>
 <section id="install-the-latest-version-of-lmdeploy">
@@ -488,9 +491,8 @@ document.write(`
 </section>
 <section id="build">
 <h4>2. Build<a class="headerlink" href="#build" title="Link to this heading">#</a></h4>
-</section>
 <section id="build-from-source">
-<h4>2.1 Build from source<a class="headerlink" href="#build-from-source" title="Link to this heading">#</a></h4>
+<h5>2.1 Build from source<a class="headerlink" href="#build-from-source" title="Link to this heading">#</a></h5>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>LMDeploy
 pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
@@ -498,6 +500,7 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 <ul class="simple">
 <li><p>If you encounter any problems that you cannot solve, please refer to the <a class="reference external" href="https://lmdeploy.readthedocs.io/en/latest/get_started/installation.html">LMDeploy official installation guide</a>.</p></li>
 </ul>
+</section>
 </section>
 </section>
 </section>
@@ -683,15 +686,15 @@ lmdeploy<span class="w"> </span>serve<span class="w"> </span>api_server<span cla
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mooncake x LLMDeploy</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lmdeploy-disaggregated-serving-with-mooncaketransferengine">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-version-of-lmdeploy">Install the latest version of LMDeploy</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-lmdeploy-from-the-official-repo">1. Clone LMDeploy from the official repo</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build">2. Build</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-from-source">2.1 Build from source</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build">2. Build</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#build-from-source">2.1 Build from source</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -715,9 +718,6 @@ lmdeploy<span class="w"> </span>serve<span class="w"> </span>api_server<span cla
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

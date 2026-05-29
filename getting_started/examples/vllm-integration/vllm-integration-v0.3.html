@@ -175,22 +175,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../build.html">Build Guide</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="disagg-prefill-decode.html">Disaggregated Prefill-Decode with MooncakeConnector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kv-cache-storage.html">KV Cache Storage &amp; Sharing with MooncakeStore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
-</ul>
-</details></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LLMDeploy</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
@@ -205,10 +196,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../observability.html">Observability</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -224,6 +217,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
 </ul>
 
     </div>
@@ -488,7 +488,7 @@ document.write(`
 </div>
 <p>Note:</p>
 <ul class="simple">
-<li><p>If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, you should uninstall this package by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build the binaries manually according to the <a class="reference internal" href="#build.md"><span class="xref myst">instructions</span></a>.</p></li>
+<li><p>If you encounter problems such as missing <code class="docutils literal notranslate"><span class="pre">lib*.so</span></code>, you should uninstall this package by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">uninstall</span> <span class="pre">mooncake-transfer-engine</span></code>, and build the binaries manually according to the <a class="reference internal" href="../../build.html"><span class="std std-doc">instructions</span></a>.</p></li>
 <li><p>For vLLM version &lt;= v0.8.4, it requires mooncake-transfer-engine &lt;= 0.3.3.post2. In the latest release, interface <code class="docutils literal notranslate"><span class="pre">mooncake_vllm_adaptor</span></code> has been deprecated.</p></li>
 </ul>
 </section>
