@@ -228,13 +228,20 @@ Create a `mooncake.json` file:
 Change the IP addresses and ports according to your environment. `VLLM_USE_V1=0` is required for vLLM V0 backend.
 
 ```bash
+# Begin from root of your cloned repo!
+
 # 1. Start the etcd server
 etcd --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://localhost:2379
+# You may need to terminate other etcd processes before running the above command
 
 # 2. Start the mooncake_master server
 mooncake_master --port 50001
+# If some vllm instances exit unexpectedly, some connection metadata will be
+# corrupted since they are not properly cleaned. In that case, we recommend
+# you restart the mooncake_master before running another test.
 
-# 3. Run vLLM instances as kv_producer
+# 3. Run multiple vllm instances
+# kv_producer role
 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
     --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
     --port 8100 \
@@ -242,7 +249,6 @@ MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.o
     --gpu-memory-utilization 0.8 \
     --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_producer"}'
 
-# Add more producers as needed...
 CUDA_VISIBLE_DEVICES=1 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
     --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
     --port 8101 \
@@ -250,7 +256,21 @@ CUDA_VISIBLE_DEVICES=1 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python
     --gpu-memory-utilization 0.8 \
     --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_producer"}'
 
-# 4. Run vLLM instances as kv_consumer
+CUDA_VISIBLE_DEVICES=2 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+    --port 8102 \
+    --max-model-len 10000 \
+    --gpu-memory-utilization 0.8 \
+    --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_producer"}'
+
+CUDA_VISIBLE_DEVICES=3 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+    --port 8103 \
+    --max-model-len 10000 \
+    --gpu-memory-utilization 0.8 \
+    --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_producer"}'
+
+# kv_consumer role
 CUDA_VISIBLE_DEVICES=4 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
     --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
     --port 8200 \
@@ -258,6 +278,40 @@ CUDA_VISIBLE_DEVICES=4 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python
     --gpu-memory-utilization 0.8 \
     --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_consumer"}'
 
+CUDA_VISIBLE_DEVICES=5 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+    --port 8201 \
+    --max-model-len 10000 \
+    --gpu-memory-utilization 0.8 \
+    --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_consumer"}'
+
+CUDA_VISIBLE_DEVICES=6 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+    --port 8202 \
+    --max-model-len 10000 \
+    --gpu-memory-utilization 0.8 \
+    --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_consumer"}'
+
+CUDA_VISIBLE_DEVICES=7 MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_V1=0 python3 -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
+    --port 8203 \
+    --max-model-len 10000 \
+    --gpu-memory-utilization 0.8 \
+    --kv-transfer-config '{"kv_connector":"MooncakeStoreConnector","kv_role":"kv_consumer"}'
+```
+
+**Key parameters:**
+- `MOONCAKE_CONFIG_PATH`: Path to the mooncake.json configuration file.
+- `VLLM_USE_MODELSCOPE`: Optional. Remove if you have HuggingFace access.
+- `VLLM_USE_V1=0`: Required since the disaggregated feature is currently only supported on V0 vLLM. You can also `export` this configuration to the env instead of putting it in front of every command.
+- `--model`: The model to use.
+- `--port`: The vllm service port on which to listen.
+- `--max-model-len`: The maximum length of the model.
+- `--tensor-parallel-size` / `-tp`: Supported. All instances should have the same tensor_parallel_size. If running prefill and decode on the same node, set different `CUDA_VISIBLE_DEVICES` (e.g., `CUDA_VISIBLE_DEVICES=0,1` for prefill and `CUDA_VISIBLE_DEVICES=2,3` for decode).
+- `--kv-transfer-config`: Set `kv_connector` to `"MooncakeStoreConnector"`, `kv_role` to `"kv_producer"`, `"kv_consumer"`, or `"kv_both"`.
+- If some vLLM instances exit unexpectedly, connection metadata may be corrupted. Restart `mooncake_master` before another test.
+
+```bash
 # 5. Start the proxy server
 cd vllm
 python3 examples/online_serving/disagg_examples/disagg_proxy_demo.py \
@@ -267,10 +321,10 @@ python3 examples/online_serving/disagg_examples/disagg_proxy_demo.py \
     --port 8000
 ```
 
-**Key parameters:**
-- `--kv-transfer-config`: Set `kv_connector` to `"MooncakeStoreConnector"`, `kv_role` to `"kv_producer"`, `"kv_consumer"`, or `"kv_both"`.
-- `--tensor-parallel-size` / `-tp`: Supported. All instances should have the same TP size. Use different `CUDA_VISIBLE_DEVICES` for instances on the same node.
-- If some vLLM instances exit unexpectedly, connection metadata may be corrupted. Restart `mooncake_master` before another test.
+- `--model`: The model and tokenizer used by the proxy server.
+- `--port`: The proxy server port on which to listen.
+- `--prefill` / `-p`: IP and port of the vllm prefill instances.
+- `--decode` / `-d`: IP and port of the vllm decode instances.
 
 #### Dynamic XpYd Adjustment
 
@@ -279,6 +333,7 @@ To dynamically adjust prefill and decode instances at runtime:
 ```bash
 export ADMIN_API_KEY="xxxxxxxx"
 
+# or add it before the command:
 ADMIN_API_KEY="xxxxxxxx" python3 vllm/examples/online_serving/disagg_examples/disagg_demo.py \
     --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4 \
     --prefill localhost:8100 localhost:8101 \
@@ -295,7 +350,17 @@ curl -X POST "http://localhost:8000/instances/add" \
 curl -X POST "http://localhost:8000/instances/add" \
   -H "Content-Type: application/json" \
   -H "X-API-Key: $ADMIN_API_KEY" \
+  -d '{"type": "prefill", "instance": "localhost:8103"}'
+
+curl -X POST "http://localhost:8000/instances/add" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: $ADMIN_API_KEY" \
   -d '{"type": "decode", "instance": "localhost:8202"}'
+
+curl -X POST "http://localhost:8000/instances/add" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: $ADMIN_API_KEY" \
+  -d '{"type": "decode", "instance": "localhost:8203"}'
 
 # Get proxy status
 curl localhost:8000/status | jq
@@ -304,6 +369,8 @@ curl localhost:8000/status | jq
 ```{note}
 Mooncake team provides this simple round-robin proxy as a demo. In production, you can implement custom global proxy strategies.
 ```
+
+**Be sure to change the IP address in the commands.**
 
 ### Test
 
@@ -316,6 +383,8 @@ curl -s http://localhost:8000/v1/completions \
     "max_tokens": 1000
   }'
 ```
+
+- If you are not testing on the proxy server, change `localhost` to the IP address of the proxy server.
 
 ---
 

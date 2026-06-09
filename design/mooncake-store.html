@@ -171,40 +171,38 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Mooncake Store</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="ssd-offload.html">SSD Offload Design</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -431,7 +429,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-information-maintenance">Object Information Maintenance</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-allocator">Buffer Allocator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-allocator">Buffer Allocator</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-local-buffer-and-python-bufferpool">Client Local Buffer and Python BufferPool</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allocationstrategy">AllocationStrategy</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apis">APIs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allocation-strategies">Allocation Strategies</a><ul class="visible nav section-nav flex-column">
@@ -958,6 +959,7 @@ path.</p>
 <p>Importantly, the memory managed by the buffer allocator does not reside within the <code class="docutils literal notranslate"><span class="pre">Master</span> <span class="pre">Service</span></code> itself. Instead, it operates on memory segments registered by <code class="docutils literal notranslate"><span class="pre">Clients</span></code>. When the <code class="docutils literal notranslate"><span class="pre">Master</span> <span class="pre">Service</span></code> receives a <code class="docutils literal notranslate"><span class="pre">MountSegment</span></code> request to register a contiguous memory region, it creates a corresponding buffer allocator via the <code class="docutils literal notranslate"><span class="pre">AddSegment</span></code> interface.</p>
 <p>Mooncake Store provides two concrete implementations of <code class="docutils literal notranslate"><span class="pre">BufferAllocatorBase</span></code>:</p>
 <p><strong>OffsetBufferAllocator (default and recommended)</strong>: This allocator is derived from <a class="reference external" href="https://github.com/sebbbi/OffsetAllocator">OffsetAllocator</a>, which uses a custom bin-based allocation strategy that supports fast hard realtime <code class="docutils literal notranslate"><span class="pre">O(1)</span></code> offset allocation with minimal fragmentation. Mooncake Store optimizes this allocator based on the specific memory usage characteristics of LLM inference workloads, thereby enhancing memory utilization in LLM scenarios.</p>
+<p>For measured utilization and allocation latency across LLM-style workloads, see <a class="reference internal" href="../performance/allocator-benchmark-result.html"><span class="std std-doc">Allocator Performance</span></a>.</p>
 <p><strong>CachelibBufferAllocator (deprecated)</strong>: This allocator leverages Facebook’s <a class="reference external" href="https://github.com/facebook/CacheLib">CacheLib</a> to manage memory using a slab-based allocation strategy. It provides efficient memory allocation with good fragmentation resistance and is well-suited for high-performance scenarios. However, in our modified version, it does not handle workloads with highly variable object sizes effectively, so it is currently marked as deprecated.</p>
 <p>Users can choose the allocator that best matches their performance and memory usage requirements through the <code class="docutils literal notranslate"><span class="pre">--memory-allocator</span></code> startup parameter of <code class="docutils literal notranslate"><span class="pre">master_service</span></code>.</p>
 <p>Both allocators implement the same interface as <code class="docutils literal notranslate"><span class="pre">BufferAllocatorBase</span></code>. The main interfaces of the <code class="docutils literal notranslate"><span class="pre">BufferAllocatorBase</span></code> class are as follows:</p>
@@ -973,6 +975,12 @@ path.</p>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">allocate</span></code> Function</strong>: When the upstream issues read or write requests, it needs a memory region to operate on. The <code class="docutils literal notranslate"><span class="pre">allocate</span></code> function invokes the internal allocator to reserve a memory block and returns metadata such as the starting address and size. The status of the newly allocated memory is initialized as <code class="docutils literal notranslate"><span class="pre">BufStatus::INIT</span></code>.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">deallocate</span></code> Function</strong>: This function is automatically triggered by the <code class="docutils literal notranslate"><span class="pre">BufHandle</span></code> destructor. It calls the internal allocator to release the associated memory and updates the handle’s status to <code class="docutils literal notranslate"><span class="pre">BufStatus::UNREGISTERED</span></code>.</p></li>
 </ol>
+<section id="client-local-buffer-and-python-bufferpool">
+<h3>Client Local Buffer and Python BufferPool<a class="headerlink" href="#client-local-buffer-and-python-bufferpool" title="Link to this heading">#</a></h3>
+<p>Each Store client can also create a setup-time local buffer through <code class="docutils literal notranslate"><span class="pre">local_buffer_size</span></code>. This memory is registered once with the Transfer Engine and managed by <code class="docutils literal notranslate"><span class="pre">ClientBufferAllocator</span></code> for short-lived client-side staging work.</p>
+<p>The Python <code class="docutils literal notranslate"><span class="pre">BufferPool</span></code> reuses this existing local buffer instead of allocating a second registered arena. A pool lease is a sub-allocation from <code class="docutils literal notranslate"><span class="pre">client_buffer_allocator_</span></code>, so the common path avoids per-lease <code class="docutils literal notranslate"><span class="pre">register_buffer()</span></code> and <code class="docutils literal notranslate"><span class="pre">unregister_buffer()</span></code> calls. The pool still keeps the Python-facing lease API, memoryview lifetime checks, blocking acquire semantics, and optional <code class="docutils literal notranslate"><span class="pre">max_regions</span></code> concurrency limiting.</p>
+<p>This is a soft-isolation policy: internal Store paths and external Python leases share the local registered buffer, allowing bursty external usage when memory is available rather than reserving a hard partition. If the local buffer is temporarily exhausted, <code class="docutils literal notranslate"><span class="pre">BufferPool</span></code> can allocate and register a short-lived overflow buffer so bursts do not immediately surface as upper-layer errors; that overflow region is unregistered as soon as the lease is released. If callers need to cap long-lived external pressure, they should use pool-level controls such as <code class="docutils literal notranslate"><span class="pre">max_regions</span></code>, <code class="docutils literal notranslate"><span class="pre">max_bytes</span></code>, or acquire timeouts.</p>
+</section>
 </section>
 <section id="allocationstrategy">
 <h2>AllocationStrategy<a class="headerlink" href="#allocationstrategy" title="Link to this heading">#</a></h2>
@@ -1054,6 +1062,7 @@ path.</p>
 <li><p>New segments are dynamically added at runtime and you need them to absorb load quickly. With <code class="docutils literal notranslate"><span class="pre">random</span></code>, convergence to a well-balanced state can be slow on large or dynamic clusters; <code class="docutils literal notranslate"><span class="pre">free_ratio_first</span></code> accelerates this by preferentially filling emptier segments, substantially increasing the likelihood that newly joined segments are selected for allocations (see details below).</p></li>
 </ul>
 <p><strong>Use <code class="docutils literal notranslate"><span class="pre">cxl</span></code></strong> only when your hardware includes CXL (Compute Express Link) memory devices and you want to allocate data exclusively on CXL segments.</p>
+<p>For benchmark data comparing <code class="docutils literal notranslate"><span class="pre">random</span></code> and <code class="docutils literal notranslate"><span class="pre">free_ratio_first</span></code> across segment counts, replica counts, and skewed capacities, see <a class="reference internal" href="../performance/allocation-strategy-benchmark-result.html"><span class="std std-doc">AllocationStrategy Performance</span></a>.</p>
 </section>
 <section id="strategy-details">
 <h4>Strategy Details<a class="headerlink" href="#strategy-details" title="Link to this heading">#</a></h4>
@@ -1481,7 +1490,10 @@ Available log levels: trace, debug, info, warn (or warning), error, and critical
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-information-maintenance">Object Information Maintenance</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-allocator">Buffer Allocator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-allocator">Buffer Allocator</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-local-buffer-and-python-bufferpool">Client Local Buffer and Python BufferPool</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allocationstrategy">AllocationStrategy</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apis">APIs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allocation-strategies">Allocation Strategies</a><ul class="visible nav section-nav flex-column">

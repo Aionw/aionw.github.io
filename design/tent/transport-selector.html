@@ -171,28 +171,32 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">TENT: Transfer Engine NEXT</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">TENT Metrics System</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TENT Transport Selector</a></li>
@@ -201,14 +205,8 @@
 <li class="toctree-l2"><a class="reference internal" href="failover.html">TENT Failover</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -440,6 +438,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fallback-with-transport-index">Fallback with <code class="docutils literal notranslate"><span class="pre">transport_index</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-request-override-transport-hint">Per-request override (<code class="docutils literal notranslate"><span class="pre">transport_hint</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semantics">Semantics</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-behavior">Default Behavior</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-example">Complete Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unified-priority-system">Unified Priority System</a></li>
@@ -627,6 +629,27 @@ document.write(`
 </div>
 </section>
 </section>
+<section id="per-request-override-transport-hint">
+<h2>Per-request override (<code class="docutils literal notranslate"><span class="pre">transport_hint</span></code>)<a class="headerlink" href="#per-request-override-transport-hint" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Request::transport_hint</span></code> lets a caller bypass the policy lookup for one request at a time. It’s the per-request analogue of <code class="docutils literal notranslate"><span class="pre">transport_index</span></code> and sits on top of the configured policies, so callers can keep the global policy config as the default while still pinning specific requests.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Request</span><span class="w"> </span><span class="n">r</span><span class="p">{};</span>
+<span class="n">r</span><span class="p">.</span><span class="n">opcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Request</span><span class="o">::</span><span class="n">WRITE</span><span class="p">;</span>
+<span class="n">r</span><span class="p">.</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local_ptr</span><span class="p">;</span>
+<span class="n">r</span><span class="p">.</span><span class="n">target_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seg</span><span class="p">;</span>
+<span class="n">r</span><span class="p">.</span><span class="n">target_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">r</span><span class="p">.</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4096</span><span class="p">;</span>
+<span class="n">r</span><span class="p">.</span><span class="n">transport_hint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TransportType</span><span class="o">::</span><span class="n">TCP</span><span class="p">;</span><span class="w">   </span><span class="c1">// UNSPEC (default) defers to policy</span>
+<span class="n">engine</span><span class="p">.</span><span class="n">submitTransfer</span><span class="p">(</span><span class="n">batch_id</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">r</span><span class="p">});</span>
+</pre></div>
+</div>
+<section id="semantics">
+<h3>Semantics<a class="headerlink" href="#semantics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">UNSPEC</span></code> (default)</strong>: unchanged — <code class="docutils literal notranslate"><span class="pre">TransportSelector::select(...)</span></code> runs as documented above.</p></li>
+<li><p><strong>Pinned</strong>: the request’s first attempt uses the hinted transport. On failover (when enabled), the engine asks the selector for the next candidate <strong>with the hint excluded</strong>, so failover never loops back onto the transport that already failed.</p></li>
+</ul>
+</section>
+</section>
 <section id="default-behavior">
 <h2>Default Behavior<a class="headerlink" href="#default-behavior" title="Link to this heading">#</a></h2>
 <p>If no <code class="docutils literal notranslate"><span class="pre">policy</span></code> is configured, TENT falls back to original behavior:</p>
@@ -796,6 +819,10 @@ Worker scheduling (separate queues per priority)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#device-mask">Device Mask</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transport-fallback">Transport Fallback</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fallback-with-transport-index">Fallback with <code class="docutils literal notranslate"><span class="pre">transport_index</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-request-override-transport-hint">Per-request override (<code class="docutils literal notranslate"><span class="pre">transport_hint</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semantics">Semantics</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-behavior">Default Behavior</a></li>

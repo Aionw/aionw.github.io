@@ -58,8 +58,8 @@
     <link rel="icon" href="../../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="AWS EFA Transport for Mooncake" href="efa_transport.html" />
-    <link rel="prev" title="TENT Failover" href="../tent/failover.html" />
+    <link rel="next" title="Supported Communication Protocols" href="../../getting_started/supported-protocols.html" />
+    <link rel="prev" title="P2P Store" href="../p2p-store.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,47 +171,45 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Transfer Engine</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="efa_transport.html">AWS EFA Transport for Mooncake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ascend_direct_transport.html">Ascend Direct Transport</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ascend_transport.html">Ascend Transport</a></li>
 <li class="toctree-l2"><a class="reference internal" href="heterogeneous_ascend.html">Heterogeneous Ascend Transport</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kunpeng_ub_transport.html">Kunpeng UB Transport for Mooncake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sunrise_link_transport.html">Sunrise Link Transport</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer-engine-bench-tuning.html">Transfer Engine Benchmarking &amp; Tuning Guide</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -460,10 +458,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-runtime-options">Advanced Runtime Options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-api-reference">C++ API Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-protocols">Supported Protocols</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efa-transport-aws">EFA Transport (AWS)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ascend-transport-component">Ascend Transport Component</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sunrise-link-transport-component">Sunrise Link Transport Component</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-protocols">Supported Protocols</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-and-tuning-guide">Benchmark and Tuning Guide</a></li>
 </ul>
             </nav>
@@ -791,6 +789,7 @@ Value = {
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_WORKERS_PER_CTX</span></code> The number of asynchronous worker threads corresponding to each device instance</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_SLICE_SIZE</span></code> The segmentation granularity of user requests in Transfer Engine</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_RETRY_CNT</span></code> The maximum number of retries in Transfer Engine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_AUTO_GID_MAX_RETRIES</span></code> The maximum number of automatic local GID reprobe retries during classic RDMA handshake recovery. Default value 2. Set to 0 to disable automatic GID retry.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_LOG_LEVEL</span></code> This option can be set as <code class="docutils literal notranslate"><span class="pre">TRACE</span></code>/<code class="docutils literal notranslate"><span class="pre">INFO</span></code>/<code class="docutils literal notranslate"><span class="pre">WARNING</span></code>/<code class="docutils literal notranslate"><span class="pre">ERROR</span></code> (see <a class="reference external" href="https://github.com/google/glog/blob/master/docs/logging.md">glog doc</a>), and more detailed logs will be output during runtime</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_DISABLE_METACACHE</span></code> Disable local meta cache to prevent transfer failure due to dynamic memory registrations, which may downgrades the performance</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_LISTEN_BACKLOG</span></code> The backlog size of socket listening for handshaking, default value is 128</p></li>
@@ -811,12 +810,19 @@ Value = {
 <li><p><code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM</span></code> When set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">ON</span></code>, or <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, Mooncake uses <code class="docutils literal notranslate"><span class="pre">ibv_reg_mr()</span></code> directly for GPU memory registration (requires the <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> kernel module). By default (unset or <code class="docutils literal notranslate"><span class="pre">0</span></code>), Mooncake uses the DMA-BUF path which does not require <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_ENDPOINT_STORE_TYPE</span></code> Choose FIFO Endpoint Store (<code class="docutils literal notranslate"><span class="pre">FIFO</span></code>) or Sieve Endpoint Store (<code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>), default is <code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_TCP_ENABLE_CONNECTION_POOL</span></code> Enable TCP Connection Pool to avoid excessive sockets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TCP_SLICE_SIZE</span></code> The segmentation granularity (in bytes) of TCP transport for splitting large transfers into socket read/write operations. Corresponds to <code class="docutils literal notranslate"><span class="pre">MC_SLICE_SIZE</span></code> for RDMA. Default value 65536 (64KB).</p></li>
 </ul>
 </section>
 <section id="c-api-reference">
 <h2>C++ API Reference<a class="headerlink" href="#c-api-reference" title="Link to this heading">#</a></h2>
 <p>For the complete C++ API reference, see <a class="reference internal" href="../../api-reference/cpp/index.html"><span class="doc std std-doc">Transfer Engine C++ API</span></a>.</p>
+</section>
+<section id="supported-protocols">
+<h2>Supported Protocols<a class="headerlink" href="#supported-protocols" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
+</ul>
 </div>
 </section>
 <section id="efa-transport-aws">
@@ -846,14 +852,6 @@ Value = {
 </ul>
 </div>
 </section>
-<section id="supported-protocols">
-<h2>Supported Protocols<a class="headerlink" href="#supported-protocols" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
-</ul>
-</div>
-</section>
 <section id="benchmark-and-tuning-guide">
 <h2>Benchmark and Tuning Guide<a class="headerlink" href="#benchmark-and-tuning-guide" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
@@ -876,20 +874,20 @@ Value = {
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../tent/failover.html"
+       href="../p2p-store.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">TENT Failover</p>
+        <p class="prev-next-title">P2P Store</p>
       </div>
     </a>
     <a class="right-next"
-       href="efa_transport.html"
+       href="../../getting_started/supported-protocols.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">AWS EFA Transport for Mooncake</p>
+        <p class="prev-next-title">Supported Communication Protocols</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -940,10 +938,10 @@ Value = {
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-runtime-options">Advanced Runtime Options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-api-reference">C++ API Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-protocols">Supported Protocols</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efa-transport-aws">EFA Transport (AWS)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ascend-transport-component">Ascend Transport Component</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sunrise-link-transport-component">Sunrise Link Transport Component</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-protocols">Supported Protocols</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-and-tuning-guide">Benchmark and Tuning Guide</a></li>
 </ul>
   </nav></div>

@@ -1,47 +1,17 @@
-# Mooncake Store Deployment
+# Mooncake Store Deployment & Tunnig Guide
 
-This guide covers the architecture, minimal deployment, and operational tuning of Mooncake Store.
+This guide covers minimal deployment, and operational tuning of Mooncake Store.
 
 ## Architecture Overview
 
-Mooncake Store is a distributed KV cache engine for LLM inference. A deployment involves three node roles:
 
-```
-                            +--------------------+
-                            |   Master Service   |
-                            | (mooncake_master)  |
-                            | - Object alloc     |
-                            | - Eviction policy  |
-                            | - Node membership  |
-                            +--------+-----------+
-                                     |
-                           Control plane (RPC)
-                                     |
-         +---------------------------+---------------------------+
-         |                           |                           |
-+--------v--------+         +--------v--------+         +--------v--------+
-|   Client Node   |         |   Client Node   |         |   Client Node   |
-| (App + Embed)   |         | (App + Embed)   |         | (Standalone)    |
-|                 |         |                 |         |                 |
-|  DRAM/VRAM/SSD  |         |  DRAM/VRAM/SSD  |         |  DRAM/VRAM/SSD  |
-+--------+--------+         +--------+--------+         +--------+--------+
-         |                           |                           |
-         +---------------------------+---------------------------+
-                           Data plane (RDMA/TCP)
-                    Transfer Engine — zero-copy, multi-NIC
-                                    |
-                          +---------+---------+
-                          | Metadata Service  |
-                          | (etcd / Redis /   |
-                          |  HTTP)            |
-                          +-------------------+
-```
+![architecture](../image/mooncake-store-preview.png)
 
 **Master Service** (`mooncake_master`): The central coordinator. It manages cluster membership, allocates object storage across client nodes, and enforces eviction/placement policies. Runs as a standalone process.
 
 **Client Node**: Each node contributes DRAM (and optionally VRAM/SSD) to form the distributed cache pool. Clients communicate with the master over RPC for control operations (`Put`/`Get`/`Remove`), but transfer actual data directly between each other via the Transfer Engine — the master is never in the data path.
 
-**Metadata Service**: A separate service (etcd, Redis, or HTTP) used by the Transfer Engine for peer discovery and configuration. The master's embedded HTTP metadata server can replace an external etcd/Redis for simple deployments.
+**Metadata Service**: A separate service (etcd, Redis, or HTTP) used by the Transfer Engine for peer discovery and configuration. The master's embedded HTTP metadata server can replace an external etcd/Redis for simple deployments. We also provide a P2P handshake mechanism (`P2PHANDSHAKE`) that enables decentralized metadata management by storing metadata locally on each node, eliminating the need for a centralized service — this is the simplest metadata handshake method and the recommended starting point (see [Quick Start](#quick-start)).
 
 For a detailed design discussion, see the [Mooncake Store Design](../design/mooncake-store.md).
 
@@ -56,13 +26,22 @@ Deploy a minimal single-node Mooncake Store in three steps.
 Choose one option:
 
 ```bash
-# Option A: Embed HTTP metadata server in the master (simplest)
+# Option A: P2P handshake — the simplest metadata handshake method (recommended)
+# Nothing to start here. There is no metadata service to deploy: each node
+# exchanges and stores metadata locally during connection setup. Just set the
+# client's metadata_server to the literal string "P2PHANDSHAKE" (see step 3).
+
+# Option B: Embed HTTP metadata server in the master
 # (configured in step 2 via --enable_http_metadata_server)
 
-# Option B: External etcd
+# Option C: External etcd
 etcd --listen-client-urls http://0.0.0.0:2379 \
      --advertise-client-urls http://localhost:2379
 ```
+
+> **Tip:** P2P handshake is the easiest way to get started — it is decentralized
+> and requires no etcd/Redis/HTTP metadata service. Prefer it for development and
+> simple deployments; use an external etcd/Redis for large, long-lived clusters.
 
 ### 2. Start the Master Service
 
@@ -109,6 +88,30 @@ store.setup(
 python3 stress_cluster_benchmark.py
 ```
 
+To use **P2P handshake** instead of an HTTP/etcd metadata service, pass the
+literal string `P2PHANDSHAKE` as `metadata_server` — no other change is needed:
+
+```python
+store.setup(
+    local_hostname=os.getenv("LOCAL_HOSTNAME", "localhost"),
+    metadata_server="P2PHANDSHAKE",          # decentralized, no metadata service
+    global_segment_size=3200 * 1024 * 1024,
+    local_buffer_size=512 * 1024 * 1024,
+    protocol=os.getenv("PROTOCOL", "tcp"),
+    device_name=os.getenv("DEVICE_NAME", ""),
+    master_server_address=os.getenv("MASTER_SERVER", "127.0.0.1:50051"),
+)
+```
+
+The standalone store service accepts the same value:
+
+```bash
+python -m mooncake.mooncake_store_service \
+  --local_hostname=localhost \
+  --metadata_server=P2PHANDSHAKE \
+  --master_server=127.0.0.1:50051
+```
+
 **What just happened:**
 
 1. The client registered itself with the master via RPC.
@@ -153,23 +156,61 @@ Limitation: the master is a single point of failure. If it crashes, cluster oper
 
 ---
 
-### Single-Node (RDMA) — Production with RDMA Transport
+### High-Availability (etcd) — Production HA
 
-For production workloads, enable RDMA for both the control and data planes:
+Runs a cluster of master instances coordinated through etcd. If the leader fails, the remaining instances elect a new leader automatically.
 
 ```bash
-MC_RPC_PROTOCOL=rdma mooncake_master \
-  --enable_http_metadata_server=true \
-  --http_metadata_server_port=8080
+# Start each master instance with:
+mooncake_master \
+  --enable-ha=true \
+  --etcd-endpoints="10.0.0.1:2379;10.0.0.2:2379;10.0.0.3:2379" \
+  --rpc-address=10.0.0.1
 ```
 
-Clients must also set `MC_RPC_PROTOCOL=rdma` and pass valid `rdma_devices` to the Python `setup()` call. The same single-master limitation applies.
+Each instance must specify its own reachable `--rpc-address`. The etcd cluster used for HA can be shared with or separate from the Transfer Engine's metadata etcd.
+
+---
+
+### High-Availability (Redis) — Alternative HA Backend
+
+Same HA semantics but using Redis instead of etcd for leader election:
+
+```bash
+mooncake_master \
+  --enable-ha=true \
+  --ha_backend_type=redis \
+  --ha_backend_connstring="redis://127.0.0.1:6379" \
+  --rpc-address=10.0.0.1
+```
+
+
+---
+
+### Snapshot & Restore — Backup / Disaster Recovery
+
+```{caution}
+Metadata Snapshot And Restore is experimental feature.
+```
+
+Periodically persist master metadata to local disk or S3, enabling recovery from a recent snapshot after a crash.
+
+```bash
+export MOONCAKE_SNAPSHOT_LOCAL_PATH=/data/mooncake_snapshots
+
+mooncake_master \
+  --enable_snapshot=true \
+  --snapshot_interval_seconds=300 \
+  --snapshot_retention_count=5 \
+  --snapshot_object_store_type=local \
+  --enable_snapshot_restore=true
+```
 
 ---
 
 ### Tiered Storage with SSD Offload — Cost-Effective Capacity
 
-Extends the cache pool from DRAM to SSD. New objects land in DRAM; cold data is moved to SSD at eviction time; frequently re-accessed objects are promoted back to DRAM.
+Extends the cache pool from DRAM to SSD while keeping normal reads and writes on the distributed memory path. With `--enable_offload=true`, completed memory writes are queued for asynchronous SSD persistence through the master control plane. Set `--offload_on_evict=true` to defer that SSD write until the memory eviction path selects an object for reclamation. When `--promotion_on_hit=true`, SSD-only objects can be promoted back to DRAM after repeated reads; admission is gated by `--promotion_admission_threshold`.
 
 ```bash
 mooncake_master \
@@ -180,6 +221,20 @@ mooncake_master \
   --root_fs_dir=/mnt/ssd_cache \
   --enable_http_metadata_server=true \
   --http_metadata_server_port=8080
+```
+
+---
+
+### CXL-Aware Allocation — Memory Tiering
+
+When the host has CXL-attached memory, the master can preferentially allocate new objects on the CXL tier, reserving local DRAM for latency-sensitive operations.
+
+```bash
+mooncake_master \
+  --enable_cxl=true \
+  --cxl_path=/dev/dax0.0 \
+  --cxl_size=17179869184 \
+  --allocation_strategy=cxl
 ```
 
 ---
@@ -198,35 +253,8 @@ mooncake_master \
 
 The master resolves the current IPv4 address of `eth0` at startup and uses it as the advertised RPC address.
 
----
-
-### Snapshot & Restore — Backup / Disaster Recovery
-
-Periodically persist master metadata to local disk or S3, enabling recovery from a recent snapshot after a crash.
-
-```bash
-export MOONCAKE_SNAPSHOT_LOCAL_PATH=/data/mooncake_snapshots
-
-mooncake_master \
-  --enable_snapshot=true \
-  --snapshot_interval_seconds=300 \
-  --snapshot_retention_count=5 \
-  --snapshot_object_store_type=local \
-  --enable_snapshot_restore=true
-```
 
 ---
-
-### Client Modes
-
-Regardless of the master deployment mode, a client can operate in three modes:
-
-| Mode | Description |
-|------|-------------|
-| **Embedded** | Client runs inside the LLM inference process (e.g., vLLM) via shared library. Contributes memory when `global_segment_size > 0`. |
-| **Dummy-Real** | Per-rank dummy clients forward requests to one real client per inference instance. Zero-copy shared memory between ranks. |
-| **Standalone Service** | A dedicated `mooncake_store_service` process owns memory/SSD. Inference processes run as pure clients (`global_segment_size = 0`). |
-
 
 ## Metrics Endpoints
 
@@ -248,14 +276,18 @@ curl -s http://<master_host>:9003/metrics/summary
 - Start with default eviction settings; adjust `--eviction_high_watermark_ratio` and `--eviction_ratio` based on memory pressure and object churn.
 - Use `/metrics/summary` during bring-up; integrate `/metrics` with Prometheus/Grafana for production.
 - For detailed SSD offload configuration (storage backends, eviction policies, io_uring), see the [SSD Offload guide](ssd-offload).
+- For NVMe-oF SSD pool configuration see the [NVMe-oF SSD Pool Deployment Guide](nvmf-ssd-deployment-guide)
 - For experimental 3FS (USRBIO) integration as a persistent storage backend, see the [3FS USRBIO Plugin guide](../getting_started/plugin-usage/3FS-USRBIO-Plugin).
+- For detailed monitoring and observation see [Observability](../getting_started/observability)
 
 :::{toctree}
 :maxdepth: 1
 :hidden:
 
 ssd-offload
-../getting_started/plugin-usage/3FS-USRBIO-Plugin
+NvMe-Of SSD Pool<nvmf-ssd-deployment-guide>
+HF3FS Plugin (Experimental)<../getting_started/plugin-usage/3FS-USRBIO-Plugin>
+../getting_started/observability
 :::
 
 ---
@@ -272,6 +304,12 @@ ssd-offload
 | `--rpc_interface` | empty | Network interface to resolve RPC address at startup (overrides `--rpc_address`) |
 | `--rpc_conn_timeout_seconds` | `0` | Idle connection timeout; `0` disables |
 | `--rpc_enable_tcp_no_delay` | `true` | Enable TCP_NODELAY |
+
+### Logging
+
+The master uses glog. When `--log_dir` is set, all severities are merged into a single journal file in that directory (`mooncake_master.INFO.<date>-<time>.<pid>`), reachable through the stable `mooncake_master.INFO` symlink.
+
+glog's standard flags (`--log_dir`, `--max_log_size`, `--logtostderr`, ...) control the rest.
 
 ### Metrics
 
@@ -320,6 +358,7 @@ ssd-offload
 
 ### High Availability
 
+**Master Node High Availability**
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--enable_ha` | `false` | Enable HA mode |
@@ -327,6 +366,30 @@ ssd-offload
 | `--ha_backend_connstring` | empty | HA backend connection string |
 | `--etcd_endpoints` | empty | etcd endpoints, semicolon separated (when `--ha_backend_type=etcd`) |
 | `--cluster_id` | `mooncake_cluster` | Cluster ID for HA persistence |
+
+```{caution}
+Metadata Snapshot And Restore is experimental feature.
+```
+
+**Metadata Snapshot And Restore**
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--enable_snapshot` | `false` | Enable periodic metadata snapshot |
+| `--snapshot_interval_seconds` | `300` (5 min) | Interval between snapshots |
+| `--snapshot_child_timeout_seconds` | `3600` (1 hour) | Timeout per snapshot child process |
+| `--snapshot_retention_count` | `10` | Number of recent snapshots retained |
+| `--snapshot_object_store_type` | required | Object store: `local` or `s3` |
+| `--snapshot_catalog_store_type` | empty | Catalog store: `embedded` or `redis` |
+| `--snapshot_catalog_store_connstring` | empty | Catalog store connection string (required for `redis`) |
+| `--snapshot_backup_dir` | empty | Optional local backup directory |
+| `--enable_snapshot_restore` | `false` | Restore from latest snapshot at startup |
+
+**Environment variable:** `MOONCAKE_SNAPSHOT_LOCAL_PATH` (required when `--snapshot_object_store_type=local`) — persistent directory for local snapshots.
+
+```{warning}
+The snapshot storage path is a **managed directory** exclusively controlled by Mooncake. Old snapshots exceeding `--snapshot_retention_count` are automatically deleted. Use a dedicated directory to avoid data loss.
+```
 
 ### Task Manager
 
@@ -354,7 +417,7 @@ Flags for controlling data movement between DRAM and SSD.
 | `--quota_bytes` | `0` (90% of capacity) | Storage quota in bytes |
 | `--enable_disk_eviction` | `true` | Enable disk eviction |
 
-Start with `--enable_offload=true` to move cold data to SSD automatically. Add `--promotion_on_hit=true` to re-promote hot SSD data back to DRAM on access.
+Start with `--enable_offload=true` for eager asynchronous SSD persistence after `Put` completion. Add `--offload_on_evict=true` when you want SSD writes to happen only when memory pressure selects an object for eviction. Add `--promotion_on_hit=true` to allow hot SSD-only data to be promoted back to DRAM, and tune `--promotion_admission_threshold` to control how many observed reads are required before promotion is queued.
 
 ### CXL Memory
 
@@ -365,26 +428,6 @@ Start with `--enable_offload=true` to move cold data to SSD automatically. Add `
 | `--cxl_size` | `8GB` (`8589934592`) | CXL memory size in bytes |
 
 When `--allocation_strategy=cxl` is set alongside `--enable_cxl=true`, the master preferentially allocates new objects on CXL memory.
-
-### Snapshot & Restore
-
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--enable_snapshot` | `false` | Enable periodic metadata snapshot |
-| `--snapshot_interval_seconds` | `300` (5 min) | Interval between snapshots |
-| `--snapshot_child_timeout_seconds` | `3600` (1 hour) | Timeout per snapshot child process |
-| `--snapshot_retention_count` | `10` | Number of recent snapshots retained |
-| `--snapshot_object_store_type` | required | Object store: `local` or `s3` |
-| `--snapshot_catalog_store_type` | empty | Catalog store: `embedded` or `redis` |
-| `--snapshot_catalog_store_connstring` | empty | Catalog store connection string (required for `redis`) |
-| `--snapshot_backup_dir` | empty | Optional local backup directory |
-| `--enable_snapshot_restore` | `false` | Restore from latest snapshot at startup |
-
-**Environment variable:** `MOONCAKE_SNAPSHOT_LOCAL_PATH` (required when `--snapshot_object_store_type=local`) — persistent directory for local snapshots.
-
-```{warning}
-The snapshot storage path is a **managed directory** exclusively controlled by Mooncake. Old snapshots exceeding `--snapshot_retention_count` are automatically deleted. Use a dedicated directory to avoid data loss.
-```
 
 ### DFS Storage
 
@@ -471,22 +514,6 @@ Local hot cache provides a DRAM read cache on top of SSD-resident objects for fa
 | `MC_MMAP_ARENA_POOL_SIZE` | unset | Pre-allocated arena pool size (e.g., `8gb`). Explicitly set to enable the arena |
 | `MC_DISABLE_MMAP_ARENA` | unset | Set `1` to disable arena, fall back to per-call `mmap()` |
 
-For HiCache-style deployments, pre-flight the host before reserving hugepages:
-
-```bash
-python3 scripts/check_hicache_hugepage_requirements.py \
-  --tp-size 4 \
-  --hicache-size 64gb \
-  --global-segment-size 8gb \
-  --arena-pool-size 56gb \
-  --available-hugetlb 512gb
-
-sudo sysctl -w vm.nr_hugepages=262144
-grep -E 'HugePages_Total|HugePages_Free|Hugepagesize' /proc/meminfo
-```
-
-The arena is disabled by default. Start with `8gb` or `16gb` and size upward using the helper script.
-
 ### yalantinglibs Log Level
 
 ```bash
@@ -494,4 +521,3 @@ export MC_YLT_LOG_LEVEL=info
 ```
 
 Available: `trace`, `debug`, `info`, `warn` (or `warning`), `error`, `critical`.
-

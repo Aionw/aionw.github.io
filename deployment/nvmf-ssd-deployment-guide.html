@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mooncake NVMe-oF SSD Pool Deployment Guide &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deployment/nvmf-ssd-deployment-guide';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mooncake HF3FS Plugin (Experimental)" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html" />
+    <link rel="prev" title="SSD Offload" href="ssd-offload.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ssd-offload.html">SSD Offload</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">NvMe-Of SSD Pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html">HF3FS Plugin (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/deployment/nvmf-ssd-deployment-guide.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/deployment/nvmf-ssd-deployment-guide.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mooncake NVMe-oF SSD Pool Deployment Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-mooncake-with-nof-support">1. Build Mooncake with NoF Support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-mooncake-services">2. Deploy Mooncake Services</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-topology">2.1 Node Topology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-master-service">2.2 Deploy the Master Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-metadata-service">2.3 Deploy the Metadata Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-store-service">2.4 Deploy the Store Service</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-store-service-json">Configure <code class="docutils literal notranslate"><span class="pre">store_service.json</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-service">Start the Service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-nvme-of-ssd-pool">3. Deploy the NVMe-oF SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">3.1 Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-ssh-dependencies">3.2 Install SSH Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-ssd-pool">3.3 Deploy the SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-command">Deployment Command</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transport-options">Transport Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-nvme-of-ssd-pool">4. Register the NVMe-oF SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-all-ssds">4.1 Register All SSDs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-the-nvme-of-ssd-pool">5. Unregister the NVMe-oF SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-a-specific-ssd">5.1 Unregister a Specific SSD</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-target-disk-information">5.2 Get Target Disk Information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-tests">6. Performance Tests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-built-in-benchmark-tool">6.1 Use the Built-in Benchmark Tool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-nof-with-vllm-lmcache">6.2 Use NoF with vLLM + LMCache</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nof-environment-variables">NoF Environment Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nof-lmcache-configuration">NoF LMCache Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mooncake-nvme-of-ssd-pool-deployment-guide">
+<h1>Mooncake NVMe-oF SSD Pool Deployment Guide<a class="headerlink" href="#mooncake-nvme-of-ssd-pool-deployment-guide" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This guide shows how to attach an NVMe-oF SSD pool to Mooncake Store. The
+deployment has two main phases:</p>
+<ul class="simple">
+<li><p>Start Mooncake services built with NoF support enabled.</p></li>
+<li><p>Create SPDK NVMe-oF targets on SSD pool nodes and register their namespaces
+with the Mooncake master.</p></li>
+</ul>
+<p>After registration, the master reports the registered NVMe-oF namespaces as a
+remote SSD pool in its metrics, and clients can place NoF replicas through
+Mooncake Store.</p>
+</section>
+<section id="build-mooncake-with-nof-support">
+<h2>1. Build Mooncake with NoF Support<a class="headerlink" href="#build-mooncake-with-nof-support" title="Link to this heading">#</a></h2>
+<p>Follow the “Build with NVMe-oF SSD Pool” section in the
+<a class="reference internal" href="../getting_started/build.html"><span class="std std-doc">Build Guide</span></a> to install SPDK dependencies and
+build Mooncake with <code class="docutils literal notranslate"><span class="pre">-DUSE_NOF=ON</span></code>.</p>
+</section>
+<section id="deploy-mooncake-services">
+<h2>2. Deploy Mooncake Services<a class="headerlink" href="#deploy-mooncake-services" title="Link to this heading">#</a></h2>
+<section id="node-topology">
+<h3>2.1 Node Topology<a class="headerlink" href="#node-topology" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Mooncake service node</strong>: 192.168.65.81. This node runs the master, metadata, and store services.</p></li>
+<li><p><strong>SSD pool nodes</strong>: 192.168.65.56 and 192.168.65.57. These nodes provide SSD storage resources.</p></li>
+</ul>
+</section>
+<section id="deploy-the-master-service">
+<h3>2.2 Deploy the Master Service<a class="headerlink" href="#deploy-the-master-service" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span>--rpc_address<span class="o">=</span><span class="m">192</span>.168.65.81
+</pre></div>
+</div>
+</section>
+<section id="deploy-the-metadata-service">
+<h3>2.3 Deploy the Metadata Service<a class="headerlink" href="#deploy-the-metadata-service" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>mooncake.http_metadata_server<span class="w"> </span>--host<span class="o">=</span><span class="m">192</span>.168.65.81<span class="w"> </span>--port<span class="o">=</span><span class="m">8080</span>
+</pre></div>
+</div>
+<p>If an aiohttp-related error occurs during startup, install aiohttp:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>aiohttp
+</pre></div>
+</div>
+</section>
+<section id="deploy-the-store-service">
+<h3>2.4 Deploy the Store Service<a class="headerlink" href="#deploy-the-store-service" title="Link to this heading">#</a></h3>
+<section id="configure-store-service-json">
+<h4>Configure <code class="docutils literal notranslate"><span class="pre">store_service.json</span></code><a class="headerlink" href="#configure-store-service-json" title="Link to this heading">#</a></h4>
+<p>Create <code class="docutils literal notranslate"><span class="pre">store_service.json</span></code> under <code class="docutils literal notranslate"><span class="pre">/home</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;local_hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;metadata_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://192.168.65.81:8080/metadata&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;master_server_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.65.81:50051&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdma&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;device_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mlx5_0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;global_segment_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;50gb&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;local_buffer_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">device_name</span></code>: Run <code class="docutils literal notranslate"><span class="pre">ibv_devices</span></code> on node 192.168.65.81 to check the RDMA device name.</p></li>
+</ul>
+</section>
+<section id="start-the-service">
+<h4>Start the Service<a class="headerlink" href="#start-the-service" title="Link to this heading">#</a></h4>
+<p>The store service initializes the SPDK environment during startup. Configure hugepages on the store service node, 192.168.65.81:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="m">512</span><span class="w"> </span>&gt;<span class="w"> </span>/proc/sys/vm/nr_hugepages
+</pre></div>
+</div>
+<p>Only a small number of hugepages is required during startup. In most cases, 512 hugepages are sufficient.</p>
+<p>Start the store service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>mooncake.mooncake_store_service<span class="w"> </span>--config<span class="o">=</span>/home/store_service.json<span class="w"> </span>--port<span class="o">=</span><span class="m">8081</span>
+</pre></div>
+</div>
+<p>If a timeout error occurs during startup, check whether a proxy is configured on node 192.168.65.81. If a proxy is configured, unset the proxy configuration and try again.</p>
+</section>
+</section>
+</section>
+<section id="deploy-the-nvme-of-ssd-pool">
+<h2>3. Deploy the NVMe-oF SSD Pool<a class="headerlink" href="#deploy-the-nvme-of-ssd-pool" title="Link to this heading">#</a></h2>
+<section id="prerequisites">
+<h3>3.1 Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Configure passwordless SSH login from the Mooncake node, 192.168.65.81, to the SSD pool nodes, 192.168.65.56 and 192.168.65.57.
+See <a class="reference external" href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys">OpenSSH key-based authentication</a>.</p></li>
+<li><p>Build SPDK on each SSD pool node in advance.
+See <a class="reference external" href="https://github.com/spdk/spdk/blob/master/README.md#build">SPDK build instructions</a>.</p></li>
+</ol>
+</section>
+<section id="install-ssh-dependencies">
+<h3>3.2 Install SSH Dependencies<a class="headerlink" href="#install-ssh-dependencies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;paramiko&gt;=3.4.0&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="deploy-the-ssd-pool">
+<h3>3.3 Deploy the SSD Pool<a class="headerlink" href="#deploy-the-ssd-pool" title="Link to this heading">#</a></h3>
+<section id="deployment-command">
+<h4>Deployment Command<a class="headerlink" href="#deployment-command" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>mooncake.spdk_tgt_create<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--spdk_target_info<span class="o">=</span><span class="s2">&quot;ip:192.168.65.56 path:/home/spdk pci:0000:01:00.0,0000:02:00.0&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--spdk_target_info<span class="o">=</span><span class="s2">&quot;ip:192.168.65.57 path:/home/spdk&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--core-mask<span class="o">=</span>0xff<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--transport-type<span class="o">=</span>RDMA<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-queue-depth<span class="o">=</span><span class="m">128</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-io-qpairs-per-ctrlr<span class="o">=</span><span class="m">127</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-io-size<span class="o">=</span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--in-capsule-data-size<span class="o">=</span><span class="m">131072</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--io-unit-size<span class="o">=</span><span class="m">131072</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-aq-depth<span class="o">=</span><span class="m">128</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-shared-buffers<span class="o">=</span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--buf-cache-size<span class="o">=</span><span class="m">32</span>
+</pre></div>
+</div>
+</section>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ip</span></code></p></td>
+<td><p>IP address of the target node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">path</span></code></p></td>
+<td><p>SPDK installation path on the target node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pci</span></code></p></td>
+<td><p>PCI addresses of SSDs to register with the target. Use commas to separate multiple PCI addresses. If this field is omitted, SPDK-ready or unmounted NVMe devices on the target node are registered.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--core-mask</span></code></p></td>
+<td><p>CPU core mask used to start <code class="docutils literal notranslate"><span class="pre">nvmf_tgt</span></code> with <code class="docutils literal notranslate"><span class="pre">-m</span></code>. The default value is <code class="docutils literal notranslate"><span class="pre">0xff</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Tip</strong>: Run <code class="docutils literal notranslate"><span class="pre">/path/scripts/setup.sh</span> <span class="pre">status</span></code> on a target node to list available PCI addresses.</p>
+</section>
+<section id="transport-options">
+<h4>Transport Options<a class="headerlink" href="#transport-options" title="Link to this heading">#</a></h4>
+<p>The transport options are passed to the SPDK <code class="docutils literal notranslate"><span class="pre">nvmf_create_transport</span></code> RPC. If an option is not specified, the tool uses the default value listed below.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--transport-type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RDMA</span></code></p></td>
+<td><p>NVMe-oF transport type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--max-queue-depth</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
+<td><p>Maximum number of outstanding I/O operations per queue.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--max-io-qpairs-per-ctrlr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">127</span></code></p></td>
+<td><p>Maximum number of I/O queue pairs per controller.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--max-io-size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4096</span></code></p></td>
+<td><p>Maximum I/O size, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--in-capsule-data-size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">131072</span></code></p></td>
+<td><p>Maximum in-capsule data size, in bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--io-unit-size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">131072</span></code></p></td>
+<td><p>I/O unit size, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--max-aq-depth</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
+<td><p>Maximum number of admin commands per admin queue.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--num-shared-buffers</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4096</span></code></p></td>
+<td><p>Number of pooled data buffers available to the transport.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--buf-cache-size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code></p></td>
+<td><p>Number of shared buffers reserved for each poll group.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="register-the-nvme-of-ssd-pool">
+<h2>4. Register the NVMe-oF SSD Pool<a class="headerlink" href="#register-the-nvme-of-ssd-pool" title="Link to this heading">#</a></h2>
+<section id="register-all-ssds">
+<h3>4.1 Register All SSDs<a class="headerlink" href="#register-all-ssds" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>mooncake.mooncake_ssd_register<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master_server_address<span class="o">=</span><span class="m">192</span>.168.65.81:50051<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--spdk_target_info<span class="o">=</span><span class="s2">&quot;ip:192.168.65.56 path:/home/spdk&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--spdk_target_info<span class="o">=</span><span class="s2">&quot;ip:192.168.65.57 path:/root/spdk&quot;</span>
+</pre></div>
+</div>
+<section id="id1">
+<h4>Parameters<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--master_server_address</span></code></p></td>
+<td><p>IP address and port of the master service node. The default port is 50051.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--spdk_target_info</span></code></p></td>
+<td><p>Target node information, including <code class="docutils literal notranslate"><span class="pre">ip</span></code>, the node IP address, and <code class="docutils literal notranslate"><span class="pre">path</span></code>, the SPDK installation path.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--username</span></code></p></td>
+<td><p>SSH username used to connect to target nodes. The default value is <code class="docutils literal notranslate"><span class="pre">root</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--port</span></code></p></td>
+<td><p>SSH port used to connect to target nodes. The default value is <code class="docutils literal notranslate"><span class="pre">22</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--password</span></code></p></td>
+<td><p>SSH password used to connect to target nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--key-file</span></code></p></td>
+<td><p>SSH private key file used to connect to target nodes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="unregister-the-nvme-of-ssd-pool">
+<h2>5. Unregister the NVMe-oF SSD Pool<a class="headerlink" href="#unregister-the-nvme-of-ssd-pool" title="Link to this heading">#</a></h2>
+<section id="unregister-a-specific-ssd">
+<h3>5.1 Unregister a Specific SSD<a class="headerlink" href="#unregister-a-specific-ssd" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>mooncake.mooncake_ssd_unregister<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master_server_address<span class="o">=</span><span class="m">192</span>.168.65.81:50051<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--spdk_target_info<span class="o">=</span><span class="s2">&quot;ip:192.168.65.56 ns:1 nqn:nqn.2016-06.io.spdk:cnode1&quot;</span>
+</pre></div>
+</div>
+<section id="id2">
+<h4>Parameters<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--master_server_address</span></code></p></td>
+<td><p>IP address and port of the master service node. The default port is 50051.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--spdk_target_info</span></code></p></td>
+<td><p>Disk information to unregister, including <code class="docutils literal notranslate"><span class="pre">ip</span></code>, the node IP address, <code class="docutils literal notranslate"><span class="pre">ns</span></code>, the namespace ID, and <code class="docutils literal notranslate"><span class="pre">nqn</span></code>, the subsystem NQN.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--username</span></code></p></td>
+<td><p>SSH username used to connect to target nodes. The default value is <code class="docutils literal notranslate"><span class="pre">root</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--port</span></code></p></td>
+<td><p>SSH port used to connect to target nodes. The default value is <code class="docutils literal notranslate"><span class="pre">22</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--password</span></code></p></td>
+<td><p>SSH password used to connect to target nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--key-file</span></code></p></td>
+<td><p>SSH private key file used to connect to target nodes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="get-target-disk-information">
+<h3>5.2 Get Target Disk Information<a class="headerlink" href="#get-target-disk-information" title="Link to this heading">#</a></h3>
+<p>Enter the SPDK directory on the target node and run the following commands.</p>
+<ol class="arabic simple">
+<li><p>Show subsystem information, including NQN and namespace IDs:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/rpc.py<span class="w"> </span>nvmf_get_subsystems
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Show disk details, including block size and PCI address:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/rpc.py<span class="w"> </span>bdev_get_bdevs
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-tests">
+<h2>6. Performance Tests<a class="headerlink" href="#performance-tests" title="Link to this heading">#</a></h2>
+<section id="use-the-built-in-benchmark-tool">
+<h3>6.1 Use the Built-in Benchmark Tool<a class="headerlink" href="#use-the-built-in-benchmark-tool" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build/mooncake-store/benchmarks/nof_worker_pool_bench<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--endpoints<span class="o">=</span><span class="s1">&#39;traddr:192.168.65.56 trsvcid:4420 subnqn:nqn.2016-06.io.spdk:cnode1 trtype:RDMA adrfam:IPv4 ns:1, traddr:192.168.65.56 trsvcid:4420 subnqn:nqn.2016-06.io.spdk:cnode1 trtype:RDMA adrfam:IPv4 ns:2&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--op<span class="o">=</span><span class="nb">read</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--io_size<span class="o">=</span><span class="m">1048576</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--iodepth<span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--warmup_sec<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--duration_sec<span class="o">=</span><span class="m">30</span>
+</pre></div>
+</div>
+<section id="id3">
+<h4>Parameters<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--endpoints</span></code></p></td>
+<td><p>Disk information used for the test.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--op</span></code></p></td>
+<td><p>I/O operation type, either <code class="docutils literal notranslate"><span class="pre">read</span></code> or <code class="docutils literal notranslate"><span class="pre">write</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--io_size</span></code></p></td>
+<td><p>Block size in bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--iodepth</span></code></p></td>
+<td><p>Read/write queue depth.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--warmup_sec</span></code></p></td>
+<td><p>Warmup duration in seconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--duration_sec</span></code></p></td>
+<td><p>Test duration in seconds.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="use-nof-with-vllm-lmcache">
+<h3>6.2 Use NoF with vLLM + LMCache<a class="headerlink" href="#use-nof-with-vllm-lmcache" title="Link to this heading">#</a></h3>
+<p>For the general VLLM + LMCache + Mooncake deployment flow, see
+<a class="reference internal" href="../getting_started/examples/vllm-integration/vllmv1-lmcache-integration.html"><span class="std std-doc">vLLM V1 Disaggregated Serving with Mooncake Store and LMCache</span></a>.
+After the NVMe-oF SSD pool is registered with Mooncake, add the NoF-specific
+Mooncake configuration below.</p>
+<section id="nof-environment-variables">
+<h4>NoF Environment Variables<a class="headerlink" href="#nof-environment-variables" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LMCACHE_CONFIG_FILE</span><span class="o">=</span><span class="s2">&quot;/path/vllm-lmcache-mooncake-config.yaml&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MC_NOF_WORKERS</span><span class="o">=</span><span class="m">4</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MC_NOF_SUBMIT_CHUNK_BYTES</span><span class="o">=</span><span class="k">$((</span><span class="m">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="m">17</span><span class="k">))</span><span class="w">  </span><span class="c1"># 128KB</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MC_NOF_INFLIGHT_BYTES_LIMIT</span><span class="o">=</span><span class="k">$((</span><span class="m">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="m">25</span><span class="k">))</span><span class="w">  </span><span class="c1"># 32MB</span>
+</pre></div>
+</div>
+</section>
+<section id="nof-lmcache-configuration">
+<h4>NoF LMCache Configuration<a class="headerlink" href="#nof-lmcache-configuration" title="Link to this heading">#</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">chunk_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span>
+<span class="nt">remote_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mooncakestore://192.168.65.81:50051/&quot;</span>
+<span class="nt">remote_serde</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;naive&quot;</span>
+<span class="nt">local_cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">max_local_cpu_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="nt">enable_mooncake_nof_pool</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+
+<span class="nt">extra_config</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">local_hostname</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span>
+<span class="w">  </span><span class="nt">metadata_server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://192.168.65.81:8080/metadata&quot;</span>
+<span class="w">  </span><span class="nt">master_server_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;192.168.65.81:50051&quot;</span>
+<span class="w">  </span><span class="nt">global_segment_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">local_buffer_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1073741824</span>
+<span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rdma&quot;</span>
+<span class="w">  </span><span class="nt">device_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mlx5_0&quot;</span>
+</pre></div>
+</div>
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_mooncake_nof_pool=True</span></code> enables writing KV cache objects to the
+registered NoF pool.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">global_segment_size:</span> <span class="pre">0</span></code> means the inference process does not contribute a
+memory segment to the Mooncake cluster.</p></li>
+<li><p>Keep <code class="docutils literal notranslate"><span class="pre">local_buffer_size</span></code> non-zero because the client still needs local
+staging buffers for Mooncake transfers.</p></li>
+<li><p>The parameters in <code class="docutils literal notranslate"><span class="pre">extra_config</span></code> should use the same Mooncake master,
+metadata server, protocol, and RDMA device as the store service.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_NOF_WORKERS</span></code></p></td>
+<td><p>Number of worker threads used to process SPDK NoF I/O operations.</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_NOF_SUBMIT_CHUNK_BYTES</span></code></p></td>
+<td><p>Size of each I/O operation submitted to SPDK.</p></td>
+<td><p>128KB</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_NOF_INFLIGHT_BYTES_LIMIT</span></code></p></td>
+<td><p>Maximum number of in-flight I/O bytes allowed in the system.</p></td>
+<td><p>32MB</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These three parameters together provide QoS control for SPDK NoF I/O.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ssd-offload.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SSD Offload</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mooncake HF3FS Plugin (Experimental)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-mooncake-with-nof-support">1. Build Mooncake with NoF Support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-mooncake-services">2. Deploy Mooncake Services</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-topology">2.1 Node Topology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-master-service">2.2 Deploy the Master Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-metadata-service">2.3 Deploy the Metadata Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-store-service">2.4 Deploy the Store Service</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-store-service-json">Configure <code class="docutils literal notranslate"><span class="pre">store_service.json</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-service">Start the Service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-nvme-of-ssd-pool">3. Deploy the NVMe-oF SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">3.1 Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-ssh-dependencies">3.2 Install SSH Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-ssd-pool">3.3 Deploy the SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-command">Deployment Command</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transport-options">Transport Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-nvme-of-ssd-pool">4. Register the NVMe-oF SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-all-ssds">4.1 Register All SSDs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-the-nvme-of-ssd-pool">5. Unregister the NVMe-oF SSD Pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-a-specific-ssd">5.1 Unregister a Specific SSD</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-target-disk-information">5.2 Get Target Disk Information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-tests">6. Performance Tests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-built-in-benchmark-tool">6.1 Use the Built-in Benchmark Tool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-nof-with-vllm-lmcache">6.2 Use NoF with vLLM + LMCache</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nof-environment-variables">NoF Environment Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nof-lmcache-configuration">NoF LMCache Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

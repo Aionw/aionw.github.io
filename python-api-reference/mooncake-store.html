@@ -171,37 +171,35 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -453,6 +451,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-registration">Memory Registration</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#register-buffer">register_buffer()</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-buffer">unregister_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bufferpool-helper">BufferPool Helper</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-copy-operations">Zero-Copy Operations</a><ul class="visible nav section-nav flex-column">
@@ -845,7 +844,7 @@ It is designed for cases such as rollout / batch transfer where callers want to 
 <section id="memory-registration">
 <h3>Memory Registration<a class="headerlink" href="#memory-registration" title="Link to this heading">#</a></h3>
 <p>⚠️ <strong>Important</strong>: <code class="docutils literal notranslate"><span class="pre">register_buffer</span></code> is required for zero-copy RDMA operations. Without proper buffer registration, undefined behavior and memory corruption may occur.</p>
-<p>Zero-copy operations require registering memory buffers with the store:</p>
+<p>Zero-copy operations require registered memory buffers. For repeated reads and writes, prefer the Python <code class="docutils literal notranslate"><span class="pre">BufferPool</span></code> helper described below so leases come from the store’s setup-time local buffer instead of registering and unregistering memory for every operation.</p>
 <section id="register-buffer">
 <h4>register_buffer()<a class="headerlink" href="#register-buffer" title="Link to this heading">#</a></h4>
 <p>Register a memory buffer for direct RDMA access.</p>
@@ -876,6 +875,43 @@ It is designed for cases such as rollout / batch transfer where callers want to 
 </pre></div>
 </div>
 </details>
+</section>
+<section id="bufferpool-helper">
+<h4>BufferPool Helper<a class="headerlink" href="#bufferpool-helper" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">BufferPool</span></code> leases scratch buffers from the store’s setup-time local buffer for repeated zero-copy operations. It is useful when a caller repeatedly needs temporary memory, for example as the destination buffer for <code class="docutils literal notranslate"><span class="pre">get_into()</span></code> or <code class="docutils literal notranslate"><span class="pre">get_into_ranges()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake.buffer_pool</span><span class="w"> </span><span class="kn">import</span> <span class="n">BufferPool</span>
+
+<span class="n">pool</span> <span class="o">=</span> <span class="n">BufferPool</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pool</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">lease</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_into</span><span class="p">(</span><span class="s2">&quot;my_key&quot;</span><span class="p">,</span> <span class="n">lease</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">lease</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">lease</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+    <span class="c1"># Consume view directly, or wrap it with np.frombuffer(view, dtype=...).</span>
+    <span class="c1"># Copy only if the data must outlive the lease: data = bytes(view)</span>
+
+<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">acquire(size)</span></code> and <code class="docutils literal notranslate"><span class="pre">buffer(size)</span></code> return a lease object. A lease exposes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: the local-buffer address to pass to zero-copy APIs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: the requested logical size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: a Python <code class="docutils literal notranslate"><span class="pre">memoryview</span></code> over the logical requested size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">release()</span></code>: returns the local-buffer allocation to the store allocator.</p></li>
+</ul>
+<p>Behavior and lifecycle rules:</p>
+<ul class="simple">
+<li><p>Leases prefer the store local buffer shared with internal Store staging paths.</p></li>
+<li><p>If local-buffer allocation is temporarily exhausted, <code class="docutils literal notranslate"><span class="pre">BufferPool</span></code> can allocate and register a short-lived overflow buffer; the overflow buffer is unregistered when the lease is released.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_regions</span></code> can limit the number of concurrently active external leases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_bytes</span></code> bounds total active local-buffer and overflow leases; the default allows one local-buffer-sized overflow burst.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acquire(size,</span> <span class="pre">block=False)</span></code> raises when both local and overflow capacity are exhausted instead of waiting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acquire(size,</span> <span class="pre">timeout=...)</span></code> can wait for another lease to be released.</p></li>
+<li><p>Do not keep <code class="docutils literal notranslate"><span class="pre">lease.ptr</span></code> or a <code class="docutils literal notranslate"><span class="pre">memoryview</span></code> after releasing the lease.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">release()</span></code> fails while exported views are alive. Delete those views first, then release.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code> fails if leases are still active. Release all leases before closing the pool.</p></li>
+</ul>
+<p>Legacy code may still import <code class="docutils literal notranslate"><span class="pre">RegisteredBufferPool</span></code>, but new examples should prefer <code class="docutils literal notranslate"><span class="pre">mooncake.buffer_pool.BufferPool</span></code>.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -988,7 +1024,7 @@ from object <code class="docutils literal notranslate"><span class="pre">all_key
 <p>This lets one buffer gather interleaved fragments from multiple keys, and lets one key contribute multiple disjoint fragments to the same buffer in a single call.</p>
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">buffer_ptrs</span></code>: Memory addresses of pre-allocated destination buffers. Every buffer must be registered with <code class="docutils literal notranslate"><span class="pre">register_buffer()</span></code> before calling this API.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_ptrs</span></code>: Memory addresses of pre-allocated destination buffers. Each buffer must resolve to Store-managed registered memory, either from <code class="docutils literal notranslate"><span class="pre">BufferPool</span></code>/the setup-time local buffer or from an explicit <code class="docutils literal notranslate"><span class="pre">register_buffer()</span></code> call.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">all_keys</span></code>: For each buffer, the ordered list of source object keys to read from.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">all_dst_offsets</span></code>: For each buffer and key, the destination offsets of that key’s fragments.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">all_src_offsets</span></code>: For each buffer and key, the source offsets of that key’s fragments inside the object.</p></li>
@@ -1334,7 +1370,7 @@ If you only want part of an object, do not call <code class="docutils literal no
 </section>
 <section id="get-tensor-with-parallelism-into-batch-get-tensor-with-parallelism-into">
 <h3>get_tensor_with_parallelism_into() / batch_get_tensor_with_parallelism_into()<a class="headerlink" href="#get-tensor-with-parallelism-into-batch-get-tensor-with-parallelism-into" title="Link to this heading">#</a></h3>
-<p>Zero-copy unified read forms. The destination buffers must be registered with <code class="docutils literal notranslate"><span class="pre">register_buffer()</span></code> before calling them.</p>
+<p>Zero-copy unified read forms. The destination buffers must resolve to Store-managed registered memory, either from <code class="docutils literal notranslate"><span class="pre">BufferPool</span></code>/the setup-time local buffer or from an explicit <code class="docutils literal notranslate"><span class="pre">register_buffer()</span></code> call.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_tensor_with_parallelism_into</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -1393,11 +1429,11 @@ If you only want part of an object, do not call <code class="docutils literal no
 <li><p><code class="docutils literal notranslate"><span class="pre">upsert_tensor_with_parallelism_from(...)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">batch_upsert_tensor_with_parallelism_from(...)</span></code></p></li>
 </ul>
-<p>These APIs accept registered buffer pointers that contain serialized tensor objects in the current Mooncake tensor format:</p>
+<p>These APIs accept Store-managed registered buffer pointers that contain serialized tensor objects in the current Mooncake tensor format:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[TensorObjectHeader + layout metadata][tensor data]
 </pre></div>
 </div>
-<p>As with other zero-copy APIs, every source pointer must be registered with <code class="docutils literal notranslate"><span class="pre">register_buffer()</span></code> before use.</p>
+<p>As with other zero-copy APIs, every source pointer must resolve to Store-managed registered memory, either from <code class="docutils literal notranslate"><span class="pre">BufferPool</span></code>/the setup-time local buffer or from an explicit <code class="docutils literal notranslate"><span class="pre">register_buffer()</span></code> call.</p>
 </section>
 <section id="compatibility-wrappers">
 <h3>Compatibility wrappers<a class="headerlink" href="#compatibility-wrappers" title="Link to this heading">#</a></h3>
@@ -3186,7 +3222,7 @@ use layout <code class="docutils literal notranslate"><span class="pre">[TensorO
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">List[int]</span></code>: List of bytes read for each operation (positive = success, negative = error)</p></li>
 </ul>
-<p>⚠️ <strong>Buffer Registration Required</strong>: All buffers must be registered before batch zero-copy operations.</p>
+<p>⚠️ <strong>Store-managed Buffer Required</strong>: All buffers must resolve to Store-managed registered memory before batch zero-copy operations.</p>
 <p><strong>Example:</strong></p>
 <details>
 <summary>Click to expand: Batch zero-copy retrieval example</summary>
@@ -3258,7 +3294,7 @@ use layout <code class="docutils literal notranslate"><span class="pre">[TensorO
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">List[int]</span></code>: List of bytes read for each operation (positive = success, negative = error)</p></li>
 </ul>
-<p>⚠️ <strong>Buffer Registration Required</strong>: All buffers must be registered before batch zero-copy operations.</p>
+<p>⚠️ <strong>Store-managed Buffer Required</strong>: All buffers must resolve to Store-managed registered memory before batch zero-copy operations.</p>
 <p><strong>Example:</strong></p>
 <details>
 <summary>Click to expand: Batch zero-copy put and get for multiple buffers example</summary>
@@ -3489,6 +3525,7 @@ use layout <code class="docutils literal notranslate"><span class="pre">[TensorO
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-registration">Memory Registration</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#register-buffer">register_buffer()</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unregister-buffer">unregister_buffer()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bufferpool-helper">BufferPool Helper</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-copy-operations">Zero-Copy Operations</a><ul class="visible nav section-nav flex-column">

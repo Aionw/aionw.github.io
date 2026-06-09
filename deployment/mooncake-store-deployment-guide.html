@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Mooncake Store Deployment &#8212; Mooncake</title>
+    <title>Mooncake Store Deployment &amp; Tunnig Guide &#8212; Mooncake</title>
   
   
   
@@ -59,7 +59,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="SSD Offload" href="ssd-offload.html" />
-    <link rel="prev" title="Build Guide" href="../getting_started/build.html" />
+    <link rel="prev" title="Quick Start" href="../getting_started/quick-start.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,41 +171,41 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Mooncake Store Deployment</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Mooncake Store Deployment &amp; Tunnig Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="ssd-offload.html">SSD Offload</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html">Mooncake HF3FS Plugin (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvmf-ssd-deployment-guide.html">NvMe-Of SSD Pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html">HF3FS Plugin (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -413,7 +413,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mooncake Store Deployment</h1>
+    <h1>Mooncake Store Deployment & Tunnig Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -433,17 +433,19 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-scenarios">Deployment Scenarios</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-tcp-development-quick-evaluation">Single-Node (TCP) — Development / Quick Evaluation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-rdma-production-with-rdma-transport">Single-Node (RDMA) — Production with RDMA Transport</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-etcd-production-ha">High-Availability (etcd) — Production HA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-redis-alternative-ha-backend">High-Availability (Redis) — Alternative HA Backend</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore-backup-disaster-recovery">Snapshot &amp; Restore — Backup / Disaster Recovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-modes">Client Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-aware-allocation-memory-tiering">CXL-Aware Allocation — Memory Tiering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-tips">Quick Tips</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-master-startup-flags">Reference: Master Startup Flags</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rpc">RPC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server-embedded">HTTP Metadata Server (Embedded)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-allocator">Memory Allocator</a></li>
@@ -454,7 +456,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-manager">Task Manager</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offload-tiered-storage">Offload / Tiered Storage</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-memory">CXL Memory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore">Snapshot &amp; Restore</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-storage">DFS Storage</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-configuration-file">Master Configuration File</a></li>
 </ul>
@@ -481,45 +482,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mooncake-store-deployment">
-<h1>Mooncake Store Deployment<a class="headerlink" href="#mooncake-store-deployment" title="Link to this heading">#</a></h1>
-<p>This guide covers the architecture, minimal deployment, and operational tuning of Mooncake Store.</p>
+  <section id="mooncake-store-deployment-tunnig-guide">
+<h1>Mooncake Store Deployment &amp; Tunnig Guide<a class="headerlink" href="#mooncake-store-deployment-tunnig-guide" title="Link to this heading">#</a></h1>
+<p>This guide covers minimal deployment, and operational tuning of Mooncake Store.</p>
 <section id="architecture-overview">
 <h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Link to this heading">#</a></h2>
-<p>Mooncake Store is a distributed KV cache engine for LLM inference. A deployment involves three node roles:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                            +--------------------+
-                            |   Master Service   |
-                            | (mooncake_master)  |
-                            | - Object alloc     |
-                            | - Eviction policy  |
-                            | - Node membership  |
-                            +--------+-----------+
-                                     |
-                           Control plane (RPC)
-                                     |
-         +---------------------------+---------------------------+
-         |                           |                           |
-+--------v--------+         +--------v--------+         +--------v--------+
-|   Client Node   |         |   Client Node   |         |   Client Node   |
-| (App + Embed)   |         | (App + Embed)   |         | (Standalone)    |
-|                 |         |                 |         |                 |
-|  DRAM/VRAM/SSD  |         |  DRAM/VRAM/SSD  |         |  DRAM/VRAM/SSD  |
-+--------+--------+         +--------+--------+         +--------+--------+
-         |                           |                           |
-         +---------------------------+---------------------------+
-                           Data plane (RDMA/TCP)
-                    Transfer Engine — zero-copy, multi-NIC
-                                    |
-                          +---------+---------+
-                          | Metadata Service  |
-                          | (etcd / Redis /   |
-                          |  HTTP)            |
-                          +-------------------+
-</pre></div>
-</div>
+<p><img alt="architecture" src="../_images/mooncake-store-preview.png" /></p>
 <p><strong>Master Service</strong> (<code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code>): The central coordinator. It manages cluster membership, allocates object storage across client nodes, and enforces eviction/placement policies. Runs as a standalone process.</p>
 <p><strong>Client Node</strong>: Each node contributes DRAM (and optionally VRAM/SSD) to form the distributed cache pool. Clients communicate with the master over RPC for control operations (<code class="docutils literal notranslate"><span class="pre">Put</span></code>/<code class="docutils literal notranslate"><span class="pre">Get</span></code>/<code class="docutils literal notranslate"><span class="pre">Remove</span></code>), but transfer actual data directly between each other via the Transfer Engine — the master is never in the data path.</p>
-<p><strong>Metadata Service</strong>: A separate service (etcd, Redis, or HTTP) used by the Transfer Engine for peer discovery and configuration. The master’s embedded HTTP metadata server can replace an external etcd/Redis for simple deployments.</p>
+<p><strong>Metadata Service</strong>: A separate service (etcd, Redis, or HTTP) used by the Transfer Engine for peer discovery and configuration. The master’s embedded HTTP metadata server can replace an external etcd/Redis for simple deployments. We also provide a P2P handshake mechanism (<code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code>) that enables decentralized metadata management by storing metadata locally on each node, eliminating the need for a centralized service — this is the simplest metadata handshake method and the recommended starting point (see <a class="reference internal" href="#quick-start">Quick Start</a>).</p>
 <p>For a detailed design discussion, see the <a class="reference internal" href="../design/mooncake-store.html"><span class="std std-doc">Mooncake Store Design</span></a>.</p>
 </section>
 <hr class="docutils" />
@@ -529,14 +500,24 @@ document.write(`
 <section id="start-the-metadata-service">
 <h3>1. Start the Metadata Service<a class="headerlink" href="#start-the-metadata-service" title="Link to this heading">#</a></h3>
 <p>Choose one option:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Option A: Embed HTTP metadata server in the master (simplest)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Option A: P2P handshake — the simplest metadata handshake method (recommended)</span>
+<span class="c1"># Nothing to start here. There is no metadata service to deploy: each node</span>
+<span class="c1"># exchanges and stores metadata locally during connection setup. Just set the</span>
+<span class="c1"># client&#39;s metadata_server to the literal string &quot;P2PHANDSHAKE&quot; (see step 3).</span>
+
+<span class="c1"># Option B: Embed HTTP metadata server in the master</span>
 <span class="c1"># (configured in step 2 via --enable_http_metadata_server)</span>
 
-<span class="c1"># Option B: External etcd</span>
+<span class="c1"># Option C: External etcd</span>
 etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0.0.0.0:2379<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--advertise-client-urls<span class="w"> </span>http://localhost:2379
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Tip:</strong> P2P handshake is the easiest way to get started — it is decentralized
+and requires no etcd/Redis/HTTP metadata service. Prefer it for development and
+simple deployments; use an external etcd/Redis for large, long-lived clusters.</p>
+</div></blockquote>
 </section>
 <section id="start-the-master-service">
 <h3>2. Start the Master Service<a class="headerlink" href="#start-the-master-service" title="Link to this heading">#</a></h3>
@@ -575,6 +556,26 @@ etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>stress_cluster_benchmark.py
+</pre></div>
+</div>
+<p>To use <strong>P2P handshake</strong> instead of an HTTP/etcd metadata service, pass the
+literal string <code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code> as <code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> — no other change is needed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">store</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
+    <span class="n">local_hostname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;LOCAL_HOSTNAME&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost&quot;</span><span class="p">),</span>
+    <span class="n">metadata_server</span><span class="o">=</span><span class="s2">&quot;P2PHANDSHAKE&quot;</span><span class="p">,</span>          <span class="c1"># decentralized, no metadata service</span>
+    <span class="n">global_segment_size</span><span class="o">=</span><span class="mi">3200</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="n">local_buffer_size</span><span class="o">=</span><span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PROTOCOL&quot;</span><span class="p">,</span> <span class="s2">&quot;tcp&quot;</span><span class="p">),</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DEVICE_NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="n">master_server_address</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;MASTER_SERVER&quot;</span><span class="p">,</span> <span class="s2">&quot;127.0.0.1:50051&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The standalone store service accepts the same value:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>mooncake.mooncake_store_service<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--local_hostname<span class="o">=</span>localhost<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--master_server<span class="o">=</span><span class="m">127</span>.0.0.1:50051
 </pre></div>
 </div>
 <p><strong>What just happened:</strong></p>
@@ -617,20 +618,53 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9003/metr
 <p>Limitation: the master is a single point of failure. If it crashes, cluster operations pause until it is restored.</p>
 </section>
 <hr class="docutils" />
-<section id="single-node-rdma-production-with-rdma-transport">
-<h3>Single-Node (RDMA) — Production with RDMA Transport<a class="headerlink" href="#single-node-rdma-production-with-rdma-transport" title="Link to this heading">#</a></h3>
-<p>For production workloads, enable RDMA for both the control and data planes:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MC_RPC_PROTOCOL</span><span class="o">=</span>rdma<span class="w"> </span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
+<section id="high-availability-etcd-production-ha">
+<h3>High-Availability (etcd) — Production HA<a class="headerlink" href="#high-availability-etcd-production-ha" title="Link to this heading">#</a></h3>
+<p>Runs a cluster of master instances coordinated through etcd. If the leader fails, the remaining instances elect a new leader automatically.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start each master instance with:</span>
+mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable-ha<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--etcd-endpoints<span class="o">=</span><span class="s2">&quot;10.0.0.1:2379;10.0.0.2:2379;10.0.0.3:2379&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rpc-address<span class="o">=</span><span class="m">10</span>.0.0.1
 </pre></div>
 </div>
-<p>Clients must also set <code class="docutils literal notranslate"><span class="pre">MC_RPC_PROTOCOL=rdma</span></code> and pass valid <code class="docutils literal notranslate"><span class="pre">rdma_devices</span></code> to the Python <code class="docutils literal notranslate"><span class="pre">setup()</span></code> call. The same single-master limitation applies.</p>
+<p>Each instance must specify its own reachable <code class="docutils literal notranslate"><span class="pre">--rpc-address</span></code>. The etcd cluster used for HA can be shared with or separate from the Transfer Engine’s metadata etcd.</p>
+</section>
+<hr class="docutils" />
+<section id="high-availability-redis-alternative-ha-backend">
+<h3>High-Availability (Redis) — Alternative HA Backend<a class="headerlink" href="#high-availability-redis-alternative-ha-backend" title="Link to this heading">#</a></h3>
+<p>Same HA semantics but using Redis instead of etcd for leader election:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable-ha<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ha_backend_type<span class="o">=</span>redis<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ha_backend_connstring<span class="o">=</span><span class="s2">&quot;redis://127.0.0.1:6379&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rpc-address<span class="o">=</span><span class="m">10</span>.0.0.1
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="snapshot-restore-backup-disaster-recovery">
+<h3>Snapshot &amp; Restore — Backup / Disaster Recovery<a class="headerlink" href="#snapshot-restore-backup-disaster-recovery" title="Link to this heading">#</a></h3>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Metadata Snapshot And Restore is experimental feature.</p>
+</div>
+<p>Periodically persist master metadata to local disk or S3, enabling recovery from a recent snapshot after a crash.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_SNAPSHOT_LOCAL_PATH</span><span class="o">=</span>/data/mooncake_snapshots
+
+mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_snapshot<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--snapshot_interval_seconds<span class="o">=</span><span class="m">300</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--snapshot_retention_count<span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--snapshot_object_store_type<span class="o">=</span><span class="nb">local</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_snapshot_restore<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
 </section>
 <hr class="docutils" />
 <section id="tiered-storage-with-ssd-offload-cost-effective-capacity">
 <h3>Tiered Storage with SSD Offload — Cost-Effective Capacity<a class="headerlink" href="#tiered-storage-with-ssd-offload-cost-effective-capacity" title="Link to this heading">#</a></h3>
-<p>Extends the cache pool from DRAM to SSD. New objects land in DRAM; cold data is moved to SSD at eviction time; frequently re-accessed objects are promoted back to DRAM.</p>
+<p>Extends the cache pool from DRAM to SSD while keeping normal reads and writes on the distributed memory path. With <code class="docutils literal notranslate"><span class="pre">--enable_offload=true</span></code>, completed memory writes are queued for asynchronous SSD persistence through the master control plane. Set <code class="docutils literal notranslate"><span class="pre">--offload_on_evict=true</span></code> to defer that SSD write until the memory eviction path selects an object for reclamation. When <code class="docutils literal notranslate"><span class="pre">--promotion_on_hit=true</span></code>, SSD-only objects can be promoted back to DRAM after repeated reads; admission is gated by <code class="docutils literal notranslate"><span class="pre">--promotion_admission_threshold</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--enable_offload<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--offload_on_evict<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
@@ -639,6 +673,18 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9003/metr
 <span class="w">  </span>--root_fs_dir<span class="o">=</span>/mnt/ssd_cache<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cxl-aware-allocation-memory-tiering">
+<h3>CXL-Aware Allocation — Memory Tiering<a class="headerlink" href="#cxl-aware-allocation-memory-tiering" title="Link to this heading">#</a></h3>
+<p>When the host has CXL-attached memory, the master can preferentially allocate new objects on the CXL tier, reserving local DRAM for latency-sensitive operations.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_cxl<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cxl_path<span class="o">=</span>/dev/dax0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cxl_size<span class="o">=</span><span class="m">17179869184</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--allocation_strategy<span class="o">=</span>cxl
 </pre></div>
 </div>
 </section>
@@ -655,46 +701,8 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9003/metr
 </div>
 <p>The master resolves the current IPv4 address of <code class="docutils literal notranslate"><span class="pre">eth0</span></code> at startup and uses it as the advertised RPC address.</p>
 </section>
-<hr class="docutils" />
-<section id="snapshot-restore-backup-disaster-recovery">
-<h3>Snapshot &amp; Restore — Backup / Disaster Recovery<a class="headerlink" href="#snapshot-restore-backup-disaster-recovery" title="Link to this heading">#</a></h3>
-<p>Periodically persist master metadata to local disk or S3, enabling recovery from a recent snapshot after a crash.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_SNAPSHOT_LOCAL_PATH</span><span class="o">=</span>/data/mooncake_snapshots
-
-mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_snapshot<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--snapshot_interval_seconds<span class="o">=</span><span class="m">300</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--snapshot_retention_count<span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--snapshot_object_store_type<span class="o">=</span><span class="nb">local</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_snapshot_restore<span class="o">=</span><span class="nb">true</span>
-</pre></div>
-</div>
 </section>
 <hr class="docutils" />
-<section id="client-modes">
-<h3>Client Modes<a class="headerlink" href="#client-modes" title="Link to this heading">#</a></h3>
-<p>Regardless of the master deployment mode, a client can operate in three modes:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Mode</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Embedded</strong></p></td>
-<td><p>Client runs inside the LLM inference process (e.g., vLLM) via shared library. Contributes memory when <code class="docutils literal notranslate"><span class="pre">global_segment_size</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Dummy-Real</strong></p></td>
-<td><p>Per-rank dummy clients forward requests to one real client per inference instance. Zero-copy shared memory between ranks.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Standalone Service</strong></p></td>
-<td><p>A dedicated <code class="docutils literal notranslate"><span class="pre">mooncake_store_service</span></code> process owns memory/SSD. Inference processes run as pure clients (<code class="docutils literal notranslate"><span class="pre">global_segment_size</span> <span class="pre">=</span> <span class="pre">0</span></code>).</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-</section>
 <section id="metrics-endpoints">
 <h2>Metrics Endpoints<a class="headerlink" href="#metrics-endpoints" title="Link to this heading">#</a></h2>
 <p>The master exposes Prometheus-style metrics on <code class="docutils literal notranslate"><span class="pre">--metrics_port</span></code>:</p>
@@ -714,7 +722,9 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 <li><p>Start with default eviction settings; adjust <code class="docutils literal notranslate"><span class="pre">--eviction_high_watermark_ratio</span></code> and <code class="docutils literal notranslate"><span class="pre">--eviction_ratio</span></code> based on memory pressure and object churn.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">/metrics/summary</span></code> during bring-up; integrate <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> with Prometheus/Grafana for production.</p></li>
 <li><p>For detailed SSD offload configuration (storage backends, eviction policies, io_uring), see the <a class="reference internal" href="ssd-offload.html"><span class="doc std std-doc">SSD Offload guide</span></a>.</p></li>
+<li><p>For NVMe-oF SSD pool configuration see the <a class="reference internal" href="nvmf-ssd-deployment-guide.html"><span class="doc std std-doc">NVMe-oF SSD Pool Deployment Guide</span></a></p></li>
 <li><p>For experimental 3FS (USRBIO) integration as a persistent storage backend, see the <a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html"><span class="doc std std-doc">3FS USRBIO Plugin guide</span></a>.</p></li>
+<li><p>For detailed monitoring and observation see <a class="reference internal" href="../getting_started/observability.html"><span class="doc std std-doc">Observability</span></a></p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
@@ -759,6 +769,11 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 </tbody>
 </table>
 </div>
+</section>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading">#</a></h3>
+<p>The master uses glog. When <code class="docutils literal notranslate"><span class="pre">--log_dir</span></code> is set, all severities are merged into a single journal file in that directory (<code class="docutils literal notranslate"><span class="pre">mooncake_master.INFO.&lt;date&gt;-&lt;time&gt;.&lt;pid&gt;</span></code>), reachable through the stable <code class="docutils literal notranslate"><span class="pre">mooncake_master.INFO</span></code> symlink.</p>
+<p>glog’s standard flags (<code class="docutils literal notranslate"><span class="pre">--log_dir</span></code>, <code class="docutils literal notranslate"><span class="pre">--max_log_size</span></code>, <code class="docutils literal notranslate"><span class="pre">--logtostderr</span></code>, …) control the rest.</p>
 </section>
 <section id="metrics">
 <h3>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h3>
@@ -906,6 +921,7 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 </section>
 <section id="high-availability">
 <h3>High Availability<a class="headerlink" href="#high-availability" title="Link to this heading">#</a></h3>
+<p><strong>Master Node High Availability</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Flag</p></th>
@@ -936,6 +952,63 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 </tr>
 </tbody>
 </table>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Metadata Snapshot And Restore is experimental feature.</p>
+</div>
+<p><strong>Metadata Snapshot And Restore</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Flag</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Enable periodic metadata snapshot</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_interval_seconds</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code> (5 min)</p></td>
+<td><p>Interval between snapshots</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_child_timeout_seconds</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3600</span></code> (1 hour)</p></td>
+<td><p>Timeout per snapshot child process</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p>Number of recent snapshots retained</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type</span></code></p></td>
+<td><p>required</p></td>
+<td><p>Object store: <code class="docutils literal notranslate"><span class="pre">local</span></code> or <code class="docutils literal notranslate"><span class="pre">s3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_type</span></code></p></td>
+<td><p>empty</p></td>
+<td><p>Catalog store: <code class="docutils literal notranslate"><span class="pre">embedded</span></code> or <code class="docutils literal notranslate"><span class="pre">redis</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_connstring</span></code></p></td>
+<td><p>empty</p></td>
+<td><p>Catalog store connection string (required for <code class="docutils literal notranslate"><span class="pre">redis</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_backup_dir</span></code></p></td>
+<td><p>empty</p></td>
+<td><p>Optional local backup directory</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot_restore</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Restore from latest snapshot at startup</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Environment variable:</strong> <code class="docutils literal notranslate"><span class="pre">MOONCAKE_SNAPSHOT_LOCAL_PATH</span></code> (required when <code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type=local</span></code>) — persistent directory for local snapshots.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The snapshot storage path is a <strong>managed directory</strong> exclusively controlled by Mooncake. Old snapshots exceeding <code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code> are automatically deleted. Use a dedicated directory to avoid data loss.</p>
 </div>
 </section>
 <section id="task-manager">
@@ -1022,7 +1095,7 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 </tbody>
 </table>
 </div>
-<p>Start with <code class="docutils literal notranslate"><span class="pre">--enable_offload=true</span></code> to move cold data to SSD automatically. Add <code class="docutils literal notranslate"><span class="pre">--promotion_on_hit=true</span></code> to re-promote hot SSD data back to DRAM on access.</p>
+<p>Start with <code class="docutils literal notranslate"><span class="pre">--enable_offload=true</span></code> for eager asynchronous SSD persistence after <code class="docutils literal notranslate"><span class="pre">Put</span></code> completion. Add <code class="docutils literal notranslate"><span class="pre">--offload_on_evict=true</span></code> when you want SSD writes to happen only when memory pressure selects an object for eviction. Add <code class="docutils literal notranslate"><span class="pre">--promotion_on_hit=true</span></code> to allow hot SSD-only data to be promoted back to DRAM, and tune <code class="docutils literal notranslate"><span class="pre">--promotion_admission_threshold</span></code> to control how many observed reads are required before promotion is queued.</p>
 </section>
 <section id="cxl-memory">
 <h3>CXL Memory<a class="headerlink" href="#cxl-memory" title="Link to this heading">#</a></h3>
@@ -1050,61 +1123,6 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 </table>
 </div>
 <p>When <code class="docutils literal notranslate"><span class="pre">--allocation_strategy=cxl</span></code> is set alongside <code class="docutils literal notranslate"><span class="pre">--enable_cxl=true</span></code>, the master preferentially allocates new objects on CXL memory.</p>
-</section>
-<section id="snapshot-restore">
-<h3>Snapshot &amp; Restore<a class="headerlink" href="#snapshot-restore" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Enable periodic metadata snapshot</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_interval_seconds</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code> (5 min)</p></td>
-<td><p>Interval between snapshots</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_child_timeout_seconds</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">3600</span></code> (1 hour)</p></td>
-<td><p>Timeout per snapshot child process</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
-<td><p>Number of recent snapshots retained</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type</span></code></p></td>
-<td><p>required</p></td>
-<td><p>Object store: <code class="docutils literal notranslate"><span class="pre">local</span></code> or <code class="docutils literal notranslate"><span class="pre">s3</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_type</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Catalog store: <code class="docutils literal notranslate"><span class="pre">embedded</span></code> or <code class="docutils literal notranslate"><span class="pre">redis</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_connstring</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Catalog store connection string (required for <code class="docutils literal notranslate"><span class="pre">redis</span></code>)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_backup_dir</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Optional local backup directory</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot_restore</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Restore from latest snapshot at startup</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Environment variable:</strong> <code class="docutils literal notranslate"><span class="pre">MOONCAKE_SNAPSHOT_LOCAL_PATH</span></code> (required when <code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type=local</span></code>) — persistent directory for local snapshots.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The snapshot storage path is a <strong>managed directory</strong> exclusively controlled by Mooncake. Old snapshots exceeding <code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code> are automatically deleted. Use a dedicated directory to avoid data loss.</p>
-</div>
 </section>
 <section id="dfs-storage">
 <h3>DFS Storage<a class="headerlink" href="#dfs-storage" title="Link to this heading">#</a></h3>
@@ -1330,19 +1348,6 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 </tbody>
 </table>
 </div>
-<p>For HiCache-style deployments, pre-flight the host before reserving hugepages:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>scripts/check_hicache_hugepage_requirements.py<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--tp-size<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--hicache-size<span class="w"> </span>64gb<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--global-segment-size<span class="w"> </span>8gb<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--arena-pool-size<span class="w"> </span>56gb<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--available-hugetlb<span class="w"> </span>512gb
-
-sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.nr_hugepages<span class="o">=</span><span class="m">262144</span>
-grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;HugePages_Total|HugePages_Free|Hugepagesize&#39;</span><span class="w"> </span>/proc/meminfo
-</pre></div>
-</div>
-<p>The arena is disabled by default. Start with <code class="docutils literal notranslate"><span class="pre">8gb</span></code> or <code class="docutils literal notranslate"><span class="pre">16gb</span></code> and size upward using the helper script.</p>
 </section>
 <section id="yalantinglibs-log-level">
 <h3>yalantinglibs Log Level<a class="headerlink" href="#yalantinglibs-log-level" title="Link to this heading">#</a></h3>
@@ -1366,12 +1371,12 @@ grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;Huge
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../getting_started/build.html"
+       href="../getting_started/quick-start.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Build Guide</p>
+        <p class="prev-next-title">Quick Start</p>
       </div>
     </a>
     <a class="right-next"
@@ -1409,17 +1414,19 @@ grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;Huge
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-scenarios">Deployment Scenarios</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-tcp-development-quick-evaluation">Single-Node (TCP) — Development / Quick Evaluation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-rdma-production-with-rdma-transport">Single-Node (RDMA) — Production with RDMA Transport</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-etcd-production-ha">High-Availability (etcd) — Production HA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-redis-alternative-ha-backend">High-Availability (Redis) — Alternative HA Backend</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore-backup-disaster-recovery">Snapshot &amp; Restore — Backup / Disaster Recovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-modes">Client Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-aware-allocation-memory-tiering">CXL-Aware Allocation — Memory Tiering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-tips">Quick Tips</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-master-startup-flags">Reference: Master Startup Flags</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rpc">RPC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server-embedded">HTTP Metadata Server (Embedded)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-allocator">Memory Allocator</a></li>
@@ -1430,7 +1437,6 @@ grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;Huge
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-manager">Task Manager</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offload-tiered-storage">Offload / Tiered Storage</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-memory">CXL Memory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore">Snapshot &amp; Restore</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-storage">DFS Storage</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-configuration-file">Master Configuration File</a></li>
 </ul>

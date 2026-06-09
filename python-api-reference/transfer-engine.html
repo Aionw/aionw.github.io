@@ -171,37 +171,35 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -508,6 +506,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance Considerations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thread-safety">Thread Safety</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-feature-support-attributes">Compile-time Feature Support Attributes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-attributes">Module Attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -690,9 +693,13 @@ document.write(`
 </section>
 <section id="data-transfer-operations">
 <h3>Data Transfer Operations<a class="headerlink" href="#data-transfer-operations" title="Link to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The optional <code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> argument pins the request onto a named transport (<code class="docutils literal notranslate"><span class="pre">&quot;rdma&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tcp&quot;</span></code>, …), overriding policy-driven selection for that one call. <strong>TENT backend only</strong> (<code class="docutils literal notranslate"><span class="pre">MC_USE_TENT=1</span></code>); silently ignored on the classic backend. See <a class="reference internal" href="../design/tent/transport-selector.html"><span class="std std-doc">TENT transport selector</span></a> for more details.</p>
+</div>
 <section id="transfer-sync-write">
 <h4>transfer_sync_write()<a class="headerlink" href="#transfer-sync-write" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a synchronous write operation to transfer data from local buffer to remote buffer.</p>
@@ -702,6 +709,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code> (int): The local buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): The remote buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): The number of bytes to transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-request transport pin. See the note above. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -710,7 +718,7 @@ document.write(`
 </section>
 <section id="transfer-sync-read">
 <h4>transfer_sync_read()<a class="headerlink" href="#transfer-sync-read" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync_read</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync_read</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a synchronous read operation to transfer data from remote buffer to local buffer.</p>
@@ -720,6 +728,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code> (int): The local buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): The remote buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): The number of bytes to transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-request transport pin. See the note above. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -728,7 +737,7 @@ document.write(`
 </section>
 <section id="transfer-sync">
 <h4>transfer_sync()<a class="headerlink" href="#transfer-sync" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">opcode</span><span class="p">,</span> <span class="n">notify</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_sync</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">opcode</span><span class="p">,</span> <span class="n">notify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a synchronous transfer operation with specified opcode and optional notification.</p>
@@ -740,6 +749,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): The number of bytes to transfer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code> (TransferOpcode): The transfer operation type (READ or WRITE)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">notify</span></code> (TransferNotify, optional): Notification object to send after transfer completion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-request transport pin. See the note above. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -748,7 +758,7 @@ document.write(`
 </section>
 <section id="transfer-submit-write">
 <h4>transfer_submit_write()<a class="headerlink" href="#transfer-submit-write" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_submit_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_submit_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Submits an asynchronous write operation and returns immediately.</p>
@@ -758,6 +768,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code> (int): The local buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): The remote buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): The number of bytes to transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-request transport pin. See the note above. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -788,7 +799,7 @@ document.write(`
 </section>
 <section id="transfer-write-on-cuda">
 <h4>transfer_write_on_cuda()<a class="headerlink" href="#transfer-write-on-cuda" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_write_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_write_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a write operation to transfer data from local buffer to remote buffer on a given cuda stream.</p>
@@ -799,6 +810,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): The remote buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): The number of bytes to transfer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stream_ptr</span></code> (int): The integer representation of a CUDA stream pointer (<code class="docutils literal notranslate"><span class="pre">cudaStream_t</span></code>). For example, from a PyTorch stream, this can be obtained via <code class="docutils literal notranslate"><span class="pre">stream.cuda_stream</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-request transport pin. See the note at the top of this section. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -815,7 +827,7 @@ document.write(`
 </section>
 <section id="transfer-read-on-cuda">
 <h4>transfer_read_on_cuda()<a class="headerlink" href="#transfer-read-on-cuda" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_read_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_read_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">peer_buffer_address</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a read operation to transfer data from remote buffer to local buffer on a given cuda stream.</p>
@@ -826,6 +838,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_address</span></code> (int): The remote buffer address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">length</span></code> (int): The number of bytes to transfer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stream_ptr</span></code> (int): The integer representation of a CUDA stream pointer (<code class="docutils literal notranslate"><span class="pre">cudaStream_t</span></code>). For example, from a PyTorch stream, this can be obtained via <code class="docutils literal notranslate"><span class="pre">stream.cuda_stream</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-request transport pin. See the note at the top of this section. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -846,7 +859,7 @@ document.write(`
 <p><strong>Note:</strong> In a few inference engines and benchmarks, accuracy may be affected when using batch transfer APIs. This issue has been found only in multi-node NVLink transfers.</p>
 <section id="batch-transfer-sync-write">
 <h4>batch_transfer_sync_write()<a class="headerlink" href="#batch-transfer-sync-write" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_sync_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_sync_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a batch synchronous write operation to transfer multiple data chunks from local buffers to remote buffers.</p>
@@ -856,6 +869,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">buffers</span></code> (List[int]): List of local buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_addresses</span></code> (List[int]): List of remote buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -864,7 +878,7 @@ document.write(`
 </section>
 <section id="batch-transfer-sync-read">
 <h4>batch_transfer_sync_read()<a class="headerlink" href="#batch-transfer-sync-read" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_sync_read</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_sync_read</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a batch synchronous read operation to transfer multiple data chunks from remote buffers to local buffers.</p>
@@ -874,6 +888,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">buffers</span></code> (List[int]): List of local buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_addresses</span></code> (List[int]): List of remote buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -882,7 +897,7 @@ document.write(`
 </section>
 <section id="batch-transfer-sync">
 <h4>batch_transfer_sync()<a class="headerlink" href="#batch-transfer-sync" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_sync</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">opcode</span><span class="p">,</span> <span class="n">notify</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_sync</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">opcode</span><span class="p">,</span> <span class="n">notify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a batch synchronous transfer operation with specified opcode and optional notification.</p>
@@ -894,6 +909,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code> (TransferOpcode): The transfer operation type (READ or WRITE)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">notify</span></code> (TransferNotify, optional): Notification object to send after transfer completion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -902,7 +918,7 @@ document.write(`
 </section>
 <section id="batch-transfer-async-write">
 <h4>batch_transfer_async_write()<a class="headerlink" href="#batch-transfer-async-write" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_async_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_async_write</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Submits a batch asynchronous write operation and returns immediately.</p>
@@ -912,6 +928,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">buffers</span></code> (List[int]): List of local buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_addresses</span></code> (List[int]): List of remote buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -920,7 +937,7 @@ document.write(`
 </section>
 <section id="batch-transfer-async-read">
 <h4>batch_transfer_async_read()<a class="headerlink" href="#batch-transfer-async-read" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_async_read</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_async_read</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Submits a batch asynchronous read operation and returns immediately.</p>
@@ -930,6 +947,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">buffers</span></code> (List[int]): List of local buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_addresses</span></code> (List[int]): List of remote buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -938,7 +956,7 @@ document.write(`
 </section>
 <section id="batch-transfer-async">
 <h4>batch_transfer_async()<a class="headerlink" href="#batch-transfer-async" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_async</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">opcode</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_async</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">opcode</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Submits a batch asynchronous transfer operation with specified opcode and returns immediately.</p>
@@ -949,6 +967,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_addresses</span></code> (List[int]): List of remote buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code> (TransferOpcode): The transfer operation type (READ or WRITE)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -972,7 +991,7 @@ document.write(`
 </section>
 <section id="batch-transfer-write-on-cuda">
 <h4>batch_transfer_write_on_cuda()<a class="headerlink" href="#batch-transfer-write-on-cuda" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_write_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_write_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a batch write operation to transfer multiple data chunks from local buffers to remote buffers on a given cuda stream.</p>
@@ -983,6 +1002,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_addresses</span></code> (List[int]): List of remote buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stream_ptr</span></code> (int): The integer representation of a CUDA stream pointer (<code class="docutils literal notranslate"><span class="pre">cudaStream_t</span></code>). For example, from a PyTorch stream, this can be obtained via <code class="docutils literal notranslate"><span class="pre">stream.cuda_stream</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -999,7 +1019,7 @@ document.write(`
 </section>
 <section id="batch-transfer-read-on-cuda">
 <h4>batch_transfer_read_on_cuda()<a class="headerlink" href="#batch-transfer-read-on-cuda" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_read_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_transfer_read_on_cuda</span><span class="p">(</span><span class="n">target_hostname</span><span class="p">,</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">peer_buffer_addresses</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">stream_ptr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">transport_hint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Performs a batch read operation to transfer multiple data chunks from remote buffers to local buffers on a given cuda stream.</p>
@@ -1010,6 +1030,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">peer_buffer_addresses</span></code> (List[int]): List of remote buffer addresses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lengths</span></code> (List[int]): List of byte lengths for each transfer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stream_ptr</span></code> (int): The integer representation of a CUDA stream pointer (<code class="docutils literal notranslate"><span class="pre">cudaStream_t</span></code>). For example, from a PyTorch stream, this can be obtained via <code class="docutils literal notranslate"><span class="pre">stream.cuda_stream</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport_hint</span></code> (str, optional): TENT-only per-batch transport pin. Default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (policy-driven).</p></li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul class="simple">
@@ -1180,6 +1201,7 @@ RPC error).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_METADATA_SERVER</span></code>: Default metadata server address</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_LEGACY_RPC_PORT_BINDING</span></code>: Enables legacy RPC port binding behavior</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_TCP_BIND_ADDRESS</span></code>: Specifies the TCP bind address</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_RDMA_BIND_ADDRESS</span></code>: Specifies the RDMA bind address for NIC path construction in dual-NIC environments. When set, RDMA NIC paths use this address while TCP handshake uses the address from <code class="docutils literal notranslate"><span class="pre">local_hostname</span></code>. This is useful when TCP and RDMA traffic use separate network interfaces (e.g., <code class="docutils literal notranslate"><span class="pre">eth0</span></code> for TCP and <code class="docutils literal notranslate"><span class="pre">rdma-net1</span></code> for RDMA).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_CUSTOM_TOPO_JSON</span></code>: Path to custom topology JSON file</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC</span></code>: Enables metrics reporting (set to “1”, “true”, “yes”, or “on”). <strong>Note:</strong> Not supported when using Transfer Engine TENT.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC_INTERVAL_SECONDS</span></code>: Sets metrics reporting interval in seconds</p></li>
@@ -1393,6 +1415,37 @@ RPC error).</p></li>
 <li><p><strong>Performance Issues</strong>: Check RDMA device configuration and network topology</p></li>
 </ol>
 </section>
+<section id="compile-time-feature-support-attributes">
+<h2>Compile-time Feature Support Attributes<a class="headerlink" href="#compile-time-feature-support-attributes" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">mooncake.engine</span></code> module provides boolean attributes that indicate whether specific features were enabled during compilation:</p>
+<section id="module-attributes">
+<h3>Module Attributes<a class="headerlink" href="#module-attributes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">engine.SUPPORT_CUDA</span></code>: Whether CUDA support is enabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">engine.SUPPORT_EFA</span></code>: Whether EFA (Elastic Fabric Adapter) support is enabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">engine.SUPPORT_HIP</span></code>: Whether HIP (Heterogeneous-compute Interface for Portability) support is enabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">engine.SUPPORT_MNNVL</span></code>: Whether MNNVL transport protocol support is enabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">engine.SUPPORT_INTRA_NVLINK</span></code>: Whether intra-node NVLink support is enabled</p></li>
+</ul>
+</section>
+<section id="usage-example">
+<h3>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">engine</span>
+
+<span class="c1"># Check if CUDA is supported</span>
+<span class="k">if</span> <span class="n">engine</span><span class="o">.</span><span class="n">SUPPORT_CUDA</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA support is available&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check all features</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA: </span><span class="si">{</span><span class="n">engine</span><span class="o">.</span><span class="n">SUPPORT_CUDA</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EFA: </span><span class="si">{</span><span class="n">engine</span><span class="o">.</span><span class="n">SUPPORT_EFA</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HIP: </span><span class="si">{</span><span class="n">engine</span><span class="o">.</span><span class="n">SUPPORT_HIP</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MNNVL: </span><span class="si">{</span><span class="n">engine</span><span class="o">.</span><span class="n">SUPPORT_MNNVL</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intra-NVLink: </span><span class="si">{</span><span class="n">engine</span><span class="o">.</span><span class="n">SUPPORT_INTRA_NVLINK</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
 
@@ -1524,6 +1577,11 @@ RPC error).</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance Considerations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thread-safety">Thread Safety</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-feature-support-attributes">Compile-time Feature Support Attributes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-attributes">Module Attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

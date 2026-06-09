@@ -122,7 +122,7 @@ vllm serve Qwen/Qwen2.5-7B-Instruct \
     - `kv_producer`: For prefiller instances that generate KV caches
     - `kv_consumer`: For decoder instances that consume KV caches
     - `kv_both`: Enables symmetric functionality (experimental)
-    - `num_workers`: Thread pool size in each prefiller worker to send kvcache (default 10)
+  - `num_workers`: Thread pool size in each prefiller worker to send kvcache (default 10)
 
 ### Environment Variables
 
@@ -254,9 +254,14 @@ MOONCAKE_CONFIG_PATH=./mooncake.json VLLM_USE_MODELSCOPE=True python3 -m vllm.en
   - `kv_connector`: `"MooncakeConnector"`
   - `kv_role`: `"kv_producer"` or `"kv_consumer"`
   - `kv_rank`: 0 for producer, 1 for consumer
-  - `kv_parallel_size`: Fixed to 2
+  - `kv_parallel_size`: Fixed to 2 currently
   - `kv_buffer_size`: KVCache lookup buffer size; increase for longer prompts. If OOM occurs, decrease `--gpu-memory-utilization`.
+  - `kv_ip` and `kv_port`: Used to specify the IP address and port of the master node for `"PyNcclConnector"` distributed setup. Not used for `"MooncakeConnector"` currently. Instead, `"MooncakeConnector"` uses a config file to set up the distributed connection.
 - `--tensor-parallel-size` / `-tp`: Supported. If running on the same node, set different `CUDA_VISIBLE_DEVICES`.
+
+```{note}
+If running prefill and decode on the same node, set a different port for `decode_url`. To avoid port conflicts, ensure the decode port differs by at least 50 from the `prefill_url` port (e.g., `"decode_url": "192.168.0.137:13103"`). If the same URL is set for both, the port of `decode_url` will be automatically incremented by 100.
+```
 
 **Proxy Server:**
 

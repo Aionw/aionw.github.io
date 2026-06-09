@@ -59,7 +59,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="TENT Metrics System" href="metrics.html" />
-    <link rel="prev" title="SSD Offload Design" href="../ssd-offload.html" />
+    <link rel="prev" title="Unified Parallel Tensor IO" href="../unified-parallel-tensor-io.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,28 +171,32 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">TENT: Transfer Engine NEXT</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">TENT Metrics System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transport-selector.html">TENT Transport Selector</a></li>
@@ -201,14 +205,8 @@
 <li class="toctree-l2"><a class="reference internal" href="failover.html">TENT Failover</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -438,7 +436,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-c-api-reference">TENT C++ API Reference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-metrics-system">TENT Metrics System</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-transport-selector">TENT Transport Selector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-transport-selection">TENT Transport Selection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-quality-of-service">TENT Quality of Service</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-slice-spraying">TENT Slice Spraying</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-failover">TENT Failover</a></li>
@@ -520,9 +518,7 @@ It is the successor to the classic Mooncake Transfer Engine (TE) and is designed
 </section>
 <section id="tent-c-api-reference">
 <h2>TENT C++ API Reference<a class="headerlink" href="#tent-c-api-reference" title="Link to this heading">#</a></h2>
-<p>For the complete C++ API reference, see <a class="reference internal" href="../../api-reference/cpp/index.html"><span class="doc std std-doc">TENT C++ API</span></a>.</p>
-<div class="toctree-wrapper compound">
-</div>
+<p><a class="reference internal" href="cpp-api.html"><span class="std std-doc">TENT C++ API Reference</span></a></p>
 </section>
 <section id="tent-metrics-system">
 <h2>TENT Metrics System<a class="headerlink" href="#tent-metrics-system" title="Link to this heading">#</a></h2>
@@ -532,8 +528,8 @@ It is the successor to the classic Mooncake Transfer Engine (TE) and is designed
 </ul>
 </div>
 </section>
-<section id="tent-transport-selector">
-<h2>TENT Transport Selector<a class="headerlink" href="#tent-transport-selector" title="Link to this heading">#</a></h2>
+<section id="tent-transport-selection">
+<h2>TENT Transport Selection<a class="headerlink" href="#tent-transport-selection" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="transport-selector.html">TENT Transport Selector</a></li>
@@ -578,12 +574,12 @@ It is the successor to the classic Mooncake Transfer Engine (TE) and is designed
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../ssd-offload.html"
+       href="../unified-parallel-tensor-io.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">SSD Offload Design</p>
+        <p class="prev-next-title">Unified Parallel Tensor IO</p>
       </div>
     </a>
     <a class="right-next"
@@ -623,7 +619,7 @@ It is the successor to the classic Mooncake Transfer Engine (TE) and is designed
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-c-api-reference">TENT C++ API Reference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-metrics-system">TENT Metrics System</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-transport-selector">TENT Transport Selector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-transport-selection">TENT Transport Selection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-quality-of-service">TENT Quality of Service</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-slice-spraying">TENT Slice Spraying</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tent-failover">TENT Failover</a></li>

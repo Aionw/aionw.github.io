@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>vLLM Performance Benchmarks &#8212; Mooncake</title>
+    <title>vLLM Integration Performance Benchmarks &#8212; Mooncake</title>
   
   
   
@@ -171,42 +171,40 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">vLLM Performance Benchmarks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">vLLM Integration Performance Benchmarks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../vllm-v1-support-benchmark.html">vLLM with Mooncake Transfer Engine Benchmark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vllm-benchmark-results-v1.html">Benchmark performance on NVIDIA A10</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vllm-benchmark-results-v0.2.html">Benchmark performance on NVIDIA A10</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -412,7 +410,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>vLLM Performance Benchmarks</h1>
+    <h1>vLLM Integration Performance Benchmarks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -426,8 +424,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="vllm-performance-benchmarks">
-<h1>vLLM Performance Benchmarks<a class="headerlink" href="#vllm-performance-benchmarks" title="Link to this heading">#</a></h1>
+  <section id="vllm-integration-performance-benchmarks">
+<h1>vLLM Integration Performance Benchmarks<a class="headerlink" href="#vllm-integration-performance-benchmarks" title="Link to this heading">#</a></h1>
 <p>Benchmarks evaluating Mooncake’s integration with vLLM across different backends and scenarios.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -441,8 +439,8 @@ document.write(`
 <td><p>vLLM V1</p></td>
 <td><p>1P1D PD disaggregation on H800 with 8x RoCE: <strong>142.25 GB/s</strong> peak transfer bandwidth (71.1% of theoretical), KV transfer overhead just <strong>4.2%</strong> of total TTFT at 32K tokens</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../vllm-benchmark-results-v1.html"><span class="doc std std-doc">vLLM V0 + MooncakeStore vs Redis</span></a></p></td>
-<td><p>vLLM V0</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../vllm-benchmark-results-v1.html"><span class="doc std std-doc">vLLM V1 + MooncakeStore vs Redis</span></a></p></td>
+<td><p>vLLM V1</p></td>
 <td><p>MooncakeStore RDMA consistently outperforms Redis across all XpYd topologies — e.g., <strong>~32% lower</strong> mean TTFT in 2P2D tp=2</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../vllm-benchmark-results-v0.2.html"><span class="doc std std-doc">vLLM V0 + MooncakeConnector (Legacy)</span></a></p></td>

@@ -171,41 +171,39 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Disaggregated Prefill-Decode with MooncakeConnector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kv-cache-storage.html">KV Cache Storage &amp; Sharing with MooncakeStore</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -597,9 +595,9 @@ vllm<span class="w"> </span>serve<span class="w"> </span>Qwen/Qwen2.5-7B-Instruc
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_producer</span></code>: For prefiller instances that generate KV caches</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_consumer</span></code>: For decoder instances that consume KV caches</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_both</span></code>: Enables symmetric functionality (experimental)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">num_workers</span></code>: Thread pool size in each prefiller worker to send kvcache (default 10)</p></li>
 </ul>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_workers</span></code>: Thread pool size in each prefiller worker to send kvcache (default 10)</p></li>
 </ul>
 </li>
 </ul>
@@ -741,12 +739,17 @@ etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_connector</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeConnector&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_role</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;kv_producer&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;kv_consumer&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_rank</span></code>: 0 for producer, 1 for consumer</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kv_parallel_size</span></code>: Fixed to 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kv_parallel_size</span></code>: Fixed to 2 currently</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kv_buffer_size</span></code>: KVCache lookup buffer size; increase for longer prompts. If OOM occurs, decrease <code class="docutils literal notranslate"><span class="pre">--gpu-memory-utilization</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kv_ip</span></code> and <code class="docutils literal notranslate"><span class="pre">kv_port</span></code>: Used to specify the IP address and port of the master node for <code class="docutils literal notranslate"><span class="pre">&quot;PyNcclConnector&quot;</span></code> distributed setup. Not used for <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeConnector&quot;</span></code> currently. Instead, <code class="docutils literal notranslate"><span class="pre">&quot;MooncakeConnector&quot;</span></code> uses a config file to set up the distributed connection.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--tensor-parallel-size</span></code> / <code class="docutils literal notranslate"><span class="pre">-tp</span></code>: Supported. If running on the same node, set different <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If running prefill and decode on the same node, set a different port for <code class="docutils literal notranslate"><span class="pre">decode_url</span></code>. To avoid port conflicts, ensure the decode port differs by at least 50 from the <code class="docutils literal notranslate"><span class="pre">prefill_url</span></code> port (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;decode_url&quot;:</span> <span class="pre">&quot;192.168.0.137:13103&quot;</span></code>). If the same URL is set for both, the port of <code class="docutils literal notranslate"><span class="pre">decode_url</span></code> will be automatically incremented by 100.</p>
+</div>
 <p><strong>Proxy Server:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>proxy_server.py
 </pre></div>

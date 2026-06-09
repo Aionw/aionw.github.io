@@ -28,35 +28,28 @@ pip3 uninstall mooncake-transfer-engine
 
 ### Install SGLang
 
+It is recommended to use uv for faster installation:
+
 ```bash
-git clone git@github.com:sgl-project/sglang.git
-cd sglang
 pip install --upgrade pip
-pip install -e "python[all]" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python
+pip install uv
+uv pip install sglang
 ```
 
-For AMD GPUs, use the ROCm docker image:
+The major version of Cuda is 13 by default. To install sglang under Cuda 12 with pip or uv, please try the following commands:
 
 ```bash
-docker run -it --rm --network=host \
-    --device=/dev/kfd --device=/dev/dri \
-    --ipc=host --shm-size 16G \
-    --group-add video \
-    --cap-add=SYS_PTRACE \
-    --security-opt seccomp=unconfined \
-    -v /home/workspace:/workspace \
-   rocm/sgl-dev:20250707
-
-pip3 install mooncake-transfer-engine
-sudo apt update && sudo apt install libibverbs1 libibverbs-dev -y
-sudo apt-get install lsof net-tools iputils-ping -y
+pip install --upgrade pip
+pip install uv
+uv pip install sglang
+uv pip install --force-reinstall  torch==2.11.0 torchaudio==2.11.0 torchvision --index-url https://download.pytorch.org/whl/cu129
+uv pip install --force-reinstall sglang-kernel --index-url https://docs.sglang.ai/whl/cu129/
+uv pip install --force-reinstall sgl-deep-gemm --index-url https://docs.sglang.ai/whl/cu129/ --no-deps
 ```
 
 See the [SGLang official compilation guide](https://docs.sglang.ai/start/install.html) if you encounter issues.
 
 ## Configuration
-
-Since [PR 5460](https://github.com/sgl-project/sglang/pull/5460), no `mooncake.json` configuration file is needed — Mooncake auto-detects RDMA devices.
 
 Key arguments:
 
@@ -70,7 +63,7 @@ Key arguments:
 
 ## Run PD Disaggregation
 
-### Cross-Node
+### Multi-Node
 
 ```bash
 # Prefill node (192.168.0.137)
@@ -102,7 +95,7 @@ curl -X POST http://127.0.0.1:8000/generate \
   -d '{"text": "Tell me a long story", "sampling_params": {"temperature": 0}}'
 ```
 
-### Same-Node
+### Single-Node
 
 ```bash
 # Prefill
@@ -124,15 +117,9 @@ python3 -m sglang_router.launch_router \
   --decode  "http://192.168.0.137:30001" \
   --policy round_robin \
   --host 0.0.0.0 --port 8000
-```
 
-TP is supported but not required — omit `--tp-size 2` for single-GPU setups.
-
-### XpYd Topology
-
-Multiple decode instances per prefill are supported. Multiple prefills on the same node are not supported due to bootstrap server port conflicts.
-
-```bash
+# Router for multi node.
+# Here is an example for 2 decode node running on 192.168.0.137 and 192.168.0.140
 python3 -m sglang_router.launch_router \
   --pd-disaggregation \
   --prefill "http://192.168.0.137:30000" 8998 \
@@ -140,6 +127,10 @@ python3 -m sglang_router.launch_router \
   --policy round_robin \
   --host 0.0.0.0 --port 8000
 ```
+
+TP is supported but not required — omit `--tp-size 2` for single-GPU setups.
+
+Multiple decode instances per prefill are supported. Multiple prefills on the same node are not supported due to bootstrap server port conflicts.
 
 ```{tip}
 If you encounter HuggingFace timeouts, set `export SGLANG_USE_MODELSCOPE=true`.

@@ -58,7 +58,7 @@
     <link rel="icon" href="../../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Transfer Engine" href="../transfer-engine/index.html" />
+    <link rel="next" title="Mooncake Transfer Engine Benchmark Tool (tebench) Guide" href="tebench.html" />
     <link rel="prev" title="TENT Slice Spraying" href="slice-spraying.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,28 +171,32 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">TENT: Transfer Engine NEXT</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">TENT Metrics System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transport-selector.html">TENT Transport Selector</a></li>
@@ -201,14 +205,8 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TENT Failover</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../engram.html">EngramStore Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -570,19 +568,23 @@ This document describes how the recovery works, which knobs control it, and how 
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_failover_attempts</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">enable_auto_failover_on_poll</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Controls whether <code class="docutils literal notranslate"><span class="pre">getTransferStatus</span></code> automatically resubmits tasks that report a recoverable <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> completion. Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to make status polling observational only; internal completion paths can still trigger failover/resubmit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_failover_attempts</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
 <td><p>Upper bound on <code class="docutils literal notranslate"><span class="pre">resubmitTransferTask</span></code> calls per task. <code class="docutils literal notranslate"><span class="pre">0</span></code> disables cross-transport failover entirely. <code class="docutils literal notranslate"><span class="pre">1</span></code> allows exactly one switch.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_error_threshold</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_error_threshold</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
 <td><p>Number of failures inside <code class="docutils literal notranslate"><span class="pre">rail_error_window_secs</span></code> that trips a rail into the paused state.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_error_window_secs</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_error_window_secs</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
 <td><p>Sliding window for counting rail errors. A failure older than the window resets <code class="docutils literal notranslate"><span class="pre">error_count</span></code> to 1.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_cooldown_secs</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transports/rdma/rail_cooldown_secs</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">30</span></code></p></td>
 <td><p>Initial cooldown after tripping. Doubles on each repeat failure, capped at 300 s.</p></td>
 </tr>
@@ -591,6 +593,7 @@ This document describes how the recovery works, which knobs control it, and how 
 </div>
 <p>The RDMA keys are read by <code class="docutils literal notranslate"><span class="pre">RailMonitor::load</span></code>. Example:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;enable_auto_failover_on_poll&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;max_failover_attempts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;transports&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;rdma&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -695,7 +698,8 @@ This document describes how the recovery works, which knobs control it, and how 
 <h3>Running manually<a class="headerlink" href="#running-manually" title="Link to this heading">#</a></h3>
 <p>The TENT tests are <strong>not</strong> in CI today (the upstream workflow builds with <code class="docutils literal notranslate"><span class="pre">USE_TENT=OFF</span></code>). Run them locally:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build-tent<span class="w"> </span>-DUSE_TENT<span class="o">=</span>ON<span class="w"> </span>-DUSE_CUDA<span class="o">=</span>OFF
-cmake<span class="w"> </span>--build<span class="w"> </span>build-tent<span class="w"> </span>--target<span class="w"> </span>tent_engine_failover_e2e_test<span class="w"> </span>-j
+cmake<span class="w"> </span>--build<span class="w"> </span>build-tent<span class="w"> </span>--target<span class="w"> </span>tent_failover_test<span class="w"> </span>tent_engine_failover_e2e_test<span class="w"> </span>-j
+./build-tent/mooncake-transfer-engine/tent/tests/tent_failover_test
 ./build-tent/mooncake-transfer-engine/tent/tests/tent_engine_failover_e2e_test
 </pre></div>
 </div>
@@ -741,11 +745,11 @@ A safe submit-stage recovery needs either (a) a transport-level “atomic submit
       </div>
     </a>
     <a class="right-next"
-       href="../transfer-engine/index.html"
+       href="tebench.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Transfer Engine</p>
+        <p class="prev-next-title">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -58,8 +58,8 @@
     <link rel="icon" href="../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Build Guide" href="build.html" />
-    <link rel="prev" title="Welcome to Mooncake" href="../index.html" />
+    <link rel="next" title="Mooncake Store Deployment &amp; Tunnig Guide" href="../deployment/mooncake-store-deployment-guide.html" />
+    <link rel="prev" title="Build Guide" href="build.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,37 +171,35 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="build.html">Build Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -459,18 +457,15 @@ document.write(`
 </pre></div>
 </div>
 <p>📦 <strong>Package Details</strong>: <a class="reference external" href="https://pypi.org/project/mooncake-transfer-engine-non-cuda/">https://pypi.org/project/mooncake-transfer-engine-non-cuda/</a></p>
-<div class="note admonition">
-<p class="admonition-title">CUDA Version &amp; Supported Protocols</p>
-<p>The CUDA version includes Mooncake-EP and GPU topology detection, requiring CUDA 12.1+. The non-CUDA version is for environments without CUDA dependencies.</p>
-<p>The pre-built PyPI wheels only bundle <strong>RDMA</strong> and <strong>TCP</strong> transports. Other transports such as NVMe-oF, CXL, NVLink, AWS EFA, and Ascend/NPU are not included and require <a class="reference internal" href="build.html"><span class="std std-doc">building from source</span></a>.</p>
-</div>
+<blockquote>
+<div><p><strong>Note</strong>: The CUDA version includes Mooncake-EP and GPU topology detection, requiring CUDA 12.1+. The non-CUDA version is for environments without CUDA dependencies.</p>
+</div></blockquote>
 </section>
 <section id="transfer-engine-quick-start">
 <h2>Transfer Engine Quick Start<a class="headerlink" href="#transfer-engine-quick-start" title="Link to this heading">#</a></h2>
-<div class="admonition-rdma admonition">
-<p class="admonition-title">RDMA</p>
-<p>When using RDMA protocol, you may need to run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for proper permissions.</p>
-</div>
+<blockquote>
+<div><p><strong>Note</strong>: When using RDMA protocol, you may need to run with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for proper permissions.</p>
+</div></blockquote>
 <section id="start-transfer-engine-receiver-server">
 <h3>Start Transfer Engine Receiver (Server)<a class="headerlink" href="#start-transfer-engine-receiver-server" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
@@ -488,7 +483,7 @@ document.write(`
     <span class="n">METADATA_SERVER</span> <span class="o">=</span> <span class="s2">&quot;P2PHANDSHAKE&quot;</span> <span class="c1"># [ETCD_SERVER_URL, P2PHANDSHAKE, ...]</span>
     <span class="n">PROTOCOL</span> <span class="o">=</span> <span class="s2">&quot;rdma&quot;</span> <span class="c1"># [rdma, tcp, ...]</span>
     <span class="n">DEVICE_NAME</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># auto discovery if empty</span>
-    
+
     <span class="c1"># Initialize server engine</span>
     <span class="n">server_engine</span> <span class="o">=</span> <span class="n">TransferEngine</span><span class="p">()</span>
     <span class="n">server_engine</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
@@ -498,12 +493,12 @@ document.write(`
         <span class="n">DEVICE_NAME</span>
     <span class="p">)</span>
     <span class="n">session_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">server_engine</span><span class="o">.</span><span class="n">get_rpc_port</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
-    
+
     <span class="c1"># Allocate memory on server side (1MB buffer)</span>
     <span class="n">server_buffer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
     <span class="n">server_ptr</span> <span class="o">=</span> <span class="n">server_buffer</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span>
     <span class="n">server_len</span> <span class="o">=</span> <span class="n">server_buffer</span><span class="o">.</span><span class="n">nbytes</span>
-    
+
     <span class="c1"># Register memory with Mooncake</span>
     <span class="k">if</span> <span class="n">PROTOCOL</span> <span class="o">==</span> <span class="s2">&quot;rdma&quot;</span><span class="p">:</span>
         <span class="n">ret_value</span> <span class="o">=</span> <span class="n">server_engine</span><span class="o">.</span><span class="n">register_memory</span><span class="p">(</span><span class="n">server_ptr</span><span class="p">,</span> <span class="n">server_len</span><span class="p">)</span>
@@ -513,7 +508,7 @@ document.write(`
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Server initialized with session ID: </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Server buffer address: </span><span class="si">{</span><span class="n">server_ptr</span><span class="si">}</span><span class="s2">, length: </span><span class="si">{</span><span class="n">server_len</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    
+
     <span class="c1"># Send buffer info to client</span>
     <span class="n">buffer_info</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;session_id&quot;</span><span class="p">:</span> <span class="n">session_id</span><span class="p">,</span>
@@ -522,7 +517,7 @@ document.write(`
     <span class="p">}</span>
     <span class="n">socket</span><span class="o">.</span><span class="n">send_json</span><span class="p">(</span><span class="n">buffer_info</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Buffer information sent to client&quot;</span><span class="p">)</span>
-    
+
     <span class="c1"># Keep server running</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -541,8 +536,8 @@ document.write(`
         <span class="n">context</span><span class="o">.</span><span class="n">term</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span> 
- 
+    <span class="n">main</span><span class="p">()</span>
+
 </pre></div>
 </div>
 </section>
@@ -559,7 +554,7 @@ document.write(`
     <span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
     <span class="n">socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">PULL</span><span class="p">)</span>
     <span class="n">socket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tcp://localhost:5555&quot;</span><span class="p">)</span>
-    
+
     <span class="c1"># Wait for buffer info from server</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Waiting for server buffer information...&quot;</span><span class="p">)</span>
     <span class="n">buffer_info</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">recv_json</span><span class="p">()</span>
@@ -568,7 +563,7 @@ document.write(`
     <span class="n">server_len</span> <span class="o">=</span> <span class="n">buffer_info</span><span class="p">[</span><span class="s2">&quot;len&quot;</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received server info - Session ID: </span><span class="si">{</span><span class="n">server_session_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Server buffer address: </span><span class="si">{</span><span class="n">server_ptr</span><span class="si">}</span><span class="s2">, length: </span><span class="si">{</span><span class="n">server_len</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    
+
     <span class="c1"># Initialize client engine</span>
     <span class="n">HOSTNAME</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span> <span class="c1"># localhost for simple demo</span>
     <span class="n">METADATA_SERVER</span> <span class="o">=</span> <span class="s2">&quot;P2PHANDSHAKE&quot;</span> <span class="c1"># [ETCD_SERVER_URL, P2PHANDSHAKE, ...]</span>
@@ -583,12 +578,12 @@ document.write(`
         <span class="n">DEVICE_NAME</span>
     <span class="p">)</span>
     <span class="n">session_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">client_engine</span><span class="o">.</span><span class="n">get_rpc_port</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
-    
+
     <span class="c1"># Allocate and initialize client buffer (1MB)</span>
     <span class="n">client_buffer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>  <span class="c1"># Fill with ones</span>
     <span class="n">client_ptr</span> <span class="o">=</span> <span class="n">client_buffer</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span>
     <span class="n">client_len</span> <span class="o">=</span> <span class="n">client_buffer</span><span class="o">.</span><span class="n">nbytes</span>
-    
+
     <span class="c1"># Register memory with Mooncake</span>
     <span class="k">if</span> <span class="n">PROTOCOL</span> <span class="o">==</span> <span class="s2">&quot;rdma&quot;</span><span class="p">:</span>
         <span class="n">ret_value</span> <span class="o">=</span> <span class="n">client_engine</span><span class="o">.</span><span class="n">register_memory</span><span class="p">(</span><span class="n">client_ptr</span><span class="p">,</span> <span class="n">client_len</span><span class="p">)</span>
@@ -607,12 +602,12 @@ document.write(`
             <span class="n">server_ptr</span><span class="p">,</span>
             <span class="nb">min</span><span class="p">(</span><span class="n">client_len</span><span class="p">,</span> <span class="n">server_len</span><span class="p">)</span>  <span class="c1"># Transfer minimum of both lengths</span>
         <span class="p">)</span>
-    
+
         <span class="k">if</span> <span class="n">ret</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transfer successful!&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transfer failed!&quot;</span><span class="p">)</span>
-    
+
     <span class="c1"># Cleanup</span>
     <span class="k">if</span> <span class="n">PROTOCOL</span> <span class="o">==</span> <span class="s2">&quot;rdma&quot;</span><span class="p">:</span>
         <span class="n">ret_value</span> <span class="o">=</span> <span class="n">client_engine</span><span class="o">.</span><span class="n">unregister_memory</span><span class="p">(</span><span class="n">client_ptr</span><span class="p">)</span>
@@ -624,7 +619,7 @@ document.write(`
     <span class="n">context</span><span class="o">.</span><span class="n">term</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span> 
+    <span class="n">main</span><span class="p">()</span>
 
 </pre></div>
 </div>
@@ -688,7 +683,7 @@ document.write(`
 </section>
 <section id="id1">
 <h3>More Examples and Documentation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p>Please refer to the <a class="reference internal" href="../python-api-reference/mooncake-store.html"><span class="std std-doc">Mooncake Store Python API</span></a>, <a class="reference internal" href="../design/mooncake-store.html"><span class="std std-doc">Mooncake Store</span></a> and <a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html"><span class="std std-doc">Mooncake Store Deployment &amp; Operations Guide</span></a> for more examples and documentation.</p>
+<p>Please refer to the <a class="reference internal" href="../python-api-reference/mooncake-store.html"><span class="std std-doc">Mooncake Store Python API</span></a>, <a class="reference internal" href="../design/mooncake-store.html"><span class="std std-doc">Mooncake Store</span></a> and <a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html"><span class="std std-doc">Mooncake Store Deployment &amp; Tuning Guide</span></a> for more examples and documentation.</p>
 </section>
 </section>
 </section>
@@ -705,20 +700,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../index.html"
+       href="build.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to Mooncake</p>
+        <p class="prev-next-title">Build Guide</p>
       </div>
     </a>
     <a class="right-next"
-       href="build.html"
+       href="../deployment/mooncake-store-deployment-guide.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Build Guide</p>
+        <p class="prev-next-title">Mooncake Store Deployment &amp; Tunnig Guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

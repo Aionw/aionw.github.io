@@ -58,7 +58,7 @@
     <link rel="icon" href="../../../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="LMDeploy Disaggregated Serving with MooncakeTransferEngine" href="../lmdeploy-integration-v0.9.html" />
+    <link rel="next" title="vLLM V1 Disaggregated Serving with Mooncake Store and LMCache [MP]" href="vllmv1-lmcache-mp-integration.html" />
     <link rel="prev" title="Mooncake x LMCache Integration" href="../lmcache-integration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,37 +171,39 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Mooncake x vLLM Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../lmcache-integration.html">Mooncake x LMCache Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">vLLM V1 Disaggregated Serving with Mooncake Store and LMCache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vllmv1-lmcache-mp-integration.html">vLLM V1 Disaggregated Serving with Mooncake Store and LMCache [MP]</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -422,12 +424,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-mooncake-master">1. Start Mooncake Master</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-lmcache-multiprocess-server">2. Start the LMCache Multiprocess Server</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-disaggregated-proxy">3. Start the Disaggregated Proxy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-vllm-prefiller">4. Start the vLLM Prefiller</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-vllm-decoder">5. Start the vLLM Decoder</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#send-a-test-request">6. Send a Test Request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-mooncake-master-on-machine-a">1. Start Mooncake Master on Machine A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-and-start-the-vllm-decoder-on-machine-a">2. Configure and Start the vLLM Decoder on Machine A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-and-start-the-vllm-prefiller-on-machine-b">3. Configure and Start the vLLM Prefiller on Machine B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-disaggregated-proxy">4. Start the Disaggregated Proxy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#send-a-test-request">5. Send a Test Request</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#port-and-configuration-checklist">Port and Configuration Checklist</a></li>
@@ -447,140 +448,147 @@ document.write(`
 <h1>vLLM V1 Disaggregated Serving with Mooncake Store and LMCache<a class="headerlink" href="#vllm-v1-disaggregated-serving-with-mooncake-store-and-lmcache" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>This guide shows a single-machine 1-prefill/1-decode deployment using vLLM V1,
-LMCache’s multiprocess server, and Mooncake Store as the LMCache L2 backend.</p>
-<p>In this setup, one machine runs Mooncake master, one LMCache MP server, the
-disaggregated proxy, the prefiller vLLM instance, and the decoder vLLM
-instance. The prefiller and decoder should use different GPUs.</p>
-<p>This example uses <code class="docutils literal notranslate"><span class="pre">&quot;metadata_server&quot;:&quot;P2PHANDSHAKE&quot;</span></code> for Mooncake transfer
-metadata, so the Mooncake HTTP metadata server is not needed. If you switch to
-HTTP metadata, remember that Mooncake’s HTTP metadata server also defaults to
-<code class="docutils literal notranslate"><span class="pre">8080</span></code>, which conflicts with LMCache’s HTTP API on a single host.</p>
+<p>This guide shows a two-machine 1-prefill/1-decode deployment using vLLM V1,
+LMCache’s non-MP <code class="docutils literal notranslate"><span class="pre">LMCacheConnectorV1</span></code>, and Mooncake Store as LMCache’s remote
+storage backend.</p>
+<p>LMCache supports both non-MP mode and MP mode with Mooncake Store. This page
+covers the non-MP path, where each vLLM instance loads an LMCache YAML config
+through <code class="docutils literal notranslate"><span class="pre">LMCACHE_CONFIG_FILE</span></code> and connects directly to Mooncake Store with
+<code class="docutils literal notranslate"><span class="pre">remote_url:</span> <span class="pre">&quot;mooncakestore://...&quot;</span></code>. For the LMCache multiprocess server path,
+see <a class="reference internal" href="vllmv1-lmcache-mp-integration.html"><span class="std std-doc">vLLM V1 Disaggregated Serving with Mooncake Store and LMCache [MP]</span></a>.</p>
+<p>The examples below use:</p>
+<ul class="simple">
+<li><p>Machine A: Mooncake master and vLLM decoder</p></li>
+<li><p>Machine B: vLLM prefiller</p></li>
+<li><p>Mooncake master RPC address: <code class="docutils literal notranslate"><span class="pre">{IP</span> <span class="pre">of</span> <span class="pre">Machine</span> <span class="pre">A}:50051</span></code></p></li>
+<li><p>Mooncake HTTP metadata endpoint: <code class="docutils literal notranslate"><span class="pre">http://{IP</span> <span class="pre">of</span> <span class="pre">Machine</span> <span class="pre">A}:8080/metadata</span></code></p></li>
+<li><p>RDMA device: <code class="docutils literal notranslate"><span class="pre">{RDMA</span> <span class="pre">device}</span></code></p></li>
+</ul>
+<p>Replace these placeholders with the IP addresses, hostname, and RDMA device for
+your environment.</p>
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
-<p>Install Mooncake, vLLM, and LMCache on the machine. The example assumes an RDMA
-deployment and uses:</p>
+<p>Install Mooncake, vLLM, and LMCache on both machines. For installation details,
+refer to the official documentation of each project:</p>
 <ul class="simple">
-<li><p>local host address: <code class="docutils literal notranslate"><span class="pre">{IP</span> <span class="pre">of</span> <span class="pre">Machine}</span></code></p></li>
-<li><p>RDMA device: <code class="docutils literal notranslate"><span class="pre">{RDMA</span> <span class="pre">device}</span></code></p></li>
-<li><p>LMCache checkout path: <code class="docutils literal notranslate"><span class="pre">/path/to/LMCache</span></code></p></li>
+<li><p><a class="reference internal" href="../../build.html"><span class="std std-doc">Mooncake build guide</span></a></p></li>
+<li><p><a class="reference external" href="https://docs.lmcache.ai/getting_started/installation.html">LMCache installation</a></p></li>
+<li><p><a class="reference external" href="https://docs.vllm.ai/en/latest/getting_started/installation/">vLLM installation</a></p></li>
 </ul>
-<p>Replace these values with the local hostname/IP, RDMA device, and LMCache checkout path for your environment.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">mooncake_store</span></code> MP L2 adapter requires LMCache’s <code class="docutils literal notranslate"><span class="pre">lmcache_mooncake</span></code> C++
-extension. When building LMCache from source, enable Mooncake support, for
-example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">BUILD_MOONCAKE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-<span class="nv">MOONCAKE_INCLUDE_DIR</span><span class="o">=</span>/path/to/mooncake/include<span class="w"> </span><span class="se">\</span>
-<span class="nv">MOONCAKE_LIB_DIR</span><span class="o">=</span>/path/to/mooncake/lib<span class="w"> </span><span class="se">\</span>
-pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>/path/to/LMCache<span class="w"> </span>--verbose
-</pre></div>
-</div>
 </section>
 <section id="deployment">
 <h2>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h2>
-<section id="start-mooncake-master">
-<h3>1. Start Mooncake Master<a class="headerlink" href="#start-mooncake-master" title="Link to this heading">#</a></h3>
+<section id="start-mooncake-master-on-machine-a">
+<h3>1. Start Mooncake Master on Machine A<a class="headerlink" href="#start-mooncake-master-on-machine-a" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span>-v<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--rpc_port<span class="o">=</span><span class="m">50051</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--metrics_port<span class="o">=</span><span class="m">9003</span>
+<span class="w">  </span>--metrics_port<span class="o">=</span><span class="m">9003</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--http_metadata_server_host<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
 </pre></div>
 </div>
 </section>
-<section id="start-the-lmcache-multiprocess-server">
-<h3>2. Start the LMCache Multiprocess Server<a class="headerlink" href="#start-the-lmcache-multiprocess-server" title="Link to this heading">#</a></h3>
-<p>Start one LMCache MP server and configure Mooncake Store as the L2 adapter.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lmcache<span class="w"> </span>server<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--port<span class="w"> </span><span class="m">5555</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http-host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http-port<span class="w"> </span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--l1-size-gb<span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--eviction-policy<span class="w"> </span>LRU<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--no-l1-use-lazy<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--l2-adapter<span class="w"> </span><span class="s1">&#39;{</span>
-<span class="s1">    &quot;type&quot;: &quot;mooncake_store&quot;,</span>
-<span class="s1">    &quot;local_hostname&quot;: &quot;{IP of Machine}&quot;,</span>
-<span class="s1">    &quot;metadata_server&quot;: &quot;P2PHANDSHAKE&quot;,</span>
-<span class="s1">    &quot;protocol&quot;: &quot;rdma&quot;,</span>
-<span class="s1">    &quot;rdma_devices&quot;: &quot;{RDMA device}&quot;,</span>
-<span class="s1">    &quot;global_segment_size&quot;: &quot;32212254720&quot;,</span>
-<span class="s1">    &quot;local_buffer_size&quot;: &quot;1073741824&quot;,</span>
-<span class="s1">    &quot;master_server_addr&quot;: &quot;127.0.0.1:50051&quot;</span>
-<span class="s1">  }&#39;</span>
+<section id="configure-and-start-the-vllm-decoder-on-machine-a">
+<h3>2. Configure and Start the vLLM Decoder on Machine A<a class="headerlink" href="#configure-and-start-the-vllm-decoder-on-machine-a" title="Link to this heading">#</a></h3>
+<p>Modify the vLLM disaggregated prefill launcher to use a Mooncake-backed LMCache
+config for the decoder.</p>
+<p>The decoder should continue to use <code class="docutils literal notranslate"><span class="pre">LMCacheConnectorV1</span></code> with <code class="docutils literal notranslate"><span class="pre">kv_role</span></code> set to
+<code class="docutils literal notranslate"><span class="pre">kv_consumer</span></code>.</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --git a/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh b/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh</span>
+<span class="gd">--- a/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh</span>
+<span class="gi">+++ b/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh</span>
+<span class="gu">@@</span>
+<span class="w"> </span>elif [[ $1 == &quot;decoder&quot; ]]; then
+<span class="w"> </span>    # Decoder listens on port 8200
+<span class="gd">-    decode_config_file=$SCRIPT_DIR/configs/lmcache-decoder-config.yaml</span>
+<span class="gi">+    decode_config_file=$SCRIPT_DIR/configs/mooncake-decoder-config.yaml</span>
+</pre></div>
+</div>
+<p>Create <code class="docutils literal notranslate"><span class="pre">configs/mooncake-decoder-config.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">chunk_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span>
+<span class="nt">remote_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mooncakestore://{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">A}:50051/&quot;</span>
+<span class="nt">remote_serde</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;naive&quot;</span>
+<span class="nt">local_cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">max_local_cpu_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+
+<span class="nt">extra_config</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">local_hostname</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">A}&quot;</span>
+<span class="w">  </span><span class="nt">metadata_server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">A}:8080/metadata&quot;</span>
+<span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rdma&quot;</span>
+<span class="w">  </span><span class="nt">device_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{RDMA</span><span class="nv"> </span><span class="s">device}&quot;</span>
+<span class="w">  </span><span class="nt">master_server_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">A}:50051&quot;</span>
+<span class="w">  </span><span class="nt">global_segment_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32212254720</span><span class="w"> </span><span class="c1"># 30GB</span>
+<span class="w">  </span><span class="nt">local_buffer_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1073741824</span><span class="w"> </span><span class="c1"># 1GB</span>
+<span class="w">  </span><span class="nt">transfer_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">save_chunk_meta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<p>Launch the decoder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>disagg_vllm_launcher.sh<span class="w"> </span>decoder<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4
+</pre></div>
+</div>
+</section>
+<section id="configure-and-start-the-vllm-prefiller-on-machine-b">
+<h3>3. Configure and Start the vLLM Prefiller on Machine B<a class="headerlink" href="#configure-and-start-the-vllm-prefiller-on-machine-b" title="Link to this heading">#</a></h3>
+<p>Modify the launcher to use a Mooncake-backed LMCache config for the prefiller.</p>
+<p>The prefiller should continue to use <code class="docutils literal notranslate"><span class="pre">LMCacheConnectorV1</span></code> with <code class="docutils literal notranslate"><span class="pre">kv_role</span></code> set to
+<code class="docutils literal notranslate"><span class="pre">kv_producer</span></code>.</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --git a/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh b/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh</span>
+<span class="gd">--- a/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh</span>
+<span class="gi">+++ b/examples/lmcache/disagg_prefill_lmcache_v1/disagg_vllm_launcher.sh</span>
+<span class="gu">@@</span>
+<span class="w"> </span>if [[ $1 == &quot;prefiller&quot; ]]; then
+<span class="w"> </span>    # Prefiller listens on port 8100
+<span class="gd">-    prefill_config_file=$SCRIPT_DIR/configs/lmcache-prefiller-config.yaml</span>
+<span class="gi">+    prefill_config_file=$SCRIPT_DIR/configs/mooncake-prefiller-config.yaml</span>
+</pre></div>
+</div>
+<p>Create <code class="docutils literal notranslate"><span class="pre">configs/mooncake-prefiller-config.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">chunk_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span>
+<span class="nt">remote_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mooncakestore://{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">A}:50051/&quot;</span>
+<span class="nt">remote_serde</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;naive&quot;</span>
+<span class="nt">local_cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">max_local_cpu_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+
+<span class="nt">extra_config</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">local_hostname</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">B}&quot;</span>
+<span class="w">  </span><span class="nt">metadata_server</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">A}:8080/metadata&quot;</span>
+<span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rdma&quot;</span>
+<span class="w">  </span><span class="nt">device_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{RDMA</span><span class="nv"> </span><span class="s">device}&quot;</span>
+<span class="w">  </span><span class="nt">master_server_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{IP</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Machine</span><span class="nv"> </span><span class="s">A}:50051&quot;</span>
+<span class="w">  </span><span class="nt">global_segment_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32212254720</span><span class="w"> </span><span class="c1"># 30GB</span>
+<span class="w">  </span><span class="nt">local_buffer_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1073741824</span><span class="w"> </span><span class="c1"># 1GB</span>
+<span class="w">  </span><span class="nt">transfer_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">save_chunk_meta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<p>Launch the prefiller:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>disagg_vllm_launcher.sh<span class="w"> </span>prefiller<span class="w"> </span>Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4
 </pre></div>
 </div>
 </section>
 <section id="start-the-disaggregated-proxy">
-<h3>3. Start the Disaggregated Proxy<a class="headerlink" href="#start-the-disaggregated-proxy" title="Link to this heading">#</a></h3>
-<p>The proxy receives client requests, sends prefill requests to the prefiller,
-sends decode requests to the decoder, and receives LMCache request telemetry
-from the prefiller.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>/path/to/LMCache/examples/disagg_prefill_mp/disagg_proxy_server.py<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--port<span class="w"> </span><span class="m">8000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--prefiller-host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="se">\</span>
+<h3>4. Start the Disaggregated Proxy<a class="headerlink" href="#start-the-disaggregated-proxy" title="Link to this heading">#</a></h3>
+<p>Use the LMCache <a class="reference external" href="https://github.com/LMCache/LMCache/blob/dev/examples/disagg_prefill/disagg_proxy_server.py"><code class="docutils literal notranslate"><span class="pre">disagg_proxy_server.py</span></code></a> to route requests between the prefiller and decoder. According to <a class="reference external" href="https://github.com/LMCache/LMCache/issues/1342">LMCache/LMCache#1342</a>, when using Mooncake Store as the backend, comment out the <code class="docutils literal notranslate"><span class="pre">wait_decode_kv_ready(...)</span></code> call in the proxy before starting it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>disagg_proxy_server.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--port<span class="w"> </span><span class="m">9000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--prefiller-host<span class="w"> </span><span class="o">{</span>IP<span class="w"> </span>of<span class="w"> </span>Machine<span class="w"> </span>B<span class="o">}</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--prefiller-port<span class="w"> </span><span class="m">8100</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--decoder-host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--decoder-port<span class="w"> </span><span class="m">8200</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--telemetry-port<span class="w"> </span><span class="m">5768</span>
-</pre></div>
-</div>
-</section>
-<section id="start-the-vllm-prefiller">
-<h3>4. Start the vLLM Prefiller<a class="headerlink" href="#start-the-vllm-prefiller" title="Link to this heading">#</a></h3>
-<p>The prefiller reports request telemetry back to the proxy so the proxy knows
-when KV cache storage has completed.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
-<span class="nv">LMCACHE_REQUEST_TELEMETRY_TYPE</span><span class="o">=</span>fastapi<span class="w"> </span><span class="se">\</span>
-<span class="nv">LMCACHE_REQUEST_TELEMETRY_ENDPOINT</span><span class="o">=</span>http://127.0.0.1:5768/api/v1/telemetry<span class="w"> </span><span class="se">\</span>
-vllm<span class="w"> </span>serve<span class="w"> </span>Qwen/Qwen3-4B<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--port<span class="w"> </span><span class="m">8100</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--no-enable-log-requests<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--no-enable-prefix-caching<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{</span>
-<span class="s1">    &quot;kv_connector&quot;: &quot;LMCacheMPConnector&quot;,</span>
-<span class="s1">    &quot;kv_role&quot;: &quot;kv_both&quot;,</span>
-<span class="s1">    &quot;kv_connector_extra_config&quot;: {</span>
-<span class="s1">      &quot;lmcache.mp.host&quot;: &quot;tcp://127.0.0.1&quot;,</span>
-<span class="s1">      &quot;lmcache.mp.port&quot;: 5555</span>
-<span class="s1">    }</span>
-<span class="s1">  }&#39;</span>
-</pre></div>
-</div>
-</section>
-<section id="start-the-vllm-decoder">
-<h3>5. Start the vLLM Decoder<a class="headerlink" href="#start-the-vllm-decoder" title="Link to this heading">#</a></h3>
-<p>The decoder connects to the same local LMCache MP server. It does not need
-request telemetry environment variables; only the prefiller reports the “KV
-cache is stored” event back to the proxy.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-vllm<span class="w"> </span>serve<span class="w"> </span>Qwen/Qwen3-4B<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--port<span class="w"> </span><span class="m">8200</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--no-enable-log-requests<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--no-enable-prefix-caching<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--kv-transfer-config<span class="w"> </span><span class="s1">&#39;{</span>
-<span class="s1">    &quot;kv_connector&quot;: &quot;LMCacheMPConnector&quot;,</span>
-<span class="s1">    &quot;kv_role&quot;: &quot;kv_both&quot;,</span>
-<span class="s1">    &quot;kv_connector_extra_config&quot;: {</span>
-<span class="s1">      &quot;lmcache.mp.host&quot;: &quot;tcp://127.0.0.1&quot;,</span>
-<span class="s1">      &quot;lmcache.mp.port&quot;: 5555</span>
-<span class="s1">    }</span>
-<span class="s1">  }&#39;</span>
+<span class="w">  </span>--decoder-host<span class="w"> </span><span class="o">{</span>IP<span class="w"> </span>of<span class="w"> </span>Machine<span class="w"> </span>A<span class="o">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--decoder-port<span class="w"> </span><span class="m">8200</span>
 </pre></div>
 </div>
 </section>
 <section id="send-a-test-request">
-<h3>6. Send a Test Request<a class="headerlink" href="#send-a-test-request" title="Link to this heading">#</a></h3>
+<h3>5. Send a Test Request<a class="headerlink" href="#send-a-test-request" title="Link to this heading">#</a></h3>
 <p>Send traffic to the proxy, not directly to either vLLM instance.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-N<span class="w"> </span>http://127.0.0.1:8000/v1/chat/completions<span class="w"> </span><span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-N<span class="w"> </span>http://<span class="o">{</span>Proxy<span class="w"> </span>IP<span class="o">}</span>:9000/v1/chat/completions<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
-<span class="s1">    &quot;model&quot;: &quot;Qwen/Qwen3-4B&quot;,</span>
+<span class="s1">    &quot;model&quot;: &quot;Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4&quot;,</span>
 <span class="s1">    &quot;messages&quot;: [</span>
 <span class="s1">      {</span>
 <span class="s1">        &quot;role&quot;: &quot;user&quot;,</span>
@@ -599,25 +607,22 @@ vllm<span class="w"> </span>serve<span class="w"> </span>Qwen/Qwen3-4B<span clas
 <p>When changing ports away from these defaults, update all dependent settings
 together:</p>
 <ul class="simple">
-<li><p>Mooncake master <code class="docutils literal notranslate"><span class="pre">--rpc_port</span></code> must match LMCache <code class="docutils literal notranslate"><span class="pre">master_server_addr</span></code>.</p></li>
-<li><p>The vLLM prefiller and decoder should connect to the local LMCache MP server
-via <code class="docutils literal notranslate"><span class="pre">kv_connector_extra_config.lmcache.mp.host</span></code> and
-<code class="docutils literal notranslate"><span class="pre">kv_connector_extra_config.lmcache.mp.port</span></code>.</p></li>
+<li><p>Mooncake master <code class="docutils literal notranslate"><span class="pre">--rpc_port</span></code> must match <code class="docutils literal notranslate"><span class="pre">remote_url</span></code> and
+<code class="docutils literal notranslate"><span class="pre">extra_config.master_server_address</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_config.metadata_server</span></code> must point to the Mooncake HTTP metadata
+endpoint when HTTP metadata is used.</p></li>
+<li><p>Decoder and prefiller <code class="docutils literal notranslate"><span class="pre">device_name</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol</span></code>, <code class="docutils literal notranslate"><span class="pre">global_segment_size</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">local_buffer_size</span></code> should be set for the local hardware and workload.</p></li>
 <li><p>Proxy <code class="docutils literal notranslate"><span class="pre">--prefiller-port</span></code> and <code class="docutils literal notranslate"><span class="pre">--decoder-port</span></code> must match the two vLLM
-<code class="docutils literal notranslate"><span class="pre">--port</span></code> values.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LMCACHE_REQUEST_TELEMETRY_ENDPOINT</span></code> on the prefiller must point to the proxy
-telemetry endpoint.</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> is changed from <code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code> to an HTTP metadata URL,
-enable Mooncake HTTP metadata server and make sure its port does not conflict
-with LMCache <code class="docutils literal notranslate"><span class="pre">--http-port</span></code>.</p></li>
+instance ports.</p></li>
 </ul>
 </section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../lmcache-integration.html"><span class="std std-doc">Mooncake x LMCache: Unite to Pioneer KVCache-Centric LLM Serving System</span></a></p></li>
-<li><p><a class="reference external" href="https://docs.lmcache.ai/mp/l2_storage.html#mooncake-store-mooncake-store-native-connector">LMCache MP <code class="docutils literal notranslate"><span class="pre">mooncake_store</span></code> L2 adapter</a></p></li>
-<li><p><a class="reference external" href="https://github.com/LMCache/LMCache/tree/dev/examples/disagg_prefill_mp">LMCache multiprocess disaggregated prefill example</a></p></li>
+<li><p><a class="reference external" href="https://docs.lmcache.ai/kv_cache/storage_backends/mooncake.html">Using Mooncake in LMCache</a></p></li>
+<li><p><a class="reference external" href="https://github.com/vllm-project/vllm/tree/main/examples/others/lmcache">Using LMCache in vLLM</a></p></li>
 </ul>
 </section>
 </section>
@@ -643,11 +648,11 @@ with LMCache <code class="docutils literal notranslate"><span class="pre">--http
       </div>
     </a>
     <a class="right-next"
-       href="../lmdeploy-integration-v0.9.html"
+       href="vllmv1-lmcache-mp-integration.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">LMDeploy Disaggregated Serving with MooncakeTransferEngine</p>
+        <p class="prev-next-title">vLLM V1 Disaggregated Serving with Mooncake Store and LMCache [MP]</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -670,12 +675,11 @@ with LMCache <code class="docutils literal notranslate"><span class="pre">--http
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-mooncake-master">1. Start Mooncake Master</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-lmcache-multiprocess-server">2. Start the LMCache Multiprocess Server</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-disaggregated-proxy">3. Start the Disaggregated Proxy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-vllm-prefiller">4. Start the vLLM Prefiller</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-vllm-decoder">5. Start the vLLM Decoder</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#send-a-test-request">6. Send a Test Request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-mooncake-master-on-machine-a">1. Start Mooncake Master on Machine A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-and-start-the-vllm-decoder-on-machine-a">2. Configure and Start the vLLM Decoder on Machine A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-and-start-the-vllm-prefiller-on-machine-b">3. Configure and Start the vLLM Prefiller on Machine B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-disaggregated-proxy">4. Start the Disaggregated Proxy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#send-a-test-request">5. Send a Test Request</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#port-and-configuration-checklist">Port and Configuration Checklist</a></li>

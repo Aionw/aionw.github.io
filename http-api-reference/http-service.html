@@ -171,37 +171,35 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">SGLang x Mooncake Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">LMDeploy Disaggregated Serving with MooncakeTransferEngine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Performance Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake-store/index.html">Mooncake Store Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -439,6 +437,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-endpoints">Segment Management Endpoints</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-all-segments"><code class="docutils literal notranslate"><span class="pre">/get_all_segments</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#query-segment"><code class="docutils literal notranslate"><span class="pre">/query_segment</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-segments-detail"><code class="docutils literal notranslate"><span class="pre">/get_segments_detail</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#health-check-endpoints">Health Check Endpoints</a><ul class="visible nav section-nav flex-column">
@@ -604,6 +603,59 @@ workflows. Unless configured otherwise, it listens on port <code class="docutils
 <span class="n">Capacity</span><span class="p">(</span><span class="nb">bytes</span><span class="p">):</span> <span class="mi">4294967296</span>
 </pre></div>
 </div>
+</section>
+<section id="get-segments-detail">
+<h4><code class="docutils literal notranslate"><span class="pre">/get_segments_detail</span></code><a class="headerlink" href="#get-segments-detail" title="Link to this heading">#</a></h4>
+<p>Get detailed information of all segments in JSON format, including segment metadata, allocator usage, and status.</p>
+<p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+<strong>Content-Type</strong>: <code class="docutils literal notranslate"><span class="pre">application/json;</span> <span class="pre">charset=utf-8</span></code>
+<strong>Response</strong>: JSON object containing an array of segment details</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>http://localhost:8080/get_segments_detail
+</pre></div>
+</div>
+<p><strong>Response Format</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;total_segments&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;segments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;segment_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;segment_0&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;segment_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00000000-0000-0000-0000-000000000001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;client_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00000000-0000-0000-0000-000000000002&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;base_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x300000000&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;size_bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">17179869184</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;size_human&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16 GiB&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;te_endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.1:12345&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdma&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MOUNTED&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;allocator_used_bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1073741824</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;allocator_capacity_bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">17179869184</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;allocator_usage_percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">6.25</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Fields</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">total_segments</span></code> (integer): Total number of segments in the cluster</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">segments</span></code> (array): Array of segment detail objects</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_name</span></code> (string): Name of the segment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">segment_id</span></code> (string): UUID of the segment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_id</span></code> (string): UUID of the client that owns the segment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">base_address</span></code> (string): Base memory address in hex</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_bytes</span></code> (integer): Segment size in bytes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_human</span></code> (string): Human-readable segment size</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">te_endpoint</span></code> (string): Transport endpoint address</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code> (string): Transfer protocol (e.g., rdma, tcp)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code> (string): Current segment status</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allocator_used_bytes</span></code> (integer): Bytes currently allocated</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allocator_capacity_bytes</span></code> (integer): Total allocator capacity in bytes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allocator_usage_percent</span></code> (number): Percentage of allocator capacity used</p></li>
+</ul>
+</li>
+</ul>
 </section>
 </section>
 <section id="health-check-endpoints">
@@ -855,6 +907,7 @@ allocations, then the store releases the local allocated memory after cleanup.</
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-management-endpoints">Segment Management Endpoints</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-all-segments"><code class="docutils literal notranslate"><span class="pre">/get_all_segments</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#query-segment"><code class="docutils literal notranslate"><span class="pre">/query_segment</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-segments-detail"><code class="docutils literal notranslate"><span class="pre">/get_segments_detail</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#health-check-endpoints">Health Check Endpoints</a><ul class="visible nav section-nav flex-column">
