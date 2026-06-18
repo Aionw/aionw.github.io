@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dynamic-command-builder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
@@ -45,6 +46,7 @@
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../../_static/sphinx-dynamic-command-builder.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -59,7 +61,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Supported Communication Protocols" href="../../getting_started/supported-protocols.html" />
-    <link rel="prev" title="P2P Store" href="../p2p-store.html" />
+    <link rel="prev" title="Mooncake EP Design" href="../mooncake-ep.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,7 +178,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
@@ -193,6 +195,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-ep.html">Mooncake EP Design</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Transfer Engine</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="efa_transport.html">AWS EFA Transport for Mooncake</a></li>
@@ -221,6 +225,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/pg-ep-troubleshooting.html">Mooncake PG/EP Troubleshooting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
@@ -793,6 +798,7 @@ Value = {
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_LOG_LEVEL</span></code> This option can be set as <code class="docutils literal notranslate"><span class="pre">TRACE</span></code>/<code class="docutils literal notranslate"><span class="pre">INFO</span></code>/<code class="docutils literal notranslate"><span class="pre">WARNING</span></code>/<code class="docutils literal notranslate"><span class="pre">ERROR</span></code> (see <a class="reference external" href="https://github.com/google/glog/blob/master/docs/logging.md">glog doc</a>), and more detailed logs will be output during runtime</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_DISABLE_METACACHE</span></code> Disable local meta cache to prevent transfer failure due to dynamic memory registrations, which may downgrades the performance</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_LISTEN_BACKLOG</span></code> The backlog size of socket listening for handshaking, default value is 128</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_CONNECT_TIMEOUT</span></code> Connect timeout in seconds for outbound handshake-port requests (QP handshake, probe, notify, metadata exchange), default value is 5. Bounds the stall when the peer address is unreachable; without it, a connect to an unroutable address (e.g. a removed node) blocks for the kernel’s full TCP SYN retry cycle, which can take minutes</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_HANDSHAKE_MAX_LENGTH</span></code> The maximum handshake message length in bytes for P2P mode. Valid range: 1MB to 128MB. Default value is 1MB (1048576 bytes). Increase this value when using a single RDMA instance with many registered memory buffers (&gt;10,000) to avoid handshake failures. Example: set to 10485760 for 10MB</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_LOG_DIR</span></code> Specify the directory path for log redirection files. If invalid, log to stderr instead.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_REDIS_PASSWORD</span></code> The password for Redis storage plugin, only takes effect when Redis is specified as the metadata server. If not set, no authentication will be attempted to log in to the Redis.</p></li>
@@ -807,6 +813,7 @@ Value = {
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_MIN_RPC_PORT</span></code> Specifies the minimum port number for RPC service. The default value is 15000.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_MAX_RPC_PORT</span></code> Specifies the maximum port number for RPC service. The default value is 17000.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_PATH_ROUNDROBIN</span></code> Use round-robin mode in the RDMA path selection. This may be beneficial for transferring large bulks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MC_TE_FILTERS</span></code> Optional comma-separated whitelist of IB device names (e.g. <code class="docutils literal notranslate"><span class="pre">mlx5_0,mlx5_2</span></code>) for legacy Transfer Engine topology discovery. When unset, all available devices are discovered.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">WITH_NVIDIA_PEERMEM</span></code> When set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">ON</span></code>, or <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, Mooncake uses <code class="docutils literal notranslate"><span class="pre">ibv_reg_mr()</span></code> directly for GPU memory registration (requires the <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code> kernel module). By default (unset or <code class="docutils literal notranslate"><span class="pre">0</span></code>), Mooncake uses the DMA-BUF path which does not require <code class="docutils literal notranslate"><span class="pre">nvidia-peermem</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_ENDPOINT_STORE_TYPE</span></code> Choose FIFO Endpoint Store (<code class="docutils literal notranslate"><span class="pre">FIFO</span></code>) or Sieve Endpoint Store (<code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>), default is <code class="docutils literal notranslate"><span class="pre">SIEVE</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MC_TCP_ENABLE_CONNECTION_POOL</span></code> Enable TCP Connection Pool to avoid excessive sockets.</p></li>
@@ -874,12 +881,12 @@ Value = {
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../p2p-store.html"
+       href="../mooncake-ep.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">P2P Store</p>
+        <p class="prev-next-title">Mooncake EP Design</p>
       </div>
     </a>
     <a class="right-next"

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Mooncake Store Deployment &amp; Tunnig Guide &#8212; Mooncake</title>
+    <title>Mooncake Store Deployment Guide &#8212; Mooncake</title>
   
   
   
@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dynamic-command-builder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
@@ -45,6 +46,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../_static/sphinx-dynamic-command-builder.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -58,7 +60,7 @@
     <link rel="icon" href="../_static/moonshot.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="SSD Offload" href="ssd-offload.html" />
+    <link rel="next" title="Mooncake Store Configuration Reference" href="mooncake-store-configuration-reference.html" />
     <link rel="prev" title="Quick Start" href="../getting_started/quick-start.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -176,7 +178,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Mooncake Store Deployment &amp; Tunnig Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Mooncake Store Deployment Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mooncake-store-configuration-reference.html">Mooncake Store Configuration Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssd-offload.html">SSD Offload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nvmf-ssd-deployment-guide.html">NvMe-Of SSD Pool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html">HF3FS Plugin (Experimental)</a></li>
@@ -199,6 +202,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-ep.html">Mooncake EP Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
@@ -217,6 +222,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/pg-ep-troubleshooting.html">Mooncake PG/EP Troubleshooting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
@@ -413,7 +419,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mooncake Store Deployment & Tunnig Guide</h1>
+    <h1>Mooncake Store Deployment Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -425,50 +431,17 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-metadata-service">1. Start the Metadata Service</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-master-service">2. Start the Master Service</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-store-client">3. Start a Store Client</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify">Verify</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-master-service">1. Start the Master Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-store-client">2. Start a Store Client</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify">3. Verify</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-scenarios">Deployment Scenarios</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-tcp-development-quick-evaluation">Single-Node (TCP) — Development / Quick Evaluation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-etcd-production-ha">High-Availability (etcd) — Production HA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-redis-alternative-ha-backend">High-Availability (Redis) — Alternative HA Backend</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore-backup-disaster-recovery">Snapshot &amp; Restore — Backup / Disaster Recovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-aware-allocation-memory-tiering">CXL-Aware Allocation — Memory Tiering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stress-benchmark">Stress Benchmark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-tips">Quick Tips</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-master-startup-flags">Reference: Master Startup Flags</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rpc">RPC</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server-embedded">HTTP Metadata Server (Embedded)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-allocator">Memory Allocator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allocation-strategy">Allocation Strategy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putstart-timeouts">PutStart Timeouts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-ttls">Eviction &amp; TTLs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability">High Availability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-manager">Task Manager</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offload-tiered-storage">Offload / Tiered Storage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-memory">CXL Memory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-storage">DFS Storage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-configuration-file">Master Configuration File</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-client-engine-tuning-env-vars">Reference: Client &amp; Engine Tuning (Env Vars)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-protocol">Runtime Protocol</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-discovery">Topology Discovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine-metrics-disabled-by-default">Transfer Engine Metrics (disabled by default)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-metrics-enabled-by-default">Client Metrics (enabled by default)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-hot-cache">Local Hot Cache</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-memory-optimization">Local Memory Optimization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mmap-buffer-hugepages">MMap Buffer &amp; HugePages</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yalantinglibs-log-level">yalantinglibs Log Level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compose-commands-and-runtime-modes">Compose Commands and Runtime Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-storage-backends">Add Storage Backends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-and-observe">Validate and Observe</a></li>
 </ul>
 </li>
 </ul>
@@ -482,49 +455,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mooncake-store-deployment-tunnig-guide">
-<h1>Mooncake Store Deployment &amp; Tunnig Guide<a class="headerlink" href="#mooncake-store-deployment-tunnig-guide" title="Link to this heading">#</a></h1>
-<p>This guide covers minimal deployment, and operational tuning of Mooncake Store.</p>
+  <section id="mooncake-store-deployment-guide">
+<h1>Mooncake Store Deployment Guide<a class="headerlink" href="#mooncake-store-deployment-guide" title="Link to this heading">#</a></h1>
+<p>This guide shows how to bring up a minimal Mooncake Store deployment and where
+to tune production settings.</p>
 <section id="architecture-overview">
 <h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Link to this heading">#</a></h2>
 <p><img alt="architecture" src="../_images/mooncake-store-preview.png" /></p>
 <p><strong>Master Service</strong> (<code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code>): The central coordinator. It manages cluster membership, allocates object storage across client nodes, and enforces eviction/placement policies. Runs as a standalone process.</p>
 <p><strong>Client Node</strong>: Each node contributes DRAM (and optionally VRAM/SSD) to form the distributed cache pool. Clients communicate with the master over RPC for control operations (<code class="docutils literal notranslate"><span class="pre">Put</span></code>/<code class="docutils literal notranslate"><span class="pre">Get</span></code>/<code class="docutils literal notranslate"><span class="pre">Remove</span></code>), but transfer actual data directly between each other via the Transfer Engine — the master is never in the data path.</p>
-<p><strong>Metadata Service</strong>: A separate service (etcd, Redis, or HTTP) used by the Transfer Engine for peer discovery and configuration. The master’s embedded HTTP metadata server can replace an external etcd/Redis for simple deployments. We also provide a P2P handshake mechanism (<code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code>) that enables decentralized metadata management by storing metadata locally on each node, eliminating the need for a centralized service — this is the simplest metadata handshake method and the recommended starting point (see <a class="reference internal" href="#quick-start">Quick Start</a>).</p>
+<p><strong>Metadata Discovery</strong>: The Transfer Engine needs peer-discovery metadata before clients can exchange data. The recommended starting point is <code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code>, which stores handshake metadata locally and does not require an external metadata service.</p>
 <p>For a detailed design discussion, see the <a class="reference internal" href="../design/mooncake-store.html"><span class="std std-doc">Mooncake Store Design</span></a>.</p>
 </section>
 <hr class="docutils" />
 <section id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
-<p>Deploy a minimal single-node Mooncake Store in three steps.</p>
-<section id="start-the-metadata-service">
-<h3>1. Start the Metadata Service<a class="headerlink" href="#start-the-metadata-service" title="Link to this heading">#</a></h3>
-<p>Choose one option:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Option A: P2P handshake — the simplest metadata handshake method (recommended)</span>
-<span class="c1"># Nothing to start here. There is no metadata service to deploy: each node</span>
-<span class="c1"># exchanges and stores metadata locally during connection setup. Just set the</span>
-<span class="c1"># client&#39;s metadata_server to the literal string &quot;P2PHANDSHAKE&quot; (see step 3).</span>
-
-<span class="c1"># Option B: Embed HTTP metadata server in the master</span>
-<span class="c1"># (configured in step 2 via --enable_http_metadata_server)</span>
-
-<span class="c1"># Option C: External etcd</span>
-etcd<span class="w"> </span>--listen-client-urls<span class="w"> </span>http://0.0.0.0:2379<span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--advertise-client-urls<span class="w"> </span>http://localhost:2379
-</pre></div>
-</div>
-<blockquote>
-<div><p><strong>Tip:</strong> P2P handshake is the easiest way to get started — it is decentralized
-and requires no etcd/Redis/HTTP metadata service. Prefer it for development and
-simple deployments; use an external etcd/Redis for large, long-lived clusters.</p>
-</div></blockquote>
-</section>
+<p>Deploy a minimal single-node TCP Mooncake Store with the P2P metadata handshake.
+No etcd, Redis, or HTTP metadata service is required.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/mooncake-store-quickstart-flow.svg"><img alt="Mooncake Store Quick Start runtime map" src="../_images/mooncake-store-quickstart-flow.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Runtime map for the Quick Start path: the master handles control RPC while clients discover peers through the selected metadata handshake and exchange data directly.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <section id="start-the-master-service">
-<h3>2. Start the Master Service<a class="headerlink" href="#start-the-master-service" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_host<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
+<h3>1. Start the Master Service<a class="headerlink" href="#start-the-master-service" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master
 </pre></div>
 </div>
 <p>On success the log shows:</p>
@@ -534,19 +491,20 @@ simple deployments; use an external etcd/Redis for large, long-lived clusters.</
 <span class="n">Master</span> <span class="n">service</span> <span class="n">listening</span> <span class="n">on</span> <span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">50051</span>
 </pre></div>
 </div>
-<p>The master’s default RPC port is <code class="docutils literal notranslate"><span class="pre">50051</span></code>. The HTTP metadata server serves on port <code class="docutils literal notranslate"><span class="pre">8080</span></code> in this example.</p>
+<p>The master’s default RPC port is <code class="docutils literal notranslate"><span class="pre">50051</span></code>. This Quick Start does not enable the
+embedded HTTP metadata server because clients use <code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code>.</p>
 </section>
 <section id="start-a-store-client">
-<h3>3. Start a Store Client<a class="headerlink" href="#start-a-store-client" title="Link to this heading">#</a></h3>
+<h3>2. Start a Store Client<a class="headerlink" href="#start-a-store-client" title="Link to this heading">#</a></h3>
 <p>Use the Python sample program to bring up a client that contributes 3.2 GB of DRAM to the cluster:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># stress_cluster_benchmark.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># quickstart_store_client.py</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">distributed_object_store</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistributedObjectStore</span>
 
 <span class="n">store</span> <span class="o">=</span> <span class="n">DistributedObjectStore</span><span class="p">()</span>
 <span class="n">store</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
     <span class="n">local_hostname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;LOCAL_HOSTNAME&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost&quot;</span><span class="p">),</span>
-    <span class="n">metadata_server</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;METADATA_ADDR&quot;</span><span class="p">,</span> <span class="s2">&quot;http://127.0.0.1:8080/metadata&quot;</span><span class="p">),</span>
+    <span class="n">metadata_server</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;METADATA_ADDR&quot;</span><span class="p">,</span> <span class="s2">&quot;P2PHANDSHAKE&quot;</span><span class="p">),</span>
     <span class="n">global_segment_size</span><span class="o">=</span><span class="mi">3200</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># DRAM contributed to the cluster</span>
     <span class="n">local_buffer_size</span><span class="o">=</span><span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>     <span class="c1"># Transfer Engine buffer</span>
     <span class="n">protocol</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PROTOCOL&quot;</span><span class="p">,</span> <span class="s2">&quot;tcp&quot;</span><span class="p">),</span>
@@ -555,27 +513,7 @@ simple deployments; use an external etcd/Redis for large, long-lived clusters.</
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>stress_cluster_benchmark.py
-</pre></div>
-</div>
-<p>To use <strong>P2P handshake</strong> instead of an HTTP/etcd metadata service, pass the
-literal string <code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code> as <code class="docutils literal notranslate"><span class="pre">metadata_server</span></code> — no other change is needed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">store</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
-    <span class="n">local_hostname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;LOCAL_HOSTNAME&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost&quot;</span><span class="p">),</span>
-    <span class="n">metadata_server</span><span class="o">=</span><span class="s2">&quot;P2PHANDSHAKE&quot;</span><span class="p">,</span>          <span class="c1"># decentralized, no metadata service</span>
-    <span class="n">global_segment_size</span><span class="o">=</span><span class="mi">3200</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
-    <span class="n">local_buffer_size</span><span class="o">=</span><span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
-    <span class="n">protocol</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PROTOCOL&quot;</span><span class="p">,</span> <span class="s2">&quot;tcp&quot;</span><span class="p">),</span>
-    <span class="n">device_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DEVICE_NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-    <span class="n">master_server_address</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;MASTER_SERVER&quot;</span><span class="p">,</span> <span class="s2">&quot;127.0.0.1:50051&quot;</span><span class="p">),</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>The standalone store service accepts the same value:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>mooncake.mooncake_store_service<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--local_hostname<span class="o">=</span>localhost<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--metadata_server<span class="o">=</span>P2PHANDSHAKE<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--master_server<span class="o">=</span><span class="m">127</span>.0.0.1:50051
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>quickstart_store_client.py
 </pre></div>
 </div>
 <p><strong>What just happened:</strong></p>
@@ -584,125 +522,42 @@ literal string <code class="docutils literal notranslate"><span class="pre">P2PH
 <li><p>The master allocated a 3.2 GB segment on this node and added it to the cluster’s memory pool.</p></li>
 <li><p>The client is now ready to serve <code class="docutils literal notranslate"><span class="pre">Put</span></code>/<code class="docutils literal notranslate"><span class="pre">Get</span></code>/<code class="docutils literal notranslate"><span class="pre">Remove</span></code> requests.</p></li>
 </ol>
-<p>You can also deploy a standalone store service process that hosts memory/SSD without an inference application:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>mooncake.mooncake_store_service<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--local_hostname<span class="o">=</span>localhost<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--metadata_server<span class="o">=</span>http://127.0.0.1:8080/metadata<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--master_server<span class="o">=</span><span class="m">127</span>.0.0.1:50051
-</pre></div>
-</div>
 </section>
 <section id="verify">
-<h3>Verify<a class="headerlink" href="#verify" title="Link to this heading">#</a></h3>
+<h3>3. Verify<a class="headerlink" href="#verify" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Health check — master metrics endpoint</span>
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9003/metrics/summary
-
-<span class="c1"># List registered clients</span>
-<span class="c1"># (exposed through the store&#39;s Python API or RPC)</span>
 </pre></div>
 </div>
+<p>The client should remain running without registration or transfer-engine setup
+errors.</p>
 </section>
 </section>
-<hr class="docutils" />
-<section id="deployment-scenarios">
-<h2>Deployment Scenarios<a class="headerlink" href="#deployment-scenarios" title="Link to this heading">#</a></h2>
-<section id="single-node-tcp-development-quick-evaluation">
-<h3>Single-Node (TCP) — Development / Quick Evaluation<a class="headerlink" href="#single-node-tcp-development-quick-evaluation" title="Link to this heading">#</a></h3>
-<p>The simplest deployment, as shown in <a class="reference internal" href="#quick-start">Quick Start</a>. A single <code class="docutils literal notranslate"><span class="pre">mooncake_master</span></code> orchestrates clients over TCP. Suitable for development, testing, and single-host evaluation.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_host<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
+<section id="stress-benchmark">
+<h2>Stress Benchmark<a class="headerlink" href="#stress-benchmark" title="Link to this heading">#</a></h2>
+<p>Mooncake Store includes sample programs for validating C++ and Python
+integrations. The <a class="github reference external" href="https://github.com/kvcache-ai/Mooncake/blob/main/mooncake-store/tests/stress_cluster_benchmark.py">stress benchmark script</a>
+can be used to verify a two-role prefill/decode setup after the master is
+running.</p>
+<p>Configure the script for your network:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_hostname</span></code>: the local machine’s reachable IP address or hostname.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata_server</span></code>: the Transfer Engine metadata service, for example <code class="docutils literal notranslate"><span class="pre">P2PHANDSHAKE</span></code>, <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/metadata</span></code>, or an etcd address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">master_server_address</span></code>: the Mooncake Store master address. Use <code class="docutils literal notranslate"><span class="pre">IP:Port</span></code> in default mode, or <code class="docutils literal notranslate"><span class="pre">etcd://IP:Port;IP:Port;...;IP:Port</span></code> in etcd-backed HA mode.</p></li>
+</ul>
+<p>Then start the roles:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ROLE</span><span class="o">=</span>prefill<span class="w"> </span>python3<span class="w"> </span>mooncake-store/tests/stress_cluster_benchmark.py
+<span class="nv">ROLE</span><span class="o">=</span>decode<span class="w"> </span>python3<span class="w"> </span>mooncake-store/tests/stress_cluster_benchmark.py
 </pre></div>
 </div>
-<p>Limitation: the master is a single point of failure. If it crashes, cluster operations pause until it is restored.</p>
-</section>
-<hr class="docutils" />
-<section id="high-availability-etcd-production-ha">
-<h3>High-Availability (etcd) — Production HA<a class="headerlink" href="#high-availability-etcd-production-ha" title="Link to this heading">#</a></h3>
-<p>Runs a cluster of master instances coordinated through etcd. If the leader fails, the remaining instances elect a new leader automatically.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start each master instance with:</span>
-mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable-ha<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--etcd-endpoints<span class="o">=</span><span class="s2">&quot;10.0.0.1:2379;10.0.0.2:2379;10.0.0.3:2379&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rpc-address<span class="o">=</span><span class="m">10</span>.0.0.1
+<p>For RDMA, topology auto-discovery and NIC filters can be passed through
+environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ROLE</span><span class="o">=</span>prefill<span class="w"> </span><span class="nv">MC_MS_AUTO_DISC</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MC_MS_FILTERS</span><span class="o">=</span><span class="s2">&quot;mlx5_1,mlx5_2&quot;</span><span class="w"> </span>python3<span class="w"> </span>mooncake-store/tests/stress_cluster_benchmark.py
+<span class="nv">ROLE</span><span class="o">=</span>decode<span class="w"> </span><span class="nv">MC_MS_AUTO_DISC</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MC_MS_FILTERS</span><span class="o">=</span><span class="s2">&quot;mlx5_1,mlx5_2&quot;</span><span class="w"> </span>python3<span class="w"> </span>mooncake-store/tests/stress_cluster_benchmark.py
 </pre></div>
 </div>
-<p>Each instance must specify its own reachable <code class="docutils literal notranslate"><span class="pre">--rpc-address</span></code>. The etcd cluster used for HA can be shared with or separate from the Transfer Engine’s metadata etcd.</p>
+<p>The absence of errors indicates successful data transfer.</p>
 </section>
-<hr class="docutils" />
-<section id="high-availability-redis-alternative-ha-backend">
-<h3>High-Availability (Redis) — Alternative HA Backend<a class="headerlink" href="#high-availability-redis-alternative-ha-backend" title="Link to this heading">#</a></h3>
-<p>Same HA semantics but using Redis instead of etcd for leader election:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable-ha<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--ha_backend_type<span class="o">=</span>redis<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--ha_backend_connstring<span class="o">=</span><span class="s2">&quot;redis://127.0.0.1:6379&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rpc-address<span class="o">=</span><span class="m">10</span>.0.0.1
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="snapshot-restore-backup-disaster-recovery">
-<h3>Snapshot &amp; Restore — Backup / Disaster Recovery<a class="headerlink" href="#snapshot-restore-backup-disaster-recovery" title="Link to this heading">#</a></h3>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>Metadata Snapshot And Restore is experimental feature.</p>
-</div>
-<p>Periodically persist master metadata to local disk or S3, enabling recovery from a recent snapshot after a crash.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MOONCAKE_SNAPSHOT_LOCAL_PATH</span><span class="o">=</span>/data/mooncake_snapshots
-
-mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_snapshot<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--snapshot_interval_seconds<span class="o">=</span><span class="m">300</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--snapshot_retention_count<span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--snapshot_object_store_type<span class="o">=</span><span class="nb">local</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_snapshot_restore<span class="o">=</span><span class="nb">true</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="tiered-storage-with-ssd-offload-cost-effective-capacity">
-<h3>Tiered Storage with SSD Offload — Cost-Effective Capacity<a class="headerlink" href="#tiered-storage-with-ssd-offload-cost-effective-capacity" title="Link to this heading">#</a></h3>
-<p>Extends the cache pool from DRAM to SSD while keeping normal reads and writes on the distributed memory path. With <code class="docutils literal notranslate"><span class="pre">--enable_offload=true</span></code>, completed memory writes are queued for asynchronous SSD persistence through the master control plane. Set <code class="docutils literal notranslate"><span class="pre">--offload_on_evict=true</span></code> to defer that SSD write until the memory eviction path selects an object for reclamation. When <code class="docutils literal notranslate"><span class="pre">--promotion_on_hit=true</span></code>, SSD-only objects can be promoted back to DRAM after repeated reads; admission is gated by <code class="docutils literal notranslate"><span class="pre">--promotion_admission_threshold</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_offload<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--offload_on_evict<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--promotion_on_hit<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--promotion_admission_threshold<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--root_fs_dir<span class="o">=</span>/mnt/ssd_cache<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="cxl-aware-allocation-memory-tiering">
-<h3>CXL-Aware Allocation — Memory Tiering<a class="headerlink" href="#cxl-aware-allocation-memory-tiering" title="Link to this heading">#</a></h3>
-<p>When the host has CXL-attached memory, the master can preferentially allocate new objects on the CXL tier, reserving local DRAM for latency-sensitive operations.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_cxl<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cxl_path<span class="o">=</span>/dev/dax0.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cxl_size<span class="o">=</span><span class="m">17179869184</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--allocation_strategy<span class="o">=</span>cxl
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="container-dynamic-network-interface">
-<h3>Container / Dynamic Network Interface<a class="headerlink" href="#container-dynamic-network-interface" title="Link to this heading">#</a></h3>
-<p>When the master runs in a container with a dynamic IP, use <code class="docutils literal notranslate"><span class="pre">--rpc_interface</span></code> to resolve the RPC address from a stable interface name:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rpc_interface<span class="o">=</span>eth0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable_http_metadata_server<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_host<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--http_metadata_server_port<span class="o">=</span><span class="m">8080</span>
-</pre></div>
-</div>
-<p>The master resolves the current IPv4 address of <code class="docutils literal notranslate"><span class="pre">eth0</span></code> at startup and uses it as the advertised RPC address.</p>
-</section>
-</section>
-<hr class="docutils" />
 <section id="metrics-endpoints">
 <h2>Metrics Endpoints<a class="headerlink" href="#metrics-endpoints" title="Link to this heading">#</a></h2>
 <p>The master exposes Prometheus-style metrics on <code class="docutils literal notranslate"><span class="pre">--metrics_port</span></code>:</p>
@@ -715,646 +570,32 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
 </div>
 </section>
 <hr class="docutils" />
-<section id="quick-tips">
-<h2>Quick Tips<a class="headerlink" href="#quick-tips" title="Link to this heading">#</a></h2>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<section id="compose-commands-and-runtime-modes">
+<h3>Compose Commands and Runtime Modes<a class="headerlink" href="#compose-commands-and-runtime-modes" title="Link to this heading">#</a></h3>
+<p>Use the <a class="reference internal" href="mooncake-store-configuration-reference.html"><span class="doc std std-doc">Configuration Reference</span></a> for the
+master command builder, standalone Real Client deployment modes, startup flags,
+and client/engine environment variables. Common first adjustments are
+<code class="docutils literal notranslate"><span class="pre">--rpc_thread_num</span></code>, eviction watermarks, and storage-related flags.</p>
+</section>
+<section id="add-storage-backends">
+<h3>Add Storage Backends<a class="headerlink" href="#add-storage-backends" title="Link to this heading">#</a></h3>
+<p>Choose a storage guide when the in-memory quick start is not enough:</p>
 <ul class="simple">
-<li><p>Scale <code class="docutils literal notranslate"><span class="pre">--rpc_thread_num</span></code> with available CPU cores and workload.</p></li>
-<li><p>Start with default eviction settings; adjust <code class="docutils literal notranslate"><span class="pre">--eviction_high_watermark_ratio</span></code> and <code class="docutils literal notranslate"><span class="pre">--eviction_ratio</span></code> based on memory pressure and object churn.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">/metrics/summary</span></code> during bring-up; integrate <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> with Prometheus/Grafana for production.</p></li>
-<li><p>For detailed SSD offload configuration (storage backends, eviction policies, io_uring), see the <a class="reference internal" href="ssd-offload.html"><span class="doc std std-doc">SSD Offload guide</span></a>.</p></li>
-<li><p>For NVMe-oF SSD pool configuration see the <a class="reference internal" href="nvmf-ssd-deployment-guide.html"><span class="doc std std-doc">NVMe-oF SSD Pool Deployment Guide</span></a></p></li>
-<li><p>For experimental 3FS (USRBIO) integration as a persistent storage backend, see the <a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html"><span class="doc std std-doc">3FS USRBIO Plugin guide</span></a>.</p></li>
-<li><p>For detailed monitoring and observation see <a class="reference internal" href="../getting_started/observability.html"><span class="doc std std-doc">Observability</span></a></p></li>
+<li><p><a class="reference internal" href="ssd-offload.html"><span class="doc std std-doc">SSD Offload</span></a>: local SSD capacity, eviction policy, and io_uring settings.</p></li>
+<li><p><a class="reference internal" href="nvmf-ssd-deployment-guide.html"><span class="doc std std-doc">NVMe-oF SSD Pool</span></a>: remote NVMe-oF SSD pool deployment.</p></li>
+<li><p><a class="reference internal" href="../getting_started/plugin-usage/3FS-USRBIO-Plugin.html"><span class="doc std std-doc">3FS USRBIO Plugin</span></a>: experimental 3FS-backed persistent storage.</p></li>
+</ul>
+</section>
+<section id="validate-and-observe">
+<h3>Validate and Observe<a class="headerlink" href="#validate-and-observe" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <a class="reference internal" href="#stress-benchmark">Stress Benchmark</a> for two-role prefill/decode validation.</p></li>
+<li><p><a class="reference internal" href="../getting_started/observability.html"><span class="doc std std-doc">Observability</span></a>: metrics collection and production monitoring.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
-</section>
-<hr class="docutils" />
-<section id="reference-master-startup-flags">
-<h2>Reference: Master Startup Flags<a class="headerlink" href="#reference-master-startup-flags" title="Link to this heading">#</a></h2>
-<section id="rpc">
-<h3>RPC<a class="headerlink" href="#rpc" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--rpc_port</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">50051</span></code></p></td>
-<td><p>RPC listen port</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--rpc_thread_num</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">min(4,</span> <span class="pre">CPU</span> <span class="pre">cores)</span></code></p></td>
-<td><p>RPC worker threads</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--rpc_address</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
-<td><p>RPC bind address</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--rpc_interface</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Network interface to resolve RPC address at startup (overrides <code class="docutils literal notranslate"><span class="pre">--rpc_address</span></code>)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--rpc_conn_timeout_seconds</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
-<td><p>Idle connection timeout; <code class="docutils literal notranslate"><span class="pre">0</span></code> disables</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--rpc_enable_tcp_no_delay</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Enable TCP_NODELAY</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="logging">
-<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading">#</a></h3>
-<p>The master uses glog. When <code class="docutils literal notranslate"><span class="pre">--log_dir</span></code> is set, all severities are merged into a single journal file in that directory (<code class="docutils literal notranslate"><span class="pre">mooncake_master.INFO.&lt;date&gt;-&lt;time&gt;.&lt;pid&gt;</span></code>), reachable through the stable <code class="docutils literal notranslate"><span class="pre">mooncake_master.INFO</span></code> symlink.</p>
-<p>glog’s standard flags (<code class="docutils literal notranslate"><span class="pre">--log_dir</span></code>, <code class="docutils literal notranslate"><span class="pre">--max_log_size</span></code>, <code class="docutils literal notranslate"><span class="pre">--logtostderr</span></code>, …) control the rest.</p>
-</section>
-<section id="metrics">
-<h3>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_metric_reporting</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Periodically log master metrics</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--metrics_port</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">9003</span></code></p></td>
-<td><p>HTTP port for <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> endpoints</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="http-metadata-server-embedded">
-<h3>HTTP Metadata Server (Embedded)<a class="headerlink" href="#http-metadata-server-embedded" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_http_metadata_server</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Enable embedded HTTP metadata server</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--http_metadata_server_host</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
-<td><p>Metadata bind host</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--http_metadata_server_port</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">8080</span></code></p></td>
-<td><p>Metadata TCP port</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="memory-allocator">
-<h3>Memory Allocator<a class="headerlink" href="#memory-allocator" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--memory_allocator</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">offset</span></code></p></td>
-<td><p>Memory allocator: <code class="docutils literal notranslate"><span class="pre">offset</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">cachelib</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="allocation-strategy">
-<h3>Allocation Strategy<a class="headerlink" href="#allocation-strategy" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--allocation_strategy</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">random</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">random</span></code> (pure random, fastest), <code class="docutils literal notranslate"><span class="pre">free_ratio_first</span></code> (best load balance), or <code class="docutils literal notranslate"><span class="pre">cxl</span></code> (prefer CXL memory)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="putstart-timeouts">
-<h3>PutStart Timeouts<a class="headerlink" href="#putstart-timeouts" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--put_start_discard_timeout_sec</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">30</span></code></p></td>
-<td><p>Seconds before an uncompleted <code class="docutils literal notranslate"><span class="pre">PutStart</span></code> is discarded</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--put_start_release_timeout_sec</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code> (5 min)</p></td>
-<td><p>Seconds before <code class="docutils literal notranslate"><span class="pre">PutStart</span></code>-allocated space is released</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="eviction-ttls">
-<h3>Eviction &amp; TTLs<a class="headerlink" href="#eviction-ttls" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--default_kv_lease_ttl</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">5000</span></code> ms</p></td>
-<td><p>Lease TTL for KV objects. Supports <code class="docutils literal notranslate"><span class="pre">5000ms</span></code>, <code class="docutils literal notranslate"><span class="pre">5s</span></code>, <code class="docutils literal notranslate"><span class="pre">30m</span></code>, <code class="docutils literal notranslate"><span class="pre">1h</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--default_kv_soft_pin_ttl</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">1800000</span></code> ms</p></td>
-<td><p>Soft pin TTL (30 min)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--allow_evict_soft_pinned_objects</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Allow evicting soft-pinned objects</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--eviction_ratio</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0.05</span></code></p></td>
-<td><p>Fraction evicted at high watermark</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--eviction_high_watermark_ratio</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0.95</span></code></p></td>
-<td><p>Usage ratio triggering eviction</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--client_ttl</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code> s</p></td>
-<td><p>Seconds before a silent client is considered disconnected</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="high-availability">
-<h3>High Availability<a class="headerlink" href="#high-availability" title="Link to this heading">#</a></h3>
-<p><strong>Master Node High Availability</strong></p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_ha</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Enable HA mode</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--ha_backend_type</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">etcd</span></code></p></td>
-<td><p>HA backend: <code class="docutils literal notranslate"><span class="pre">etcd</span></code>, <code class="docutils literal notranslate"><span class="pre">redis</span></code>, or <code class="docutils literal notranslate"><span class="pre">k8s</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ha_backend_connstring</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>HA backend connection string</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--etcd_endpoints</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>etcd endpoints, semicolon separated (when <code class="docutils literal notranslate"><span class="pre">--ha_backend_type=etcd</span></code>)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--cluster_id</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">mooncake_cluster</span></code></p></td>
-<td><p>Cluster ID for HA persistence</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>Metadata Snapshot And Restore is experimental feature.</p>
-</div>
-<p><strong>Metadata Snapshot And Restore</strong></p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Enable periodic metadata snapshot</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_interval_seconds</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code> (5 min)</p></td>
-<td><p>Interval between snapshots</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_child_timeout_seconds</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">3600</span></code> (1 hour)</p></td>
-<td><p>Timeout per snapshot child process</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
-<td><p>Number of recent snapshots retained</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type</span></code></p></td>
-<td><p>required</p></td>
-<td><p>Object store: <code class="docutils literal notranslate"><span class="pre">local</span></code> or <code class="docutils literal notranslate"><span class="pre">s3</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_type</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Catalog store: <code class="docutils literal notranslate"><span class="pre">embedded</span></code> or <code class="docutils literal notranslate"><span class="pre">redis</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_catalog_store_connstring</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Catalog store connection string (required for <code class="docutils literal notranslate"><span class="pre">redis</span></code>)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--snapshot_backup_dir</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Optional local backup directory</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_snapshot_restore</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Restore from latest snapshot at startup</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Environment variable:</strong> <code class="docutils literal notranslate"><span class="pre">MOONCAKE_SNAPSHOT_LOCAL_PATH</span></code> (required when <code class="docutils literal notranslate"><span class="pre">--snapshot_object_store_type=local</span></code>) — persistent directory for local snapshots.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The snapshot storage path is a <strong>managed directory</strong> exclusively controlled by Mooncake. Old snapshots exceeding <code class="docutils literal notranslate"><span class="pre">--snapshot_retention_count</span></code> are automatically deleted. Use a dedicated directory to avoid data loss.</p>
-</div>
-</section>
-<section id="task-manager">
-<h3>Task Manager<a class="headerlink" href="#task-manager" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--max_total_finished_tasks</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10000</span></code></p></td>
-<td><p>Max finished tasks kept in memory</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--max_total_pending_tasks</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10000</span></code></p></td>
-<td><p>Max queued pending tasks</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--max_total_processing_tasks</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10000</span></code></p></td>
-<td><p>Max simultaneously processing tasks</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--pending_task_timeout_sec</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code> (5 min)</p></td>
-<td><p>Timeout for pending tasks (<code class="docutils literal notranslate"><span class="pre">0</span></code> = no timeout)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--processing_task_timeout_sec</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code> (5 min)</p></td>
-<td><p>Timeout for processing tasks (<code class="docutils literal notranslate"><span class="pre">0</span></code> = no timeout)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--max_retry_attempts</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
-<td><p>Max retries for failed tasks (<code class="docutils literal notranslate"><span class="pre">NO_AVAILABLE_HANDLE</span></code>)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="offload-tiered-storage">
-<h3>Offload / Tiered Storage<a class="headerlink" href="#offload-tiered-storage" title="Link to this heading">#</a></h3>
-<p>Flags for controlling data movement between DRAM and SSD.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_offload</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Enable offload from DRAM to SSD</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--offload_on_evict</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Defer offload to eviction time rather than at <code class="docutils literal notranslate"><span class="pre">Put</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--offload_force_evict</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Force-evict objects exceeding capacity without offload</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--promotion_on_hit</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Promote SSD-resident keys to DRAM on read hit</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--promotion_admission_threshold</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
-<td><p>Min CountMinSketch count to allow promotion (<code class="docutils literal notranslate"><span class="pre">1</span></code> = disable gating)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--promotion_queue_limit</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">50000</span></code></p></td>
-<td><p>Max in-flight promotion tasks</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--quota_bytes</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (90% of capacity)</p></td>
-<td><p>Storage quota in bytes</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_disk_eviction</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Enable disk eviction</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Start with <code class="docutils literal notranslate"><span class="pre">--enable_offload=true</span></code> for eager asynchronous SSD persistence after <code class="docutils literal notranslate"><span class="pre">Put</span></code> completion. Add <code class="docutils literal notranslate"><span class="pre">--offload_on_evict=true</span></code> when you want SSD writes to happen only when memory pressure selects an object for eviction. Add <code class="docutils literal notranslate"><span class="pre">--promotion_on_hit=true</span></code> to allow hot SSD-only data to be promoted back to DRAM, and tune <code class="docutils literal notranslate"><span class="pre">--promotion_admission_threshold</span></code> to control how many observed reads are required before promotion is queued.</p>
-</section>
-<section id="cxl-memory">
-<h3>CXL Memory<a class="headerlink" href="#cxl-memory" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--enable_cxl</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Enable CXL memory support</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--cxl_path</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/dev/dax0.0</span></code></p></td>
-<td><p>DAX device path for CXL memory</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--cxl_size</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">8GB</span></code> (<code class="docutils literal notranslate"><span class="pre">8589934592</span></code>)</p></td>
-<td><p>CXL memory size in bytes</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>When <code class="docutils literal notranslate"><span class="pre">--allocation_strategy=cxl</span></code> is set alongside <code class="docutils literal notranslate"><span class="pre">--enable_cxl=true</span></code>, the master preferentially allocates new objects on CXL memory.</p>
-</section>
-<section id="dfs-storage">
-<h3>DFS Storage<a class="headerlink" href="#dfs-storage" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--root_fs_dir</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>DFS mount directory for multi-layer storage backend</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--global_file_segment_size</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">4GB</span></code> (<code class="docutils literal notranslate"><span class="pre">4294967296</span></code>)</p></td>
-<td><p>Max available space for DFS segments</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="master-configuration-file">
-<h3>Master Configuration File<a class="headerlink" href="#master-configuration-file" title="Link to this heading">#</a></h3>
-<p>In addition to CLI flags, the master accepts JSON/YAML config files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mooncake_master<span class="w"> </span>--config_path<span class="o">=</span>mooncake-store/conf/master.yaml
-</pre></div>
-</div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">rpc_interface</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eth0&quot;</span>
-<span class="nt">rpc_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50051</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="reference-client-engine-tuning-env-vars">
-<h2>Reference: Client &amp; Engine Tuning (Env Vars)<a class="headerlink" href="#reference-client-engine-tuning-env-vars" title="Link to this heading">#</a></h2>
-<section id="runtime-protocol">
-<h3>Runtime Protocol<a class="headerlink" href="#runtime-protocol" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_RPC_PROTOCOL</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">tcp</span></code></p></td>
-<td><p>RPC transport protocol between master and clients: <code class="docutils literal notranslate"><span class="pre">tcp</span></code> or <code class="docutils literal notranslate"><span class="pre">rdma</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_USE_TENT</span></code> / <code class="docutils literal notranslate"><span class="pre">MC_USE_TEV1</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Set to any value to enable the TENT (next-gen) transfer engine</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLUSTER_ID</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Cluster ID label attached to client metrics</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="topology-discovery">
-<h3>Topology Discovery<a class="headerlink" href="#topology-discovery" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_MS_AUTO_DISC</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
-<td><p>Auto-discover NIC/GPU topology. Set <code class="docutils literal notranslate"><span class="pre">0</span></code> to provide <code class="docutils literal notranslate"><span class="pre">rdma_devices</span></code> manually</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_MS_FILTERS</span></code></p></td>
-<td><p>empty</p></td>
-<td><p>Comma-separated NIC whitelist (e.g., <code class="docutils literal notranslate"><span class="pre">mlx5_0,mlx5_2</span></code>)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>When <code class="docutils literal notranslate"><span class="pre">MC_MS_AUTO_DISC=0</span></code>, pass <code class="docutils literal notranslate"><span class="pre">rdma_devices</span></code> (comma-separated) to the Python <code class="docutils literal notranslate"><span class="pre">setup()</span></code> call.</p>
-</section>
-<section id="transfer-engine-metrics-disabled-by-default">
-<h3>Transfer Engine Metrics (disabled by default)<a class="headerlink" href="#transfer-engine-metrics-disabled-by-default" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
-<td><p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> to enable engine metrics. Not supported with TENT</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_TE_METRIC_INTERVAL_SECONDS</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
-<td><p>Seconds between reports</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="client-metrics-enabled-by-default">
-<h3>Client Metrics (enabled by default)<a class="headerlink" href="#client-metrics-enabled-by-default" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_METRIC</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
-<td><p>Set <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_METRIC_INTERVAL</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
-<td><p>Reporting interval; <code class="docutils literal notranslate"><span class="pre">0</span></code> collects but does not periodically report</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_MIN_PORT</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">12300</span></code></p></td>
-<td><p>Min local port for client connections</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_MAX_PORT</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">14300</span></code></p></td>
-<td><p>Max local port for client connections</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="local-hot-cache">
-<h3>Local Hot Cache<a class="headerlink" href="#local-hot-cache" title="Link to this heading">#</a></h3>
-<p>Local hot cache provides a DRAM read cache on top of SSD-resident objects for faster access.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_LOCAL_HOT_CACHE_SIZE</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Size of the local hot cache (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;8gb&quot;</span></code>). Set to enable the hot cache</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_LOCAL_HOT_BLOCK_SIZE</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Block size for hot cache (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;2mb&quot;</span></code>)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_LOCAL_HOT_CACHE_USE_SHM</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Set <code class="docutils literal notranslate"><span class="pre">1</span></code> to use memfd-backed shared memory</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_LOCAL_HOT_ADMISSION_THRESHOLD</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Minimum CountMinSketch count before a key is admitted to hot cache</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="local-memory-optimization">
-<h3>Local Memory Optimization<a class="headerlink" href="#local-memory-optimization" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_MEMCPY</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
-<td><p>Set <code class="docutils literal notranslate"><span class="pre">1</span></code> to prefer local memcpy when source/destination are on the same client</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_CLIENT_SETUP_RETRIES</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">20</span></code></p></td>
-<td><p>Number of times to retry client registration on failure</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_CXL_DEV_SIZE</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>CXL device size (overrides <code class="docutils literal notranslate"><span class="pre">--cxl_size</span></code> for client-side allocation)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="mmap-buffer-hugepages">
-<h3>MMap Buffer &amp; HugePages<a class="headerlink" href="#mmap-buffer-hugepages" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_USE_HUGEPAGE</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Set <code class="docutils literal notranslate"><span class="pre">1</span></code> to request HugeTLB-backed <code class="docutils literal notranslate"><span class="pre">mmap()</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_STORE_HUGEPAGE_SIZE</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2MB</span></code></p></td>
-<td><p>Supported: <code class="docutils literal notranslate"><span class="pre">2MB</span></code>, <code class="docutils literal notranslate"><span class="pre">1GB</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_MMAP_ARENA_POOL_SIZE</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Pre-allocated arena pool size (e.g., <code class="docutils literal notranslate"><span class="pre">8gb</span></code>). Explicitly set to enable the arena</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_DISABLE_MMAP_ARENA</span></code></p></td>
-<td><p>unset</p></td>
-<td><p>Set <code class="docutils literal notranslate"><span class="pre">1</span></code> to disable arena, fall back to per-call <code class="docutils literal notranslate"><span class="pre">mmap()</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="yalantinglibs-log-level">
-<h3>yalantinglibs Log Level<a class="headerlink" href="#yalantinglibs-log-level" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MC_YLT_LOG_LEVEL</span><span class="o">=</span>info
-</pre></div>
-</div>
-<p>Available: <code class="docutils literal notranslate"><span class="pre">trace</span></code>, <code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">warn</span></code> (or <code class="docutils literal notranslate"><span class="pre">warning</span></code>), <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">critical</span></code>.</p>
 </section>
 </section>
 </section>
@@ -1380,11 +621,11 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
       </div>
     </a>
     <a class="right-next"
-       href="ssd-offload.html"
+       href="mooncake-store-configuration-reference.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">SSD Offload</p>
+        <p class="prev-next-title">Mooncake Store Configuration Reference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1406,50 +647,17 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;master_host&gt;
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-metadata-service">1. Start the Metadata Service</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-master-service">2. Start the Master Service</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-store-client">3. Start a Store Client</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify">Verify</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-master-service">1. Start the Master Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-store-client">2. Start a Store Client</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify">3. Verify</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-scenarios">Deployment Scenarios</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-tcp-development-quick-evaluation">Single-Node (TCP) — Development / Quick Evaluation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-etcd-production-ha">High-Availability (etcd) — Production HA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability-redis-alternative-ha-backend">High-Availability (Redis) — Alternative HA Backend</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-restore-backup-disaster-recovery">Snapshot &amp; Restore — Backup / Disaster Recovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiered-storage-with-ssd-offload-cost-effective-capacity">Tiered Storage with SSD Offload — Cost-Effective Capacity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-aware-allocation-memory-tiering">CXL-Aware Allocation — Memory Tiering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#container-dynamic-network-interface">Container / Dynamic Network Interface</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stress-benchmark">Stress Benchmark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics-endpoints">Metrics Endpoints</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-tips">Quick Tips</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-master-startup-flags">Reference: Master Startup Flags</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rpc">RPC</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-metadata-server-embedded">HTTP Metadata Server (Embedded)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-allocator">Memory Allocator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allocation-strategy">Allocation Strategy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putstart-timeouts">PutStart Timeouts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eviction-ttls">Eviction &amp; TTLs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-availability">High Availability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-manager">Task Manager</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offload-tiered-storage">Offload / Tiered Storage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cxl-memory">CXL Memory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-storage">DFS Storage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-configuration-file">Master Configuration File</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-client-engine-tuning-env-vars">Reference: Client &amp; Engine Tuning (Env Vars)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-protocol">Runtime Protocol</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-discovery">Topology Discovery</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-engine-metrics-disabled-by-default">Transfer Engine Metrics (disabled by default)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-metrics-enabled-by-default">Client Metrics (enabled by default)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-hot-cache">Local Hot Cache</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-memory-optimization">Local Memory Optimization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mmap-buffer-hugepages">MMap Buffer &amp; HugePages</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yalantinglibs-log-level">yalantinglibs Log Level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compose-commands-and-runtime-modes">Compose Commands and Runtime Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-storage-backends">Add Storage Backends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-and-observe">Validate and Observe</a></li>
 </ul>
 </li>
 </ul>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Mooncake EP &amp; Mooncake Backend &#8212; Mooncake</title>
+    <title>Mooncake EP &amp; Mooncake Backend (PG) &#8212; Mooncake</title>
   
   
   
@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dynamic-command-builder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
@@ -45,6 +46,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../_static/sphinx-dynamic-command-builder.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -176,7 +178,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
@@ -193,6 +195,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-ep.html">Mooncake EP Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
@@ -206,7 +210,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../api-reference/python/index.html">Python</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="mooncake-store.html">Mooncake Store Python API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer-engine.html">Transfer Engine Python API</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mooncake EP &amp; Mooncake Backend</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mooncake EP &amp; Mooncake Backend (PG)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
@@ -216,6 +220,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/pg-ep-troubleshooting.html">Mooncake PG/EP Troubleshooting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
@@ -412,7 +417,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mooncake EP & Mooncake Backend</h1>
+    <h1>Mooncake EP & Mooncake Backend (PG)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,16 +428,36 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-ep">Mooncake EP</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-get-buffer-size-hint">Buffer.get_buffer_size_hint()</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-init">Buffer.__init__()</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-dispatch-buffer-combine">Buffer.dispatch/Buffer.combine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-build-notes">Installation and build notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-backend-pg-quick-start">Mooncake Backend (PG) quick start</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuda-backend">CUDA backend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cpu-backend">CPU backend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-network-devices">Selecting network devices</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-backend">Mooncake Backend</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-backend-pg-api-reference">Mooncake Backend (PG) API reference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncakebackendoptions"><code class="docutils literal notranslate"><span class="pre">MooncakeBackendOptions</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-distributed-operations">Supported distributed operations</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-recovery-protocol">Elastic recovery protocol</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#healthy-rank-side">Healthy-rank side</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-rank-side">Joining-rank side</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-ep-quick-start">Mooncake EP quick start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-ep-api-reference">Mooncake EP API reference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-get-ep-buffer-size-hint"><code class="docutils literal notranslate"><span class="pre">Buffer.get_ep_buffer_size_hint(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-group-num-ep-buffer-bytes-0"><code class="docutils literal notranslate"><span class="pre">Buffer(group,</span> <span class="pre">num_ep_buffer_bytes=0)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-dispatch"><code class="docutils literal notranslate"><span class="pre">Buffer.dispatch(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-combine"><code class="docutils literal notranslate"><span class="pre">Buffer.combine(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-get-next-combine-buffer-handle"><code class="docutils literal notranslate"><span class="pre">Buffer.get_next_combine_buffer(handle)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-update-ep-member"><code class="docutils literal notranslate"><span class="pre">Buffer.update_ep_member()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-rank-tensors-pg-vs-ep">Active-rank tensors: PG vs EP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-and-examples">Tests and examples</a></li>
 </ul>
             </nav>
         </div>
@@ -444,59 +469,61 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mooncake-ep-mooncake-backend">
-<h1>Mooncake EP &amp; Mooncake Backend<a class="headerlink" href="#mooncake-ep-mooncake-backend" title="Link to this heading">#</a></h1>
+  <section id="mooncake-ep-mooncake-backend-pg">
+<h1>Mooncake EP &amp; Mooncake Backend (PG)<a class="headerlink" href="#mooncake-ep-mooncake-backend-pg" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Mooncake EP is an adaption of <a class="reference external" href="https://github.com/deepseek-ai/DeepEP">DeepEP</a> that supports <strong>fault tolerance</strong> and fast data transfer with <strong>IBGDA</strong>, designed as a critical component for large-scale, latency-sensitive MoE (Mixture of Experts) inference. Mooncake EP aims to retain full compatibility with the DeepEP API, with the addition of an <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> tensor passed to both the <code class="docutils literal notranslate"><span class="pre">dispatch</span></code> and <code class="docutils literal notranslate"><span class="pre">combine</span></code> functions to capture information about rank activeness. By integrating with the EPLB module, Mooncake EP ensures fault tolerance during MoE inference, enabling robust performance even in large-scale, fault-prone environments.</p>
-<p>Mooncake Backend is a PyTorch distributed backend (a replacement for NCCL and Gloo) that provides <strong>fault-tolerant collective communication primitives</strong> and can be seamlessly integrated into machine learning systems. Built with the <a class="reference internal" href="../design/transfer-engine/index.html"><span class="std std-doc">Transfer Engine</span></a>, Mooncake Backend ensures that collective communications can continue even in the event of rank failures. Furthermore, it reports these failures to the upper layers of the system, allowing for graceful error handling without disrupting ongoing operations.</p>
+<p>Mooncake provides two closely related components for fault-tolerant MoE
+inference:</p>
+<ul class="simple">
+<li><p><strong>Mooncake Backend (PG)</strong> is a <code class="docutils literal notranslate"><span class="pre">torch.distributed</span></code> ProcessGroup backend. It
+registers the <code class="docutils literal notranslate"><span class="pre">mooncake</span></code> accelerator backend and the <code class="docutils literal notranslate"><span class="pre">mooncake-cpu</span></code> backend,
+implements common collective and point-to-point APIs, tracks active ranks, and
+exposes elastic recovery helpers.</p></li>
+<li><p><strong>Mooncake EP</strong> is an expert-parallel dispatch/combine runtime for
+latency-sensitive MoE inference. It follows the DeepEP low-latency programming
+model while adding rank activeness awareness and Mooncake transport support.</p></li>
+</ul>
+<p>The usual integration pattern is to initialize a Mooncake process group first,
+then construct a Mooncake EP <code class="docutils literal notranslate"><span class="pre">Buffer</span></code> from that group. The process group is used
+both for regular collectives and for exchanging EP bootstrap metadata.</p>
+<p>For implementation details, see the <a class="reference internal" href="../design/mooncake-backend-pg.html"><span class="std std-doc">Mooncake Backend (PG) design guide</span></a>
+and the <a class="reference internal" href="../design/mooncake-ep.html"><span class="std std-doc">Mooncake EP design guide</span></a>.</p>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
-<section id="mooncake-ep">
-<h3>Mooncake EP<a class="headerlink" href="#mooncake-ep" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>Note:</strong> Mooncake EP currently supports only the low-latency transfer mode.</p>
-</div></blockquote>
-<p>The API is largely consistent with DeepEP’s, with only minor differences in a few parameters. Mooncake EP exposes a <code class="docutils literal notranslate"><span class="pre">Buffer</span></code> that can be imported from <code class="docutils literal notranslate"><span class="pre">mooncake.mooncake_ep_buffer</span></code>. For example, refer to <code class="docutils literal notranslate"><span class="pre">mooncake-wheel/tests/test_mooncake_ep.py</span></code>.</p>
-<section id="buffer-get-buffer-size-hint">
-<h4>Buffer.get_buffer_size_hint()<a class="headerlink" href="#buffer-get-buffer-size-hint" title="Link to this heading">#</a></h4>
-<p><strong>Signature:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@staticmethod</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_ep_buffer_size_hint</span><span class="p">(</span><span class="n">num_max_dispatch_tokens_per_rank</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">num_ranks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">num_experts</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<section id="installation-and-build-notes">
+<h2>Installation and build notes<a class="headerlink" href="#installation-and-build-notes" title="Link to this heading">#</a></h2>
+<p>Mooncake EP and PG are included in CUDA-enabled Mooncake wheels. When building
+from source, enable the EP/PG extensions with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>..<span class="w"> </span>-DWITH_EP<span class="o">=</span>ON
 </pre></div>
 </div>
-<p>Calculates the number of bytes to pre-allocate for data transfer.</p>
+<p>The extensions are compiled against a specific PyTorch version. At import time,
+<code class="docutils literal notranslate"><span class="pre">mooncake.pg</span></code> and <code class="docutils literal notranslate"><span class="pre">mooncake.ep</span></code> load version-suffixed extension modules that
+match the active <code class="docutils literal notranslate"><span class="pre">torch.__version__</span></code>. If the current PyTorch version does not
+match a built extension, import will fail with a message such as
+<code class="docutils literal notranslate"><span class="pre">Mooncake</span> <span class="pre">PG</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">built</span> <span class="pre">against</span> <span class="pre">torch==...</span></code>.</p>
 </section>
-<section id="buffer-init">
-<h4>Buffer.__init__()<a class="headerlink" href="#buffer-init" title="Link to this heading">#</a></h4>
-<p><strong>Signature:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">dist</span><span class="o">.</span><span class="n">ProcessGroup</span><span class="p">,</span> <span class="n">num_ep_buffer_bytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The constructor. Ensure that only one instance is created.</p>
-<ul class="simple">
-<li><p><strong>group</strong>: Must be a Mooncake Backend process group.</p></li>
-<li><p><strong>num_ep_buffer_bytes</strong>: The number of bytes acquired with <code class="docutils literal notranslate"><span class="pre">Buffer.get_buffer_size_hint()</span></code></p></li>
-</ul>
-</section>
-<section id="buffer-dispatch-buffer-combine">
-<h4>Buffer.dispatch/Buffer.combine<a class="headerlink" href="#buffer-dispatch-buffer-combine" title="Link to this heading">#</a></h4>
-<p><strong>Signature:</strong> Similar to DeepEP’s <code class="docutils literal notranslate"><span class="pre">low_latency_dispatch</span></code>/<code class="docutils literal notranslate"><span class="pre">low_latency_combine</span></code>, with two additional parameters:</p>
-<ul class="simple">
-<li><p><strong>active_ranks</strong>: A tensor of shape <code class="docutils literal notranslate"><span class="pre">(num_ranks,)</span></code> containing values of 0 or 1. The indices of the broken ranks will be set to 0.</p></li>
-<li><p><strong>timeout_us</strong>: The timeout in microseconds for a rank to be considered broken. Set to -1 for infinite timeout.</p></li>
-</ul>
-</section>
-</section>
-<section id="mooncake-backend">
-<h3>Mooncake Backend<a class="headerlink" href="#mooncake-backend" title="Link to this heading">#</a></h3>
-<p>Basic usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<section id="mooncake-backend-pg-quick-start">
+<h2>Mooncake Backend (PG) quick start<a class="headerlink" href="#mooncake-backend-pg-quick-start" title="Link to this heading">#</a></h2>
+<section id="cuda-backend">
+<h3>CUDA backend<a class="headerlink" href="#cuda-backend" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch.distributed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dist</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">pg</span>
 
-<span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">world_size</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">rank</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;RANK&quot;</span><span class="p">])</span>
+<span class="n">world_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;WORLD_SIZE&quot;</span><span class="p">])</span>
+<span class="n">local_rank</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LOCAL_RANK&quot;</span><span class="p">,</span> <span class="n">rank</span><span class="p">))</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">set_device</span><span class="p">(</span><span class="n">local_rank</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">local_rank</span><span class="p">)</span>
+
+<span class="c1"># Backend-level active-rank mask. Use int32 and place it on the backend device.</span>
+<span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">world_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
 <span class="n">dist</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
     <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;mooncake&quot;</span><span class="p">,</span>
     <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
@@ -504,45 +531,420 @@ document.write(`
     <span class="n">pg_options</span><span class="o">=</span><span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span><span class="n">active_ranks</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">dist</span><span class="o">.</span><span class="n">all_gather</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>           <span class="c1"># Standard API usage</span>
-<span class="k">assert</span> <span class="n">active_ranks</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>  <span class="c1"># Verify that no ranks are broken</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">dist</span><span class="o">.</span><span class="n">all_reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">ReduceOp</span><span class="o">.</span><span class="n">SUM</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank=</span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2">, all_reduce=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For a full example, see <code class="docutils literal notranslate"><span class="pre">mooncake-wheel/tests/test_mooncake_backend.py</span></code>.</p>
-<hr class="docutils" />
-<p>Recover usage (e.g., wants to recover rank #2):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For the healthy processes, execute:</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch.distributed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dist</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">pg</span>
-
-<span class="o">...</span>
-
-<span class="n">broken_rank</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">WORLD</span><span class="o">.</span><span class="n">_get_backend</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">))</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="p">(</span><span class="n">peer_state</span><span class="p">,)</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">get_peer_state</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="p">[</span><span class="n">broken_rank</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">peer_state</span><span class="p">:</span>
-        <span class="n">pg</span><span class="o">.</span><span class="n">recover_ranks</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="p">[</span><span class="n">broken_rank</span><span class="p">])</span>
-        <span class="k">break</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># Handle ongoing logic, like inference</span>
-        <span class="k">pass</span>
-
-<span class="c1"># For the new process, execute:</span>
+<p>Run it with the usual PyTorch launcher, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>torchrun<span class="w"> </span>--nproc-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span>pg_quickstart.py
+</pre></div>
+</div>
+</section>
+<section id="cpu-backend">
+<h3>CPU backend<a class="headerlink" href="#cpu-backend" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">backend=&quot;mooncake-cpu&quot;</span></code> and put <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> on CPU:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">world_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
 <span class="n">dist</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
     <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;mooncake-cpu&quot;</span><span class="p">,</span>
-    <span class="n">rank</span><span class="o">=</span><span class="n">broken_rank</span><span class="p">,</span>
-    <span class="n">world_size</span><span class="o">=</span><span class="n">num_processes</span><span class="p">,</span>
-    <span class="n">pg_options</span><span class="o">=</span><span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">num_processes</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
-        <span class="n">is_extension</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Must set this option to True</span>
-    <span class="p">),</span>
+    <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
+    <span class="n">world_size</span><span class="o">=</span><span class="n">world_size</span><span class="p">,</span>
+    <span class="n">pg_options</span><span class="o">=</span><span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span><span class="n">active_ranks</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>For a full example, see <code class="docutils literal notranslate"><span class="pre">mooncake-wheel/tests/test_mooncake_backend_elastic.py</span></code>.</p>
 </section>
+<section id="selecting-network-devices">
+<h3>Selecting network devices<a class="headerlink" href="#selecting-network-devices" title="Link to this heading">#</a></h3>
+<p>To explicitly restrict Mooncake to a list of NIC / HCA devices, call
+<code class="docutils literal notranslate"><span class="pre">pg.set_device_filter(...)</span></code> before <code class="docutils literal notranslate"><span class="pre">init_process_group()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">pg</span>
+
+<span class="n">pg</span><span class="o">.</span><span class="n">set_device_filter</span><span class="p">([</span><span class="s2">&quot;mlx5_1&quot;</span><span class="p">,</span> <span class="s2">&quot;mlx5_2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>For test and benchmark commands, the same setting is commonly passed through
+<code class="docutils literal notranslate"><span class="pre">MOONCAKE_PGTEST_DEVICE_FILTERS=mlx5_1,mlx5_2</span></code>.</p>
+</section>
+</section>
+<section id="mooncake-backend-pg-api-reference">
+<h2>Mooncake Backend (PG) API reference<a class="headerlink" href="#mooncake-backend-pg-api-reference" title="Link to this heading">#</a></h2>
+<section id="mooncakebackendoptions">
+<h3><code class="docutils literal notranslate"><span class="pre">MooncakeBackendOptions</span></code><a class="headerlink" href="#mooncakebackendoptions" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span><span class="n">active_ranks</span><span class="p">)</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span><span class="n">active_ranks</span><span class="p">,</span> <span class="n">is_extension</span><span class="p">)</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span><span class="n">active_ranks</span><span class="p">,</span> <span class="n">is_extension</span><span class="p">,</span> <span class="n">max_world_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">active_ranks</span></code>: <code class="docutils literal notranslate"><span class="pre">torch.int32</span></code> tensor used as the backend-level rank-health
+mask. For <code class="docutils literal notranslate"><span class="pre">mooncake</span></code>, it must be on the accelerator device; for
+<code class="docutils literal notranslate"><span class="pre">mooncake-cpu</span></code>, it must be on CPU. When <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code> is set, size this
+tensor to <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code>, not the current visible world size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_extension</span></code>: set to <code class="docutils literal notranslate"><span class="pre">True</span></code> for a replacement or joining process that will
+enter an existing group through <code class="docutils literal notranslate"><span class="pre">join_group()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_world_size</span></code>: optional upper bound for reserved rank slots. It lets
+healthy ranks reserve inactive future ranks while keeping
+<code class="docutils literal notranslate"><span class="pre">dist.get_world_size()</span></code> equal to the current active size.</p></li>
+</ul>
+</section>
+<section id="utility-functions">
+<h3>Utility functions<a class="headerlink" href="#utility-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pg.set_host_ip(host_ip)</span></code></p></td>
+<td><p>Override the host IP used by the backend.</p></td>
+<td><p>Call before <code class="docutils literal notranslate"><span class="pre">init_process_group()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pg.set_device_filter(filters)</span></code></p></td>
+<td><p>Restrict NIC/HCA selection.</p></td>
+<td><p>Call before <code class="docutils literal notranslate"><span class="pre">init_process_group()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pg.set_transfer_engine(engine)</span></code></p></td>
+<td><p>Reuse an external <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code>.</p></td>
+<td><p>The engine must outlive all process groups.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pg.get_preferred_hca(backend,</span> <span class="pre">location)</span></code></p></td>
+<td><p>Query topology-preferred HCA for a location.</p></td>
+<td><p>Useful for topology-aware placement/debugging.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pg.get_active_ranks(backend)</span></code></p></td>
+<td><p>Return the backend active-rank tensor.</p></td>
+<td><p>Used by EP fallback and recovery paths.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pg.get_num_synced_ranks(backend)</span></code></p></td>
+<td><p>Return the number of ranks synchronized by the backend.</p></td>
+<td><p>Diagnostic helper.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pg.extend_group_size_to(backend,</span> <span class="pre">size)</span></code></p></td>
+<td><p>Reserve additional inactive ranks.</p></td>
+<td><p>Newly extended ranks do not participate until recovered.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pg.get_peer_state(backend,</span> <span class="pre">ranks)</span></code></p></td>
+<td><p>Check whether candidate ranks have published peer metadata.</p></td>
+<td><p>Collective among healthy ranks.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pg.recover_ranks(backend,</span> <span class="pre">ranks)</span></code></p></td>
+<td><p>Activate ready ranks and publish extension state.</p></td>
+<td><p>Requires peer metadata to be ready.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pg.join_group(backend)</span></code></p></td>
+<td><p>Joiner-side blocking call for extension ranks.</p></td>
+<td><p>Used after <code class="docutils literal notranslate"><span class="pre">is_extension=True</span></code> initialization.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="supported-distributed-operations">
+<h3>Supported distributed operations<a class="headerlink" href="#supported-distributed-operations" title="Link to this heading">#</a></h3>
+<p>Mooncake Backend implements the following <code class="docutils literal notranslate"><span class="pre">torch.distributed</span></code> APIs. Support may
+depend on device type, dtype, PyTorch version, and whether the current backend is
+<code class="docutils literal notranslate"><span class="pre">mooncake</span></code> or <code class="docutils literal notranslate"><span class="pre">mooncake-cpu</span></code>; run the PG tests on the target environment before
+production use.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>API family</p></th>
+<th class="head"><p>Examples</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Collectives</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">all_reduce</span></code>, <code class="docutils literal notranslate"><span class="pre">broadcast</span></code>, <code class="docutils literal notranslate"><span class="pre">all_gather</span></code>, <code class="docutils literal notranslate"><span class="pre">all_gather_into_tensor</span></code>, <code class="docutils literal notranslate"><span class="pre">reduce_scatter_tensor</span></code>, <code class="docutils literal notranslate"><span class="pre">all_to_all</span></code>, <code class="docutils literal notranslate"><span class="pre">barrier</span></code>, <code class="docutils literal notranslate"><span class="pre">reduce</span></code>, <code class="docutils literal notranslate"><span class="pre">gather</span></code>, <code class="docutils literal notranslate"><span class="pre">scatter</span></code></p></td>
+<td><p>Active ranks participate; inactive ranks are skipped by backend internals.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Async work</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dist.all_reduce(...,</span> <span class="pre">async_op=True)</span></code></p></td>
+<td><p>Wait on the returned work object, then synchronize the device stream as needed.</p></td>
+</tr>
+<tr class="row-even"><td><p>P2P</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isend</span></code>, <code class="docutils literal notranslate"><span class="pre">irecv</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_isend_irecv</span></code></p></td>
+<td><p>Single-tensor P2P is routed through the Mooncake P2P shim.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="elastic-recovery-protocol">
+<h2>Elastic recovery protocol<a class="headerlink" href="#elastic-recovery-protocol" title="Link to this heading">#</a></h2>
+<p>Mooncake PG supports a two-sided recovery protocol. Existing healthy ranks poll
+for replacement rank readiness, then activate those ranks. Replacement ranks
+start in extension mode, publish metadata, and wait until healthy ranks recover
+them.</p>
+<section id="healthy-rank-side">
+<h3>Healthy-rank side<a class="headerlink" href="#healthy-rank-side" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">pg</span>
+
+<span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">dist</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
+    <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;mooncake&quot;</span><span class="p">,</span>
+    <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
+    <span class="n">world_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">pg_options</span><span class="o">=</span><span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span>
+        <span class="n">active_ranks</span><span class="p">,</span>
+        <span class="kc">False</span><span class="p">,</span>             <span class="c1"># is_extension</span>
+        <span class="mi">3</span><span class="p">,</span>                 <span class="c1"># max_world_size</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">WORLD</span>
+<span class="n">join_ranks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">pg</span><span class="o">.</span><span class="n">get_peer_state</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">join_ranks</span><span class="p">)):</span>
+    <span class="c1"># Continue serving, back off, or poll according to your scheduler policy.</span>
+    <span class="k">pass</span>
+
+<span class="n">pg</span><span class="o">.</span><span class="n">recover_ranks</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">join_ranks</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="joining-rank-side">
+<h3>Joining-rank side<a class="headerlink" href="#joining-rank-side" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">pg</span>
+
+<span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">dist</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
+    <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;mooncake&quot;</span><span class="p">,</span>
+    <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">world_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">pg_options</span><span class="o">=</span><span class="n">pg</span><span class="o">.</span><span class="n">MooncakeBackendOptions</span><span class="p">(</span>
+        <span class="n">active_ranks</span><span class="p">,</span>
+        <span class="kc">True</span><span class="p">,</span>              <span class="c1"># is_extension</span>
+        <span class="mi">3</span><span class="p">,</span>                 <span class="c1"># max_world_size</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">WORLD</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">join_group</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Important semantics:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_peer_state()</span></code> is collective among the current healthy ranks. Call it in a
+consistent order across those ranks.</p></li>
+<li><p>New ranks are inactive after <code class="docutils literal notranslate"><span class="pre">extend_group_size_to()</span></code> and become collective
+participants only after <code class="docutils literal notranslate"><span class="pre">recover_ranks()</span></code>.</p></li>
+<li><p>A joining rank initialized with <code class="docutils literal notranslate"><span class="pre">is_extension=True</span></code> starts with local-only
+behavior and blocks in <code class="docutils literal notranslate"><span class="pre">join_group()</span></code> until the corresponding healthy ranks
+publish recovery state.</p></li>
+<li><p>Subgroups must be created in the same order on healthy and joining processes,
+following PyTorch <code class="docutils literal notranslate"><span class="pre">new_group()</span></code> ordering rules.</p></li>
+</ul>
+</section>
+</section>
+<section id="mooncake-ep-quick-start">
+<h2>Mooncake EP quick start<a class="headerlink" href="#mooncake-ep-quick-start" title="Link to this heading">#</a></h2>
+<p>Mooncake EP exposes <code class="docutils literal notranslate"><span class="pre">Buffer</span></code> from <code class="docutils literal notranslate"><span class="pre">mooncake.mooncake_ep_buffer</span></code>. Initialize it
+with a Mooncake process group and a workspace size computed from the expected
+dispatch shape.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.distributed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dist</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">pg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mooncake.mooncake_ep_buffer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Buffer</span>
+
+
+<span class="c1"># Assume dist.init_process_group(..., backend=&quot;mooncake&quot;, ...) has completed.</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">WORLD</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+<span class="n">world_size</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
+<span class="n">num_tokens</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">hidden</span> <span class="o">=</span> <span class="mi">7168</span>
+<span class="n">num_experts</span> <span class="o">=</span> <span class="mi">288</span>
+<span class="n">top_k</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">max_tokens_per_rank</span> <span class="o">=</span> <span class="mi">128</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_tokens</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_tokens</span><span class="p">,</span> <span class="n">num_experts</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">topk_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">top_k</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">indices</span>
+<span class="n">topk_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_tokens</span><span class="p">,</span> <span class="n">top_k</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">num_ep_buffer_bytes</span> <span class="o">=</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">get_ep_buffer_size_hint</span><span class="p">(</span>
+    <span class="n">max_tokens_per_rank</span><span class="p">,</span>
+    <span class="n">hidden</span><span class="p">,</span>
+    <span class="n">world_size</span><span class="p">,</span>
+    <span class="n">num_experts</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">num_ep_buffer_bytes</span><span class="p">)</span>
+
+<span class="c1"># EP-level rank-health tensor. Kernels may update it to 0 when timeout_us</span>
+<span class="c1"># detects a failed source rank.</span>
+<span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">world_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">recv_x</span><span class="p">,</span> <span class="n">recv_count</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">hook</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">topk_idx</span><span class="p">,</span>
+    <span class="n">active_ranks</span><span class="p">,</span>
+    <span class="n">num_max_dispatch_tokens_per_rank</span><span class="o">=</span><span class="n">max_tokens_per_rank</span><span class="p">,</span>
+    <span class="n">num_experts</span><span class="o">=</span><span class="n">num_experts</span><span class="p">,</span>
+    <span class="n">timeout_us</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">use_fp8</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">async_finish</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">return_recv_hook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">event</span><span class="o">.</span><span class="n">current_stream_wait</span><span class="p">()</span>
+
+<span class="c1"># Run local experts on recv_x here. If use_fp8=True, recv_x is a</span>
+<span class="c1"># (data, scales) tuple; dequantize or feed it into an FP8-aware expert kernel.</span>
+<span class="n">expert_out</span> <span class="o">=</span> <span class="n">run_local_experts</span><span class="p">(</span><span class="n">recv_x</span><span class="p">,</span> <span class="n">recv_count</span><span class="p">)</span>
+
+<span class="n">combined_x</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">hook</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span>
+    <span class="n">expert_out</span><span class="p">,</span>
+    <span class="n">topk_idx</span><span class="p">,</span>
+    <span class="n">topk_weights</span><span class="p">,</span>
+    <span class="n">active_ranks</span><span class="p">,</span>
+    <span class="n">timeout_us</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">handle</span><span class="o">=</span><span class="n">handle</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">event</span><span class="o">.</span><span class="n">current_stream_wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="mooncake-ep-api-reference">
+<h2>Mooncake EP API reference<a class="headerlink" href="#mooncake-ep-api-reference" title="Link to this heading">#</a></h2>
+<section id="buffer-get-ep-buffer-size-hint">
+<h3><code class="docutils literal notranslate"><span class="pre">Buffer.get_ep_buffer_size_hint(...)</span></code><a class="headerlink" href="#buffer-get-ep-buffer-size-hint" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Buffer</span><span class="o">.</span><span class="n">get_ep_buffer_size_hint</span><span class="p">(</span>
+    <span class="n">num_max_dispatch_tokens_per_rank</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">num_ranks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">num_experts</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>Returns the workspace size in bytes for the EP buffer. Use the maximum number of
+tokens a rank may dispatch in one step. Underestimating this value can cause
+buffer overflow or incorrect dispatch results.</p>
+</section>
+<section id="buffer-group-num-ep-buffer-bytes-0">
+<h3><code class="docutils literal notranslate"><span class="pre">Buffer(group,</span> <span class="pre">num_ep_buffer_bytes=0)</span></code><a class="headerlink" href="#buffer-group-num-ep-buffer-bytes-0" title="Link to this heading">#</a></h3>
+<p>Creates the EP runtime for a Mooncake process group. The constructor exchanges
+RDMA and IPC metadata through the group, initializes fast-path transports when
+available, and falls back to the Python implementation if the fast path is not
+usable.</p>
+</section>
+<section id="buffer-dispatch">
+<h3><code class="docutils literal notranslate"><span class="pre">Buffer.dispatch(...)</span></code><a class="headerlink" href="#buffer-dispatch" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recv_x</span><span class="p">,</span> <span class="n">recv_count</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">hook</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">topk_idx</span><span class="p">,</span>
+    <span class="n">active_ranks</span><span class="p">,</span>
+    <span class="n">num_max_dispatch_tokens_per_rank</span><span class="p">,</span>
+    <span class="n">num_experts</span><span class="p">,</span>
+    <span class="n">timeout_us</span><span class="p">,</span>
+    <span class="n">use_fp8</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">async_finish</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">return_recv_hook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: local token hidden states, shape <code class="docutils literal notranslate"><span class="pre">[num_tokens,</span> <span class="pre">hidden]</span></code>, typically BF16
+on CUDA.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topk_idx</span></code>: selected expert IDs, shape <code class="docutils literal notranslate"><span class="pre">[num_tokens,</span> <span class="pre">top_k]</span></code>. Use <code class="docutils literal notranslate"><span class="pre">-1</span></code> to mark
+masked selections.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">active_ranks</span></code>: EP-level rank-health tensor, shape <code class="docutils literal notranslate"><span class="pre">[num_ranks]</span></code>, dtype
+<code class="docutils literal notranslate"><span class="pre">torch.int32</span></code>. Timeout detection may set failed source ranks to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_max_dispatch_tokens_per_rank</span></code>: workspace capacity per rank. It should be
+at least the maximum local <code class="docutils literal notranslate"><span class="pre">num_tokens</span></code> across ranks for the current step.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_experts</span></code>: global expert count. It must be divisible by <code class="docutils literal notranslate"><span class="pre">num_ranks</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout_us</span></code>: timeout in microseconds. Use <code class="docutils literal notranslate"><span class="pre">-1</span></code> to disable timeout detection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_fp8</span></code>: when <code class="docutils literal notranslate"><span class="pre">True</span></code>, dispatch returns FP8 data plus scales.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">async_finish</span></code>: when <code class="docutils literal notranslate"><span class="pre">True</span></code>, returned tensors are associated with the returned
+event for stream-lifetime management.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return_recv_hook</span></code>: when <code class="docutils literal notranslate"><span class="pre">True</span></code>, call the returned <code class="docutils literal notranslate"><span class="pre">hook()</span></code> to complete receive
+synchronization; otherwise use <code class="docutils literal notranslate"><span class="pre">event.current_stream_wait()</span></code>.</p></li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">recv_x</span></code>: packed local-expert inputs. If <code class="docutils literal notranslate"><span class="pre">use_fp8=True</span></code>, this is
+<code class="docutils literal notranslate"><span class="pre">(packed_data,</span> <span class="pre">packed_scales)</span></code>; otherwise it is a BF16 tensor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">recv_count</span></code>: number of tokens received by each local expert.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span></code>: opaque metadata required by <code class="docutils literal notranslate"><span class="pre">combine()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">get_next_combine_buffer()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">event</span></code>: <code class="docutils literal notranslate"><span class="pre">EventOverlap</span></code> helper; call <code class="docutils literal notranslate"><span class="pre">event.current_stream_wait()</span></code> before using
+outputs when no hook is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hook</span></code>: optional synchronization hook used when <code class="docutils literal notranslate"><span class="pre">return_recv_hook=True</span></code>.</p></li>
+</ul>
+</section>
+<section id="buffer-combine">
+<h3><code class="docutils literal notranslate"><span class="pre">Buffer.combine(...)</span></code><a class="headerlink" href="#buffer-combine" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">combined_x</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">hook</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">topk_idx</span><span class="p">,</span>
+    <span class="n">topk_weights</span><span class="p">,</span>
+    <span class="n">active_ranks</span><span class="p">,</span>
+    <span class="n">timeout_us</span><span class="p">,</span>
+    <span class="n">handle</span><span class="p">,</span>
+    <span class="n">zero_copy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">async_finish</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">return_recv_hook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: local expert outputs packed in the layout returned by <code class="docutils literal notranslate"><span class="pre">dispatch()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topk_idx</span></code> and <code class="docutils literal notranslate"><span class="pre">topk_weights</span></code>: routing metadata for combining expert outputs
+back to local tokens.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">active_ranks</span></code>: same EP-level rank-health tensor used by <code class="docutils literal notranslate"><span class="pre">dispatch()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout_us</span></code>: timeout in microseconds; use <code class="docutils literal notranslate"><span class="pre">-1</span></code> to disable timeout detection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span></code>: the handle returned by the matching <code class="docutils literal notranslate"><span class="pre">dispatch()</span></code> call.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zero_copy</span></code>: when <code class="docutils literal notranslate"><span class="pre">True</span></code>, write expert outputs into
+<code class="docutils literal notranslate"><span class="pre">buffer.get_next_combine_buffer(handle)</span></code> and pass that tensor to <code class="docutils literal notranslate"><span class="pre">combine()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">out</span></code>: optional output tensor for the combined result.</p></li>
+</ul>
+</section>
+<section id="buffer-get-next-combine-buffer-handle">
+<h3><code class="docutils literal notranslate"><span class="pre">Buffer.get_next_combine_buffer(handle)</span></code><a class="headerlink" href="#buffer-get-next-combine-buffer-handle" title="Link to this heading">#</a></h3>
+<p>Returns the next combine buffer for zero-copy expert output. Use it only with the
+matching dispatch <code class="docutils literal notranslate"><span class="pre">handle</span></code> and pass the resulting tensor back to <code class="docutils literal notranslate"><span class="pre">combine()</span></code> with
+<code class="docutils literal notranslate"><span class="pre">zero_copy=True</span></code>.</p>
+</section>
+<section id="buffer-update-ep-member">
+<h3><code class="docutils literal notranslate"><span class="pre">Buffer.update_ep_member()</span></code><a class="headerlink" href="#buffer-update-ep-member" title="Link to this heading">#</a></h3>
+<p>Reconnects EP peers after backend membership changes. Call it after PG recovery
+updates rank activeness so EP transport metadata and QPs can be refreshed.</p>
+</section>
+</section>
+<section id="active-rank-tensors-pg-vs-ep">
+<h2>Active-rank tensors: PG vs EP<a class="headerlink" href="#active-rank-tensors-pg-vs-ep" title="Link to this heading">#</a></h2>
+<p>There are two active-rank tensors in the API surface:</p>
+<ul class="simple">
+<li><p><strong>PG active-rank mask</strong>: passed to <code class="docutils literal notranslate"><span class="pre">pg.MooncakeBackendOptions</span></code>. This is the
+backend-level health mask used by collective and recovery logic.</p></li>
+<li><p><strong>EP active-rank tensor</strong>: passed to <code class="docutils literal notranslate"><span class="pre">Buffer.dispatch()</span></code> and <code class="docutils literal notranslate"><span class="pre">Buffer.combine()</span></code>.
+It is also rank-level (<code class="docutils literal notranslate"><span class="pre">[num_ranks]</span></code>, <code class="docutils literal notranslate"><span class="pre">torch.int32</span></code>) and may be updated by EP
+kernels when timeout detection marks a peer as failed.</p></li>
+</ul>
+<p>In simple integrations these tensors often carry the same health information,
+but they are passed through different API layers. Keep their dtype, device, and
+shape consistent with the process group world size or reserved <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code>.</p>
+</section>
+<section id="tests-and-examples">
+<h2>Tests and examples<a class="headerlink" href="#tests-and-examples" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>PG collectives: <code class="docutils literal notranslate"><span class="pre">mooncake-pg/tests/test_pg_collectives.py</span></code></p></li>
+<li><p>PG elastic recovery and subgroup extension: <code class="docutils literal notranslate"><span class="pre">mooncake-pg/tests/test_pg_elastic.py</span></code></p></li>
+<li><p>PG benchmark harness: <code class="docutils literal notranslate"><span class="pre">mooncake-pg/benchmark/README.md</span></code></p></li>
+<li><p>EP correctness and failure simulation: <code class="docutils literal notranslate"><span class="pre">mooncake-ep/tests/test_ep_grid.py</span></code></p></li>
+<li><p>Wheel-level EP example: <code class="docutils literal notranslate"><span class="pre">mooncake-wheel/tests/test_mooncake_ep.py</span></code></p></li>
+</ul>
+<p>See <a class="reference internal" href="../troubleshooting/pg-ep-troubleshooting.html"><span class="std std-doc">PG/EP troubleshooting</span></a> for
+common setup and runtime issues.</p>
 </section>
 </section>
 
@@ -592,16 +994,36 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-ep">Mooncake EP</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-get-buffer-size-hint">Buffer.get_buffer_size_hint()</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-init">Buffer.__init__()</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-dispatch-buffer-combine">Buffer.dispatch/Buffer.combine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-build-notes">Installation and build notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-backend-pg-quick-start">Mooncake Backend (PG) quick start</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuda-backend">CUDA backend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cpu-backend">CPU backend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-network-devices">Selecting network devices</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-backend">Mooncake Backend</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-backend-pg-api-reference">Mooncake Backend (PG) API reference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncakebackendoptions"><code class="docutils literal notranslate"><span class="pre">MooncakeBackendOptions</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-distributed-operations">Supported distributed operations</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-recovery-protocol">Elastic recovery protocol</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#healthy-rank-side">Healthy-rank side</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-rank-side">Joining-rank side</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-ep-quick-start">Mooncake EP quick start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mooncake-ep-api-reference">Mooncake EP API reference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-get-ep-buffer-size-hint"><code class="docutils literal notranslate"><span class="pre">Buffer.get_ep_buffer_size_hint(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-group-num-ep-buffer-bytes-0"><code class="docutils literal notranslate"><span class="pre">Buffer(group,</span> <span class="pre">num_ep_buffer_bytes=0)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-dispatch"><code class="docutils literal notranslate"><span class="pre">Buffer.dispatch(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-combine"><code class="docutils literal notranslate"><span class="pre">Buffer.combine(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-get-next-combine-buffer-handle"><code class="docutils literal notranslate"><span class="pre">Buffer.get_next_combine_buffer(handle)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-update-ep-member"><code class="docutils literal notranslate"><span class="pre">Buffer.update_ep_member()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-rank-tensors-pg-vs-ep">Active-rank tensors: PG vs EP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-and-examples">Tests and examples</a></li>
 </ul>
   </nav></div>
 

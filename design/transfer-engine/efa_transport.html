@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dynamic-command-builder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
@@ -45,6 +46,7 @@
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../../_static/sphinx-dynamic-command-builder.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -176,7 +178,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
@@ -193,6 +195,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-ep.html">Mooncake EP Design</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Transfer Engine</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">AWS EFA Transport for Mooncake</a></li>
@@ -221,6 +225,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/pg-ep-troubleshooting.html">Mooncake PG/EP Troubleshooting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
@@ -1385,11 +1390,17 @@ vllm<span class="w"> </span>serve<span class="w"> </span>&lt;model_path&gt;<span
 <span class="w">  </span>--prefill<span class="w"> </span>http://&lt;prefill_ip&gt;:8010<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--decode<span class="w">  </span>http://&lt;decode_ip&gt;:8020<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--kv-connector<span class="w"> </span>mooncake<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>--port<span class="w"> </span><span class="m">30000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--intra-node-data-parallel-size<span class="w"> </span><span class="m">8</span>
+<span class="w">  </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>--port<span class="w"> </span><span class="m">30000</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">--intra-node-data-parallel-size</span></code> should match the per-node DP size of your prefill / decode instances (8 in this example, matching <code class="docutils literal notranslate"><span class="pre">-tp</span> <span class="pre">8</span></code>).</p>
+<blockquote>
+<div><p><strong>Do not add <code class="docutils literal notranslate"><span class="pre">--intra-node-data-parallel-size</span></code> here.</strong> The prefill / decode
+instances above are launched with <code class="docutils literal notranslate"><span class="pre">-tp</span> <span class="pre">8</span></code> (pure tensor parallelism, data
+parallel size = 1), so there is no intra-node DP to advertise. Only pass
+<code class="docutils literal notranslate"><span class="pre">--intra-node-data-parallel-size</span> <span class="pre">N</span></code> when your instances actually run <code class="docutils literal notranslate"><span class="pre">N</span></code>-way
+data parallelism per node (e.g. you launched them with <code class="docutils literal notranslate"><span class="pre">--data-parallel-size</span> <span class="pre">N</span></code>);
+setting it to match <code class="docutils literal notranslate"><span class="pre">-tp</span> <span class="pre">8</span></code> is wrong and will misroute requests.</p>
+</div></blockquote>
 </section>
 </section>
 <section id="usage-with-sglang">
@@ -1398,7 +1409,7 @@ vllm<span class="w"> </span>serve<span class="w"> </span>&lt;model_path&gt;<span
 <section id="apply-efa-patch-only-if-sglang-version-predates-pr-25083">
 <h3>1. Apply EFA Patch (only if SGLang version predates PR #25083)<a class="headerlink" href="#apply-efa-patch-only-if-sglang-version-predates-pr-25083" title="Link to this heading">#</a></h3>
 <p>Older SGLang releases hardcode <code class="docutils literal notranslate"><span class="pre">&quot;rdma&quot;</span></code> in the transfer engine init. <a class="reference external" href="https://github.com/sgl-project/sglang/pull/25083">SGLang PR #25083</a> has been <strong>merged into SGLang <code class="docutils literal notranslate"><span class="pre">main</span></code></strong>, so the protocol is now read from <code class="docutils literal notranslate"><span class="pre">MOONCAKE_PROTOCOL</span></code>. If your SGLang build includes that PR (any recent <code class="docutils literal notranslate"><span class="pre">main</span></code> or release built after it), <strong>this step is unnecessary</strong> — skip to step 2.</p>
-<p>Only if you are pinned to an older release that predates PR #25083, apply the <a class="reference external" href="https://github.com/whn09/kimi-k2-sglang">patch script</a>:</p>
+<p>Only if you are pinned to an older release that predates PR #25083, apply the <a class="reference external" href="https://github.com/whn09/kimi-k2-sglang/blob/main/patch_sglang_efa.sh">patch script</a>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>patch_sglang_efa.sh
 </pre></div>
 </div>
@@ -1472,11 +1483,17 @@ sglang<span class="w"> </span>serve<span class="w"> </span>&lt;model_path&gt;<sp
 <h2>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h2>
 <section id="why-libfabric-instead-of-ibverbs">
 <h3>Why libfabric instead of ibverbs?<a class="headerlink" href="#why-libfabric-instead-of-ibverbs" title="Link to this heading">#</a></h3>
-<p>AWS EFA exposes RDMA-like devices through the ibverbs interface, but does not support the full ibverbs API. Specifically:</p>
-<ul class="simple">
-<li><p>Queue Pair (QP) creation fails with “Operation not supported” (error 95)</p></li>
-<li><p>EFA requires using libfabric’s <code class="docutils literal notranslate"><span class="pre">FI_EP_RDM</span></code> (Reliable Datagram Message) endpoint type</p></li>
-</ul>
+<p>AWS EFA exposes an RDMA-capable device through the ibverbs interface, but it does
+<strong>not</strong> implement the full ibverbs API. In particular, EFA only supports
+<strong>SRD</strong> (Scalable Reliable Datagram) and <strong>UD</strong> (Unreliable Datagram) queue
+pairs — it does <strong>not</strong> support the <strong>RC</strong> (Reliable Connection) queue pairs
+that Mooncake’s RDMA (<code class="docutils literal notranslate"><span class="pre">rdma</span></code>) transport is built on. Attempting to create an RC
+QP on an EFA device fails (<code class="docutils literal notranslate"><span class="pre">EOPNOTSUPP</span></code>), and SRD has no one-sided RC-style
+<code class="docutils literal notranslate"><span class="pre">ibv_post_send(RDMA_WRITE)</span></code> verb in the public ibverbs API.</p>
+<p>The portable way to drive EFA’s SRD transport is libfabric, whose EFA provider
+exposes SRD through the <code class="docutils literal notranslate"><span class="pre">FI_EP_RDM</span></code> (Reliable Datagram Message) endpoint type and
+implements <code class="docutils literal notranslate"><span class="pre">fi_write</span></code> / <code class="docutils literal notranslate"><span class="pre">fi_read</span></code> (one-sided RMA) on top of it. Mooncake’s EFA
+transport therefore targets libfabric directly rather than ibverbs.</p>
 </section>
 <section id="efa-transport-architecture">
 <h3>EFA Transport Architecture<a class="headerlink" href="#efa-transport-architecture" title="Link to this heading">#</a></h3>
@@ -1492,7 +1509,9 @@ sglang<span class="w"> </span>serve<span class="w"> </span>&lt;model_path&gt;<sp
 │  ├── fid_mr         (memory regions)                      │
 │  ├── shared_ep_     (the single fid_ep that serves every  │
 │  │                   peer via fi_addr_t lookup in the AV) │
-│  └── peer_map_      (normalized nic_path -&gt; EfaEndPoint)  │
+│  └── peer_map_      (full &quot;host:port@nic&quot; path -&gt;         │
+│                      EfaEndPoint; the RPC port is NOT     │
+│                      stripped — see note below)           │
 ├───────────────────────────────────────────────────────────┤
 │  EfaEndPoint (per peer)                                   │
 │  └── peer_fi_addr_  (AV slot index for this peer; sends   │
@@ -1501,6 +1520,17 @@ sglang<span class="w"> </span>serve<span class="w"> </span>&lt;model_path&gt;<sp
 └───────────────────────────────────────────────────────────┘
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Peer-map keying.</strong> <code class="docutils literal notranslate"><span class="pre">peer_map_</span></code> is keyed by the <strong>full</strong> <code class="docutils literal notranslate"><span class="pre">host:port&#64;nic</span></code>
+path, <em>not</em> a port-stripped form. Under SGLang DP &gt; 1 each DP worker on a
+peer host is a separate process with its own Mooncake <code class="docutils literal notranslate"><span class="pre">TransferEngine</span></code> and
+its own P2PHANDSHAKE RPC port; they share host + NIC but have distinct EFA
+addresses. Normalizing the port away would collapse every DP worker on that
+host onto one <code class="docutils literal notranslate"><span class="pre">EfaEndPoint</span></code>, so each arriving handshake would look like a
+“peer reconnected” to the previous holder and trigger <code class="docutils literal notranslate"><span class="pre">fi_av_remove</span></code> +
+<code class="docutils literal notranslate"><span class="pre">fi_av_insert</span></code> churn on every KV transfer. Keeping the port in the key costs
+nothing in steady state (the port is stable for a worker’s lifetime).</p>
+</div></blockquote>
 </section>
 <section id="thread-safety">
 <h3>Thread Safety<a class="headerlink" href="#thread-safety" title="Link to this heading">#</a></h3>
@@ -1509,7 +1539,11 @@ sglang<span class="w"> </span>serve<span class="w"> </span>&lt;model_path&gt;<sp
 <li><p>Multiple submission threads may route slices through the same shared endpoint concurrently.</p></li>
 <li><p>libfabric’s EFA RDM endpoints are not thread-safe for concurrent <code class="docutils literal notranslate"><span class="pre">fi_write</span></code>/<code class="docutils literal notranslate"><span class="pre">fi_read</span></code> even under <code class="docutils literal notranslate"><span class="pre">FI_THREAD_SAFE</span></code> at the domain level — concurrent posts corrupt provider internals and completions silently vanish.</p></li>
 </ul>
-<p>CQ completion queues are polled by dedicated worker threads (one per EFA device) that run independently of submission threads.</p>
+<p>CQ completion queues are polled by dedicated worker threads that run
+independently of submission threads. The poller count is <code class="docutils literal notranslate"><span class="pre">min(MC_EFA_CQ_THREADS,</span> <span class="pre">num_EFA_devices)</span></code>; <code class="docutils literal notranslate"><span class="pre">MC_EFA_CQ_THREADS</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>, so a single poller
+round-robins every context’s CQ (which already reaches ~99.9% of peak — see the
+SGLang env-var note above). Set <code class="docutils literal notranslate"><span class="pre">MC_EFA_CQ_THREADS=0</span></code> to lift the cap and spawn
+one poller per EFA device (the legacy behavior).</p>
 </section>
 <section id="efa-vs-roce-rdma">
 <h3>EFA vs RoCE RDMA<a class="headerlink" href="#efa-vs-roce-rdma" title="Link to this heading">#</a></h3>
@@ -1522,36 +1556,48 @@ sglang<span class="w"> </span>serve<span class="w"> </span>&lt;model_path&gt;<sp
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Protocol</p></td>
-<td><p>Scalable Reliable Datagram</p></td>
+<td><p>Scalable Reliable Datagram (SRD)</p></td>
 <td><p>RDMA over Converged Ethernet</p></td>
 </tr>
-<tr class="row-odd"><td><p>Endpoint type</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">FI_EP_RDM</span></code> (message-based)</p></td>
-<td><p>Queue Pairs (true RDMA)</p></td>
+<tr class="row-odd"><td><p>QP type</p></td>
+<td><p>SRD / UD (no RC)</p></td>
+<td><p>RC (Reliable Connection)</p></td>
+</tr>
+<tr class="row-even"><td><p>Endpoint type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FI_EP_RDM</span></code> (connectionless)</p></td>
+<td><p>Queue Pairs (connection-oriented)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reliability / ordering</p></td>
+<td><p>Reliable delivery, <strong>unordered</strong> (SRD sprays across paths)</p></td>
+<td><p>Reliable, in-order</p></td>
 </tr>
 <tr class="row-even"><td><p>Write operation</p></td>
-<td><p>Software-emulated via messages + ACKs</p></td>
+<td><p>One-sided <code class="docutils literal notranslate"><span class="pre">fi_write</span></code> over SRD; device-RDMA-offloaded by default (<code class="docutils literal notranslate"><span class="pre">FI_EFA_USE_DEVICE_RDMA=1</span></code>), falls back to libfabric’s emulated RMA only if device RDMA is disabled</p></td>
 <td><p>Hardware-offloaded one-sided RDMA</p></td>
 </tr>
-<tr class="row-odd"><td><p>CPU overhead</p></td>
-<td><p>Moderate (provider processes ACKs)</p></td>
-<td><p>Minimal (NIC handles everything)</p></td>
-</tr>
-<tr class="row-even"><td><p>Throughput GPU-to-GPU (16×200G, p5en)</p></td>
+<tr class="row-odd"><td><p>Throughput GPU-to-GPU (16×200G, p5en)</p></td>
 <td><p>365 GB/s (tuned)</p></td>
 <td><p>N/A</p></td>
 </tr>
-<tr class="row-odd"><td><p>Throughput CPU-to-CPU (16×200G, p5en)</p></td>
+<tr class="row-even"><td><p>Throughput CPU-to-CPU (16×200G, p5en)</p></td>
 <td><p>213 GB/s (tuned)</p></td>
 <td><p>—</p></td>
 </tr>
-<tr class="row-even"><td><p>AWS availability</p></td>
+<tr class="row-odd"><td><p>AWS availability</p></td>
 <td><p>All EFA-enabled instances</p></td>
 <td><p>Not available on AWS</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<blockquote>
+<div><p>Mooncake requests libfabric API ≥ 1.18 at <code class="docutils literal notranslate"><span class="pre">fi_getinfo</span></code>, which makes
+<code class="docutils literal notranslate"><span class="pre">FI_EFA_USE_DEVICE_RDMA=1</span></code> the default on every supported EFA generation
+(p5/p5e included). On this path <code class="docutils literal notranslate"><span class="pre">fi_write</span></code> / <code class="docutils literal notranslate"><span class="pre">fi_read</span></code> are hardware-offloaded
+one-sided RMA over SRD — the host CPU is not in the data path. The
+software-emulated RMA path only applies if you explicitly set
+<code class="docutils literal notranslate"><span class="pre">FI_EFA_USE_DEVICE_RDMA=0</span></code>.</p>
+</div></blockquote>
 </section>
 <section id="supported-aws-instance-types">
 <h3>Supported AWS Instance Types<a class="headerlink" href="#supported-aws-instance-types" title="Link to this heading">#</a></h3>

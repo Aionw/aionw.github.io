@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dynamic-command-builder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
@@ -45,6 +46,7 @@
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../../_static/sphinx-dynamic-command-builder.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -176,7 +178,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
@@ -193,6 +195,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-ep.html">Mooncake EP Design</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Transfer Engine</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="efa_transport.html">AWS EFA Transport for Mooncake</a></li>
@@ -221,6 +225,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/pg-ep-troubleshooting.html">Mooncake PG/EP Troubleshooting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
@@ -495,8 +500,8 @@ document.write(`
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ASCEND_AUTO_CONNECT</span></code></p></td>
 <td><p>Enable automatic connection management</p></td>
-<td><p>0 (disabled)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ASCEND_AUTO_CONNECT=1</span></code></p></td>
+<td><p>1 (enabled)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ASCEND_AUTO_CONNECT=0</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ASCEND_ENABLE_USE_FABRIC_MEM</span></code></p></td>
 <td><p>Enable fabric memory transfer mode in Mooncake Store (A3 only)</p></td>
@@ -563,7 +568,7 @@ document.write(`
 </div>
 <p><strong>Detailed Descriptions:</strong></p>
 <ul class="simple">
-<li><p><strong>ASCEND_AUTO_CONNECT</strong>: Requires CANN 9.0 or later. Default is 0, recommended to enable on supported versions: link can be automatically disconnected when the remote end goes offline abnormally.</p></li>
+<li><p><strong>ASCEND_AUTO_CONNECT</strong>: Requires CANN 9.0 or later. Default is 1: link can be automatically disconnected when the remote end goes offline abnormally. Set <code class="docutils literal notranslate"><span class="pre">ASCEND_AUTO_CONNECT=0</span></code> to disable.</p></li>
 <li><p><strong>ASCEND_ENABLE_USE_FABRIC_MEM</strong>: Requires CANN 9.0+ and HDK 26.0+. Recommended when using Mooncake Store on supported A3 platforms: it can significantly improve transmission performance.</p></li>
 <li><p><strong>ASCEND_USE_ASYNC_TRANSFER</strong>: Requires CANN 8.5+. Enables HIXL asynchronous transfer mode, defaults to synchronous mode.</p></li>
 <li><p><strong>ASCEND_GLOBAL_RESOURCE_CONFIG</strong>: Configures HIXL global resources. Refer to HIXL documentation for <code class="docutils literal notranslate"><span class="pre">OPTION_GLOBAL_RESOURCE_CONFIG</span></code> settings.</p></li>
@@ -599,7 +604,7 @@ document.write(`
 <li><p><strong>Buffer Pool Configuration</strong>: Under constrained scenarios, transmission can be achieved by using intermediate buffers. The specific way to enable this is by configuring the ASCEND_BUFFER_POOL environment variable in the format BUFFER_NUM:BUFFER_SIZE (in MB). The recommended size is 4:8, which can be adjusted to the most suitable configuration based on actual scenarios.</p></li>
 <li><p><strong>Async transfer</strong>: The asynchronous transfer mode can be enabled by configuring the ASCEND_USE_ASYNC_TRANSFER environment variable.</p></li>
 <li><p><strong>Fabric Memory mode</strong>: On the A3, with the latest drivers and CANN installed, when using Mooncake store, the ASCEND_ENABLE_USE_FABRIC_MEM environment variable can be set to enable fabric memory transfer mode (which allows direct access remote HOST memory).</p></li>
-<li><p><strong>Auto Connect</strong>: The auto connect feature can be enabled by configuring the <code class="docutils literal notranslate"><span class="pre">ASCEND_AUTO_CONNECT</span></code> environment variable. The default value is 0 (disabled).</p></li>
+<li><p><strong>Auto Connect</strong>: The auto connect feature is enabled by default (<code class="docutils literal notranslate"><span class="pre">ASCEND_AUTO_CONNECT=1</span></code>). Set <code class="docutils literal notranslate"><span class="pre">ASCEND_AUTO_CONNECT=0</span></code> to disable.</p></li>
 </ol>
 </section>
 </section>

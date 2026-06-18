@@ -1,0 +1,1270 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mooncake EP Design &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dynamic-command-builder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../_static/sphinx-dynamic-command-builder.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}`;
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        all_mermaids.forEach((el) => {
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+        await mermaid.run();
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+const load = async () => {
+    initStyles();
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...JSON.parse(
+                    `{"startOnLoad": false}`
+                ),
+                ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...JSON.parse(
+        `{"startOnLoad": false}`
+    ),
+    ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design/mooncake-ep';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Transfer Engine" href="transfer-engine/index.html" />
+    <link rel="prev" title="Mooncake Backend (PG) Design" href="mooncake-backend-pg.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mooncake EP Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/pg-ep-troubleshooting.html">Mooncake PG/EP Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/design/mooncake-ep.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/design/mooncake-ep.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mooncake EP Design</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals">Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-data-flow">High-level data flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-mooncake-backend-pg">Relationship with Mooncake Backend (PG)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-objects">Runtime objects</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-wrapper">Python wrapper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#native-buffer">Native buffer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-layout">Buffer layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-paths-and-fallback">Fast paths and fallback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-exchange">Metadata exchange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatch-internals">Dispatch internals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-internals">Combine internals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-activeness-and-timeout-behavior">Rank activeness and timeout behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-synchronization-model">Stream synchronization model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recovery-integration">Recovery integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance considerations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-test-checklist">Developer test checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-documentation">Related documentation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mooncake-ep-design">
+<h1>Mooncake EP Design<a class="headerlink" href="#mooncake-ep-design" title="Link to this heading">#</a></h1>
+<p>Mooncake EP is the expert-parallel communication runtime used for MoE token
+dispatch and combine. It follows the DeepEP low-latency programming model while
+adding Mooncake transport integration and rank activeness awareness.</p>
+<p>This document explains the runtime at a level useful for developers maintaining
+Mooncake EP or integrating it into inference engines.</p>
+<section id="goals">
+<h2>Goals<a class="headerlink" href="#goals" title="Link to this heading">#</a></h2>
+<p>Mooncake EP is designed to:</p>
+<ul class="simple">
+<li><p>provide low-latency dispatch/combine operations for expert-parallel MoE
+inference;</p></li>
+<li><p>keep the Python programming model close to DeepEP low-latency mode;</p></li>
+<li><p>use Mooncake device transports for fast intra-node and inter-node movement;</p></li>
+<li><p>detect failed source ranks through timeout-aware kernels;</p></li>
+<li><p>interoperate with Mooncake Backend (PG) for bootstrap metadata exchange and
+rank-health state.</p></li>
+</ul>
+</section>
+<section id="high-level-data-flow">
+<h2>High-level data flow<a class="headerlink" href="#high-level-data-flow" title="Link to this heading">#</a></h2>
+<p>MoE inference with Mooncake EP has three phases:</p>
+<ol class="arabic simple">
+<li><p><strong>Dispatch</strong>: each rank sends token hidden states to the ranks that own the
+selected experts. The receiver packs tokens by local expert.</p></li>
+<li><p><strong>Expert compute</strong>: each rank runs its local experts over the packed inputs.</p></li>
+<li><p><strong>Combine</strong>: expert outputs are routed back to the original token owners and
+reduced with routing weights.</p></li>
+</ol>
+<pre  class="mermaid">
+        flowchart LR
+    A[Local tokens x + topk_idx] --&gt; B[dispatch]
+    B --&gt; C[Packed local expert inputs]
+    C --&gt; D[Local expert kernels]
+    D --&gt; E[Packed expert outputs]
+    E --&gt; F[combine]
+    F --&gt; G[Combined local token outputs]
+    </pre></section>
+<section id="relationship-with-mooncake-backend-pg">
+<h2>Relationship with Mooncake Backend (PG)<a class="headerlink" href="#relationship-with-mooncake-backend-pg" title="Link to this heading">#</a></h2>
+<p>Mooncake EP is constructed from a <code class="docutils literal notranslate"><span class="pre">torch.distributed</span></code> process group:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake.mooncake_ep_buffer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Buffer</span>
+
+<span class="n">buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">num_ep_buffer_bytes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The group should normally be a Mooncake Backend process group. EP uses it to
+exchange RDMA memory-region metadata, QP information, GID/LID information, and
+IPC handles. The backend active-rank state is also used by the fallback path and
+by peer synchronization.</p>
+<p>After PG recovery changes membership, call <code class="docutils literal notranslate"><span class="pre">Buffer.update_ep_member()</span></code> to refresh
+EP peer metadata and QPs before relying on the recovered ranks for dispatch and
+combine.</p>
+</section>
+<section id="runtime-objects">
+<h2>Runtime objects<a class="headerlink" href="#runtime-objects" title="Link to this heading">#</a></h2>
+<section id="python-wrapper">
+<h3>Python wrapper<a class="headerlink" href="#python-wrapper" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">mooncake.mooncake_ep_buffer.Buffer</span></code> is the user-facing wrapper. It owns:</p>
+<ul class="simple">
+<li><p>the process group;</p></li>
+<li><p>the native EP buffer runtime;</p></li>
+<li><p>the fallback flag;</p></li>
+<li><p>Python fallback buffers used when fast path is unavailable.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Buffer.connect()</span></code> exchanges peer metadata. It first tries the RDMA/IBGDA path,
+then exchanges IPC handles for intra-node P2P. If neither fast path is usable, it
+falls back to a Python implementation based on PyTorch collectives.</p>
+</section>
+<section id="native-buffer">
+<h3>Native buffer<a class="headerlink" href="#native-buffer" title="Link to this heading">#</a></h3>
+<p>The native <code class="docutils literal notranslate"><span class="pre">MooncakeEpBuffer</span></code> owns or references:</p>
+<ul class="simple">
+<li><p>rank and world-size metadata;</p></li>
+<li><p>a GDR workspace buffer;</p></li>
+<li><p>P2P and RDMA device transports;</p></li>
+<li><p>a communication stream;</p></li>
+<li><p>temporary workspace used by dispatch/combine kernels.</p></li>
+</ul>
+<p>If an external Transfer Engine is supplied by a higher layer, EP can reference
+device transports owned by that engine; otherwise EP creates and owns the
+transports itself.</p>
+</section>
+<section id="buffer-layout">
+<h3>Buffer layout<a class="headerlink" href="#buffer-layout" title="Link to this heading">#</a></h3>
+<p>EP allocates paired send/receive buffers for double-buffered dispatch/combine.
+Each pair contains:</p>
+<ul class="simple">
+<li><p>RDMA send signal buffer;</p></li>
+<li><p>RDMA receive signal buffer;</p></li>
+<li><p>RDMA send data buffer;</p></li>
+<li><p>RDMA receive data buffer.</p></li>
+</ul>
+<p>The workspace size returned by <code class="docutils literal notranslate"><span class="pre">Buffer.get_ep_buffer_size_hint()</span></code> is derived from
+<code class="docutils literal notranslate"><span class="pre">num_max_dispatch_tokens_per_rank</span></code>, <code class="docutils literal notranslate"><span class="pre">hidden</span></code>, <code class="docutils literal notranslate"><span class="pre">num_ranks</span></code>, and <code class="docutils literal notranslate"><span class="pre">num_experts</span></code>.
+Size this for peak dispatch demand, not the average request.</p>
+</section>
+</section>
+<section id="fast-paths-and-fallback">
+<h2>Fast paths and fallback<a class="headerlink" href="#fast-paths-and-fallback" title="Link to this heading">#</a></h2>
+<p>Mooncake EP has three broad execution modes:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IBGDA / RDMA fast path</p></td>
+<td><p>Inter-node GPU memory movement.</p></td>
+<td><p>Requires RDMA-capable environment and successful metadata/QP setup.</p></td>
+</tr>
+<tr class="row-odd"><td><p>P2P / IPC fast path</p></td>
+<td><p>Intra-node peer access such as NVLink.</p></td>
+<td><p>Requires peer accessibility and IPC handle exchange.</p></td>
+</tr>
+<tr class="row-even"><td><p>Python fallback</p></td>
+<td><p>Functional fallback for unsupported environments.</p></td>
+<td><p>Slower; useful for correctness and limited testing.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The runtime reports whether IBGDA is disabled and whether the fast path is usable
+through native helper methods surfaced in Python. The Python wrapper updates its
+fallback flag after metadata exchange.</p>
+</section>
+<section id="metadata-exchange">
+<h2>Metadata exchange<a class="headerlink" href="#metadata-exchange" title="Link to this heading">#</a></h2>
+<p>During <code class="docutils literal notranslate"><span class="pre">Buffer.connect()</span></code>, ranks exchange:</p>
+<ul class="simple">
+<li><p>RDMA memory-region address and key;</p></li>
+<li><p>local QP numbers;</p></li>
+<li><p>LID and GID information;</p></li>
+<li><p>subnet prefix and interface ID;</p></li>
+<li><p>CUDA IPC handles for local peer access;</p></li>
+<li><p>current active-rank mask from the backend.</p></li>
+</ul>
+<p>The exchange uses <code class="docutils literal notranslate"><span class="pre">dist.all_gather()</span></code> and <code class="docutils literal notranslate"><span class="pre">dist.all_to_all()</span></code> on the process
+group. For this reason, the process group must already be initialized and healthy
+before the EP buffer is constructed or refreshed.</p>
+</section>
+<section id="dispatch-internals">
+<h2>Dispatch internals<a class="headerlink" href="#dispatch-internals" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dispatch()</span></code> takes local token hidden states and selected expert IDs. It sends
+tokens to expert-owner ranks and packs received tokens into local-expert-major
+layout.</p>
+<p>Important inputs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: <code class="docutils literal notranslate"><span class="pre">[num_tokens,</span> <span class="pre">hidden]</span></code> token hidden states;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topk_idx</span></code>: <code class="docutils literal notranslate"><span class="pre">[num_tokens,</span> <span class="pre">top_k]</span></code> global expert IDs;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">active_ranks</span></code>: <code class="docutils literal notranslate"><span class="pre">[num_ranks]</span></code> int32 rank-health tensor;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_max_dispatch_tokens_per_rank</span></code>: receive capacity per source rank;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_experts</span></code>: global expert count, divisible by <code class="docutils literal notranslate"><span class="pre">num_ranks</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout_us</span></code>: failure-detection timeout.</p></li>
+</ul>
+<p>Important outputs:</p>
+<ul class="simple">
+<li><p>packed local-expert input tensor;</p></li>
+<li><p>per-local-expert receive counts;</p></li>
+<li><p>source/layout metadata handle used by <code class="docutils literal notranslate"><span class="pre">combine()</span></code>;</p></li>
+<li><p>event/hook synchronization helpers.</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">use_fp8=True</span></code>, dispatch returns packed FP8 data and FP32 scales. The local
+expert path must either consume that format directly or dequantize before expert
+compute.</p>
+</section>
+<section id="combine-internals">
+<h2>Combine internals<a class="headerlink" href="#combine-internals" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">combine()</span></code> sends local expert outputs back to token-owner ranks and applies
+routing weights. It consumes the handle produced by the matching <code class="docutils literal notranslate"><span class="pre">dispatch()</span></code>
+call.</p>
+<p>For zero-copy combine, call <code class="docutils literal notranslate"><span class="pre">get_next_combine_buffer(handle)</span></code>, write expert
+outputs into that buffer, then call <code class="docutils literal notranslate"><span class="pre">combine(...,</span> <span class="pre">zero_copy=True)</span></code> with the same
+handle. Do not reuse a handle across unrelated dispatch/combine pairs.</p>
+</section>
+<section id="rank-activeness-and-timeout-behavior">
+<h2>Rank activeness and timeout behavior<a class="headerlink" href="#rank-activeness-and-timeout-behavior" title="Link to this heading">#</a></h2>
+<p>Mooncake EP receives an <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> tensor in both dispatch and combine. The
+native kernels poll receive signals from source ranks. If <code class="docutils literal notranslate"><span class="pre">timeout_us</span></code> is not
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> and a source rank does not make progress before the timeout, the kernel can
+mark <code class="docutils literal notranslate"><span class="pre">active_ranks[src_rank]</span> <span class="pre">=</span> <span class="pre">0</span></code> and skip that source.</p>
+<p>This EP-level tensor is rank-level and should have shape <code class="docutils literal notranslate"><span class="pre">[num_ranks]</span></code>. It is
+related to, but not automatically identical to, the backend-level active-rank
+mask passed through <code class="docutils literal notranslate"><span class="pre">MooncakeBackendOptions</span></code>. Integrations should propagate
+health updates consistently between scheduling logic, PG state, and EP buffers.</p>
+</section>
+<section id="stream-synchronization-model">
+<h2>Stream synchronization model<a class="headerlink" href="#stream-synchronization-model" title="Link to this heading">#</a></h2>
+<p>Mooncake EP operations return an <code class="docutils literal notranslate"><span class="pre">EventOverlap</span></code> object and, optionally, a hook:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">return_recv_hook=False</span></code>, call <code class="docutils literal notranslate"><span class="pre">event.current_stream_wait()</span></code> before using
+the output tensors on the current stream.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">return_recv_hook=True</span></code>, call the returned <code class="docutils literal notranslate"><span class="pre">hook()</span></code> at the chosen overlap
+point.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">async_finish=True</span></code>, the wrapper records extra tensors in the event helper
+to keep lifetimes safe for asynchronous use and CUDA graph scenarios.</p></li>
+</ul>
+<p>Always make synchronization explicit when composing EP with custom expert
+kernels, CUDA graphs, or application-level streams.</p>
+</section>
+<section id="recovery-integration">
+<h2>Recovery integration<a class="headerlink" href="#recovery-integration" title="Link to this heading">#</a></h2>
+<p>When a rank fails, multiple layers must be updated:</p>
+<ol class="arabic simple">
+<li><p>PG active-rank state must stop collectives from waiting for the failed rank.</p></li>
+<li><p>Scheduler / MoE routing should stop assigning tokens to unavailable experts.</p></li>
+<li><p>Replacement ranks should join through the PG elastic protocol.</p></li>
+<li><p>EP buffers should refresh peer metadata with <code class="docutils literal notranslate"><span class="pre">update_ep_member()</span></code> after the
+process group activates recovered ranks.</p></li>
+</ol>
+<p>EP timeout detection can mark a rank inactive in the EP-level tensor, but higher
+layers still need to coordinate recovery and routing decisions.</p>
+</section>
+<section id="performance-considerations">
+<h2>Performance considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Prefer fast path operation with working RDMA/IBGDA or P2P peer access.</p></li>
+<li><p>Size <code class="docutils literal notranslate"><span class="pre">num_max_dispatch_tokens_per_rank</span></code> for the worst expected per-rank token
+count to avoid overflow.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">return_recv_hook=True</span></code> or <code class="docutils literal notranslate"><span class="pre">async_finish=True</span></code> only when the application
+deliberately overlaps communication and compute.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_fp8=True</span></code> reduces dispatch bandwidth but requires FP8-aware expert code
+or explicit dequantization.</p></li>
+<li><p>Repeatedly reconstructing EP buffers is expensive; refresh membership only
+when PG membership changes.</p></li>
+</ul>
+</section>
+<section id="developer-test-checklist">
+<h2>Developer test checklist<a class="headerlink" href="#developer-test-checklist" title="Link to this heading">#</a></h2>
+<p>For EP changes, run correctness across:</p>
+<ul class="simple">
+<li><p>BF16 and FP8 dispatch;</p></li>
+<li><p>zero-copy and non-zero-copy combine;</p></li>
+<li><p>synchronous event wait and hook-based synchronization;</p></li>
+<li><p>fallback and fast path when available;</p></li>
+<li><p>failure simulation with finite <code class="docutils literal notranslate"><span class="pre">timeout_us</span></code>;</p></li>
+<li><p>multi-rank topologies where <code class="docutils literal notranslate"><span class="pre">num_experts</span> <span class="pre">%</span> <span class="pre">num_ranks</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+<p>Useful entry points:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># EP grid correctness test</span>
+python<span class="w"> </span>mooncake-ep/tests/test_ep_grid.py
+
+<span class="c1"># Wheel-level EP smoke test</span>
+python<span class="w"> </span>mooncake-wheel/tests/test_mooncake_ep.py
+</pre></div>
+</div>
+<p>Adapt launch commands to the target environment and number of GPUs.</p>
+</section>
+<section id="related-documentation">
+<h2>Related documentation<a class="headerlink" href="#related-documentation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="mooncake-backend-pg.html"><span class="std std-doc">Mooncake Backend (PG) design</span></a></p></li>
+<li><p><a class="reference internal" href="../python-api-reference/ep-backend.html"><span class="std std-doc">Python API reference</span></a></p></li>
+<li><p><a class="reference internal" href="../troubleshooting/pg-ep-troubleshooting.html"><span class="std std-doc">PG/EP troubleshooting</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mooncake-backend-pg.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mooncake Backend (PG) Design</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="transfer-engine/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Transfer Engine</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals">Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-data-flow">High-level data flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-mooncake-backend-pg">Relationship with Mooncake Backend (PG)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-objects">Runtime objects</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-wrapper">Python wrapper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#native-buffer">Native buffer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer-layout">Buffer layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-paths-and-fallback">Fast paths and fallback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-exchange">Metadata exchange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatch-internals">Dispatch internals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-internals">Combine internals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-activeness-and-timeout-behavior">Rank activeness and timeout behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-synchronization-model">Stream synchronization model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recovery-integration">Recovery integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance considerations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-test-checklist">Developer test checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-documentation">Related documentation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

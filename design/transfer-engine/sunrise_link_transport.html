@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dynamic-command-builder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ea134bb0" />
@@ -45,6 +46,7 @@
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../../_static/sphinx-dynamic-command-builder.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -176,7 +178,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment &amp; Tunnig Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
@@ -193,6 +195,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Mooncake Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mooncake-store.html">Mooncake Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mooncake-ep.html">Mooncake EP Design</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Transfer Engine</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../getting_started/supported-protocols.html">Supported Communication Protocols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="efa_transport.html">AWS EFA Transport for Mooncake</a></li>
@@ -221,6 +225,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/error-code.html">Error Code Explanation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/pg-ep-troubleshooting.html">Mooncake PG/EP Troubleshooting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
@@ -427,11 +432,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-pipeline">Transfer Pipeline</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-dependencies">Additional Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-and-compile">Build and Compile</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-and-test">Run and Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-and-test">Run and Test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tebench-tent-backend">Using <code class="docutils literal notranslate"><span class="pre">tebench</span></code> (TENT Backend)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options-tent">Configuration Options (TENT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
 </ul>
             </nav>
         </div>
@@ -447,8 +460,18 @@ document.write(`
 <h1>Sunrise Link Transport<a class="headerlink" href="#sunrise-link-transport" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Sunrise Link is a GPU transport backend in the Mooncake TENT transfer framework. It relies on Tang Runtime (<code class="docutils literal notranslate"><span class="pre">tangrt</span></code>) for device memory allocation, pointer attribute queries, peer copy, and IPC handle operations, and is registered as <code class="docutils literal notranslate"><span class="pre">SUNRISE_LINK</span></code> in TENT.</p>
+<p>Sunrise Link is a GPU-to-GPU direct communication interconnect developed by Sunrise. In Mooncake, it is integrated as a GPU transport backend in the TENT transfer framework. It relies on Tang Runtime (<code class="docutils literal notranslate"><span class="pre">tangrt</span></code>) for device memory allocation, pointer attribute queries, peer copy, and IPC handle operations, and is registered as <code class="docutils literal notranslate"><span class="pre">SUNRISE_LINK</span></code> in TENT.</p>
 <p>At runtime, <code class="docutils literal notranslate"><span class="pre">TransferEngineImpl</span></code> loads Sunrise Link Transport when <code class="docutils literal notranslate"><span class="pre">USE_SUNRISE</span></code> is enabled at build time and <code class="docutils literal notranslate"><span class="pre">transports/sunrise_link/enable=true</span></code> is set in config.</p>
+<section id="transfer-pipeline">
+<h3>Transfer Pipeline<a class="headerlink" href="#transfer-pipeline" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Init</strong>: <code class="docutils literal notranslate"><span class="pre">dlopen</span></code> <code class="docutils literal notranslate"><span class="pre">libptml_shared.so</span></code> + <code class="docutils literal notranslate"><span class="pre">libtangrt_shared.so</span></code>, initialize PTML.</p></li>
+<li><p><strong>Topology</strong>: <code class="docutils literal notranslate"><span class="pre">ptmlPtlinkPhytopoDetect</span></code> discovers inter-chip ports, builds C2C mapping (<code class="docutils literal notranslate"><span class="pre">local_chipid,</span> <span class="pre">remote_chipid</span> <span class="pre">→</span> <span class="pre">local_port</span></code>).</p></li>
+<li><p><strong>Registration</strong>: <code class="docutils literal notranslate"><span class="pre">tangIpcGetMemHandle</span></code> generates IPC handles for GPU buffers.</p></li>
+<li><p><strong>Execution</strong>: Same device → <code class="docutils literal notranslate"><span class="pre">tangMemcpy</span></code>; Cross-device → <code class="docutils literal notranslate"><span class="pre">tangMemcpyPeer</span></code> / <code class="docutils literal notranslate"><span class="pre">tangMemcpyPeer_v2</span></code>, fallback to <code class="docutils literal notranslate"><span class="pre">tangDeviceGetPeerPointer</span></code> + C2C; Remote → <code class="docutils literal notranslate"><span class="pre">tangIpcOpenMemHandle</span></code> + peer copy; Host ↔ Device → <code class="docutils literal notranslate"><span class="pre">tangMemcpy</span></code> with direction.</p></li>
+<li><p><strong>Async</strong>: When size exceeds <code class="docutils literal notranslate"><span class="pre">async_memcpy_threshold</span></code>, uses <code class="docutils literal notranslate"><span class="pre">tangMemcpyAsync</span></code> with per-device stream.</p></li>
+</ol>
+</section>
 </section>
 <hr class="docutils" />
 <section id="additional-dependencies">
@@ -482,6 +505,10 @@ cmake<span class="w"> </span>..<span class="w"> </span>-DUSE_TENT<span class="o"
 make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
 </pre></div>
 </div>
+<p>If Tang Runtime is installed at a non-default location:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>..<span class="w"> </span>-DUSE_TENT<span class="o">=</span>ON<span class="w"> </span>-DUSE_SUNRISE<span class="o">=</span>ON<span class="w"> </span>-DMC_TANGRT_ROOT<span class="o">=</span>/opt/tangrt
+</pre></div>
+</div>
 </section>
 <hr class="docutils" />
 <section id="run-and-test">
@@ -509,6 +536,47 @@ make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</s
 <blockquote>
 <div><p>Note: when <code class="docutils literal notranslate"><span class="pre">metadata_server=P2PHANDSHAKE</span></code>, the target node may listen on a dynamically assigned port. Replace <code class="docutils literal notranslate"><span class="pre">$PORT</span></code> in <code class="docutils literal notranslate"><span class="pre">--segment_id</span></code> with the actual port printed in target logs.</p>
 </div></blockquote>
+<section id="using-tebench-tent-backend">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">tebench</span></code> (TENT Backend)<a class="headerlink" href="#using-tebench-tent-backend" title="Link to this heading">#</a></h3>
+<p>Role is determined by <code class="docutils literal notranslate"><span class="pre">--target_seg_name</span></code>: empty → target, otherwise → initiator.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal 1: target</span>
+./tebench<span class="w"> </span>--backend<span class="o">=</span>tent<span class="w"> </span>--metadata_type<span class="o">=</span>p2p<span class="w"> </span>--xport_type<span class="o">=</span>sunrise_link<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--seg_type<span class="o">=</span>VRAM<span class="w"> </span>--local_gpu_id<span class="o">=</span><span class="m">0</span>
+
+<span class="c1"># Terminal 2: initiator</span>
+./tebench<span class="w"> </span>--backend<span class="o">=</span>tent<span class="w"> </span>--metadata_type<span class="o">=</span>p2p<span class="w"> </span>--xport_type<span class="o">=</span>sunrise_link<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--seg_type<span class="o">=</span>VRAM<span class="w"> </span>--target_seg_name<span class="o">=</span><span class="m">192</span>.168.172.52:168<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--local_gpu_id<span class="o">=</span><span class="m">1</span><span class="w"> </span>--target_gpu_id<span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_TANGRT_ROOT</span></code></p></td>
+<td><p>Tang Runtime root directory</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/usr/local/tangrt</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MC_TANGRT_LIB_DIR</span></code></p></td>
+<td><p>Direct path to <code class="docutils literal notranslate"><span class="pre">.so</span></code> dir. Overrides <code class="docutils literal notranslate"><span class="pre">MC_TANGRT_ROOT</span></code> + arch lookup.</p></td>
+<td><p>(unset)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MC_TANGRT_LIB_ARCH</span></code></p></td>
+<td><p>Architecture subdirectory under <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/lib/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">linux-x86_64</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
 <section id="configuration-options-tent">
@@ -516,9 +584,20 @@ make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</s
 <p>Sunrise Link behavior can be tuned through config file options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">transports/sunrise_link/enable</span></code>: enable or disable the transport (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">transports/sunrise_link/async_memcpy_threshold</span></code>: threshold for async memcpy (MiB)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transports/sunrise_link/async_memcpy_threshold</span></code>: threshold for async memcpy in MiB, 0 to disable (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transports/sunrise_link/enable_port_striping</span></code>: enable multi-port striping for large cross-device copies &gt;4 MiB (default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 </ul>
 <p>Tune these options based on workload characteristics and hardware topology.</p>
+</section>
+<hr class="docutils" />
+<section id="important-notes">
+<h2>Important Notes<a class="headerlink" href="#important-notes" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Device Context</strong>: Internally manages <code class="docutils literal notranslate"><span class="pre">tangSetDevice</span></code>. When calling Tang API directly, set the correct device before querying pointer attributes.</p></li>
+<li><p><strong>IPC Handle Lifecycle</strong>: IPC handles are cached and released in <code class="docutils literal notranslate"><span class="pre">uninstall()</span></code>.</p></li>
+<li><p><strong>Concurrent Peer Copy</strong>: Per-device mutexes protect context-bound ops. Cross-device copies acquire source/destination mutexes in fixed order (lower device ID first) to prevent deadlocks.</p></li>
+<li><p><strong>Mapped Host Pointer Normalization</strong>: <code class="docutils literal notranslate"><span class="pre">tangHostAlloc</span></code> host pointers with corresponding device pointers are auto-normalized for correct peer copy path selection.</p></li>
+</ol>
 </section>
 </section>
 
@@ -567,11 +646,19 @@ make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-pipeline">Transfer Pipeline</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-dependencies">Additional Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-and-compile">Build and Compile</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-and-test">Run and Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-and-test">Run and Test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tebench-tent-backend">Using <code class="docutils literal notranslate"><span class="pre">tebench</span></code> (TENT Backend)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options-tent">Configuration Options (TENT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
 </ul>
   </nav></div>
 

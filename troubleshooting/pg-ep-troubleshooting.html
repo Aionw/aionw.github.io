@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mooncake PG/EP Troubleshooting &#8212; Mooncake</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dynamic-command-builder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ea134bb0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=a5fa425f"></script>
+    <script src="../_static/sphinx-dynamic-command-builder.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'troubleshooting/pg-ep-troubleshooting';</script>
+    <script src="../_static/custom.js?v=79a5fa75"></script>
+    <link rel="icon" href="../_static/moonshot.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Governance" href="../community/governance.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mooncake-icon.png" class="logo__image only-light" alt="Mooncake - Home"/>
+    <script>document.write(`<img src="../_static/mooncake-icon.png" class="logo__image only-dark" alt="Mooncake - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/build.html">Build Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick-start.html">Quick Start</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/mooncake-store-deployment-guide.html">Mooncake Store Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/sglang-integration/index.html">Mooncake x SGLang Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/index.html">Mooncake x vLLM Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmcache-integration.html">Mooncake x LMCache Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/lmdeploy-integration-v0.9.html">Mooncake x LMDeploy Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../performance/vllm/index.html">vLLM Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/sglang/index.html">SGLang Integration Performance Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance/mooncake/index.html">Mooncake Performance Benchmarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design Documents</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../design/architecture.html">Mooncake Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-store.html">Mooncake Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/p2p-store.html">P2P Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-backend-pg.html">Mooncake Backend (PG) Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/mooncake-ep.html">Mooncake EP Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/transfer-engine/index.html">Transfer Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/hicache-design.html">Mooncake x SGLang HiCache System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/engram.html">EngramStore Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/unified-parallel-tensor-io.html">Unified Parallel Tensor IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/overview.html">TENT: Transfer Engine NEXT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/tent/tebench.html">Mooncake Transfer Engine Benchmark Tool (<code class="docutils literal notranslate"><span class="pre">tebench</span></code>) Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/conductor/conductor-architecture-design.html">Mooncake Conductor Architecture</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/cpp/index.html">C/C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/http/index.html">HTTP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="error-code.html">Error Code Explanation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mooncake PG/EP Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">Governance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archived</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-mooncakestoreconnector.html">Guide: vLLM MooncakeStoreConnector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.2.html">vLLM V0 Disaggregated Serving Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v0.3.html">vLLM V0 Disaggregated Serving with MooncakeStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/examples/vllm-integration/vllm-integration-v1.0.html">vLLM v1 backend Disaggregated Serving with MooncakeConnector</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kvcache-ai/Mooncake/edit/main/docs/source/troubleshooting/pg-ep-troubleshooting.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/troubleshooting/pg-ep-troubleshooting.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mooncake PG/EP Troubleshooting</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-fails-with-a-pytorch-version-error">Import fails with a PyTorch version error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activeranks-must-be-int-or-device-mismatch"><code class="docutils literal notranslate"><span class="pre">activeRanks</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">int</span></code> or device mismatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dist-get-world-size-is-smaller-than-max-world-size"><code class="docutils literal notranslate"><span class="pre">dist.get_world_size()</span></code> is smaller than <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-peer-state-or-join-group-hangs"><code class="docutils literal notranslate"><span class="pre">get_peer_state()</span></code> or <code class="docutils literal notranslate"><span class="pre">join_group()</span></code> hangs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newly-extended-ranks-participate-too-early">Newly extended ranks participate too early</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ep-dispatch-combine-timeout-marks-a-rank-inactive">EP dispatch/combine timeout marks a rank inactive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ep-falls-back-instead-of-using-the-fast-path">EP falls back instead of using the fast path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdma-connection-errors-or-severe-latency-from-wrong-hca-selection">RDMA connection errors or severe latency from wrong HCA selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ep-output-mismatch-or-buffer-overflow-symptoms">EP output mismatch or buffer overflow symptoms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p2p-send-recv-errors">P2P send/recv errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-smoke-commands">Useful smoke commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-include-in-bug-reports">What to include in bug reports</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mooncake-pg-ep-troubleshooting">
+<h1>Mooncake PG/EP Troubleshooting<a class="headerlink" href="#mooncake-pg-ep-troubleshooting" title="Link to this heading">#</a></h1>
+<p>This page covers common setup, import, runtime, and recovery issues for
+Mooncake Backend (PG) and Mooncake EP.</p>
+<section id="import-fails-with-a-pytorch-version-error">
+<h2>Import fails with a PyTorch version error<a class="headerlink" href="#import-fails-with-a-pytorch-version-error" title="Link to this heading">#</a></h2>
+<p>Symptoms:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Mooncake PG was not built against torch==...
+Mooncake EP was not built against torch==...
+</pre></div>
+</div>
+<p>Cause:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mooncake.pg</span></code> and <code class="docutils literal notranslate"><span class="pre">mooncake.ep</span></code> load native extension modules whose names include
+the current PyTorch version. If the wheel or source build does not contain an
+extension for the active <code class="docutils literal notranslate"><span class="pre">torch.__version__</span></code>, import fails.</p>
+<p>Fixes:</p>
+<ol class="arabic">
+<li><p>Verify the active PyTorch version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;&#39;PY&#39;</span>
+<span class="s">import torch</span>
+<span class="s">print(torch.__version__)</span>
+<span class="s">print(torch.version.cuda)</span>
+<span class="s">PY</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install a Mooncake wheel built for that PyTorch/CUDA combination, or rebuild
+from source with EP/PG enabled:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>..<span class="w"> </span>-DWITH_EP<span class="o">=</span>ON
+make<span class="w"> </span>-j
+</pre></div>
+</div>
+</li>
+<li><p>Make sure the Python environment used at runtime is the same one used for the
+build.</p></li>
+</ol>
+</section>
+<section id="activeranks-must-be-int-or-device-mismatch">
+<h2><code class="docutils literal notranslate"><span class="pre">activeRanks</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">int</span></code> or device mismatch<a class="headerlink" href="#activeranks-must-be-int-or-device-mismatch" title="Link to this heading">#</a></h2>
+<p>Symptoms:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>activeRanks must be int.
+activeRanks must be on CPU.
+activeRanks must be on GPU.
+activeRanks must be sized to max_world_size when max_world_size is set
+</pre></div>
+</div>
+<p>Causes and fixes:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">torch.int32</span></code>, not <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">int64</span></code>, or floating-point types.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">backend=&quot;mooncake&quot;</span></code>, put <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> on the accelerator device.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">backend=&quot;mooncake-cpu&quot;</span></code>, put <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> on CPU.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code> is set, allocate <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> with length
+<code class="docutils literal notranslate"><span class="pre">max_world_size</span></code>, even if the initial visible <code class="docutils literal notranslate"><span class="pre">world_size</span></code> is smaller.</p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># CUDA / accelerator backend</span>
+<span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">max_world_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="c1"># CPU backend</span>
+<span class="n">active_ranks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">max_world_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dist-get-world-size-is-smaller-than-max-world-size">
+<h2><code class="docutils literal notranslate"><span class="pre">dist.get_world_size()</span></code> is smaller than <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code><a class="headerlink" href="#dist-get-world-size-is-smaller-than-max-world-size" title="Link to this heading">#</a></h2>
+<p>This is expected. Mooncake PG distinguishes reserved capacity from visible active
+membership:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">max_world_size</span></code> reserves future rank slots.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist.get_world_size()</span></code> returns the visible active size.</p></li>
+<li><p>Reserved ranks are inactive until <code class="docutils literal notranslate"><span class="pre">recover_ranks()</span></code> activates them.</p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pg.get_active_ranks(backend)</span></code> to inspect the current backend mask.</p>
+</section>
+<section id="get-peer-state-or-join-group-hangs">
+<h2><code class="docutils literal notranslate"><span class="pre">get_peer_state()</span></code> or <code class="docutils literal notranslate"><span class="pre">join_group()</span></code> hangs<a class="headerlink" href="#get-peer-state-or-join-group-hangs" title="Link to this heading">#</a></h2>
+<p>Common causes:</p>
+<ul class="simple">
+<li><p>Healthy ranks are not all calling <code class="docutils literal notranslate"><span class="pre">get_peer_state()</span></code> in the same order.</p></li>
+<li><p>The joining rank did not initialize with <code class="docutils literal notranslate"><span class="pre">is_extension=True</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_world_size</span></code> / rank numbering differs between healthy and joining ranks.</p></li>
+<li><p>Subgroups were created in different orders on healthy and joining processes.</p></li>
+<li><p>The joining process has not published peer metadata yet.</p></li>
+<li><p>Network device filters differ across ranks.</p></li>
+</ul>
+<p>Debug checklist:</p>
+<ol class="arabic simple">
+<li><p>Confirm all ranks use the same rendezvous address and store.</p></li>
+<li><p>Print rank, visible <code class="docutils literal notranslate"><span class="pre">world_size</span></code>, and <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code> at initialization.</p></li>
+<li><p>Confirm <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> length and values on every rank.</p></li>
+<li><p>Verify healthy ranks poll the same <code class="docutils literal notranslate"><span class="pre">join_ranks</span></code> list.</p></li>
+<li><p>For subgroup recovery, confirm every rank calls <code class="docutils literal notranslate"><span class="pre">dist.new_group()</span></code> in the same
+order.</p></li>
+<li><p>If using RDMA, set the same HCA whitelist on every rank.</p></li>
+</ol>
+</section>
+<section id="newly-extended-ranks-participate-too-early">
+<h2>Newly extended ranks participate too early<a class="headerlink" href="#newly-extended-ranks-participate-too-early" title="Link to this heading">#</a></h2>
+<p>After <code class="docutils literal notranslate"><span class="pre">pg.extend_group_size_to(backend,</span> <span class="pre">new_size)</span></code>, new ranks are reserved but
+inactive. They should not participate in collectives until healthy ranks call
+<code class="docutils literal notranslate"><span class="pre">pg.recover_ranks(backend,</span> <span class="pre">ranks)</span></code>.</p>
+<p>If a new rank appears to participate early, check whether:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> was initialized with <code class="docutils literal notranslate"><span class="pre">1</span></code> for future ranks without masking them
+through the backend protocol;</p></li>
+<li><p>the application called collectives on the joining process before
+<code class="docutils literal notranslate"><span class="pre">pg.join_group()</span></code> returned;</p></li>
+<li><p>different ranks used inconsistent <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code> or rank IDs.</p></li>
+</ul>
+</section>
+<section id="ep-dispatch-combine-timeout-marks-a-rank-inactive">
+<h2>EP dispatch/combine timeout marks a rank inactive<a class="headerlink" href="#ep-dispatch-combine-timeout-marks-a-rank-inactive" title="Link to this heading">#</a></h2>
+<p>Mooncake EP kernels can update the EP-level <code class="docutils literal notranslate"><span class="pre">active_ranks</span></code> tensor when a source
+rank does not make progress before <code class="docutils literal notranslate"><span class="pre">timeout_us</span></code>.</p>
+<p>If this happens unexpectedly:</p>
+<ul class="simple">
+<li><p>Increase <code class="docutils literal notranslate"><span class="pre">timeout_us</span></code> to rule out slow startup or transient scheduling delay.</p></li>
+<li><p>Check whether the source rank exited, crashed, or skipped the matching
+dispatch/combine call.</p></li>
+<li><p>Confirm <code class="docutils literal notranslate"><span class="pre">num_experts</span> <span class="pre">%</span> <span class="pre">num_ranks</span> <span class="pre">==</span> <span class="pre">0</span></code> and that every rank uses the same
+<code class="docutils literal notranslate"><span class="pre">num_experts</span></code>, <code class="docutils literal notranslate"><span class="pre">top_k</span></code>, and buffer sizing assumptions.</p></li>
+<li><p>Ensure all ranks call dispatch and combine in the same order.</p></li>
+</ul>
+<p>If timeout detection is not desired for a test, pass <code class="docutils literal notranslate"><span class="pre">timeout_us=-1</span></code>.</p>
+</section>
+<section id="ep-falls-back-instead-of-using-the-fast-path">
+<h2>EP falls back instead of using the fast path<a class="headerlink" href="#ep-falls-back-instead-of-using-the-fast-path" title="Link to this heading">#</a></h2>
+<p>The Python wrapper uses fallback when the native runtime cannot use IBGDA/RDMA or
+fully accessible P2P.</p>
+<p>Possible causes:</p>
+<ul class="simple">
+<li><p>RDMA devices or drivers are not available inside the container.</p></li>
+<li><p>HCA selection picked the wrong device.</p></li>
+<li><p>GPUDirect RDMA / peer-memory support is missing.</p></li>
+<li><p>CUDA IPC or peer access is unavailable between local GPUs.</p></li>
+<li><p>The environment was built without the required accelerator support.</p></li>
+</ul>
+<p>Debug checklist:</p>
+<ol class="arabic simple">
+<li><p>Restrict HCA selection with <code class="docutils literal notranslate"><span class="pre">pg.set_device_filter([...])</span></code> or
+<code class="docutils literal notranslate"><span class="pre">MOONCAKE_PGTEST_DEVICE_FILTERS</span></code>.</p></li>
+<li><p>Check whether all intended ranks can see the same accelerator and RDMA
+devices.</p></li>
+<li><p>Run PG collectives first; EP metadata exchange depends on a healthy process
+group.</p></li>
+<li><p>Run EP tests with fallback enabled and disabled to separate correctness from
+transport setup.</p></li>
+</ol>
+</section>
+<section id="rdma-connection-errors-or-severe-latency-from-wrong-hca-selection">
+<h2>RDMA connection errors or severe latency from wrong HCA selection<a class="headerlink" href="#rdma-connection-errors-or-severe-latency-from-wrong-hca-selection" title="Link to this heading">#</a></h2>
+<p>Symptoms can include connection setup failures, repeated transport timeouts,
+unexpected fallback, very low bandwidth, or RDMA retry-style errors when the
+backend auto-selects an unsuitable NIC/HCA. This commonly happens on machines
+with multiple RDMA devices where some devices are for management traffic, are on
+different fabrics, or are not reachable from peer ranks.</p>
+<p>Fix: set an explicit device filter before initializing Mooncake PG/EP so all
+ranks use the intended HCA list.</p>
+<p>For application code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mooncake</span><span class="w"> </span><span class="kn">import</span> <span class="n">pg</span>
+
+<span class="n">pg</span><span class="o">.</span><span class="n">set_device_filter</span><span class="p">([</span><span class="s2">&quot;mlx5_1&quot;</span><span class="p">,</span> <span class="s2">&quot;mlx5_2&quot;</span><span class="p">])</span>
+<span class="c1"># call dist.init_process_group(...) after setting the filter</span>
+</pre></div>
+</div>
+<p>For PG tests and benchmarks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MOONCAKE_PGTEST_DEVICE_FILTERS</span><span class="o">=</span>mlx5_1,mlx5_2<span class="w"> </span><span class="se">\</span>
+python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>discover<span class="w"> </span>-s<span class="w"> </span>mooncake-pg/tests<span class="w"> </span>-k<span class="w"> </span>CUDA<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>Use the same filter on every rank. If the problem disappears after setting the
+filter, treat the original failure as a topology/device-selection issue rather
+than an EP kernel or collective correctness problem.</p>
+</section>
+<section id="ep-output-mismatch-or-buffer-overflow-symptoms">
+<h2>EP output mismatch or buffer overflow symptoms<a class="headerlink" href="#ep-output-mismatch-or-buffer-overflow-symptoms" title="Link to this heading">#</a></h2>
+<p>Common causes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">num_max_dispatch_tokens_per_rank</span></code> is smaller than the actual per-rank token
+count.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_experts</span></code> is not divisible by <code class="docutils literal notranslate"><span class="pre">num_ranks</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topk_idx</span></code> contains expert IDs outside <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">num_experts)</span></code> except for masked
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> entries.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">handle</span></code> from one dispatch call is reused with an unrelated combine call.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zero_copy=True</span></code> is used without writing expert outputs into
+<code class="docutils literal notranslate"><span class="pre">get_next_combine_buffer(handle)</span></code>.</p></li>
+</ul>
+<p>Fixes:</p>
+<ul>
+<li><p>Size the buffer for peak traffic:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_ep_buffer_bytes</span> <span class="o">=</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">get_ep_buffer_size_hint</span><span class="p">(</span>
+    <span class="n">max_tokens_per_rank</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">world_size</span><span class="p">,</span> <span class="n">num_experts</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Keep dispatch and combine paired by using the matching <code class="docutils literal notranslate"><span class="pre">handle</span></code>.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">event.current_stream_wait()</span></code> or the returned <code class="docutils literal notranslate"><span class="pre">hook()</span></code> before consuming
+operation outputs.</p></li>
+</ul>
+</section>
+<section id="p2p-send-recv-errors">
+<h2>P2P send/recv errors<a class="headerlink" href="#p2p-send-recv-errors" title="Link to this heading">#</a></h2>
+<p>Mooncake PG’s PyTorch P2P path currently supports single-tensor send/recv
+through the backend shim. If <code class="docutils literal notranslate"><span class="pre">batch_isend_irecv()</span></code> fails:</p>
+<ul class="simple">
+<li><p>verify each <code class="docutils literal notranslate"><span class="pre">P2POp</span></code> contains one tensor;</p></li>
+<li><p>ensure peer ranks are active;</p></li>
+<li><p>check that all ranks issue matching send/recv operations;</p></li>
+<li><p>test CPU and accelerator backends separately to isolate device-specific
+transport issues.</p></li>
+</ul>
+</section>
+<section id="useful-smoke-commands">
+<h2>Useful smoke commands<a class="headerlink" href="#useful-smoke-commands" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># PG CPU sanity</span>
+python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>discover<span class="w"> </span>-s<span class="w"> </span>mooncake-pg/tests<span class="w"> </span>-k<span class="w"> </span>CPU<span class="w"> </span>-v
+
+<span class="c1"># PG CUDA sanity</span>
+python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>discover<span class="w"> </span>-s<span class="w"> </span>mooncake-pg/tests<span class="w"> </span>-k<span class="w"> </span>CUDA<span class="w"> </span>-v
+
+<span class="c1"># PG all-reduce benchmark smoke</span>
+<span class="nv">PYTHONPATH</span><span class="o">=</span>mooncake-pg<span class="w"> </span><span class="se">\</span>
+python<span class="w"> </span>mooncake-pg/benchmark/pgbench.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--collective<span class="w"> </span>all_reduce<span class="w"> </span>--backend<span class="w"> </span>mooncake<span class="w"> </span>--device<span class="w"> </span>cuda<span class="w"> </span>-g<span class="w"> </span><span class="m">2</span><span class="w"> </span>-b<span class="w"> </span><span class="m">8</span><span class="w"> </span>-e<span class="w"> </span>1M<span class="w"> </span>-f<span class="w"> </span><span class="m">2</span>
+
+<span class="c1"># EP grid test</span>
+python<span class="w"> </span>mooncake-ep/tests/test_ep_grid.py
+</pre></div>
+</div>
+<p>Adapt process counts, device filters, and launchers to the target cluster.</p>
+</section>
+<section id="what-to-include-in-bug-reports">
+<h2>What to include in bug reports<a class="headerlink" href="#what-to-include-in-bug-reports" title="Link to this heading">#</a></h2>
+<p>When reporting PG/EP issues, include:</p>
+<ul class="simple">
+<li><p>Mooncake commit and installation method;</p></li>
+<li><p>PyTorch version and CUDA/accelerator runtime version;</p></li>
+<li><p>exact backend name (<code class="docutils literal notranslate"><span class="pre">mooncake</span></code> or <code class="docutils literal notranslate"><span class="pre">mooncake-cpu</span></code>);</p></li>
+<li><p>world size, max world size, rank IDs, and subgroup layout;</p></li>
+<li><p>active-rank tensor dtype/device/values;</p></li>
+<li><p>HCA/device filters;</p></li>
+<li><p>minimal command or script reproducing the issue;</p></li>
+<li><p>logs from all ranks around initialization, failure detection, and recovery.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="troubleshooting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Troubleshooting</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../community/governance.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Governance</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-fails-with-a-pytorch-version-error">Import fails with a PyTorch version error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activeranks-must-be-int-or-device-mismatch"><code class="docutils literal notranslate"><span class="pre">activeRanks</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">int</span></code> or device mismatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dist-get-world-size-is-smaller-than-max-world-size"><code class="docutils literal notranslate"><span class="pre">dist.get_world_size()</span></code> is smaller than <code class="docutils literal notranslate"><span class="pre">max_world_size</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-peer-state-or-join-group-hangs"><code class="docutils literal notranslate"><span class="pre">get_peer_state()</span></code> or <code class="docutils literal notranslate"><span class="pre">join_group()</span></code> hangs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newly-extended-ranks-participate-too-early">Newly extended ranks participate too early</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ep-dispatch-combine-timeout-marks-a-rank-inactive">EP dispatch/combine timeout marks a rank inactive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ep-falls-back-instead-of-using-the-fast-path">EP falls back instead of using the fast path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdma-connection-errors-or-severe-latency-from-wrong-hca-selection">RDMA connection errors or severe latency from wrong HCA selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ep-output-mismatch-or-buffer-overflow-symptoms">EP output mismatch or buffer overflow symptoms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p2p-send-recv-errors">P2P send/recv errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-smoke-commands">Useful smoke commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-include-in-bug-reports">What to include in bug reports</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the Mooncake Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Mooncake Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
