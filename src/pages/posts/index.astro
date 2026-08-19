@@ -1,0 +1,28 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import PostListItem from '~/components/PostListItem.astro'
+import { getSortedPosts } from '~/utils'
+
+const posts = (await getSortedPosts()).reverse()
+const postsByYear = Map.groupBy(posts, (post) =>
+  post.data.published.getUTCFullYear().toString(),
+)
+---
+
+<Layout title="Archive" description="All posts in the archive">
+  <article class="simple-page">
+    <h1>Archive</h1>
+    {
+      Array.from(postsByYear.entries()).map(([year, yearPosts]) => (
+        <section class="archive-year">
+          <h2>{year}</h2>
+          <div class="post-list">
+            {yearPosts.map((post) => (
+              <PostListItem post={post} />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </article>
+</Layout>

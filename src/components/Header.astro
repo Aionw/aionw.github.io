@@ -1,0 +1,23 @@
+---
+import siteConfig from '~/site.config'
+import NavLink from '~/components/NavLink.astro'
+---
+
+<header
+  class="flex flex-col gap-3 border-b border-foreground/10 pb-5 sm:flex-row sm:items-baseline sm:justify-between"
+>
+  <a id="logo" href="/" class="text-xl font-semibold text-accent no-underline">
+    {siteConfig.title}
+  </a>
+  <nav aria-label="Primary navigation">
+    <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-accent">
+      {
+        siteConfig.navLinks.map((link) => (
+          <li>
+            <NavLink link={link} />
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

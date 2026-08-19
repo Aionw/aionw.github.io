@@ -1,0 +1,56 @@
+<script>
+  const renderMermaid = async () => {
+    const blocks = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        'pre[data-language="mermaid"]:not([data-mermaid-processed])',
+      ),
+    )
+    if (blocks.length === 0) return
+
+    const { default: mermaid } = await import('mermaid')
+    const rootStyles = getComputedStyle(document.documentElement)
+    const color = (name: string) => rootStyles.getPropertyValue('--theme-' + name).trim()
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      themeVariables: {
+        background: color('background'),
+        primaryColor: color('background'),
+        primaryTextColor: color('foreground'),
+        primaryBorderColor: color('accent'),
+        lineColor: color('accent'),
+        secondaryColor: color('background'),
+        tertiaryColor: color('background'),
+        fontFamily: 'Source Serif 4 Variable, serif',
+      },
+    })
+
+    const diagrams = blocks.map((block) => {
+      block.dataset.mermaidProcessed = 'true'
+      const codeLines = Array.from(block.querySelectorAll<HTMLElement>('.ec-line .code'))
+      const source =
+        codeLines.length > 0
+          ? codeLines.map((line) => line.textContent || '').join('\n')
+          : block.textContent?.trim() || ''
+      const original = block.closest('figure') || block
+      const diagram = document.createElement('div')
+      diagram.className = 'mermaid mermaid-diagram'
+      diagram.textContent = source
+      original.replaceWith(diagram)
+      return { diagram, original }
+    })
+
+    try {
+      await mermaid.run({ nodes: diagrams.map(({ diagram }) => diagram) })
+    } catch (error) {
+      const message = error instanceof Error ? error.message : JSON.stringify(error)
+      console.error('Unable to render Mermaid diagram: ' + message)
+      diagrams.forEach(({ diagram, original }) => diagram.replaceWith(original))
+    }
+  }
+
+  renderMermaid()
+  document.addEventListener('astro:page-load', renderMermaid)
+</script>

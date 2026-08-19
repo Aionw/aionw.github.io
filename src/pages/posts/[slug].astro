@@ -1,0 +1,60 @@
+---
+import type { GetStaticPaths } from 'astro'
+import { render } from 'astro:content'
+import Layout from '~/layouts/Layout.astro'
+import { dateString, getSortedPosts, TagsGroup } from '~/utils'
+import type { Collation } from '~/types'
+
+export const getStaticPaths = (async () => {
+  const posts = await getSortedPosts()
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }))
+}) satisfies GetStaticPaths
+
+const { post } = Astro.props
+const { Content: PostContent, remarkPluginFrontmatter } = await render(post)
+const description = post.data.description || remarkPluginFrontmatter.description
+let tags: Collation<'posts'>[] = []
+
+if (post.data.tags.length > 0) {
+  const tagsGroup = await TagsGroup.build()
+  tags = tagsGroup.matchMany(post.data.tags) || []
+}
+---
+
+<Layout
+  title={post.data.title}
+  description={description}
+  author={post.data.author}
+  tags={post.data.tags}
+>
+  <article class="post-page">
+    <header>
+      <h1>{post.data.title}</h1>
+      <p>
+        written on <time datetime={post.data.published.toISOString()}>
+          {dateString(post.data.published)}
+        </time>
+      </p>
+    </header>
+    <div class="prose">
+      <PostContent />
+    </div>
+    {
+      tags.length > 0 && (
+        <footer>
+          This entry was tagged{' '}
+          {tags.map((tag, index) => (
+            <>
+              {index > 0 && ', '}
+              <a href={tag.url}>{tag.title}</a>
+            </>
+          ))}
+          .
+        </footer>
+      )
+    }
+  </article>
+</Layout>

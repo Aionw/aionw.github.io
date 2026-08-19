@@ -1,0 +1,25 @@
+---
+import type { GetStaticPaths } from 'astro'
+import Layout from '~/layouts/Layout.astro'
+import PostListItem from '~/components/PostListItem.astro'
+import { TagsGroup } from '~/utils'
+
+export const getStaticPaths = (async () => {
+  const tagsGroup = await TagsGroup.build()
+  return tagsGroup.collations.map((tag) => ({
+    params: { tag: tag.titleSlug },
+    props: { posts: tag.entries.reverse(), tagTitle: tag.title },
+  }))
+}) satisfies GetStaticPaths
+
+const { posts, tagTitle } = Astro.props
+---
+
+<Layout title={'Tag: ' + tagTitle} description={'All posts tagged with ' + tagTitle}>
+  <article class="simple-page">
+    <h1>Tag: {tagTitle}</h1>
+    <div class="post-list">
+      {posts.map((post) => <PostListItem post={post} />)}
+    </div>
+  </article>
+</Layout>

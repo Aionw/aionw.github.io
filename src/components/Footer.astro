@@ -1,0 +1,11 @@
+---
+import siteConfig from '~/site.config'
+
+const year = new Date().getFullYear()
+---
+
+<footer class="mt-auto border-t border-foreground/10 py-6 text-sm text-foreground/55">
+  <span>{siteConfig.author} © {year}</span>
+  <span aria-hidden="true"> · </span>
+  <a href="/rss.xml">RSS</a>
+</footer>

@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { render } from 'astro:content'
+import { dateString } from '~/utils'
+
+interface Props {
+  post: CollectionEntry<'posts'>
+}
+
+const { post } = Astro.props
+const { remarkPluginFrontmatter } = await render(post)
+const description = post.data.description || remarkPluginFrontmatter.description
+const href = '/posts/' + post.id
+---
+
+<article class="post-list-item">
+  <time datetime={post.data.published.toISOString()}>
+    {dateString(post.data.published)}
+  </time>
+  <p>
+    <a href={href}>{post.data.title}</a>
+    {description && <span> — {description}</span>}
+  </p>
+</article>

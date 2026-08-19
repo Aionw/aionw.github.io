@@ -1,0 +1,16 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import { getSortedPosts } from '~/utils'
+import PostListItem from '~/components/PostListItem.astro'
+
+const posts = (await getSortedPosts()).reverse().slice(0, 10)
+---
+
+<Layout>
+  <section class="post-list py-10" aria-label="Latest posts">
+    {posts.map((post) => <PostListItem post={post} />)}
+  </section>
+  <p class="mb-10 text-right">
+    <a class="text-accent" href="/posts">Archive →</a>
+  </p>
+</Layout>
