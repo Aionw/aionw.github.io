@@ -11,9 +11,10 @@ interface Props {
   description?: string
   tags?: string[]
   author?: string
+  lang?: string
 }
 
-const { title, description, tags, author } = Astro.props
+const { title, description, tags, author, lang = 'en' } = Astro.props
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '') // Remove trailing slash for consistency
 const pageType = Astro.url.pathname.startsWith('/posts/') ? 'article' : 'website'
 const pageTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title
@@ -87,7 +88,7 @@ let generatedCss: string = cssLines.join('\n')
 ---
 
 <!doctype html>
-<html lang="en" data-theme={defaultTheme}>
+<html lang={lang} data-theme={defaultTheme}>
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
