@@ -80,10 +80,16 @@
         </button>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
-      <button class="node emphasis" type="button" data-detail="scikit-build-core">
-        scikit-build-core
-        <small>封装 CMake 与临时安装树</small>
-      </button>
+      <div class="stack">
+        <button class="node emphasis" type="button" data-detail="scikit-build-core">
+          scikit-build-core
+          <small>封装 CMake 与临时安装树</small>
+        </button>
+        <button class="node" type="button" data-detail="cibuildwheel">
+          cibuildwheel
+          <small>发布 wheel 的 ABI / 平台矩阵</small>
+        </button>
+      </div>
       <span class="arrow" aria-hidden="true">→</span>
       <button class="node" type="button" data-detail="validated-wheel">
         tested wheel
@@ -174,9 +180,13 @@
       'C++ 构建细节止于 backend',
       'scikit-build-core 在内部配置、构建并安装 CMake targets，再把结果与 Python 源码组装成 wheel；Python 开发者不操作中间目录。',
     ],
+    cibuildwheel: [
+      '发布矩阵复用同一个 backend',
+      'cibuildwheel 在 CI 中按 Python ABI、平台和架构调用 scikit-build-core，并负责 Linux wheel repair 与隔离安装测试；它不取代本地开发入口，也不持有 PyPI 发布权限。',
+    ],
     'validated-wheel': [
       '测试真正交付给用户的文件',
-      'wheel 会被安装到干净虚拟环境，验证公开 import、CLI、ELF/RPATH 和版本后才允许发布。',
+      'wheel 会被安装到干净虚拟环境，验证公开 import、CLI、ELF/RPATH 和版本；通过后只作为 Actions artifact 交给集中 publisher。',
     ],
   } as const
 
