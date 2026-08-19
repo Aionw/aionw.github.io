@@ -25,6 +25,10 @@
           mooncake-reshard/python
           <small>拆分的 namespace</small>
         </button>
+        <button class="node" type="button" data-detail="ep-pg-source">
+          EP / PG components
+          <small>各自维护 binding 与测试</small>
+        </button>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
       <button class="node emphasis" type="button" data-detail="copy-build">
@@ -46,6 +50,30 @@
           python/mooncake
           <small>唯一 Python 源码</small>
         </button>
+        <div class="module-grid" role="group" aria-label="python/mooncake 公开模块">
+          <button class="node module-node" type="button" data-detail="engine-module">
+            engine
+          </button>
+          <button class="node module-node" type="button" data-detail="store-module">
+            store
+          </button>
+          <button class="node module-node" type="button" data-detail="ep-module">
+            ep
+          </button>
+          <button class="node module-node" type="button" data-detail="pg-module">
+            pg
+          </button>
+          <button class="node module-node" type="button" data-detail="reshard-module">
+            reshard
+          </button>
+          <button
+            class="node module-node"
+            type="button"
+            data-detail="integrations-module"
+          >
+            integrations
+          </button>
+        </div>
         <button class="node" type="button" data-detail="python-build-contract">
           pyproject.toml
           <small>标准 Python 构建契约</small>
@@ -98,6 +126,10 @@
       '同一个 import package 来自两棵树',
       '<code>pkgutil.extend_path</code> 把 reshard 与主包拼在一起，测试和安装环境很难保持一致。',
     ],
+    'ep-pg-source': [
+      '原生组件各自拥有 Python binding',
+      'EP 与 PG 的 wrapper 和测试跟随 C++ 组件维护，但进入最终 wheel 仍依赖外部复制与组装逻辑。',
+    ],
     'copy-build': [
       '构建脚本承担了过多职责',
       '复制源码、注入共享库、修改包名、运行 auditwheel，再尝试恢复工作区；中断后容易留下状态。',
@@ -109,6 +141,30 @@
     'python-root': [
       '唯一 Python source of truth',
       '所有受版本控制的 Python 包代码都位于 <code>python/mooncake</code>，无需 namespace 拼接。',
+    ],
+    'engine-module': [
+      'Transfer Engine 保留稳定公开入口',
+      '<code>mooncake.engine</code> 是公开 facade，内部再加载私有原生模块 <code>mooncake._engine</code>。',
+    ],
+    'store-module': [
+      'Store 与结构化存储共享清晰边界',
+      '<code>mooncake.store</code> 隔离 <code>mooncake._store</code>；结构化对象能力位于 <code>mooncake.store.structured</code>。',
+    ],
+    'ep-module': [
+      'EP 的公开 API 不等于二进制文件名',
+      '用户导入 <code>mooncake.ep</code>，facade 在内部加载 <code>mooncake._ep</code>，不暴露 extension 的构建布局。',
+    ],
+    'pg-module': [
+      'PG 隔离 Torch ABI 差异',
+      '<code>mooncake.pg</code> 保持稳定，内部选择 <code>mooncake._pg_&lt;torch-abi&gt;</code>，调用方无需感知二进制变体。',
+    ],
+    'reshard-module': [
+      '统一源码根不抹平 reshard 边界',
+      '<code>mooncake.reshard</code> 进入同一 package tree，但继续拥有 contracts、weight API、typecheck 与独立测试。',
+    ],
+    'integrations-module': [
+      '框架适配保持可选',
+      'DataProto、vLLM 等 adapter 位于 <code>mooncake.integrations</code>，不能让重依赖反向进入 engine、store、EP 或 PG 核心模块。',
     ],
     'python-build-contract': [
       '开发与发布共用标准入口',
@@ -270,6 +326,19 @@
   .stack {
     display: grid;
     gap: 0.55rem;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .module-node {
+    border-radius: 0.55rem;
+    padding: 0.45rem 0.5rem;
+    text-align: center;
+    font-size: 0.7rem;
   }
 
   .node {

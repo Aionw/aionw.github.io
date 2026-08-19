@@ -20,6 +20,8 @@ Mooncake 的 Python 包已经不再只是几层 pybind binding。它同时承载
 
 目标方案把所有受版本控制的 Python 代码统一放到 `python/mooncake`，把原生扩展改成私有实现模块，再通过稳定的公开 facade 暴露 API。`scikit-build-core` 是唯一的 PEP 517 build backend：Python 开发者只使用 `pip install -e .`、`uv sync` 和 `python -m build`，CMake configure/build/install 以及临时安装树都收进 backend 内部。
 
+统一源码根不等于把组件揉成一个模块。`engine`、`store`、`ep`、`pg`、`reshard` 与 `integrations` 仍然拥有各自的公开边界；交互图中的组件节点展示了它们如何共享一棵源码树，同时把 `_engine`、`_store`、`_ep` 和 `_pg_<torch-abi>` 留作内部实现。
+
 ## 我们真正要解决什么
 
 ### 1. 同一个 Python 包来自多棵源码树
