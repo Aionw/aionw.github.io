@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/markdown-remark": "^6.3.6",
     "@astrojs/mdx": "^4.3.4",
-    "@astrojs/rss": "^4.0.12",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.5.1",
     "@astrojs/ts-plugin": "^1.10.4",
     "@expo-google-fonts/jetbrains-mono": "^0.4.0",
