@@ -5,6 +5,8 @@ import Footer from '~/components/Footer.astro'
 import MermaidLoader from '~/components/MermaidLoader.astro'
 import siteConfig from '~/site.config'
 import { pick, resolveThemeColorStyles } from '~/utils'
+import sourceSerifItalicUrl from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-italic.woff2?url'
+import sourceSerifNormalUrl from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url'
 
 interface Props {
   title?: string
@@ -109,6 +111,20 @@ let generatedCss: string = cssLines.join('\n')
     <link rel="canonical" href={pageUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href={sourceSerifNormalUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href={sourceSerifItalicUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
     <link
       rel="alternate"
       type="application/rss+xml"
