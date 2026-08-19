@@ -145,6 +145,10 @@ article img {
   }
 }
 
+.empty-state {
+  @apply my-24 text-center italic text-foreground/50;
+}
+
 .archive-year {
   @apply mb-12;
 

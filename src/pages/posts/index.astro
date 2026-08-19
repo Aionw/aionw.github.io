@@ -13,16 +13,20 @@ const postsByYear = Map.groupBy(posts, (post) =>
   <article class="simple-page">
     <h1>Archive</h1>
     {
-      Array.from(postsByYear.entries()).map(([year, yearPosts]) => (
-        <section class="archive-year">
-          <h2>{year}</h2>
-          <div class="post-list">
-            {yearPosts.map((post) => (
-              <PostListItem post={post} />
-            ))}
-          </div>
-        </section>
-      ))
+      posts.length > 0 ? (
+        Array.from(postsByYear.entries()).map(([year, yearPosts]) => (
+          <section class="archive-year">
+            <h2>{year}</h2>
+            <div class="post-list">
+              {yearPosts.map((post) => (
+                <PostListItem post={post} />
+              ))}
+            </div>
+          </section>
+        ))
+      ) : (
+        <p class="text-foreground/55">No posts yet.</p>
+      )
     }
   </article>
 </Layout>

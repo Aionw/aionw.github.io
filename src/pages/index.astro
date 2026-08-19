@@ -7,10 +7,22 @@ const posts = (await getSortedPosts()).reverse().slice(0, 10)
 ---
 
 <Layout>
-  <section class="post-list py-10" aria-label="Latest posts">
-    {posts.map((post) => <PostListItem post={post} />)}
-  </section>
-  <p class="mb-10 text-right">
-    <a class="text-accent" href="/posts">Archive →</a>
-  </p>
+  {
+    posts.length > 0 ? (
+      <>
+        <section class="post-list py-10" aria-label="Latest posts">
+          {posts.map((post) => (
+            <PostListItem post={post} />
+          ))}
+        </section>
+        <p class="mb-10 text-right">
+          <a class="text-accent" href="/posts">
+            Archive →
+          </a>
+        </p>
+      </>
+    ) : (
+      <p class="empty-state">No posts yet.</p>
+    )
+  }
 </Layout>
