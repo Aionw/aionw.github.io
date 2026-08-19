@@ -35,7 +35,7 @@ const config: SiteConfig = {
     },
     {
       name: 'GitHub',
-      url: 'https://github.com/Aionw/aionw.github.io',
+      url: 'https://github.com/aionw',
       external: true,
     },
   ],
