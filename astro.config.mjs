@@ -22,6 +22,9 @@ import remarkMath from 'remark-math' /* for latex math support */
 import rehypeKatex from 'rehype-katex' /* again, for latex math support */
 import remarkGemoji from './src/plugins/remark-gemoji' /* for shortcode emoji support */
 import rehypePixelated from './src/plugins/rehype-pixelated' /* Custom plugin to handle pixelated images */
+import { loadMonokaiProLightTheme } from './src/themes/monokai-pro-light'
+
+const monokaiProLightTheme = await loadMonokaiProLightTheme()
 
 // https://astro.build/config
 export default defineConfig({
@@ -64,7 +67,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     expressiveCode({
-      themes: siteConfig.themes.include,
+      themes: [monokaiProLightTheme],
       useDarkModeMediaQuery: false,
       defaultProps: {
         showLineNumbers: false,
