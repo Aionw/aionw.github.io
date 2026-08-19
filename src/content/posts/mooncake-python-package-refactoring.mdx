@@ -18,7 +18,7 @@ Mooncake 的 Python 包已经不再只是几层 pybind binding。它同时承载
 
 理想状态下，开发者编辑的 Python、测试导入的 Python 和用户从 PyPI 安装的 Python 应该是同一份代码。Mooncake 当前还做不到这一点：构建脚本需要从多处复制文件，源码目录同时承担 staging 职责，而 reshard 通过 namespace path extension 与主包拼接。
 
-目标方案把所有受版本控制的 Python 代码统一放到 `python/mooncake`，把原生扩展改成私有实现模块，再通过稳定的公开 facade 暴露 API。`scikit-build-core` 是唯一的 PEP 517 build backend：Python 开发者只使用 `pip install -e .`、`uv sync` 和 `python -m build`，CMake configure/build/install 以及临时安装树都收进 backend 内部。
+目标方案把所有受版本控制的 Python 代码统一放到 `python/mooncake`，把原生扩展改成私有实现模块，再通过稳定的公开 facade 暴露 API。`scikit-build-core` 是唯一的 PEP 517 build backend：Python 开发者只使用 `pip install -e .`、`uv sync` 和 `python -m build`，CMake configure/build/install 以及临时安装树都收进 backend 内部。发布 CI 再由 `cibuildwheel` 对同一个 backend 执行 Python ABI、平台与架构矩阵，完成可分发 wheel 的修复和安装后验证。
 
 统一源码根不等于把组件揉成一个模块。`engine`、`store`、`ep`、`pg`、`reshard` 与 `integrations` 仍然拥有各自的公开边界；交互图中的组件节点展示了它们如何共享一棵源码树，同时把 `_engine`、`_store`、`_ep` 和 `_pg_<torch-abi>` 留作内部实现。
 
@@ -86,7 +86,7 @@ Mooncake 已经有正式 wheel 发布：稳定 tag 会触发构建，wheel 会�
 这次调整遵循七条原则：
 
 1. **一个 Python 源码根。** 受版本控制的 `mooncake` 包代码全部位于 `python/mooncake`。
-2. **一个标准 Python 构建入口。** 开发和发布都通过 `scikit-build-core`，不把 CMake 命令暴露为 Python 工作流的一部分。
+2. **一个标准 Python 构建契约。** 本地开发直接进入 `scikit-build-core`；发布由 `cibuildwheel` 对同一个 backend 执行矩阵，不把 CMake 命令暴露为 Python 工作流的一部分。
 3. **源码与产物隔离。** `.so`、可执行文件和组装后的 metadata 只进入 backend 管理的构建目录。
 4. **公开 API 与实现文件名解耦。** 用户导入稳定的 Python facade，原生模块使用私有名称。
 5. **可选能力按需安装。** 核心 import 不加载 vLLM、Torch 或无关硬件 runtime。
@@ -245,12 +245,14 @@ __all__ = ['StructuredObjectStore']
 
 ## wheel 怎样构建：只暴露一个 Python 入口
 
-新的构建链不再定义一个需要开发者理解或操作的 `wheel-stage`。唯一对外入口是标准的 PEP 517 请求，[scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/) 负责收集 Python package、调用 CMake 并管理临时 wheel tree。
+新的构建链不再定义一个需要开发者理解或操作的 `wheel-stage`。唯一构建契约是标准的 PEP 517 请求：[scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/) 负责收集 Python package、调用 CMake 并管理临时 wheel tree；[cibuildwheel](https://cibuildwheel.pypa.io/en/latest/) 则在发布 CI 中重复调用这个 backend，生产不同 Python ABI、平台和架构的可分发 wheel。
 
 ```mermaid
 flowchart LR
-    D[Python developer or CI]
+    D[Python developer]
     E[pip install -e .<br/>python -m build]
+    CI[Git tag / release CI]
+    CB[cibuildwheel<br/>ABI / platform matrix]
     P[python/mooncake<br/>tracked Python source]
 
     subgraph K[scikit-build-core internal]
@@ -261,11 +263,12 @@ flowchart LR
     end
 
     W[wheel]
-    A[auditwheel]
-    V[isolated install<br/>and smoke tests]
-    R[release artifact]
+    A[repair<br/>auditwheel on Linux]
+    V[isolated installed-wheel tests]
+    R[validated Actions artifact]
 
     D --> E --> B
+    CI --> CB --> B
     P --> B
     T --> W --> A --> V --> R
 ```
@@ -292,6 +295,25 @@ install(TARGETS _engine LIBRARY DESTINATION mooncake)
 这是 native maintainer 与 build backend 之间的契约，不是 Python 开发者需要执行的步骤。无论是 editable install 还是 release wheel，scikit-build-core 都会自动 configure、build、install，再把原生产物与 `python/mooncake` 汇合。中间安装树由 backend 创建和清理，不进入公开工作流。
 
 CUDA 13、non-CUDA、EFA 等差异通过 CI matrix 和 backend config 传入；不能再通过复制源码、临时改 `pyproject.toml` 或维护 variant-specific staging 脚本表达。
+
+### cibuildwheel 位于哪一层
+
+`scikit-build-core` 与 `cibuildwheel` 不是两套构建系统。前者实现一个 wheel 如何从源码产生，后者负责发布时为哪些 Python ABI、平台和架构重复调用这个 backend，并在 Linux 上执行 `auditwheel` repair。Python 开发者不需要运行或配置 `cibuildwheel`；它是 release CI 的执行层。
+
+两者通过 `pyproject.toml` 和 PEP 517 config settings 对接。例如 packaging smoke test 可以直接写进仓库配置：
+
+```toml
+[tool.cibuildwheel]
+test-sources = ["python/tests/packaging"]
+test-command = "python python/tests/packaging/smoke.py"
+
+[tool.cibuildwheel.config-settings]
+"cmake.build-type" = "Release"
+```
+
+`cibuildwheel` 会从源码树之外的临时目录安装并测试刚刚生成的 wheel，因此测试不会意外导入 `python/mooncake`。GitHub Actions 的外层 matrix 只选择产品变体和对应 toolchain，例如 CUDA、non-CUDA 或 EFA；`cibuildwheel` 的内层 matrix 负责 Python tag、platform tag、架构、repair 与 installed-wheel test。
+
+标准 manylinux 变体应直接使用 `cibuildwheel`。ROCm、NPU、MUSA 等依赖特殊 runner 或 toolchain 的变体可以保留专用 builder；能够满足 manylinux 容器契约时同样调用 `cibuildwheel`，否则也必须实现相同的 backend、repair、测试和 artifact 输出契约，不能退回修改源码树的 staging 流程。
 
 ### wheel 门禁测试什么
 
@@ -375,14 +397,16 @@ flowchart LR
     M[release commit]
     T[signed Git tag]
     K[version check]
-    B[wheel build matrix]
+    B[cibuildwheel<br/>wheel matrix + repair]
     V[installed-wheel validation]
+    A[Actions artifacts]
+    U[central publisher]
     P[PyPI]
     G[GitHub Release]
 
-    M --> T --> K --> B --> V
-    V --> P
-    V --> G
+    M --> T --> K --> B --> V --> A --> U
+    U --> P
+    U --> G
 ```
 
 正常发布动作很简单：
@@ -392,7 +416,7 @@ git tag -s v0.3.13 <release-commit> -m 'Mooncake v0.3.13'
 git push origin v0.3.13
 ```
 
-真正的复杂性应该被 reusable builders 吸收，而不是复制在九个入口 workflow 中。
+真正的复杂性应该被 reusable builders 吸收，而不是复制在九个入口 workflow 中。标准 builder 以 `pypa/cibuildwheel` 为执行入口；它最终仍通过 PEP 517 调用项目声明的 `scikit-build-core`，而不是维护另一套 CMake 命令。
 
 ```text
 .github/workflows/
@@ -409,11 +433,14 @@ git push origin v0.3.13
 
 其中：
 
-- CUDA、CUDA 13、non-CUDA 使用标准 matrix；
+- CUDA、CUDA 13、non-CUDA 使用标准 matrix，并由 `cibuildwheel` 负责 Python ABI、架构、manylinux repair 和 installed-wheel test；
 - EFA 保留自己的环境 matrix；
 - ROCm、NPU、MUSA 继续拥有独立 builder，因为 runner 和 toolchain 确实不同；
-- builder 只构建、验证和上传 Actions artifact；
-- publisher 才能发布 PyPI 和更新 GitHub Release。
+- 特殊 builder 在环境允许时复用 `cibuildwheel`，否则仍遵守同一 PEP 517 输入和 artifact 输出契约；
+- builder 只构建、验证和上传 Actions artifact，不持有 PyPI 凭据或 OIDC 发布权限；
+- publisher 收集 wheel 与单独构建的 sdist，检查文件名、version、tag 和 digest 后，才通过 [PyPI Trusted Publishing](https://docs.pypi.org/trusted-publishers/) 发布并更新 GitHub Release。
+
+`cibuildwheel` 因此是**发布 wheel 的标准构建与验证方案**，不是 publisher。上传动作集中在唯一的 publication job，例如 `pypa/gh-action-pypi-publish`；这样矩阵中的任意 builder 都不能绕过汇总校验直接发布一个不完整版本。
 
 ### 统一入口不等于所有硬件互相阻塞
 
@@ -460,10 +487,11 @@ PyPI 文件不可覆盖。重试时需要验证已存在文件的 digest，而�
 
 ### 第四阶段：收敛 CI 与发布
 
-- builder 统一输入输出契约；
-- 标准变体改为 matrix；
+- builder 统一为 PEP 517 输入和 wheel artifact 输出契约；
+- 标准变体通过 `cibuildwheel` 构建、repair 并执行 installed-wheel test；
+- 产品变体使用外层 matrix，Python ABI、平台和架构使用 `cibuildwheel` 内层 matrix；
 - 加入 tag/version 校验；
-- 集中 PyPI 与 GitHub Release publication；
+- 通过单独的 Trusted Publishing job 集中 PyPI 与 GitHub Release publication；
 - 保留特殊平台从已有 tag backfill 的能力。
 
 ### 第五阶段：结束兼容窗口
@@ -475,16 +503,16 @@ PyPI 文件不可覆盖。重试时需要验证已存在文件的 digest，而�
 
 ## 收益与代价
 
-| 维度                   | 当前                   | 目标                              |
-| ---------------------- | ---------------------- | --------------------------------- |
-| Python source of truth | 多棵源码树             | `python/mooncake` 一处            |
-| 源码与产物             | 同一目录混合           | source 与 backend 构建树分离      |
-| 本地开发               | 依赖复制和路径补丁     | 标准 PEP 517 editable install     |
-| 原生 API               | `.so` 直接占公开模块名 | private extension + public facade |
-| 依赖                   | 隐式或过度安装         | core/extras/hardware 分层         |
-| wheel 验证             | 容易被源码路径影响     | 隔离安装验证                      |
-| 版本发布               | 多入口重复策略         | tag/version invariant + 单一编排  |
-| 兼容                   | 目录偶然稳定           | 明确 public contract 与删除窗口   |
+| 维度                   | 当前                   | 目标                                |
+| ---------------------- | ---------------------- | ----------------------------------- |
+| Python source of truth | 多棵源码树             | `python/mooncake` 一处              |
+| 源码与产物             | 同一目录混合           | source 与 backend 构建树分离        |
+| 本地开发               | 依赖复制和路径补丁     | 标准 PEP 517 editable install       |
+| 原生 API               | `.so` 直接占公开模块名 | private extension + public facade   |
+| 依赖                   | 隐式或过度安装         | core/extras/hardware 分层           |
+| wheel 验证             | 容易被源码路径影响     | 隔离安装验证                        |
+| 版本发布               | 多入口重复策略         | tag + cibuildwheel + 集中 publisher |
+| 兼容                   | 目录偶然稳定           | 明确 public contract 与删除窗口     |
 
 最大的收益不是目录变得整齐，而是减少“环境状态”对结果的影响：
 
@@ -492,7 +520,8 @@ PyPI 文件不可覆盖。重试时需要验证已存在文件的 digest，而�
 - native maintainer 只维护 CMake install contract；
 - scikit-build-core 不会修改源码；
 - CI 测试用户真正安装的文件；
-- release workflow 对版本和 artifact 有唯一判断；
+- cibuildwheel 对发布 wheel 的矩阵、repair 和安装测试有统一实现；
+- release publisher 对版本、artifact 和发布权限有唯一判断；
 - 上游项目获得可预测的兼容窗口。
 
 代价同样真实：
@@ -507,15 +536,17 @@ PyPI 文件不可覆盖。重试时需要验证已存在文件的 digest，而�
 
 Mooncake 当前结构的优势是组件局部性强，新增一个 C++ binding 很直接。但随着 Python API、框架集成和硬件 wheel 数量增加，构建脚本正在承担一个包管理系统才应该承担的职责。
 
-统一 `python/` 目录并不是为了追求某种流行仓库外观。它要建立四个稳定边界：
+统一 `python/` 目录并不是为了追求某种流行仓库外观。它要建立六个稳定边界：
 
 ```text
-python/mooncake               = 唯一 Python 源码
-pyproject + scikit-build-core = 唯一 Python 构建契约
-CMake install rules           = backend 内部原生产物契约
-Git tag + pyproject           = 唯一发布版本事实
+python/mooncake                  = 唯一 Python 源码
+pyproject + scikit-build-core    = 唯一 Python 构建契约
+CMake install rules              = backend 内部原生产物契约
+cibuildwheel + CI variant matrix = 发布 wheel 构建与验证门禁
+Git tag + pyproject              = 唯一发布版本事实
+Trusted Publishing job           = 唯一 publication authority
 ```
 
-只要这四个边界成立，Python 开发者就只需要理解 package、依赖和公开 API；CMake target、install prefix 与临时 wheel tree 都停留在 build backend 内部。目录、测试、依赖和 release YAML 的简化会成为自然结果；如果只移动文件而保留原来的 copy-and-restore 构建方式，复杂度只会换一个位置继续存在。
+只要这六个边界成立，Python 开发者就只需要理解 package、依赖和公开 API；CMake target、install prefix 与临时 wheel tree 都停留在 build backend 内部。发布 CI 只在更高一层选择 variant 和 wheel matrix，publisher 只接收验证通过的不可变 artifact。目录、测试、依赖和 release YAML 的简化会成为自然结果；如果只移动文件而保留原来的 copy-and-restore 构建方式，复杂度只会换一个位置继续存在。
 
 这份方案仍在讨论中。相关背景可以参考 Mooncake 的 [RFC #3425](https://github.com/kvcache-ai/Mooncake/issues/3425)。
