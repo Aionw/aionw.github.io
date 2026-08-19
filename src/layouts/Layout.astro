@@ -34,9 +34,6 @@ const pageKeywords = [
 const baseCssVars: { [key: string]: string } = {
   'ec-frm-frameBoxShdCssVal': 'none',
   'ec-frm-edTabBrdRad': '0',
-  'ec-frm-edTabBarBrdCol':
-    'color-mix(in srgb, var(--theme-foreground), 10%, transparent)',
-  'ec-brdCol': 'color-mix(in srgb, var(--theme-foreground), 10%, transparent)',
 }
 
 if (siteConfig.themes.include.length < 1) {
@@ -110,7 +107,10 @@ let generatedCss: string = cssLines.join('\n')
     <meta name="keywords" content={pageKeywords} />
     <link rel="canonical" href={pageUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link
       rel="preload"
       href={sourceSerifNormalUrl}

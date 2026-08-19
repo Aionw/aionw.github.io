@@ -268,12 +268,12 @@ article img {
 
       button {
         @apply hidden sm:flex;
-        --code-background: var(--theme-background);
       }
     }
 
     figure {
-      @apply border-2 border-foreground/8 !rounded-xl;
+      @apply !rounded-xl;
+      border: 2px solid var(--ec-brdCol);
       box-shadow: none !important;
 
       &.has-title div.copy,
@@ -290,7 +290,6 @@ article img {
 
       figcaption {
         border-radius: 10px 10px 0 0 !important;
-        background: transparent !important;
         padding-block: 0 !important;
         border: none !important;
 
@@ -300,7 +299,7 @@ article img {
         }
 
         span.title {
-          @apply !text-foreground/90 !bg-foreground/8 text-center !border-b-2 !border-t-0 !border-r-0 !border-l-0 !border-foreground/10;
+          @apply text-center;
           width: 100%;
           font-family: var(--default-mono-font-family);
           font-size: var(--ec-codeFontSize);
@@ -319,7 +318,7 @@ article img {
         border-radius: 10px !important;
         border: none !important;
         scrollbar-width: thin;
-        background: transparent !important;
+        background: var(--code-background) !important;
       }
     }
   }
@@ -443,7 +442,11 @@ article img {
   }
 
   li {
-    @apply pl-2 my-4 marker:text-list;
+    @apply my-1.5 pl-2 marker:text-list;
+
+    & > p {
+      @apply my-0;
+    }
   }
 
   ul li {
@@ -661,14 +664,21 @@ article img {
     }
   }
 
-  table,
-  th,
-  td {
-    @apply border-2 border-foreground/80 p-2.5;
+  table {
+    @apply w-full border-collapse text-base;
+  }
+
+  td,
+  th {
+    @apply border-0 border-b border-foreground/12 px-3 py-2.5 text-left align-top;
   }
 
   th {
-    @apply uppercase text-left;
+    @apply bg-foreground/3 font-semibold text-foreground/70;
+  }
+
+  tbody tr:last-child td {
+    @apply border-b-0;
   }
 
   .katex-display {

@@ -1,6 +1,7 @@
 import type { SiteConfig } from '~/types'
 
-const accentColor = '#3f7896'
+const accentColor = '#111111'
+const foregroundColor = '#000000'
 
 const config: SiteConfig = {
   // Absolute URL to the root of your published site, used for generating links and sitemaps.
@@ -51,6 +52,7 @@ const config: SiteConfig = {
     // See themeKeys list in src/types.ts for available keys to override and reference.
     overrides: {
       'snazzy-light': {
+        foreground: foregroundColor,
         accent: accentColor,
         heading1: accentColor,
         heading2: accentColor,
