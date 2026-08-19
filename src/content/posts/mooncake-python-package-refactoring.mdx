@@ -1,7 +1,7 @@
 ---
 title: '把 Python 从构建产物中解放出来：Mooncake 包结构重构提案'
 published: 2026-08-19
-description: '为什么 Mooncake 需要一个统一的 Python 源码根、干净的 wheel staging、稳定的公开 API，以及由 Git tag 驱动的发布闭环。'
+description: '为什么 Mooncake 需要一个统一的 Python 源码根、由 scikit-build-core 封装的构建边界、稳定的公开 API，以及由 Git tag 驱动的发布闭环。'
 socialTitle: 'Mooncake Python Packaging Refactor'
 author: 'Aionw'
 lang: 'zh-CN'
@@ -18,7 +18,7 @@ Mooncake 的 Python 包已经不再只是几层 pybind binding。它同时承载
 
 理想状态下，开发者编辑的 Python、测试导入的 Python 和用户从 PyPI 安装的 Python 应该是同一份代码。Mooncake 当前还做不到这一点：构建脚本需要从多处复制文件，源码目录同时承担 staging 职责，而 reshard 通过 namespace path extension 与主包拼接。
 
-目标方案把所有受版本控制的 Python 代码统一放到 `python/mooncake`，把原生扩展改成私有实现模块，再通过稳定的公开 facade 暴露 API。wheel 只在干净的构建目录中组装，并在安装到隔离环境后再进入发布流程。
+目标方案把所有受版本控制的 Python 代码统一放到 `python/mooncake`，把原生扩展改成私有实现模块，再通过稳定的公开 facade 暴露 API。`scikit-build-core` 是唯一的 PEP 517 build backend：Python 开发者只使用 `pip install -e .`、`uv sync` 和 `python -m build`，CMake configure/build/install 以及临时安装树都收进 backend 内部。
 
 ## 我们真正要解决什么
 
@@ -81,22 +81,24 @@ Mooncake 已经有正式 wheel 发布：稳定 tag 会触发构建，wheel 会�
 
 ## 设计原则
 
-这次调整遵循六条原则：
+这次调整遵循七条原则：
 
 1. **一个 Python 源码根。** 受版本控制的 `mooncake` 包代码全部位于 `python/mooncake`。
-2. **源码与产物隔离。** `.so`、可执行文件和组装后的 metadata 只进入 `build/`。
-3. **公开 API 与实现文件名解耦。** 用户导入稳定的 Python facade，原生模块使用私有名称。
-4. **可选能力按需安装。** 核心 import 不加载 vLLM、Torch 或无关硬件 runtime。
-5. **测试最终交付物。** 发布门禁安装并运行 wheel，而不是只测试源码树。
-6. **发布由 immutable tag 驱动。** tag、`pyproject.toml` 和 wheel metadata 必须一致。
+2. **一个标准 Python 构建入口。** 开发和发布都通过 `scikit-build-core`，不把 CMake 命令暴露为 Python 工作流的一部分。
+3. **源码与产物隔离。** `.so`、可执行文件和组装后的 metadata 只进入 backend 管理的构建目录。
+4. **公开 API 与实现文件名解耦。** 用户导入稳定的 Python facade，原生模块使用私有名称。
+5. **可选能力按需安装。** 核心 import 不加载 vLLM、Torch 或无关硬件 runtime。
+6. **测试最终交付物。** 发布门禁安装并运行 wheel，而不是只测试源码树。
+7. **发布由 immutable tag 驱动。** tag、`pyproject.toml` 和 wheel metadata 必须一致。
 
 ## 目标目录长什么样
 
 目录并不是越深越好。目标是让一个文件的职责和依赖方向能从路径上被理解：
 
 ```text
+pyproject.toml
+
 python/
-  pyproject.toml
   pyrightconfig.json
 
   mooncake/
@@ -239,45 +241,55 @@ __all__ = ['StructuredObjectStore']
 
 换句话说，我们兼容的是外部 API，不是旧仓库目录。
 
-## wheel 怎样构建
+## wheel 怎样构建：只暴露一个 Python 入口
 
-新的构建链只有一个汇合点：`build/wheel-stage`。
+新的构建链不再定义一个需要开发者理解或操作的 `wheel-stage`。唯一对外入口是标准的 PEP 517 请求，[scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/) 负责收集 Python package、调用 CMake 并管理临时 wheel tree。
 
 ```mermaid
 flowchart LR
+    D[Python developer or CI]
+    E[pip install -e .<br/>python -m build]
     P[python/mooncake<br/>tracked Python source]
-    C[CMake build<br/>native artifacts]
-    I[CMake install<br/>python-runtime]
-    S[build/wheel-stage<br/>clean directory]
+
+    subgraph K[scikit-build-core internal]
+        B[PEP 517 backend]
+        C[CMake configure/build/install]
+        T[backend-owned wheel tree]
+        B --> C --> T
+    end
+
     W[wheel]
-    V[isolated install<br/>and smoke tests]
     A[auditwheel]
+    V[isolated install<br/>and smoke tests]
     R[release artifact]
 
-    P --> S
-    C --> I --> S
-    S --> W --> A --> V --> R
+    D --> E --> B
+    P --> B
+    T --> W --> A --> V --> R
 ```
 
-CMake 继续负责原生编译，但增加一个相对路径的 `python-runtime` install component：
+`pyproject.toml` 声明唯一 build backend，并让它直接收集 `python/mooncake`：
 
-```bash
-cmake -S . -B build/release \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DPython3_EXECUTABLE="$PWD/.venv/bin/python" \
-  -DWITH_TE=ON \
-  -DWITH_STORE=ON
+```toml
+[build-system]
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"
 
-cmake --build build/release --parallel 128
-
-cmake --install build/release \
-  --prefix build/wheel-stage/cuda-py312 \
-  --component python-runtime
+[tool.scikit-build]
+wheel.packages = ["python/mooncake"]
+build-dir = "build/python/{wheel_tag}"
 ```
 
-随后 staging 脚本把 `python/mooncake` 与 install 结果放到同一个空目录中，再调用 setuptools/build backend。
+原生侧只提供 CMake install contract。例如私有扩展安装到最终 package namespace：
 
-每次构建都先创建新的 variant/Python staging，不再需要“构建后恢复源码”。CUDA 13、non-CUDA、EFA 等分发名称只修改 staging 内的 metadata。
+```cmake
+pybind11_add_module(_engine ...)
+install(TARGETS _engine LIBRARY DESTINATION mooncake)
+```
+
+这是 native maintainer 与 build backend 之间的契约，不是 Python 开发者需要执行的步骤。无论是 editable install 还是 release wheel，scikit-build-core 都会自动 configure、build、install，再把原生产物与 `python/mooncake` 汇合。中间安装树由 backend 创建和清理，不进入公开工作流。
+
+CUDA 13、non-CUDA、EFA 等差异通过 CI matrix 和 backend config 传入；不能再通过复制源码、临时改 `pyproject.toml` 或维护 variant-specific staging 脚本表达。
 
 ### wheel 门禁测试什么
 
@@ -299,40 +311,32 @@ cmake --install build/release \
 
 ### 纯 Python 修改
 
-manifest、codec、reshard contract 和 adapter 等工作不应该要求先编译完整 C++：
+manifest、codec、reshard contract 和 adapter 等工作只使用标准 Python 命令：
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 
-pip install -e './python[dev,structured]'
+pip install -e '.[dev,structured]'
 pytest python/tests/unit
 ```
 
-这要求 `mooncake.__init__` 足够轻量：不能在包导入时就尝试加载所有 native extension、Torch 或 vLLM。
+scikit-build-core 的默认 redirect editable mode 会直接映射 `python/mooncake`，所以 `.py` 修改立即生效。首次 editable install 仍可能编译原生扩展，但 Python 开发者不需要知道 CMake build directory、install prefix 或产物复制路径。
+
+这同时要求 `mooncake.__init__` 足够轻量：不能在包导入时就尝试加载所有 native extension、Torch 或 vLLM。纯 Python 单测应能在不触发无关原生模块的情况下运行。
 
 ### 原生联调
 
-需要 binding 时，开发环境使用一个与 wheel 布局相同的 staging tree：
+需要 binding 时仍然使用同一个 editable install，而不是切换到一套手工 CMake 工作流：
 
 ```bash
-cmake -S . -B build/dev \
-  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-  -DPython3_EXECUTABLE="$PWD/.venv/bin/python" \
-  -DWITH_TE=ON \
-  -DWITH_STORE=ON
-
-cmake --build build/dev --parallel 128
-
-./scripts/stage_python_dev.sh \
-  --build-dir build/dev \
-  --output-dir build/python-dev
-
-PYTHONPATH="$PWD/build/python-dev" \
-  pytest python/tests/integration
+pip install -e '.[dev]'
+pytest python/tests/integration
 ```
 
-dev staging 可以 symlink Python 源码，让 `.py` 修改立即生效；原生产物仍来自 CMake build/install。修改 C++ 后重新 build，修改纯 Python 则不需要。
+修改 C++ extension 后重新执行 editable install，由 scikit-build-core 完成增量 configure/build/install；修改纯 Python 则无需重装。native maintainer 仍然可以直接使用 CMake 做底层调试，但那是原生组件内部工作流，不是 Python package 的开发入口。
+
+“不感知 C++ 构建细节”不等于源码安装时不需要编译器。如果纯 Python 开发环境连 C++ toolchain 都不应安装，就需要让它消费 CI 预构建的 native wheel；scikit-build-core 解决的是统一构建边界，而不是凭空消除原生编译。
 
 ## 依赖怎样分层
 
@@ -353,7 +357,7 @@ Torch 与 accelerator runtime 不适合作为 core wheel 的无条件依赖。�
 
 ## tag、wheel 和 GitHub Release 怎样闭环
 
-`python/pyproject.toml` 是 package version 的 source of truth；Git tag 选择不可变的 release commit。二者必须一致：
+`pyproject.toml` 是 package version 的 source of truth；Git tag 选择不可变的 release commit。二者必须一致：
 
 ```text
 pyproject version       Git tag
@@ -443,13 +447,14 @@ PyPI 文件不可覆盖。重试时需要验证已存在文件的 digest，而�
 
 源码移动和匹配的构建修改需要一起生效，避免两个目录同时成为权威实现。
 
-### 第三阶段：替换 in-source staging
+### 第三阶段：建立 scikit-build-core 构建边界
 
-- 增加 CMake `python-runtime` install component；
-- 实现 clean wheel staging 和 dev staging；
-- 将 variant metadata 改为 staging-only；
+- 将 `scikit_build_core.build` 设为唯一 PEP 517 backend；
+- 用 CMake install rules 把私有原生扩展交给 backend；
+- 让 wheel 与 editable install 共用同一构建契约；
+- 将 variant 差异改为 CI matrix 和 backend config；
 - 在隔离环境验证每个 wheel；
-- 删除复制、恢复和源码内清理逻辑。
+- 删除 staging 脚本、复制、恢复和源码内清理逻辑。
 
 ### 第四阶段：收敛 CI 与发布
 
@@ -471,8 +476,8 @@ PyPI 文件不可覆盖。重试时需要验证已存在文件的 digest，而�
 | 维度                   | 当前                   | 目标                              |
 | ---------------------- | ---------------------- | --------------------------------- |
 | Python source of truth | 多棵源码树             | `python/mooncake` 一处            |
-| 源码与产物             | 同一目录混合           | source、stage、dist 分离          |
-| 本地开发               | 依赖复制和路径补丁     | editable install + dev staging    |
+| 源码与产物             | 同一目录混合           | source 与 backend 构建树分离      |
+| 本地开发               | 依赖复制和路径补丁     | 标准 PEP 517 editable install     |
 | 原生 API               | `.so` 直接占公开模块名 | private extension + public facade |
 | 依赖                   | 隐式或过度安装         | core/extras/hardware 分层         |
 | wheel 验证             | 容易被源码路径影响     | 隔离安装验证                      |
@@ -482,8 +487,8 @@ PyPI 文件不可覆盖。重试时需要验证已存在文件的 digest，而�
 最大的收益不是目录变得整齐，而是减少“环境状态”对结果的影响：
 
 - 开发者知道应该编辑哪一份文件；
-- CMake 知道应该安装哪些原生产物；
-- wheel builder 不会修改源码；
+- native maintainer 只维护 CMake install contract；
+- scikit-build-core 不会修改源码；
 - CI 测试用户真正安装的文件；
 - release workflow 对版本和 artifact 有唯一判断；
 - 上游项目获得可预测的兼容窗口。
@@ -503,12 +508,12 @@ Mooncake 当前结构的优势是组件局部性强，新增一个 C++ binding �
 统一 `python/` 目录并不是为了追求某种流行仓库外观。它要建立四个稳定边界：
 
 ```text
-python/mooncake          = 唯一 Python 源码
-CMake python-runtime     = 唯一原生产物安装契约
-build/wheel-stage        = 唯一 wheel 汇合点
-Git tag + pyproject      = 唯一发布版本事实
+python/mooncake               = 唯一 Python 源码
+pyproject + scikit-build-core = 唯一 Python 构建契约
+CMake install rules           = backend 内部原生产物契约
+Git tag + pyproject           = 唯一发布版本事实
 ```
 
-只要这四个边界成立，目录、测试、依赖和 release YAML 的简化都会成为自然结果；如果只移动文件而保留原来的 copy-and-restore 构建方式，复杂度只会换一个位置继续存在。
+只要这四个边界成立，Python 开发者就只需要理解 package、依赖和公开 API；CMake target、install prefix 与临时 wheel tree 都停留在 build backend 内部。目录、测试、依赖和 release YAML 的简化会成为自然结果；如果只移动文件而保留原来的 copy-and-restore 构建方式，复杂度只会换一个位置继续存在。
 
 这份方案仍在讨论中。相关背景可以参考 Mooncake 的 [RFC #3425](https://github.com/kvcache-ai/Mooncake/issues/3425)。

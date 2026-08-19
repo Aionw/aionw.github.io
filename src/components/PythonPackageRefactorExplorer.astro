@@ -46,15 +46,15 @@
           python/mooncake
           <small>唯一 Python 源码</small>
         </button>
-        <button class="node" type="button" data-detail="cmake-runtime">
-          CMake python-runtime
-          <small>原生扩展安装契约</small>
+        <button class="node" type="button" data-detail="python-build-contract">
+          pyproject.toml
+          <small>标准 Python 构建契约</small>
         </button>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
-      <button class="node emphasis" type="button" data-detail="clean-stage">
-        build/wheel-stage
-        <small>每次从空目录组装</small>
+      <button class="node emphasis" type="button" data-detail="scikit-build-core">
+        scikit-build-core
+        <small>封装 CMake 与临时安装树</small>
       </button>
       <span class="arrow" aria-hidden="true">→</span>
       <button class="node" type="button" data-detail="validated-wheel">
@@ -77,7 +77,10 @@
     <div><span>Python 源码根</span><strong data-score="roots">3+</strong></div>
     <div><span>构建修改源码</span><strong data-score="mutation">是</strong></div>
     <div><span>namespace 拼接</span><strong data-score="namespace">需要</strong></div>
-    <div><span>发布入口</span><strong data-score="release">9 个</strong></div>
+    <div>
+      <span>Python 开发入口</span><strong data-score="development">复制 / 路径补丁</strong
+      >
+    </div>
   </div>
 </python-package-refactor-explorer>
 
@@ -107,13 +110,13 @@
       '唯一 Python source of truth',
       '所有受版本控制的 Python 包代码都位于 <code>python/mooncake</code>，无需 namespace 拼接。',
     ],
-    'cmake-runtime': [
-      '原生产物有明确安装契约',
-      'CMake 只负责把 <code>_engine.so</code>、<code>_store.so</code> 等原生产物安装到指定 prefix。',
+    'python-build-contract': [
+      '开发与发布共用标准入口',
+      '<code>pip install -e .</code>、<code>uv sync</code> 与 <code>python -m build</code> 都进入同一个 PEP 517 backend。',
     ],
-    'clean-stage': [
-      'staging 是一次性产物',
-      'Python 源码与 CMake install 结果只在忽略的构建目录汇合；每次构建先清空，不再修改源码。',
+    'scikit-build-core': [
+      'C++ 构建细节止于 backend',
+      'scikit-build-core 在内部配置、构建并安装 CMake targets，再把结果与 Python 源码组装成 wheel；Python 开发者不操作中间目录。',
     ],
     'validated-wheel': [
       '测试真正交付给用户的文件',
@@ -122,8 +125,18 @@
   } as const
 
   const scoreContent = {
-    before: { roots: '3+', mutation: '是', namespace: '需要', release: '9 个' },
-    after: { roots: '1', mutation: '否', namespace: '不需要', release: '1 个编排入口' },
+    before: {
+      roots: '3+',
+      mutation: '是',
+      namespace: '需要',
+      development: '复制 / 路径补丁',
+    },
+    after: {
+      roots: '1',
+      mutation: '否',
+      namespace: '不需要',
+      development: 'pip / uv',
+    },
   } as const
 
   class PythonPackageRefactorExplorer extends HTMLElement {
@@ -132,6 +145,17 @@
       const panels = this.querySelectorAll<HTMLElement>('[data-panel]')
       const title = this.querySelector<HTMLElement>('[data-detail-title]')
       const copy = this.querySelector<HTMLElement>('[data-detail-copy]')
+
+      const setDetail = (node: HTMLButtonElement) => {
+        const detail = detailContent[node.dataset.detail as keyof typeof detailContent]
+        if (!detail || !title || !copy) return
+        title.textContent = detail[0]
+        copy.innerHTML = detail[1]
+        this.querySelectorAll('.node').forEach((item) =>
+          item.classList.remove('selected'),
+        )
+        node.classList.add('selected')
+      }
 
       const setView = (view: 'before' | 'after') => {
         buttons.forEach((button) => {
@@ -145,6 +169,10 @@
           const target = this.querySelector<HTMLElement>(`[data-score="${key}"]`)
           if (target) target.textContent = value
         })
+        const firstNode = this.querySelector<HTMLButtonElement>(
+          `[data-panel="${view}"] [data-detail]`,
+        )
+        if (firstNode) setDetail(firstNode)
       }
 
       buttons.forEach((button) => {
@@ -154,17 +182,10 @@
       })
 
       this.querySelectorAll<HTMLButtonElement>('[data-detail]').forEach((node) => {
-        node.addEventListener('click', () => {
-          const detail = detailContent[node.dataset.detail as keyof typeof detailContent]
-          if (!detail || !title || !copy) return
-          title.textContent = detail[0]
-          copy.innerHTML = detail[1]
-          this.querySelectorAll('.node').forEach((item) =>
-            item.classList.remove('selected'),
-          )
-          node.classList.add('selected')
-        })
+        node.addEventListener('click', () => setDetail(node))
       })
+
+      setView('before')
     }
   }
 
