@@ -1,0 +1,379 @@
+<python-package-refactor-explorer class="refactor-explorer">
+  <div class="explorer-heading">
+    <div>
+      <p class="eyebrow">交互架构图</p>
+      <h2>同一份 wheel，两种完全不同的组织方式</h2>
+    </div>
+    <div class="view-switch" role="group" aria-label="选择目录结构">
+      <button type="button" data-view="before" aria-pressed="true">修改前</button>
+      <button type="button" data-view="after" aria-pressed="false">修改后</button>
+    </div>
+  </div>
+
+  <div class="view-panel" data-panel="before">
+    <div class="flow" aria-label="修改前的 wheel 构建流程">
+      <div class="sources stack">
+        <button class="node" type="button" data-detail="wheel-source">
+          mooncake-wheel/mooncake
+          <small>Python 源码 + staging</small>
+        </button>
+        <button class="node" type="button" data-detail="integration-source">
+          mooncake-integration/*.py
+          <small>组件侧 Python 源码</small>
+        </button>
+        <button class="node" type="button" data-detail="reshard-source">
+          mooncake-reshard/python
+          <small>拆分的 namespace</small>
+        </button>
+      </div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <button class="node emphasis" type="button" data-detail="copy-build">
+        build_wheel.sh
+        <small>复制、改名、sed、恢复</small>
+      </button>
+      <span class="arrow" aria-hidden="true">→</span>
+      <button class="node" type="button" data-detail="wheel-output">
+        wheel
+        <small>结果依赖上一次组装状态</small>
+      </button>
+    </div>
+  </div>
+
+  <div class="view-panel" data-panel="after" hidden>
+    <div class="flow" aria-label="修改后的 wheel 构建流程">
+      <div class="sources stack">
+        <button class="node" type="button" data-detail="python-root">
+          python/mooncake
+          <small>唯一 Python 源码</small>
+        </button>
+        <button class="node" type="button" data-detail="cmake-runtime">
+          CMake python-runtime
+          <small>原生扩展安装契约</small>
+        </button>
+      </div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <button class="node emphasis" type="button" data-detail="clean-stage">
+        build/wheel-stage
+        <small>每次从空目录组装</small>
+      </button>
+      <span class="arrow" aria-hidden="true">→</span>
+      <button class="node" type="button" data-detail="validated-wheel">
+        tested wheel
+        <small>安装后验证再发布</small>
+      </button>
+    </div>
+  </div>
+
+  <div class="detail-card" aria-live="polite">
+    <p class="detail-label">点击任意节点查看职责</p>
+    <strong data-detail-title>一个目录承担了两种角色</strong>
+    <p data-detail-copy>
+      <code>mooncake-wheel/mooncake</code> 既是被编辑的源码目录，也是构建过程中不断写入原生产物的
+      staging 目录。
+    </p>
+  </div>
+
+  <div class="scoreboard" aria-label="方案关键指标对比">
+    <div><span>Python 源码根</span><strong data-score="roots">3+</strong></div>
+    <div><span>构建修改源码</span><strong data-score="mutation">是</strong></div>
+    <div><span>namespace 拼接</span><strong data-score="namespace">需要</strong></div>
+    <div><span>发布入口</span><strong data-score="release">9 个</strong></div>
+  </div>
+</python-package-refactor-explorer>
+
+<script>
+  const detailContent = {
+    'wheel-source': [
+      '一个目录承担了两种角色',
+      '<code>mooncake-wheel/mooncake</code> 既是源码目录，也是构建时写入原生产物的 staging 目录。',
+    ],
+    'integration-source': [
+      '组件边界清楚，包边界模糊',
+      'Python wrapper 靠近 C++ 实现，但最终是否进入 wheel 取决于构建脚本有没有记得复制。',
+    ],
+    'reshard-source': [
+      '同一个 import package 来自两棵树',
+      '<code>pkgutil.extend_path</code> 把 reshard 与主包拼在一起，测试和安装环境很难保持一致。',
+    ],
+    'copy-build': [
+      '构建脚本承担了过多职责',
+      '复制源码、注入共享库、修改包名、运行 auditwheel，再尝试恢复工作区；中断后容易留下状态。',
+    ],
+    'wheel-output': [
+      'wheel 是组装状态的快照',
+      '源码测试通过并不能证明最终 wheel 包含了相同文件，更不能证明它能在干净环境里导入。',
+    ],
+    'python-root': [
+      '唯一 Python source of truth',
+      '所有受版本控制的 Python 包代码都位于 <code>python/mooncake</code>，无需 namespace 拼接。',
+    ],
+    'cmake-runtime': [
+      '原生产物有明确安装契约',
+      'CMake 只负责把 <code>_engine.so</code>、<code>_store.so</code> 等原生产物安装到指定 prefix。',
+    ],
+    'clean-stage': [
+      'staging 是一次性产物',
+      'Python 源码与 CMake install 结果只在忽略的构建目录汇合；每次构建先清空，不再修改源码。',
+    ],
+    'validated-wheel': [
+      '测试真正交付给用户的文件',
+      'wheel 会被安装到干净虚拟环境，验证公开 import、CLI、ELF/RPATH 和版本后才允许发布。',
+    ],
+  } as const
+
+  const scoreContent = {
+    before: { roots: '3+', mutation: '是', namespace: '需要', release: '9 个' },
+    after: { roots: '1', mutation: '否', namespace: '不需要', release: '1 个编排入口' },
+  } as const
+
+  class PythonPackageRefactorExplorer extends HTMLElement {
+    connectedCallback() {
+      const buttons = this.querySelectorAll<HTMLButtonElement>('[data-view]')
+      const panels = this.querySelectorAll<HTMLElement>('[data-panel]')
+      const title = this.querySelector<HTMLElement>('[data-detail-title]')
+      const copy = this.querySelector<HTMLElement>('[data-detail-copy]')
+
+      const setView = (view: 'before' | 'after') => {
+        buttons.forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.dataset.view === view))
+        })
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.panel !== view
+        })
+        const scores = scoreContent[view]
+        Object.entries(scores).forEach(([key, value]) => {
+          const target = this.querySelector<HTMLElement>(`[data-score="${key}"]`)
+          if (target) target.textContent = value
+        })
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () =>
+          setView(button.dataset.view as 'before' | 'after'),
+        )
+      })
+
+      this.querySelectorAll<HTMLButtonElement>('[data-detail]').forEach((node) => {
+        node.addEventListener('click', () => {
+          const detail = detailContent[node.dataset.detail as keyof typeof detailContent]
+          if (!detail || !title || !copy) return
+          title.textContent = detail[0]
+          copy.innerHTML = detail[1]
+          this.querySelectorAll('.node').forEach((item) =>
+            item.classList.remove('selected'),
+          )
+          node.classList.add('selected')
+        })
+      })
+    }
+  }
+
+  if (!customElements.get('python-package-refactor-explorer')) {
+    customElements.define(
+      'python-package-refactor-explorer',
+      PythonPackageRefactorExplorer,
+    )
+  }
+</script>
+
+<style>
+  .refactor-explorer {
+    --explorer-line: color-mix(in srgb, var(--theme-accent) 24%, transparent);
+    display: block;
+    margin: 2.5rem 0;
+    border: 1px solid var(--explorer-line);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    background: color-mix(in srgb, var(--theme-accent) 3%, var(--theme-background));
+  }
+
+  .explorer-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.25rem;
+    color: var(--theme-accent);
+    font-family: var(--default-mono-font-family);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--theme-foreground);
+    font-size: 1.35rem;
+    line-height: 1.35;
+  }
+
+  .view-switch {
+    display: inline-flex;
+    flex: 0 0 auto;
+    padding: 0.2rem;
+    border: 1px solid var(--explorer-line);
+    border-radius: 0.7rem;
+    background: var(--theme-background);
+  }
+
+  .view-switch button {
+    border: 0;
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.75rem;
+    background: transparent;
+    color: var(--theme-foreground);
+    font: 600 0.82rem var(--default-mono-font-family);
+  }
+
+  .view-switch button[aria-pressed='true'] {
+    background: var(--theme-accent);
+    color: var(--theme-background);
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) auto minmax(8rem, 1fr) auto minmax(
+        7rem,
+        0.8fr
+      );
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 13rem;
+  }
+
+  .stack {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .node {
+    width: 100%;
+    border: 1px solid var(--explorer-line);
+    border-radius: 0.75rem;
+    padding: 0.7rem 0.8rem;
+    background: var(--theme-background);
+    color: var(--theme-foreground);
+    text-align: left;
+    font: 650 0.8rem/1.35 var(--default-mono-font-family);
+    transition:
+      border-color 150ms ease,
+      transform 150ms ease,
+      background 150ms ease;
+  }
+
+  .node:hover,
+  .node.selected {
+    border-color: var(--theme-accent);
+    background: color-mix(in srgb, var(--theme-accent) 8%, var(--theme-background));
+    transform: translateY(-1px);
+  }
+
+  .node.emphasis {
+    border-width: 2px;
+  }
+
+  .node small {
+    display: block;
+    margin-top: 0.3rem;
+    color: color-mix(in srgb, var(--theme-foreground) 62%, transparent);
+    font-family: var(--default-font-family);
+    font-size: 0.78rem;
+    font-weight: 400;
+  }
+
+  .arrow {
+    color: var(--theme-accent);
+    font: 700 1.25rem var(--default-mono-font-family);
+  }
+
+  .detail-card {
+    min-height: 7.5rem;
+    margin-top: 0.5rem;
+    border-left: 3px solid var(--theme-accent);
+    padding: 0.8rem 1rem;
+    background: color-mix(in srgb, var(--theme-accent) 6%, transparent);
+  }
+
+  .detail-label {
+    margin: 0 0 0.25rem;
+    color: color-mix(in srgb, var(--theme-foreground) 55%, transparent);
+    font: 0.7rem var(--default-mono-font-family);
+    text-transform: uppercase;
+  }
+
+  .detail-card strong {
+    display: block;
+    color: var(--theme-accent);
+  }
+
+  .detail-card p:last-child {
+    margin: 0.35rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .scoreboard div {
+    border-top: 1px solid var(--explorer-line);
+    padding-top: 0.65rem;
+  }
+
+  .scoreboard span,
+  .scoreboard strong {
+    display: block;
+  }
+
+  .scoreboard span {
+    color: color-mix(in srgb, var(--theme-foreground) 55%, transparent);
+    font-size: 0.72rem;
+  }
+
+  .scoreboard strong {
+    margin-top: 0.15rem;
+    color: var(--theme-foreground);
+    font-family: var(--default-mono-font-family);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 700px) {
+    .explorer-heading {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .view-switch {
+      align-self: flex-start;
+    }
+
+    .flow {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .arrow {
+      transform: rotate(90deg);
+      justify-self: center;
+    }
+
+    .scoreboard {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .node {
+      transition: none;
+    }
+  }
+</style>

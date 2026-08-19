@@ -93,7 +93,7 @@ export async function getStaticPaths() {
       params: { slug: post.id },
       props: {
         pubDate: post.data.published ? dateString(post.data.published) : undefined,
-        title: post.data.title,
+        title: post.data.socialTitle || post.data.title,
         author: post.data.author || siteConfig.author,
       },
     }))
