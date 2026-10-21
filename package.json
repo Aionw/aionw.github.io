@@ -33,7 +33,7 @@
     "hast-util-from-html-isomorphic": "^2.0.0",
     "hastscript": "^9.0.1",
     "katex": "^0.16.22",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.3.3",
     "mdast-util-directive": "^3.1.0",
     "mdast-util-to-string": "^4.0.0",
     "mermaid": "^11.16.1",
